@@ -10,9 +10,12 @@
         "innocenzi/laravel-vite": "^0.1.27",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "lucidarch/lucid": "^1.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^v3.9.5",
+        "roave/security-advisories": "dev-latest",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
