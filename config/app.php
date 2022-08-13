@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -139,8 +137,8 @@ return [
     */
 
     'maintenance' => [
-        'driver' => 'cache',
-        'store'  => 'redis',
+        'driver' => 'file',
+        // 'store'  => 'redis',
     ],
 
     /*
