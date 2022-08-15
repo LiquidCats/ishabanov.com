@@ -1,0 +1,31 @@
+@import "bootstrap/scss/mixins";
+
+.lc-component-chips {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 16px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur( 4px );
+    background: rgba(255, 255, 255, 0.4);
+
+    padding: 16px;
+
+    word-wrap: normal;
+    overflow-wrap: normal;
+    white-space: nowrap;
+
+    font-size: 24px;
+
+    @include media-breakpoint-down(lg) {
+        border-radius: .5rem;
+        padding: 8px;
+
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
