@@ -1,0 +1,90 @@
+@import "bootstrap/scss/mixins";
+
+#hero {
+    position: relative;
+    z-index: 10;
+    @include media-breakpoint-down(lg) {
+        padding-top: 80px;
+    }
+    //@include media-breakpoint-up(lg) {
+    //    height: 100vh;
+    //}
+}
+
+.lc-hero {
+    &-chevron {
+        animation-duration: 800ms;
+        animation-name: chevron-bounce;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+    &-background {
+        position: absolute;
+        z-index: -10;
+        max-width: 900px;
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+        filter: blur(140px);
+        & #red {
+            animation-duration: 8000ms;
+            animation-name: lc-floating;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        & #blue {
+            animation-duration: 3000ms;
+            animation-name: lc-floating;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        & #cian {
+            animation-duration: 5000ms;
+            animation-name: lc-floating;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        //&::after {
+            //content: ' ';
+            //position: absolute;
+            //
+            //
+            //
+            //
+            //
+            //bottom: 0;
+            //right: 0;
+            //
+            //background-image: url(@/../images/hero/bg.svg);
+            //background-repeat: no-repeat;
+            //background-position-x: center;
+            //background-position-y: center;
+            //background-size: cover;
+            //filter: blur(150px);
+        //}
+    }
+    &-person {
+        max-width: 350px;
+        max-height: 400px;
+
+        border-radius: 1rem;
+
+        background: #000000;
+
+        box-shadow: 0 298px 84px rgba(0, 0, 0, 0.00),
+                    0 191px 76px rgba(0, 0, 0, 0.03),
+                    0 107px 64px rgba(0, 0, 0, 0.1),
+                    0 48px 48px rgba(0, 0, 0, 0.17),
+                    0 12px 26px rgba(0, 0, 0, 0.2),
+                    0 0 0 rgba(0, 0, 0, 0.2);
+
+        @include media-breakpoint-down(lg) {
+            border-radius: .5rem;
+
+            height: auto;
+            width: 100%;
+            max-width: 350px;
+        }
+    }
+}
