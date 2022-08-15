@@ -1,0 +1,88 @@
+.lc-contacts {
+    &-links {
+        & a {
+            color: $white;
+            border-radius: 1.5rem;
+            box-shadow: 0 51px 30px rgba(0, 0, 0, 0.1),
+                        0 22px 22px rgba(0, 0, 0, 0.2),
+                        0 6px 12px rgba(0, 0, 0, 0.2),
+                        0 0 0 rgba(0, 0, 0, 0.2);
+
+            transition: box-shadow 300ms ease-in-out;
+
+            &:hover {
+                box-shadow: 0 146px 59px rgba(0, 0, 0, 0.04),
+                            0 82px 49px rgba(0, 0, 0, 0.12),
+                            0 37px 37px rgba(0, 0, 0, 0.16),
+                            0 9px 20px rgba(0, 0, 0, 0.2),
+                            0 0 0 rgba(0, 0, 0, 0.2);
+            }
+        }
+        &-linkedin {
+            background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+        }
+        &-instagram {
+            background-image: linear-gradient(to right, #ec77ab 0%, #7873f5 100%);
+            //background-image: linear-gradient(to top, #cc208e 0%, #6713d2 100%);
+        }
+        &-telegram {
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+        }
+        &-email {
+            color: $black !important;
+            background: $white;
+            transition: all .3s ease-in-out;
+
+            &:hover > .hidden-email {
+                display: inline !important;
+            }
+        }
+    }
+
+    &-form {
+        //border-radius: 1.5rem;
+
+        box-shadow: 0 51px 30px rgba(0, 0, 0, 0.01),
+                    0 22px 22px rgba(0, 0, 0, 0.02),
+                    0 6px 12px rgba(0, 0, 0, 0.02),
+                    0 0 0 rgba(0, 0, 0, 0.02);
+    }
+
+    &-info {
+        position: relative;
+        z-index: 0;
+
+        & > * {
+            z-index: inherit;
+        }
+
+        & > img {
+            transition: all .3s ease-in-out;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        &::before {
+            position: absolute;
+            content: " ";
+            z-index: -1;
+
+            top: calc(50% - 35%);
+            left: calc(50% - 25%);
+
+            width: 50%;
+            height: 50%;
+
+            border-radius: 100%;
+
+            background-size: 200% 200%;
+            background-image: linear-gradient(to right, #4274ff 0%, #ff05b9 100%);
+            filter: blur(60px);
+
+            animation-duration: 8000ms;
+            animation-name: lc-slide;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+    }
+}
