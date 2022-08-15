@@ -7,17 +7,9 @@ export default defineConfig({
             buildDirectory: "static",
             input: [
                 'resources/scss/styles.scss',
-                'resources/typescript/scripts.ts',
+                'resources/js/scripts.js',
             ],
             refresh: true,
         }),
     ],
-    // build: {
-    //     rollupOptions: {
-    //         output: {
-    //             entryFileNames: `assets/[name].js`,
-    //             assetFileNames: `assets/[name].[ext]`
-    //         }
-    //     }
-    // }
 });
