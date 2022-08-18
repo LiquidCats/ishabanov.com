@@ -3,8 +3,11 @@
 namespace App\Data\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
+    Model,
+    Relations\BelongsToMany
+};
 
 /**
  * Class Experience.
@@ -36,4 +39,10 @@ class Experience extends Model
         'started_at',
         'ended_at',
     ];
+
+    public function tools(): BelongsToMany
+    {
+        return $this->belongsToMany(Tool::class)
+            ->withPivot(['level_id']);
+    }
 }
