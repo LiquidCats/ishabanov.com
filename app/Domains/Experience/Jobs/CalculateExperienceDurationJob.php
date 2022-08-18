@@ -8,7 +8,6 @@ use App\Data\Models\Experience;
 use App\Domains\Experience\ValueObjects\WorkingExperience;
 use Carbon\CarbonImmutable;
 use Lucid\Units\Job;
-use function floor;
 
 /**
  * Class CalculateExperienceDurationJob.
