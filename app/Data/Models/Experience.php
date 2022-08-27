@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Models;
 
 use Carbon\Carbon;
+use Database\Factories\ExperienceFactory;
 use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
     Model,
@@ -46,5 +47,10 @@ class Experience extends Model
     {
         return $this->belongsToMany(Tool::class)
             ->withPivot(['level_id']);
+    }
+
+    protected static function newFactory(): ExperienceFactory
+    {
+        return ExperienceFactory::new();
     }
 }

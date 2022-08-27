@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Models;
 
 use App\Data\Enums\FeedbackType;
+use Database\Factories\UserEmailFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,4 +27,9 @@ class UserEmail extends Model
         'name' => 'string',
         'subject' => FeedbackType::class,
     ];
+
+    protected static function newFactory(): UserEmailFactory
+    {
+        return UserEmailFactory::new();
+    }
 }

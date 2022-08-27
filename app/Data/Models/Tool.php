@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Models;
 
 use App\Data\Enums\ToolType;
+use Database\Factories\ToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,4 +29,9 @@ class Tool extends Model
         'name' => 'string',
         'type' => ToolType::class,
     ];
+
+    protected static function newFactory(): ToolFactory
+    {
+        return ToolFactory::new();
+    }
 }
