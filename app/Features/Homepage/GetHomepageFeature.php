@@ -1,20 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Features\Homepage;
 
-use App\Data\Models\Experience;
-use App\Domains\Experience\Jobs\{CalculateExperienceDurationJob, GetListOfExperiencesJob};
+use App\Data\Enums\ToolType;
+use App\Data\Models\{Experience, Tool};
+use App\Domains\Experience\Jobs\{CalculateExperienceDurationJob, GetListOfExperiencesJob, GetTopToolByTypeJob};
 use App\Domains\Experience\ValueObjects\WorkingExperience;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Lucid\Domains\Http\Jobs\RespondWithViewJob;
 use Lucid\Units\Feature;
 
-use function compact;
-
 class GetHomepageFeature extends Feature
 {
-    public function handle()
+    public function handle(): Response
     {
+        /** @var Collection<int, Tool> $languages */
+        $languages = $this->run(new GetTopToolByTypeJob(ToolType::LANGUAGE, 4));
+
+        /** @var Collection<int, Tool> $frameworks */
+        $frameworks = $this->run(new GetTopToolByTypeJob(ToolType::FRAMEWORK));
+
         /** @var Collection<int, Experience> $experiences */
         $experiences = $this->run(new GetListOfExperiencesJob());
 
@@ -24,7 +32,12 @@ class GetHomepageFeature extends Feature
         return $this->run(
             new RespondWithViewJob(
                 'index',
-                compact('duration', 'experiences')
+                [
+                    'duration' => $duration,
+                    'experiences' => $experiences,
+                    'languages' => $languages,
+                    'frameworks' => $frameworks,
+                ]
             )
         );
     }
