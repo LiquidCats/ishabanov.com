@@ -1,6 +1,6 @@
 <?php
 
-use Monolog\Handler\{NullHandler, StreamHandler, SyslogUdpHandler};
+declare(strict_types=1);
 
 return [
 

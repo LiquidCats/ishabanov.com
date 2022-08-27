@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -13,5 +15,12 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'telegram' => [
+        'api' => 'https://api.telegram.org/bot',
+        'announcer' => [
+            'token' => env('TG_ANNOUNCER_TOKEN'),
+            'chat_id' => env('TG_ANNOUNCER_CHAT_ID')
+        ],
 
+    ]
 ];
