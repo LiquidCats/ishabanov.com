@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Data\Models\Experience;
@@ -13,6 +15,7 @@ use function fake;
  */
 class ExperienceFactory extends Factory
 {
+    protected $model = Experience::class;
     /**
      * Define the model's default state.
      *
@@ -25,7 +28,7 @@ class ExperienceFactory extends Factory
             'company_url'  => fake()->url(),
             'company_logo' => 'images/experience/'.fake()->word().'.svg',
             'position'     => fake()->jobTitle(),
-            'description'  => '',
+            'description'  => fake()->text,
             'started_at'   => Carbon::parse(fake()->date()),
             'ended_at'     => Carbon::parse(fake()->date()),
         ];
