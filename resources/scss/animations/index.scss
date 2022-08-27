@@ -8,15 +8,6 @@
     }
 }
 
-@keyframes lc-floating {
-    from {
-        transform: translateY(-20px) translateX(20px) rotate(0deg) scale(1);
-    }
-    to {
-        transform: translateY(20px) translateX(-20px)rotate(20deg) scale(1.3);
-    }
-}
-
 @keyframes lc-slide {
     0%{
         background-position:0% 50%
