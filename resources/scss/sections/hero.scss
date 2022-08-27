@@ -1,17 +1,27 @@
 @import "bootstrap/scss/mixins";
 
+@mixin hero-shadow {
+    box-shadow:
+        0 298px 84px rgba(0, 0, 0, 0.00),
+        0 191px 76px rgba(0, 0, 0, 0.03),
+        0 107px 64px rgba(0, 0, 0, 0.1),
+        0 48px 48px rgba(0, 0, 0, 0.17),
+        0 12px 26px rgba(0, 0, 0, 0.2),
+        0 0 0 rgba(0, 0, 0, 0.2);
+}
+
 #hero {
     position: relative;
     z-index: 10;
+
     @include media-breakpoint-down(lg) {
         padding-top: 80px;
     }
-    //@include media-breakpoint-up(lg) {
-    //    height: 100vh;
-    //}
 }
 
 .lc-hero {
+    overflow: hidden;
+
     &-chevron {
         animation-duration: 800ms;
         animation-name: chevron-bounce;
@@ -21,48 +31,32 @@
     &-background {
         position: absolute;
         z-index: -10;
-        max-width: 900px;
-        width: 100%;
-        height: auto;
-        top: 0;
-        left: 0;
-        filter: blur(140px);
-        & #red {
-            animation-duration: 8000ms;
-            animation-name: lc-floating;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+        border-radius: 100%;
+
+        &.pink {
+            background: linear-gradient(291.01deg, #9D05FF 34.03%, #FF05B9 113.34%);
+
+            width: 500px;
+            height: 500px;
+            top: 40%;
+            left: 40%;
         }
-        & #blue {
-            animation-duration: 3000ms;
-            animation-name: lc-floating;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+        &.blue {
+            background: linear-gradient(291.01deg, #4276FF 34.03%, #08E6FF 113.34%);
+
+            width: 300px;
+            height: 300px;
+            top: 30%;
+            left: 10%;
         }
-        & #cian {
-            animation-duration: 5000ms;
-            animation-name: lc-floating;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+        &.cyan {
+            background: linear-gradient(180deg, #05EAFF 0%, #05FF64 100%);
+
+            width: 380px;
+            height: 380px;
+            top: 20%;
+            left:55%;
         }
-        //&::after {
-            //content: ' ';
-            //position: absolute;
-            //
-            //
-            //
-            //
-            //
-            //bottom: 0;
-            //right: 0;
-            //
-            //background-image: url(@/../images/hero/bg.svg);
-            //background-repeat: no-repeat;
-            //background-position-x: center;
-            //background-position-y: center;
-            //background-size: cover;
-            //filter: blur(150px);
-        //}
     }
     &-person {
         max-width: 350px;
@@ -72,12 +66,7 @@
 
         background: #000000;
 
-        box-shadow: 0 298px 84px rgba(0, 0, 0, 0.00),
-                    0 191px 76px rgba(0, 0, 0, 0.03),
-                    0 107px 64px rgba(0, 0, 0, 0.1),
-                    0 48px 48px rgba(0, 0, 0, 0.17),
-                    0 12px 26px rgba(0, 0, 0, 0.2),
-                    0 0 0 rgba(0, 0, 0, 0.2);
+        @include hero-shadow;
 
         @include media-breakpoint-down(lg) {
             border-radius: .5rem;
