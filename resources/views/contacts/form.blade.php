@@ -1,4 +1,4 @@
-<form action="{{ url('feedback') }}" method="post" class="bg-body p-5 lc-contacts-form">
+<form action="{{ url('feedback') }}" method="post" class="bg-body p-5 rounded-4 lc-contacts-form">
     <fieldset>
         <legend></legend>
 
