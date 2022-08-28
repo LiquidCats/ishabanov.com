@@ -1,45 +1,48 @@
-<form action="{{ url('feedback') }}" method="post" class="bg-body p-5 rounded-4 lc-contacts-form">
+<form id="feedback-form" action="{{ url('feedback') }}" method="post" class="bg-body p-5 rounded-4 lc-contacts-form">
+    @csrf
     <fieldset>
         <legend></legend>
 
-        <div class="grid gap-3">
-            <div class="g-col-6">
-                <label for="exampleInputEmail1" class="form-label small">Email address</label>
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="g-col-6">
-                <label for="exampleInputEmail2" class="form-label small">Email address</label>
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail2" aria-describedby="emailHelp">
-            </div>
-
-            <div class="g-col-12">
-                <label for="exampleFormControlTextarea1" class="form-label small">Example textarea</label>
-                <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+        <div class="form-floating mb-3">
+            <input name="name" type="text" class="form-control" id="feedback-name" placeholder="Your Name">
+            <label for="feedback-name">Your Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="email" type="email" class="form-control" id="feedback-email" placeholder="Email">
+            <label for="feedback-email">Email</label>
         </div>
 
-        <div class="row text-end mt-3">
-            <div class="col">
-                <select id="exampleInputEmail3" class="form-select form-select-lg">
-                    <option value="1" disabled selected>Subject</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-outline-primary btn-lg">
-                    <span class="d-inline-flex justify-content-center align-items-center gap-2 text-uppercase">
-                        <span class="fs-6">Send</span>
-                        <i data-feather="arrow-right-circle"
-                           stroke-width="1.5"
-                           width="24"
-                           height="24"></i>
-                    </span>
+        <div class="form-floating mb-3">
+            <textarea name="message"
+                      class="form-control"
+                      id="feedback-message"
+                      rows="3"
+                      maxlength="200"
+                      placeholder="Message"
+                      style="height: 10rem"></textarea>
+            <label for="feedback-message">Message</label>
+        </div>
 
-                </button>
-            </div>
+        <div class="form-floating mb-3">
+            <select id="feedback-subject" class="form-select" aria-label="Subject">
+                @php($feedbackTypes = App\Data\Enums\FeedbackType::cases())
+                @foreach($feedbackTypes as $type)
+                    <option value="{{ $type->value }}">{{ $type->getText() }}</option>
+                @endforeach
+            </select>
+            <label for="feedback-subject">Subject</label>
+        </div>
 
+        <div class="text-end">
+            <button type="submit" id="feedback-submit" class="btn btn-outline-primary btn-lg">
+                <span class="d-inline-flex justify-content-center align-items-center gap-2 text-uppercase">
+                    <span class="fs-6">Send</span>
+                    <i data-feather="arrow-right-circle"
+                       stroke-width="1.5"
+                       width="24"
+                       height="24"></i>
+                </span>
+            </button>
         </div>
 
     </fieldset>

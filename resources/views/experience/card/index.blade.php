@@ -1,4 +1,4 @@
-<div class="g-col-12 g-col-md-6 g-col-lg-6">
+<div class="col-12 col-md-6 col-lg-6">
     <div class="card text-center p-2 rounded-4 lc-card">
         <div class="row g-0">
             <div class="col-12 col-lg align-self-center p-4 p-lg-2">
