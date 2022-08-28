@@ -74,6 +74,13 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 3,
         ],
+
+        'emails' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/emails.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 3,
+        ],
     ],
 
 ];
