@@ -17,10 +17,6 @@ class PublishFeedbackToTelegramJob extends Job
 
     public function handle(LogManager $log, FeedbackServiceContract $feedbackService): void
     {
-        if (!app()->environment('production')) {
-            return;
-        }
-
         if (!$feedbackService->publish($this->request)) {
             $log->channel('feedback')
                 ->error('feedback to telegram failed', $this->request->validated());
