@@ -19,7 +19,7 @@ class GetTopToolByTypeJob extends Job
     {
         return Tool::query()
             ->take($this->limit)
-            ->where('type', 'framework')
+            ->where('type', $this->type)
             ->orderBy('type')
             ->orderByDesc('level')
             ->get();
