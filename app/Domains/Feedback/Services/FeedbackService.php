@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Feedback\Services;
 
 use App\Data\Contracts\Repositories\TelegramRepositoryContract;
+use App\Data\Enums\FeedbackType;
 use App\Data\ValueObject\Telegram\ChatId;
 use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use App\Http\Requests\UserFeedbackRequest;
@@ -21,9 +22,11 @@ class FeedbackService implements FeedbackServiceContract
 
     public function publish(UserFeedbackRequest $request): bool
     {
+        $subject = FeedbackType::from((int) $request->validated('subject'));
+
         $message = "Name: {$request->validated('name')}\n";
         $message .= "Email: {$request->validated('email')}\n";
-        $message .= "Subject: {$request->validated('subject')}\n";
+        $message .= "Subject: {$subject->getText()}\n";
         $message .= "Message: {$request->validated('message')}\n\n";
         $message .= "ENV: ". $this->app->environment();
 
