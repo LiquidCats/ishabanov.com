@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Data\Models;
 
+use App\Data\Enums\ExperienceLevel;
 use App\Data\Enums\ToolType;
 use Database\Factories\ToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Tool.
  *
- * @property int         $id
- * @property string      $name
- * @property string|null $type
- * @property string|null $level
+ * @property int                    $id
+ * @property string                 $name
+ * @property ToolType|null          $type
+ * @property ExperienceLevel|null   $level
  */
 class Tool extends Model
 {
@@ -28,6 +29,7 @@ class Tool extends Model
     protected $casts = [
         'name' => 'string',
         'type' => ToolType::class,
+        'level' => ExperienceLevel::class,
     ];
 
     protected static function newFactory(): ToolFactory
