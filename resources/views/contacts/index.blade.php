@@ -1,6 +1,6 @@
 <section id="contacts" class="container lc-contacts">
     <div class="row">
-        <div class="col my-5">
+        <div class="col mt-5 mb-3">
             <h2 class="display-4 fw-light">Send me a message</h2>
         </div>
     </div>

@@ -8,16 +8,10 @@
             <div class="display-1 m-0 mb-4 fw-light text-center text-lg-end">WHO SOLVING PROBLEMS</div>
             <div class="vstack gap-4 gap-lg-3 justify-content-end">
                 <div class="hstack gap-3 justify-content-lg-end justify-content-center">
-                    <div class="text-nowrap lc-component-chips">PHP: Senior</div>
-                    <div class="text-nowrap lc-component-chips">Go Lang: Middle</div>
-                    <div class="text-nowrap lc-component-chips">NodeJS: Middle+</div>
-                    <div class="text-nowrap lc-component-chips">JavaScript: Middle+</div>
+                    @each('hero.chip', $languages, 'tool')
                 </div>
                 <div class="hstack gap-3 justify-content-lg-end justify-content-center">
-                    <div class="lc-component-chips">Laravel: Senior</div>
-                    <div class="lc-component-chips">Symfony: Middle</div>
-                    <div class="lc-component-chips">React: Middle</div>
-                    <div class="lc-component-chips">Vue: Middle</div>
+                    @each('hero.chip', $frameworks, 'tool')
                 </div>
             </div>
         </div>
@@ -25,10 +19,5 @@
         <div class="col-md-12 col-lg-auto align-self-center">
             <img src="{{ asset("images/hero/person.jpg") }}" class="d-block img-fluid my-4 my-lg-2 mx-auto lc-hero-person" alt="LiquidCats - Person">
         </div>
-{{--        <div class="col-12 d-none d-lg-block align-self-end justify-content-center text-center">--}}
-{{--            <a href="#experience" class="d-inline-block mt-3 mb-3 lc-hero-chevron">--}}
-{{--                <img src="{{ asset("images/hero/chevron.svg") }}" class="d-block mx-auto" alt="Chevron">--}}
-{{--            </a>--}}
-{{--        </div>--}}
     </div>
 </section>
