@@ -46,6 +46,9 @@ class Experience extends Model
     public function tools(): BelongsToMany
     {
         return $this->belongsToMany(Tool::class)
+            ->orderByDesc((new Tool())->qualifyColumn('level'))
+            ->orderBy((new Tool())->qualifyColumn('type'))
+            ->using(ExperienceTool::class)
             ->withPivot(['level_id']);
     }
 

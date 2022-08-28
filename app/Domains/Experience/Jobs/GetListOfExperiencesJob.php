@@ -20,6 +20,7 @@ class GetListOfExperiencesJob extends Job
     {
         /* @var Collection<int, Experience> $experiences */
         return Experience::query()
+            ->with(['tools'])
             ->orderByDesc('started_at')
             ->take(6)
             ->get();

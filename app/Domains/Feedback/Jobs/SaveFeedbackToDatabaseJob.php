@@ -17,12 +17,16 @@ class SaveFeedbackToDatabaseJob extends Job
 
     public function handle(): void
     {
-        $model = new UserEmail();
+        $email = $this->request->validated('email');
 
-        $model->email = $this->request->validated('email');
-        $model->name = $this->request->validated('name');
-        $model->subject = FeedbackType::from($this->request->validated('subject'));
+        if (UserEmail::query()->whereKey($email)->doesntExist()) {
+            $model = new UserEmail();
 
-        $model->save();
+            $model->email = $this->request->validated('email');
+            $model->name = $this->request->validated('name');
+            $model->subject = FeedbackType::from((int) $this->request->validated('subject'));
+
+            $model->save();
+        }
     }
 }

@@ -13,9 +13,8 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('experience_tool', static function (Blueprint $table) {
-            $table->integer('experience_id')
-                ->primary();
-            $table->integer('tool_id');
+            $table->integer('experience_id')->index();
+            $table->integer('tool_id')->index();
             $table->tinyInteger('level_id')
                 ->default(0);
 

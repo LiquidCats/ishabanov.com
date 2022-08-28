@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;
 
@@ -48,15 +49,26 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(static function(Throwable $e) {
-        })->stop();
+        $this->reportable(static function(Throwable $e) {})->stop();
 
         $this->renderable(static function (Throwable $e, Request $request) {
             if ($request->is('api/*')) {
-                return \response()->json([
+                $response = new JsonResponse();
+
+                $data = [
                     'ok' => false,
-                    'message' => $e->getMessage()
-                ]);
+                    'message' => $e->getMessage(),
+                ];
+
+                $response->setStatusCode(400);
+
+                if ($e instanceof ValidationException) {
+                    $data['validation'] = $e->validator->getMessageBag()->getMessages();
+
+                    $response->setStatusCode(422);
+                }
+
+                return $response->setData($data);
             }
         });
     }

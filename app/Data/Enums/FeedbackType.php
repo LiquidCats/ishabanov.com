@@ -6,8 +6,18 @@ namespace App\Data\Enums;
 
 enum FeedbackType: int
 {
-    case CONSULTATION = 0;
-    case SERVICES = 1;
-    case PRICING = 2;
-    case COSTS = 3;
+    case NO_SUBJECT = 0;
+    case CONSULTATION = 1;
+    case SERVICES = 2;
+    case PRICING = 3;
+
+    public function getText(): string
+    {
+        return match ($this) {
+            self::NO_SUBJECT => 'I have a question',
+            self::CONSULTATION => 'I need consultation',
+            self::SERVICES => 'I need a developer',
+            self::PRICING => 'What your pricing policy',
+        };
+    }
 }

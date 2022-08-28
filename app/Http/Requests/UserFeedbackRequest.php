@@ -37,8 +37,7 @@ class UserFeedbackRequest extends FormRequest
                 'required',
                 'email',
                 'min:3',
-                'max:100',
-                Rule::unique((new UserEmail())->getTable())
+                'max:100'
             ],
             'message' => [
                 'required',
