@@ -6,7 +6,16 @@ namespace App\Data\Enums;
 
 enum ExperienceLevel: int
 {
-    case JUNIOUR = 0;
+    case JUNIOR = 0;
     case MIDDLE = 1;
     case SENIOR = 2;
+
+    public function getText(): string
+    {
+        return match ($this) {
+            self::JUNIOR => 'Junior',
+            self::MIDDLE => 'Middle',
+            self::SENIOR => 'Senior',
+        };
+    }
 }
