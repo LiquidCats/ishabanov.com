@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    needs: test
+    needs: tests
 
     steps:
       - name: Deploy
