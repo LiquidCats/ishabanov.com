@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
+use App\Data\Enums\FeedbackType;
 use App\Http\Requests\UserFeedbackRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -28,7 +29,7 @@ class FeedbackReceived extends Mailable
         $this->userName = $request->validated('name');
         $this->userEmail = $request->validated('email');
         $this->userMessage = $request->validated('message');
-        $this->userType = $request->validated('subject');
+        $this->userType = (int) $request->validated('subject');
     }
 
     /**
@@ -38,15 +39,17 @@ class FeedbackReceived extends Mailable
      */
     public function build(): static
     {
+        $subject = FeedbackType::from($this->userType);
+
         return $this
-            ->text('emails.feedback')
+            ->markdown('emails.feedback')
             ->tag('feedback')
-            ->metadata('subject', $this->userType)
+            ->metadata('subject', $subject->getText())
             ->with([
                 'name' => $this->userName,
                 'email' => $this->userEmail,
                 'message' => $this->userMessage,
-                'subject' => $this->userType,
+                'subject' => $subject->getText(),
             ]);
     }
 }
