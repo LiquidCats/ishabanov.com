@@ -7,11 +7,10 @@ on:
 
 jobs:
   tests:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - uses: shivammathur/setup-php@master
         with:
           php-version: '8.1'
       - uses: actions/checkout@v3
@@ -42,5 +41,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Pull
+        run: echo "test"
+
