@@ -3,9 +3,7 @@
 namespace Tests\Unit\Domains\Feedback\Jobs;
 
 use App\Domains\Feedback\Jobs\LogFeedbackToFileJob;
-use App\Http\Requests\UserFeedbackRequest;
 use Illuminate\Log\LogManager;
-use Illuminate\Support\Facades\Validator;
 use Mockery;
 use Psr\Log\LoggerInterface;
 
@@ -13,10 +11,8 @@ class LogFeedbackToFileJobTest extends AbstractFeedbackJobTest
 {
     /**
      * @test
-     *
-     * @return void
      */
-    public function should_log_the_request(): void
+    public function shouldLogTheRequest(): void
     {
         $request = $this->mockRequest();
 

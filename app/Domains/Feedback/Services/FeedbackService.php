@@ -28,7 +28,7 @@ class FeedbackService implements FeedbackServiceContract
         $message .= "Email: {$request->validated('email')}\n";
         $message .= "Subject: {$subject->getText()}\n";
         $message .= "Message: {$request->validated('message')}\n\n";
-        $message .= "ENV: ". $this->app->environment();
+        $message .= 'ENV: '.$this->app->environment();
 
         return $this->telegramRepository->sendMessage($this->chatId, $message);
     }

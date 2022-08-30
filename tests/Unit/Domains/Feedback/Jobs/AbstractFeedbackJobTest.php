@@ -19,7 +19,7 @@ class AbstractFeedbackJobTest extends TestCase
             'name' => $this->faker->name,
             'email' => $this->faker->safeEmail,
             'message' => $this->faker->text(),
-            'subject' => $this->faker->numberBetween(0,3),
+            'subject' => $this->faker->numberBetween(0, 3),
         ], $request->rules()));
 
         return $request;

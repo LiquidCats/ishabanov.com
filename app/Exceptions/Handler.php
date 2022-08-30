@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;
@@ -44,12 +43,11 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
     public function register(): void
     {
-        $this->reportable(static function(Throwable $e) {})->stop();
+        $this->reportable(static function (Throwable $e) {
+        })->stop();
 
         $this->renderable(static function (Throwable $e, Request $request) {
             if ($request->is('api/*')) {

@@ -10,10 +10,8 @@ class PublishFeedbackToTelegramJobTest extends AbstractFeedbackJobTest
 {
     /**
      * @test
-     *
-     * @return void
      */
-    public function should_send_message_to_telegram(): void
+    public function shouldSendMessageToTelegram(): void
     {
         Http::fake([
             '*' => Http::response(['ok' => true]),

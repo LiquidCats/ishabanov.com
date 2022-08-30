@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use App\Data\Enums\FeedbackType;
-use App\Data\Models\UserEmail;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class UserFeedbackRequest extends FormRequest
@@ -31,13 +29,13 @@ class UserFeedbackRequest extends FormRequest
             'name' => [
                 'required',
                 'min:3',
-                'max:100'
+                'max:100',
             ],
             'email' => [
                 'required',
                 'email',
                 'min:3',
-                'max:100'
+                'max:100',
             ],
             'message' => [
                 'required',
@@ -47,7 +45,7 @@ class UserFeedbackRequest extends FormRequest
             'subject' => [
                 'required',
                 'integer',
-                new Enum(FeedbackType::class)
+                new Enum(FeedbackType::class),
             ],
         ];
     }

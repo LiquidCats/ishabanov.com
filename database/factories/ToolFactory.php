@@ -17,6 +17,7 @@ use function fake;
 class ToolFactory extends Factory
 {
     protected $model = Tool::class;
+
     /**
      * Define the model's default state.
      *
