@@ -58,7 +58,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node: 18.x
-        run: npm install && npm run build && rm -rf ./node_modules
+        run: |
+          npm install
+          npm run build
+          rm -rf ./node_modules
 
       - name: 'Build Backend'
       - uses: php-actions/composer@v6
