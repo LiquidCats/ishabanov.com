@@ -37,15 +37,16 @@ jobs:
     needs: tests
 
     steps:
+      - name: Prepare
       - uses: actions/checkout@master
       - uses: franzbischoff/replace_envs@v1
         env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_${{ github.event.inputs.description }} }}
-          GH_DATABASE: ${{ secrets.DATABASE_${{ github.event.inputs.description }} }}
-          GH_MAIL: ${{ secrets.MAIL_${{ github.event.inputs.description }} }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_${{ github.event.inputs.description }} }}
+          GH_APP_KEY: ${{ secrets.APP_KEY_${{ github.event.inputs.destination }} }}
+          GH_DATABASE: ${{ secrets.DATABASE_${{ github.event.inputs.destination }} }}
+          GH_MAIL: ${{ secrets.MAIL_${{ github.event.inputs.destination }} }}
+          GH_TELEGRAM: ${{ secrets.TELEGRAM_${{ github.event.inputs.destination }} }}
         with:
-          from_file: ".env.${{ github.event.inputs.environment }}"
+          from_file: ".env.${{ github.event.inputs.destination }}"
           to_file: '.env'
           commit: 'false'
 
@@ -78,4 +79,4 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
-          script: cd ~/${{ github.event.repository.name }} && ./deploy/${{ github.event.inputs.description }}/run.sh
+          script: cd ~/${{ github.event.repository.name }} && ./deploy/${{ github.event.inputs.destination }}/run.sh
