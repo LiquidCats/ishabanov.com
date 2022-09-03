@@ -73,6 +73,7 @@ jobs:
       - name: 'Install Node'
         uses: actions/setup-node@v3
         with:
+          cache: 'npm'
           node: 18.x
 
       - name: Build Frontend
@@ -84,7 +85,6 @@ jobs:
       - name: Install Composer
         uses: php-actions/composer@v6
         with:
-          cache: 'npm'
           php_version: '8.1'
 
       - name: Build Backend
