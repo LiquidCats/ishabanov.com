@@ -20,8 +20,6 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -46,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
 
             $chatId = new ChatId($config->get('services.telegram.announcer.chat_id'));
 
-            return new FeedbackService( $app, $repository, $chatId);
+            return new FeedbackService($app, $repository, $chatId);
         });
     }
 

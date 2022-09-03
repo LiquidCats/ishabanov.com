@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Features\Feedback;
 
-use Illuminate\Http\JsonResponse;
 use App\Domains\Feedback\Jobs\{
     LogFeedbackToFileJob,
     MailFeedbackToAdminJob,
@@ -12,6 +11,7 @@ use App\Domains\Feedback\Jobs\{
     SaveFeedbackToDatabaseJob
 };
 use App\Http\Requests\UserFeedbackRequest;
+use Illuminate\Http\JsonResponse;
 use Lucid\Domains\Http\Jobs\RespondWithJsonJob;
 use Lucid\Units\Feature;
 
@@ -25,7 +25,7 @@ class UserFeedbackFeature extends Feature
         $this->run(new MailFeedbackToAdminJob($request));
 
         return $this->run(new RespondWithJsonJob([
-            'ok' => true
+            'ok' => true,
         ]));
     }
 }

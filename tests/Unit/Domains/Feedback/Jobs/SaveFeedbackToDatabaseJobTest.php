@@ -9,10 +9,8 @@ class SaveFeedbackToDatabaseJobTest extends AbstractFeedbackJobTest
 {
     /**
      * @test
-     *
-     * @return void
      */
-    public function should_collect_user_email(): void
+    public function shouldCollectUserEmail(): void
     {
         $request = $this->mockRequest();
 

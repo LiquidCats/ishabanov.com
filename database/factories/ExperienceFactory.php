@@ -16,6 +16,7 @@ use function fake;
 class ExperienceFactory extends Factory
 {
     protected $model = Experience::class;
+
     /**
      * Define the model's default state.
      *

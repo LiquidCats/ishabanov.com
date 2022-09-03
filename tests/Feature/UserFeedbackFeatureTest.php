@@ -30,10 +30,8 @@ class UserFeedbackFeatureTest extends TestCase
 
     /**
      * @test
-     *
-     * @return void
      */
-    public function should_successful_provide_response(): void
+    public function shouldSuccessfulProvideResponse(): void
     {
         Mail::fake();
         Http::fake(['*' => Http::response(['ok' => true])]);
@@ -61,7 +59,7 @@ class UserFeedbackFeatureTest extends TestCase
             'name' => $this->faker->name,
             'email' => $this->faker->safeEmail,
             'message' => $this->faker->text(),
-            'subject' => $this->faker->numberBetween(0,3),
+            'subject' => $this->faker->numberBetween(0, 3),
         ];
 
         $request = UserFeedbackRequest::createFrom($request);

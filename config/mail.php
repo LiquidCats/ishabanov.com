@@ -70,7 +70,7 @@ return [
     ],
 
     'to' => [
-        'admin' => env('MAIL_ADMIN_ADDRESS')
+        'admin' => env('MAIL_ADMIN_ADDRESS'),
     ],
 
     /*

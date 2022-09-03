@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $email
  * @property string $name
- * @property int $subject
+ * @property int    $subject
  */
 class UserEmail extends Model
 {

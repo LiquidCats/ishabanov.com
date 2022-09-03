@@ -10,10 +10,8 @@ class MailFeedbackToAdminJobTest extends AbstractFeedbackJobTest
 {
     /**
      * @test
-     *
-     * @return void
      */
-    public function should_send_feedback_to_admin_email(): void
+    public function shouldSendFeedbackToAdminEmail(): void
     {
         Mail::fake();
 

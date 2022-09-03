@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ExperienceToolFactory extends Factory
 {
     protected $model = ExperienceTool::class;
+
     /**
      * Define the model's default state.
      *

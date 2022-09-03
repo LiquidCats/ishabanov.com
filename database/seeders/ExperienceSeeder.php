@@ -12,24 +12,27 @@ class ExperienceSeeder extends Seeder
 {
     protected static array $values = [
         [
+            'id' => 6,
             'company_name' => 'everli.com',
             'company_url' => 'https://it.everli.com',
             'company_logo' => 'images/experience/everli.svg',
             'position' => 'Senior Software Engineer',
-            'description' => "",
+            'description' => 'Here I was involved in microservices architecture improvement and development. It is an application for grocery orders and delivery. My responsibility here is pretty the same with previous, I am trying to improve the services architecture and communication and interaction between them. I took a whole responsibility for one of the microservices -- a product search engine based on ElasticSearch.',
             'started_at' => '2021-11-04 00:00:00',
             'ended_at' => null,
         ],
         [
+            'id' => 5,
             'company_name' => 'imusician.pro',
             'company_url' => 'https://imusician.pro',
             'company_logo' => 'images/experience/imusician.svg',
             'position' => 'Senior Software Engineer',
-            'description' => '',
+            'description' => 'Here I was working on improving a backend part of the application. That was an application for music creators and distributors who want to simplify the process of music release on streaming services. Based on its specific there was decided to implement Domain Driven and start refactoring the application backend based on this approach. So, my main responsibility here was to lead refactoring and consult the team on best practices in Domain Driven.',
             'started_at' => '2020-12-01 00:00:00',
             'ended_at' => '2021-11-04 00:00:00',
         ],
         [
+            'id' => 4,
             'company_name' => 'pointpay.io',
             'company_url' => 'https://pointpay.io',
             'company_logo' => 'images/experience/pointpay.svg',
@@ -39,6 +42,7 @@ class ExperienceSeeder extends Seeder
             'ended_at' => '2020-12-01 00:00:00',
         ],
         [
+            'id' => 3,
             'company_name' => 'hemmersbach.com',
             'company_url' => 'https://hemmersbach.com',
             'company_logo' => 'images/experience/hemmersbach.svg',
@@ -48,6 +52,7 @@ class ExperienceSeeder extends Seeder
             'ended_at' => '2019-12-01 00:00:00',
         ],
         [
+            'id' => 2,
             'company_name' => 'hemmersbach.com',
             'company_url' => 'https://hemmersbach.com',
             'company_logo' => 'images/experience/hemmersbach.svg',
@@ -57,6 +62,7 @@ class ExperienceSeeder extends Seeder
             'ended_at' => '2018-12-01 00:00:00',
         ],
         [
+            'id' => 1,
             'company_name' => 'school2100.com',
             'company_url' => 'https://school2100.com',
             'company_logo' => 'images/experience/school2100.svg',
@@ -69,27 +75,24 @@ class ExperienceSeeder extends Seeder
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
         Experience::query()->truncate();
 
-        foreach (self::$values as $experience) {
+        foreach (array_reverse(self::$values) as $experience) {
             $this->createModel($experience);
         }
     }
 
     /**
      * @param array<string, string> $experience
-     *
-     * @return void
      */
     protected function createModel(array $experience): void
     {
         $model = new Experience();
 
+        $model->id = $experience['id'];
         $model->company_name = $experience['company_name'];
         $model->company_url = $experience['company_url'];
         $model->company_logo = $experience['company_logo'];

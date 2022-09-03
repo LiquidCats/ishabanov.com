@@ -12,11 +12,15 @@ use Illuminate\Queue\SerializesModels;
 
 class FeedbackReceived extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected string $userName;
+
     protected string $userEmail;
+
     protected string $userMessage;
+
     protected int $userType;
 
     /**
