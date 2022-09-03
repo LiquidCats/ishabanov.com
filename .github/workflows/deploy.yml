@@ -10,6 +10,9 @@ on:
         options:
           - production
           - staging
+env:
+  BUILD_DIR: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -38,10 +41,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-    needs: tests
+    needs: [tests, backup]
 
     steps:
       - uses: actions/checkout@master
+        env:
 
       - name: Prepare .env File
         if: ${{ github.event.inputs.destination == 'staging'}}
@@ -53,7 +57,7 @@ jobs:
           GH_TELEGRAM: ${{ secrets.TELEGRAM_STAGING }}
         with:
           from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env'
+          to_file: '.env.${{ github.event.inputs.destination }}'
           commit: 'false'
 
       - name: Prepare .env File
@@ -66,7 +70,7 @@ jobs:
           GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
         with:
           from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env'
+          to_file: '.env.${{ github.event.inputs.destination }}'
           commit: 'false'
 
       - name: Install Node
@@ -95,7 +99,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           source: '.'
-          target: '~/${{ github.event.repository.name }}'
+          target: '$BUILD_DIR'
 
 #      - name: 'Deploy'
 #        uses: appleboy/ssh-action@master
@@ -105,4 +109,4 @@ jobs:
 #          key: ${{ secrets.VPS_PRIVATE_KEY }}
 #          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
 #          port: 22
-#          script: cd ~/${{ github.event.repository.name }} && ./deploy/${{ github.event.inputs.destination }}/run.sh
+#          script: cd $BUILD_DIR && deploy/${{ github.event.inputs.destination }}/run.sh
