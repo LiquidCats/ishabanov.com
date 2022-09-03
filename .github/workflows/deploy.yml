@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: 'Prepare'
+      - name: Prepare Envs
         uses: franzbischoff/replace_envs@main
         env:
           GH_APP_KEY: ${{ secrets.APP_KEY_${{ github.event.inputs.destination }} }}
@@ -56,19 +56,24 @@ jobs:
           to_file: '.env'
           commit: 'false'
 
-      - name: 'Build Frontend'
+      - name: 'Install Node'
         uses: actions/setup-node@v3
         with:
           node: 18.x
+
+      - name: Build Frontend
         run: |
           npm install
           npm run build
           rm -rf ./node_modules
 
-      - name: 'Build Backend'
+      - name: Install Composer
         uses: php-actions/composer@v6
         with:
+          cache: 'npm'
           php_version: '8.1'
+
+      - name: Build Backend
         run: composer install --no-interaction --optimize-autoload --no-dev
 
       - name: 'Upload'
