@@ -44,13 +44,27 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Prepare Envs
+      - name: Prepare .env File
+        if: ${{ github.event.inputs.destination == 'staging'}}
         uses: franzbischoff/replace_envs@main
         env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_${{ github.event.inputs.destination }} }}
-          GH_DATABASE: ${{ secrets.DATABASE_${{ github.event.inputs.destination }} }}
-          GH_MAIL: ${{ secrets.MAIL_${{ github.event.inputs.destination }} }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_${{ github.event.inputs.destination }} }}
+          GH_APP_KEY: ${{ secrets.APP_KEY_STAGING }}
+          GH_DATABASE: ${{ secrets.DATABASE_STAGING }}
+          GH_MAIL: ${{ secrets.MAIL_STAGING }}
+          GH_TELEGRAM: ${{ secrets.TELEGRAM_STAGING }}
+        with:
+          from_file: '.env.${{ github.event.inputs.destination }}'
+          to_file: '.env'
+          commit: 'false'
+
+      - name: Prepare .env File
+        if: ${{ github.event.inputs.destination == 'production'}}
+        uses: franzbischoff/replace_envs@main
+        env:
+          GH_APP_KEY: ${{ secrets.APP_KEY_PRODUCTION }}
+          GH_DATABASE: ${{ secrets.DATABASE_PRODUCTION }}
+          GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
+          GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
         with:
           from_file: '.env.${{ github.event.inputs.destination }}'
           to_file: '.env'
@@ -86,11 +100,11 @@ jobs:
           source: '.'
           target: '~/${{ github.event.repository.name }}'
 
-      - name: 'Deploy'
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          port: 22
-          script: cd ~/${{ github.event.repository.name }} && ./deploy/${{ github.event.inputs.destination }}/run.sh
+#      - name: 'Deploy'
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.VPS_HOST }}
+#          username: ${{ secrets.VPS_USERNAME }}
+#          key: ${{ secrets.VPS_PRIVATE_KEY }}
+#          port: 22
+#          script: cd ~/${{ github.event.repository.name }} && ./deploy/${{ github.event.inputs.destination }}/run.sh
