@@ -43,7 +43,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - uses: franzbischoff/replace_envs@main
+
+      - name: 'Prepare'
+        uses: franzbischoff/replace_envs@main
         env:
           GH_APP_KEY: ${{ secrets.APP_KEY_${{ github.event.inputs.destination }} }}
           GH_DATABASE: ${{ secrets.DATABASE_${{ github.event.inputs.destination }} }}
@@ -55,7 +57,7 @@ jobs:
           commit: 'false'
 
       - name: 'Build Frontend'
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node: 18.x
         run: |
@@ -64,13 +66,13 @@ jobs:
           rm -rf ./node_modules
 
       - name: 'Build Backend'
-      - uses: php-actions/composer@v6
+        uses: php-actions/composer@v6
         with:
           php_version: '8.1'
         run: composer install --no-interaction --optimize-autoload --no-dev
 
       - name: 'Upload'
-      - uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@master
         env:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
