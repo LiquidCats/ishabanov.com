@@ -23,7 +23,7 @@ return [
             'dev_server' => [
                 'enabled' => true,
                 'url' => env('DEV_SERVER_URL', 'http://localhost:5173'),
-                'ping_before_using_manifest' => true,
+                'ping_before_using_manifest' => false,
                 'ping_url' => null,
                 'ping_timeout' => 1,
                 'key' => env('DEV_SERVER_KEY'),
@@ -57,7 +57,7 @@ return [
     */
     'commands' => [
         'artisan' => [
-            'vite:tsconfig',
+//            'vite:tsconfig',
             // 'typescript:generate'
         ],
         'shell' => [
