@@ -45,7 +45,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-        env:
 
       - name: Prepare .env File
         if: ${{ github.event.inputs.destination == 'staging'}}
