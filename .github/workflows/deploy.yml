@@ -38,7 +38,6 @@ jobs:
     needs: tests
 
     steps:
-      - name: Prepare
       - uses: actions/checkout@master
       - uses: franzbischoff/replace_envs@v1
         env:
