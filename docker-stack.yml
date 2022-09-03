@@ -30,3 +30,12 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+
+  redis:
+    image: redis:latest
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 128M
