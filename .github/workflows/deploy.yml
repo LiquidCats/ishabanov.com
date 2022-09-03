@@ -71,7 +71,7 @@ jobs:
           commit: 'false'
 
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@main
         with:
           cache: 'npm'
           node: 18.x
@@ -83,12 +83,10 @@ jobs:
           rm -rf ./node_modules
 
       - name: Build Backend
-        uses: php-actions/composer@v7
+        uses: php-actions/composer@master
         with:
           dev: no
           args: --no-interaction --optimize-autoload
-          version: 'latest'
-          php_version: 'latest'
 
       - name: 'Upload'
         uses: appleboy/scp-action@master
