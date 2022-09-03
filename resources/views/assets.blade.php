@@ -5,7 +5,14 @@
 @endproduction
 
 @env('local')
-    <link rel="stylesheet" href="http://localhost:5173/resources/scss/styles.scss">
-    <script type="module" src="http://localhost:5173/resources/js/scripts.js" defer></script>
+    @client
+    @tag('scripts')
+    @tag('styles')
+@endenv
+
+@env('testing')
+    @client
+    @tag('scripts')
+    @tag('styles')
 @endenv
 
