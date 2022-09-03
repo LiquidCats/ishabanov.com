@@ -1,35 +1,36 @@
 version: "3.8"
 
 services:
-  server:
-    build:
-      context: .
-      dockerfile: docker/production/server/Dockerfile
-    ports:
-      - "8000:80"
-    restart: always
+  fpm:
+    image: iliashabanov/php:latest
     deploy:
       mode: replicated
       replicas: 1
-
-  app:
-    build:
-      context: .
-      dockerfile: docker/production/app/Dockerfile
-    restart: always
-    deploy:
-      mode: global
-      replicas: 1
+    working_dir: /app
+    volumes:
+      - .:/app:rw
 
   cron:
-    build:
-      context: .
-      dockerfile: docker/production/app/Dockerfile
+    image: iliashabanov/php:latest
     command: "crond -f"
-    restart: always
     deploy:
       mode: replicated
       replicas: 1
+    working_dir: /app
+    volumes:
+      - .:/app:rw
+      - ./docker/production/app/config/crontab:/var/spool/cron/crontabs/root:ro
+
+  server:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    deploy:
+      mode: replicated
+      replicas: 1
+    volumes:
+      - .:/app:rw
+      - ./docker/production/server/config:/etc/nginx/conf.d:ro
 
   redis:
     image: redis:latest
