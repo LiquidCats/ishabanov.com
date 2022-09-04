@@ -67,7 +67,7 @@ jobs:
           GH_TELEGRAM: ${{ secrets.TELEGRAM_STAGING }}
         with:
           from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env.${{ github.event.inputs.destination }}'
+          to_file: '.env'
           commit: 'false'
 
       - name: Prepare .env File
@@ -80,7 +80,7 @@ jobs:
           GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
         with:
           from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env.${{ github.event.inputs.destination }}'
+          to_file: '.env'
           commit: 'false'
 
       - name: Install Node
@@ -101,7 +101,13 @@ jobs:
           dev: no
           args: --no-interaction --optimize-autoloader
 
-      - name: 'Upload'
+      - name: Update Cache
+        run: |
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+      - name: Upload
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -111,12 +117,12 @@ jobs:
           source: '.'
           target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
-#      - name: 'Deploy'
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.VPS_HOST }}
-#          username: ${{ secrets.VPS_USERNAME }}
-#          key: ${{ secrets.VPS_PRIVATE_KEY }}
-#          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-#          port: 22
-#          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/run.sh
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/run.sh

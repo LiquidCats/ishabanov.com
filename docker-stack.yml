@@ -1,9 +1,16 @@
 version: "3.8"
-
+volumes:
+  app:
+    driver_opts:
+      type: nfs
+      device: .
 services:
   fpm:
     image: iliashabanov/php:latest
     deploy:
+      placement:
+        constraints:
+          - node.role == manager
       mode: replicated
       replicas: 1
     working_dir: /app
@@ -14,6 +21,9 @@ services:
     image: iliashabanov/php:latest
     command: "crond -f"
     deploy:
+      placement:
+        constraints:
+          - node.role == manager
       mode: replicated
       replicas: 1
     working_dir: /app
@@ -26,6 +36,9 @@ services:
     ports:
       - "8000:80"
     deploy:
+      placement:
+        constraints:
+          - node.role == manager
       mode: replicated
       replicas: 1
     volumes:
