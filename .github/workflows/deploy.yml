@@ -10,8 +10,6 @@ on:
         options:
           - production
           - staging
-env:
-  BUILD_DIR: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
 jobs:
   tests:
@@ -49,7 +47,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: mkdir -p $BUILD_DIR
+          script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
   release:
     runs-on: ubuntu-latest
