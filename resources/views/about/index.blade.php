@@ -8,9 +8,10 @@
                 <div class="rounded-4 p-5">
                     <div>
                         <h2>About Me</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda distinctio dolores enim harum illo molestiae nihil quia tempora vero voluptatibus.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci aliquid amet cupiditate distinctio dolore ea est et eum facere fugit in labore maiores nobis numquam optio pariatur perferendis perspiciatis porro possimus provident, quo temporibus tenetur velit, veritatis voluptas. Architecto autem ducimus id natus obcaecati reprehenderit suscipit velit veniam!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores atque blanditiis dolore dolorem, doloremque ducimus enim, ex fuga hic in ipsum iusto laboriosam mollitia obcaecati pariatur, possimus quisquam saepe suscipit ut vel velit vero vitae? Aspernatur corporis earum provident!</p>
+                        <p>Senior Software Engineer with a demonstrated history of working in the information technology
+                            and services industry. Skilled in PHP, JS,NodeJs, React, Vue.js, Laravel, Symphony, Zend
+                            Framework, CQRS, Event Sourcing and Payment Gateways for Blockchain architecture. Strong
+                            engineering professional with a bachelor focused in Programming Engineering.</p>
                     </div>
                     <div class="text-muted fs-4 my-1">
                         Current experience: {{ $duration->getYears() }} years {{ $duration->getMonths() }} months
