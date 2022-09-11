@@ -111,8 +111,7 @@ jobs:
     steps:
       - run: |
           mkdir ./certs
-          echo "${CERT}" | tee ./certs/ca.crt
-          cat ./certs/ca.crt
+          echo "\${CERT}" | tee ./certs/ca.crt
           sudo mkdir -p /etc/docker/certs.d
 
       - uses: franzbischoff/replace_envs@main
