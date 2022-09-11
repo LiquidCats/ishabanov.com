@@ -113,10 +113,10 @@ jobs:
       - prepare
 
     steps:
-      - run: |
-          mkdir -p /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}
-          cd /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}
-          echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
+#      - run: |
+#          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+#          cd /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+#          sudo echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -136,6 +136,7 @@ jobs:
         with:
           push: true
           context: .
+          platform: linux/arm64
           file: ./docker/${{ github.event.inputs.destination }}/php/Dockerfile
           tags: ${{ github.event.repository.name }}/php:latest
 
