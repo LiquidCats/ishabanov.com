@@ -112,10 +112,17 @@ jobs:
       - run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
           sudo mkdir -p /ssl
-          cd /ssl
-          sudo touch ca.crt
-          sudo echo "${{ secrets.PROD_REGISTRY_HOST }}" >> sudo tee ca.crt
-          ln -s /ssl/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
+          sudo touch /ssl/ca.crt.tmp
+          echo "${CERT}" | tee ca.crt
+          sudo ln -s /ssl /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+
+      - uses: franzbischoff/replace_envs@main
+        env:
+          CERT: ${{ secrets.PROD_REGISTRY_CA }}
+        with:
+          from_file: '/ssl/ca.crt.tmp'
+          to_file: '/ssl/ca.crt'
+          commit: 'false'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
