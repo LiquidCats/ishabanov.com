@@ -133,7 +133,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.PROD_REGISTRY_HOST }}
+          registry: "r.liquid-cats.com:5000"
           username: ${{ secrets.PROD_REGISTRY_LOGIN }}
           password: ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
