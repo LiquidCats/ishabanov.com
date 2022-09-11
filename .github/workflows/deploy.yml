@@ -134,42 +134,42 @@ jobs:
           file: ./docker/${{ github.event.inputs.destination }}/php/Dockerfile
           tags: ${{ github.event.repository.name }}/php:latest
 
-  build-app:
-    runs-on: ubuntu-latest
-    needs: build-php
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Install Node
-        uses: actions/setup-node@main
-        with:
-          cache: 'npm'
-          node: 18.x
-
-      - name: Build Frontend
-        run: |
-          npm install
-          npm run build
-          rm -rf ./node_modules
+#  build-app:
+#    runs-on: ubuntu-latest
+#    needs: build-php
+#    steps:
+#      - uses: actions/checkout@master
+#
+#      - name: Install Node
+#        uses: actions/setup-node@main
+#        with:
+#          cache: 'npm'
+#          node: 18.x
+#
+#      - name: Build Frontend
+#        run: |
+#          npm install
+#          npm run build
+#          rm -rf ./node_modules
 
 
 #  build-cron:
 #    runs-on:  ubuntu-latest
 #    needs: build-php
 
-  deploy:
-    runs-on: ubuntu-latest
-
-    needs:
-      - build-app
-      - build-cron
-
-    steps:
-      - uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
-          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/deploy.sh
+#  deploy:
+#    runs-on: ubuntu-latest
+#
+#    needs:
+#      - build-app
+#      - build-cron
+#
+#    steps:
+#      - uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.VPS_HOST }}
+#          username: ${{ secrets.VPS_USERNAME }}
+#          key: ${{ secrets.VPS_PRIVATE_KEY }}
+#          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+#          port: 22
+#          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/deploy.sh
