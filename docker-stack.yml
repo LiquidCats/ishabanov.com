@@ -1,49 +1,17 @@
 version: "3.8"
-volumes:
-  app:
-    driver_opts:
-      type: nfs
-      device: .
+
 services:
-  fpm:
-    image: iliashabanov/php:latest
+  app:
+    image: r.liquid-cats.com/onepager/app:latest
     deploy:
-      placement:
-        constraints:
-          - node.role == manager
       mode: replicated
       replicas: 1
-    working_dir: /app
-    volumes:
-      - .:/app:rw
 
   cron:
-    image: iliashabanov/php:latest
-    command: "crond -f"
+    image: r.liquid-cats.com/onepager/cron:latest
     deploy:
-      placement:
-        constraints:
-          - node.role == manager
       mode: replicated
       replicas: 1
-    working_dir: /app
-    volumes:
-      - .:/app:rw
-      - ./docker/production/app/config/crontab:/var/spool/cron/crontabs/root:ro
-
-  server:
-    image: nginx:latest
-    ports:
-      - "8000:80"
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      mode: replicated
-      replicas: 1
-    volumes:
-      - .:/app:rw
-      - ./docker/production/server/config:/etc/nginx/conf.d:ro
 
   redis:
     image: redis:latest
