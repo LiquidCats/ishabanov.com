@@ -122,7 +122,7 @@ jobs:
           to_file: './certs/ca.crt'
           commit: 'false'
 
-      - run: sudo ln -s ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+      - run: sudo ln -s ./certs /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
