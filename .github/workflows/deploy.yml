@@ -118,8 +118,8 @@ jobs:
         env:
           CERT: ${{ secrets.PROD_REGISTRY_CA }}
         with:
-          from_file: '/certs/ca.crt'
-          to_file: '/certs/ca.crt'
+          from_file: './certs/ca.crt'
+          to_file: './certs/ca.crt'
           commit: 'false'
 
       - run: sudo ln -s ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
