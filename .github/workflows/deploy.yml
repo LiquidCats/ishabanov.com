@@ -114,7 +114,9 @@ jobs:
 
     steps:
       - run: |
-          echo "${{ secrets.PROD_REGISTRY_HOST }}" >> /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
+          mkdir -p /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}
+          cd /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}
+          echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
