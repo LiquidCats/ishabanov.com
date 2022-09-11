@@ -114,7 +114,6 @@ jobs:
           mkdir -p ./certs
           echo "\${CERT}" | tee ./certs/ca.crt
           sudo mkdir -p /etc/docker/certs.d
-          sudo ln -s /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }} ./certs
 
       - uses: franzbischoff/replace_envs@main
         env:
@@ -126,7 +125,7 @@ jobs:
 
       - run: |
           cat ./certs/ca.crt
-          mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
