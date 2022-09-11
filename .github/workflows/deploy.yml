@@ -126,7 +126,7 @@ jobs:
 
       - run: |
           cat ./certs/ca.crt
-          cat /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
+          mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
