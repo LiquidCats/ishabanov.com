@@ -110,18 +110,16 @@ jobs:
 
     steps:
       - run: |
+          echo "${CERT}" | tee ca.txt
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo mkdir -p /ssl
-          sudo touch /ssl/ca.crt.tmp
-          echo "${CERT}" | tee ca.crt
-          sudo ln -s /ssl /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo ln -s ./ca.txt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
 
       - uses: franzbischoff/replace_envs@main
         env:
           CERT: ${{ secrets.PROD_REGISTRY_CA }}
         with:
-          from_file: '/ssl/ca.crt.tmp'
-          to_file: '/ssl/ca.crt'
+          from_file: 'ca.txt'
+          to_file: 'ca.txt'
           commit: 'false'
 
       - name: Set up QEMU
@@ -133,7 +131,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          registry: "r.liquid-cats.com:5000"
+          registry: ${{ secrets.PROD_REGISTRY_HOST }}
           username: ${{ secrets.PROD_REGISTRY_LOGIN }}
           password: ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
