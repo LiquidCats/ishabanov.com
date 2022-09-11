@@ -113,10 +113,10 @@ jobs:
       - prepare
 
     steps:
-#      - run: |
-#          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-#          cd /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-#          sudo echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
+      - run: |
+          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          cd /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
