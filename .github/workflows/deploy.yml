@@ -110,9 +110,11 @@ jobs:
 
     steps:
       - run: |
-          mkdir ./certs
+          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          mkdir -p ./certs
           echo "\${CERT}" | tee ./certs/ca.crt
           sudo mkdir -p /etc/docker/certs.d
+          sudo ln -s /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }} ./certs
 
       - uses: franzbischoff/replace_envs@main
         env:
@@ -122,7 +124,6 @@ jobs:
           to_file: './certs/ca.crt'
           commit: 'false'
 
-      - run: sudo ln -s ./certs /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
       - run: |
           cat ./certs/ca.crt
           cat /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
