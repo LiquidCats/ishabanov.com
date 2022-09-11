@@ -109,6 +109,8 @@ jobs:
       - prepare
 
     steps:
+      - uses: actions/checkout@master
+
       - run: |
           mkdir -p ./certs
           echo "\${CERT}" | tee ./certs/ca.crt
@@ -124,6 +126,7 @@ jobs:
       - run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
           sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          rm ./certs
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -133,11 +136,6 @@ jobs:
 
       - name: Login to DockerHub
         run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
-#        uses: docker/login-action@v2
-#        with:
-#          registry: ${{ secrets.PROD_REGISTRY_HOST }}
-#          username: ${{ secrets.PROD_REGISTRY_LOGIN }}
-#          password: ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
