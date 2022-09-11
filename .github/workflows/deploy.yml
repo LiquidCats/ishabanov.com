@@ -115,8 +115,10 @@ jobs:
     steps:
       - run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          cd /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ./ca.crt
+          sudo mkdir -p /ssl
+          cd /ssl
+          echo "${{ secrets.PROD_REGISTRY_HOST }}" >> ca.crt
+          ln -s /ssl/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
