@@ -49,15 +49,32 @@ jobs:
           port: 22
           script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
-  release:
+  upload:
     runs-on: ubuntu-latest
 
-    needs: [tests, backup]
+    needs: backup
+
+    steps:
+      - uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          source: './deploy.sh,./docker-stack.yml'
+          target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
+
+  prepare:
+    runs-on: ubuntu-latest
+
+    needs:
+      - backup
+      - upload
 
     steps:
       - uses: actions/checkout@master
 
-      - name: Prepare .env File
+      - name: Prepare Staging Env
         if: ${{ github.event.inputs.destination == 'staging'}}
         uses: franzbischoff/replace_envs@main
         env:
@@ -70,7 +87,7 @@ jobs:
           to_file: '.env'
           commit: 'false'
 
-      - name: Prepare .env File
+      - name: Prepare Production Env
         if: ${{ github.event.inputs.destination == 'production'}}
         uses: franzbischoff/replace_envs@main
         env:
@@ -82,6 +99,46 @@ jobs:
           from_file: '.env.${{ github.event.inputs.destination }}'
           to_file: '.env'
           commit: 'false'
+
+      - name: Remove Dotenvs
+        run: rm .env.*
+
+  build-php:
+    runs-on: ubuntu-latest
+
+    needs:
+      - prepare
+
+    steps:
+      - run: |
+          echo "${{ secrets.PROD_REGISTRY_HOST }}" >> /etc/docker/cers.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.PROD_REGISTRY_HOST }}
+          username: ${{ secrets.PROD_REGISTRY_LOGIN }}
+          password: ${{ secrets.PROD_REGISTRY_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: .
+          file: ./docker/${{ github.event.inputs.destination }}/php/Dockerfile
+          tags: ${{ github.event.repository.name }}/php:latest
+
+  build-app:
+    runs-on: ubuntu-latest
+    needs: build-php
+    steps:
+      - uses: actions/checkout@master
 
       - name: Install Node
         uses: actions/setup-node@main
@@ -95,34 +152,24 @@ jobs:
           npm run build
           rm -rf ./node_modules
 
-      - name: Build Backend
-        uses: php-actions/composer@master
-        with:
-          dev: no
-          args: --no-interaction --optimize-autoloader
 
-      - name: Update Cache
-        run: |
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+#  build-cron:
+#    runs-on:  ubuntu-latest
+#    needs: build-php
 
-      - name: Upload
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          source: '.'
-          target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
+  deploy:
+    runs-on: ubuntu-latest
 
-      - name: Deploy
-        uses: appleboy/ssh-action@master
+    needs:
+      - build-app
+      - build-cron
+
+    steps:
+      - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/run.sh
+          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/deploy.sh
