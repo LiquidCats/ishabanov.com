@@ -136,7 +136,7 @@ jobs:
         container: ['app', 'cron']
 
     steps:
-      - uses: actions/checkout@master
+#      - uses: actions/checkout@master
 
       - name: Remove Dotenvs
         run: rm .env.*
@@ -144,17 +144,15 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: certificate
-          path: ./certs/ca.crt
+          path: ./certs
 
       - uses: actions/download-artifact@master
         with:
           name: dot-env
-          path: .env
+          path: .
 
       - run: |
-          ls -l ./certs
-          ls -l ./certs/ca.crt
-          ls -l .env
+          ls -laR .
 
 #      - run: |
 #          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
