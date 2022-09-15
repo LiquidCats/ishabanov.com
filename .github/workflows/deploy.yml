@@ -139,13 +139,8 @@ jobs:
         run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          context: .
-          platforms: linux/arm64
-          file: ./docker/${{ github.event.inputs.destination }}/app/Dockerfile
-          tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/php:latest
+        run: docker buildx build --file ./docker/production/app/Dockerfile --platform linux/amd64 --tag ${{ secrets.PROD_REGISTRY_HOST }}/onepager/app:latest --push .
+
   build-cron:
     runs-on: ubuntu-latest
 
@@ -184,13 +179,7 @@ jobs:
         run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          context: .
-          platforms: linux/arm64
-          file: ./docker/${{ github.event.inputs.destination }}/cron/Dockerfile
-          tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/php:latest
+        run: /usr/bin/docker buildx build --file ./docker/production/cron/Dockerfile --platform linux/arm64 --tag ${{ secrets.PROD_REGISTRY_HOST }}/onepager/cron:latest --push .
 
 #  deploy:
 #    runs-on: ubuntu-latest
