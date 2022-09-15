@@ -148,7 +148,7 @@ jobs:
 
       - uses: actions/download-artifact@master
         with:
-          name: do-env
+          name: dot-env
           path: .env
 
       - run: |
