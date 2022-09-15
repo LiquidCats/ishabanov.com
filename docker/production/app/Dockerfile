@@ -1,6 +1,6 @@
 FROM iliashabanov/php:latest
 
-ADD ./docker/production/server/config /etc/nginx/conf.d
+ADD ./docker/production/app/config /etc/nginx/conf.d
 ADD . /app
 
 WORKDIR /app

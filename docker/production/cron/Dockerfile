@@ -1,6 +1,6 @@
 FROM iliashabanov/php:latest
 
-ADD ./docker/production/app/config/crontab /var/spool/cron/crontabs/root
+ADD ./docker/production/cron/config/crontab /var/spool/cron/crontabs/root
 ADD . /app
 
 WORKDIR /app
