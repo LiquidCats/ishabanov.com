@@ -100,46 +100,46 @@ jobs:
 
       - name: Remove Dotenvs
         run: rm .env.*
-
-  build-app:
-    runs-on: ubuntu-latest
-
-    needs:
-      - tests
-      - prepare
-
-    steps:
-      - uses: actions/checkout@master
-
-      - run: |
-          mkdir -p ./certs
-          echo "\${CERT}" | tee ./certs/ca.crt
-
-      - uses: franzbischoff/replace_envs@main
-        env:
-          CERT: ${{ secrets.PROD_REGISTRY_CA }}
-        with:
-          from_file: './certs/ca.crt'
-          to_file: './certs/ca.crt'
-          commit: 'false'
-
-      - run: |
-          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-
-      - run: rm -rf ./certs
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
-
-      - name: Build and push
-        run: docker buildx build --file ./docker/production/app/Dockerfile --platform linux/amd64 --tag ${{ secrets.PROD_REGISTRY_HOST }}/onepager/app:latest --push .
+#
+#  build-app:
+#    runs-on: ubuntu-latest
+#
+#    needs:
+#      - tests
+#      - prepare
+#
+#    steps:
+#      - uses: actions/checkout@master
+#
+#      - run: |
+#          mkdir -p ./certs
+#          echo "\${CERT}" | tee ./certs/ca.crt
+#
+#      - uses: franzbischoff/replace_envs@main
+#        env:
+#          CERT: ${{ secrets.PROD_REGISTRY_CA }}
+#        with:
+#          from_file: './certs/ca.crt'
+#          to_file: './certs/ca.crt'
+#          commit: 'false'
+#
+#      - run: |
+#          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+#          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+#
+#      - run: rm -rf ./certs
+#
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
+#
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v2
+#
+#      - name: Login to DockerHub
+#        run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
+#
+#      - name: Build and push
+#        run: docker buildx build --file ./docker/production/app/Dockerfile --platform linux/amd64 --tag ${{ secrets.PROD_REGISTRY_HOST }}/onepager/app:latest --push .
 
   build-cron:
     runs-on: ubuntu-latest
@@ -164,8 +164,11 @@ jobs:
           commit: 'false'
 
       - run: |
+          sudo cp ./certs/ca.crt /usr/local/share/ca-certificates/
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo cp ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo rm -rf ./certs
+          sudo update-ca-certificates
 
       - run: rm -rf ./certs
 
