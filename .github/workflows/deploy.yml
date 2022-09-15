@@ -66,7 +66,27 @@ jobs:
 #          source: './deploy.sh,./docker-stack.yml'
 #          target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
-  prepare:
+  cert:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir -p ./certs
+          echo "\${CERT}" | tee ./certs/ca.crt
+
+      - uses: franzbischoff/replace_envs@main
+        env:
+          CERT: ${{ secrets.PROD_REGISTRY_CA }}
+        with:
+          from_file: './certs/ca.crt'
+          to_file: './certs/ca.crt'
+          commit: 'false'
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: certificate
+          path: ./certs/ca.crt
+
+  env:
     runs-on: ubuntu-latest
 
     steps:
@@ -98,15 +118,18 @@ jobs:
           to_file: '.env'
           commit: 'false'
 
-      - name: Remove Dotenvs
-        run: rm .env.*
+      - uses: actions/upload-artifact@master
+        with:
+          name: dot-env
+          path: .env
 
   build:
     runs-on: ubuntu-latest
 
     needs:
       - tests
-      - prepare
+      - cert
+      - env
 
     strategy:
       matrix:
@@ -115,17 +138,18 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - run: |
-          mkdir -p ./certs
-          echo "\${CERT}" | tee ./certs/ca.crt
+      - name: Remove Dotenvs
+        run: rm .env.*
 
-      - uses: franzbischoff/replace_envs@main
-        env:
-          CERT: ${{ secrets.PROD_REGISTRY_CA }}
+      - uses: actions/download-artifact@master
         with:
-          from_file: './certs/ca.crt'
-          to_file: './certs/ca.crt'
-          commit: 'false'
+          name: certificate
+          path: ./certs/ca.crt
+
+      - uses: actions/download-artifact@master
+        with:
+          name: do-env
+          path: .env
 
       - run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
@@ -155,16 +179,11 @@ jobs:
           file: ./docker/${{ github.event.inputs.destination }}/${{ matrix.container }}/Dockerfile
           tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/${{ matrix.container }}:latest
 
-
-#      - name: Build and push
-#        run: /usr/bin/docker buildx build --file ./docker/production/cron/Dockerfile --platform linux/arm64 --tag ${{ secrets.PROD_REGISTRY_HOST }}/onepager/cron:latest --push .
-
 #  deploy:
 #    runs-on: ubuntu-latest
 #
 #    needs:
-#      - build-app
-#      - build-cron
+#      - build
 #      - upload
 #
 #    steps:

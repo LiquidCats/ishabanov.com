@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   app:
-    image: r.liquid-cats.com/onepager/app:latest
+    image: ${REGISTRY}/onepager/app:latest
     deploy:
       mode: replicated
       replicas: 1
 
   cron:
-    image: r.liquid-cats.com/onepager/cron:latest
+    image: ${REGISTRY}/onepager/cron:latest
     deploy:
       mode: replicated
       replicas: 1
