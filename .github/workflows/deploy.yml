@@ -165,7 +165,7 @@ jobs:
 
       - run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo mx ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
+          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
 
       - run: rm -rf ./certs
 
