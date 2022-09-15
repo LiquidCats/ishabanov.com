@@ -21,13 +21,13 @@ jobs:
           php-version: '8.1'
       - uses: actions/checkout@v3
 
-      - name: Copy .env
+      - name: Copy Env
         run: cp .env.testing .env
 
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Generate key
+      - name: Generate Key
         run: php artisan key:generate
 
       - name: Run PHPUnit
@@ -139,23 +139,27 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Remove Dotenvs
-        run: rm .env.*
+        run: |
+          rm .env.*
+          rm ./tests
 
-      - uses: actions/download-artifact@master
+      - name: Get Certificate
+        uses: actions/download-artifact@master
         with:
           name: certificate
           path: ./certs
 
-      - uses: actions/download-artifact@master
+      - name: Get Env File
+        uses: actions/download-artifact@master
         with:
           name: dot-env
           path: .
 
-      - run: |
+      - name: Add Certificate
+        run: |
           sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
           sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-
-      - run: rm -rf ./certs
+          rm -rf ./certs
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -175,7 +179,7 @@ jobs:
         with:
           push: true
           context: .
-          platforms: linux/arm64
+          platforms: linux/amd64
           file: ./docker/${{ github.event.inputs.destination }}/${{ matrix.container }}/Dockerfile
           tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/${{ matrix.container }}:latest
 
@@ -195,3 +199,17 @@ jobs:
 #          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
 #          port: 22
 #          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/deploy.sh
+
+  postdeploy:
+    runs-on: ubuntu-latest
+
+    needs: deploy
+
+    steps:
+      - name: Clean Up Artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          failOnError: false
+          name: |
+            dot-env
+            certificate
