@@ -1,4 +1,4 @@
-FROM r.liquid-cats.com/onepager/php:latest
+FROM iliashabanov/php:latest
 
 ADD ./docker/production/app/config/crontab /var/spool/cron/crontabs/root
 ADD . /app

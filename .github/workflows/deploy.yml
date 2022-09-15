@@ -101,7 +101,7 @@ jobs:
       - name: Remove Dotenvs
         run: rm .env.*
 
-  build-php:
+  build-app:
     runs-on: ubuntu-latest
 
     needs:
@@ -144,8 +144,8 @@ jobs:
           push: true
           context: .
           platforms: linux/arm64
-          file: ./docker/${{ github.event.inputs.destination }}/php/Dockerfile
-          tags: ${{ github.event.repository.name }}/php:latest
+          file: ./docker/${{ github.event.inputs.destination }}/app/Dockerfile
+          tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/php:latest
 
 #  build-app:
 #    runs-on: ubuntu-latest
