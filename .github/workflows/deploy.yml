@@ -138,8 +138,8 @@ jobs:
     steps:
 #      - uses: actions/checkout@master
 
-      - name: Remove Dotenvs
-        run: rm .env.*
+#      - name: Remove Dotenvs
+#        run: rm .env.*
 
       - uses: actions/download-artifact@master
         with:
