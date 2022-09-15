@@ -175,7 +175,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          endpoint: builders
           config-inline: |
             [registry."${{ secrets.PROD_REGISTRY_HOST }}"]
               ca=["/etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt"]
