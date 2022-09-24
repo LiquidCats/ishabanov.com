@@ -11,6 +11,6 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
 
-RUN crond -b -c /var/spool/cron/crontabs
+CMD php-fpm -D && crond -f -c /var/spool/cron/crontabs
 
 
