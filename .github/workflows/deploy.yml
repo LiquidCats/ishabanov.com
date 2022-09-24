@@ -141,7 +141,7 @@ jobs:
       - name: Remove Dotenvs
         run: |
           rm .env.*
-          rm ./tests
+          rm -rf ./tests
 
       - name: Get Certificate
         uses: actions/download-artifact@master
