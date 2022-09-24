@@ -1,4 +1,4 @@
-FROM node:latest-alpine as frontend
+FROM node:current-alpine as frontend
 
 ADD . /app
 
