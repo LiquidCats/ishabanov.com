@@ -13,7 +13,7 @@ RUN chmod -R 0777 .
 
 RUN composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
 
-RUN php artisan optimze:clear
+RUN php artisan optimize:clear
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
