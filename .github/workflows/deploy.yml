@@ -161,15 +161,6 @@ jobs:
           sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
           rm -rf ./certs
 
-      - name: Use NodeJS
-        uses: actions/setup-node@v3
-
-      - name: Install Deps
-        run: npm install
-
-      - name: Build Frontend
-        run: npm run build
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
