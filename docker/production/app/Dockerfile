@@ -1,3 +1,11 @@
+FROM node:latest-alpine as frontend
+
+ADD . /app
+
+WORKDIR /app
+
+RUN npm install && npm run build
+
 FROM iliashabanov/php:latest
 
 RUN apk add --no-cache nginx
@@ -6,6 +14,8 @@ ADD ./docker/production/app/config /etc/nginx/http.d
 ADD . /app
 
 WORKDIR /app
+
+COPY --from=frontend ./app/public/static /app/public/static
 
 RUN rm -rf /etc/nginx/http.d/default.conf
 
