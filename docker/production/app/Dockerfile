@@ -20,6 +20,6 @@ RUN php artisan view:cache
 EXPOSE 8000
 EXPOSE 80
 
-CMD nginx && php-fpm --nodaemonize
+CMD nginx && php-fpm
 
 
