@@ -2,15 +2,19 @@ FROM iliashabanov/php:latest
 
 RUN apk add --no-cache nginx
 
-ADD ./docker/production/app/config /etc/nginx/conf.d
+ADD ./docker/production/app/config /etc/nginx/http.d
 ADD . /app
 
 WORKDIR /app
+
+RUN rm -rf /etc/nginx/http.d/default.conf
 
 RUN composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
 
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
+
+RUN nginx
 
 

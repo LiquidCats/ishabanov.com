@@ -198,7 +198,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }} && deploy/${{ github.event.inputs.destination }}/deploy.sh
+          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }} && bash deploy.sh
 
   postdeploy:
     runs-on: ubuntu-latest
