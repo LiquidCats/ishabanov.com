@@ -203,16 +203,17 @@ jobs:
           port: 22
           script: |
             cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }}
-            bash deploy.sh
+            deploy_service ${{ github.event.repository.name }} .
 
   postdeploy:
     runs-on: ubuntu-latest
+
+    if: always()
 
     needs: deploy
 
     steps:
       - name: Clean Up Artifacts
-        if: always()
         uses: geekyeggo/delete-artifact@v1
         with:
           failOnError: false
