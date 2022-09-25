@@ -192,13 +192,18 @@ jobs:
 
     steps:
       - uses: appleboy/ssh-action@master
+        env:
+          REGISTRY: ${{ secrets.PROD_REGISTRY }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          envs: REGISTRY
           port: 22
-          script: cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }} && bash deploy.sh
+          script: |
+            cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }}
+            bash deploy.sh
 
   postdeploy:
     runs-on: ubuntu-latest
@@ -207,6 +212,7 @@ jobs:
 
     steps:
       - name: Clean Up Artifacts
+        if: always()
         uses: geekyeggo/delete-artifact@v1
         with:
           failOnError: false
