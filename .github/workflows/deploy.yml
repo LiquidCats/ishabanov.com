@@ -63,7 +63,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          source: './deploy/${{ github.event.inputs.destination }}/deploy.sh,./deploy/${{ github.event.inputs.destination }}/docker-stack.yml'
+          source: './deploy/${{ github.event.inputs.destination }}/*'
           target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
 
   cert:
