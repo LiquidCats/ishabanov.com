@@ -9,7 +9,7 @@ enum FeedbackType: int
     case NO_SUBJECT = 0;
     case CONSULTATION = 1;
     case SERVICES = 2;
-    case PRICING = 3;
+//    case PRICING = 3;
 
     public function getText(): string
     {
@@ -17,7 +17,7 @@ enum FeedbackType: int
             self::NO_SUBJECT => 'I have a question',
             self::CONSULTATION => 'I need consultation',
             self::SERVICES => 'I need a developer',
-            self::PRICING => 'What your pricing policy',
+//            self::PRICING => 'What your pricing policy',
         };
     }
 }
