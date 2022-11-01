@@ -23,11 +23,10 @@ use Illuminate\Support\Facades\{
 use Mockery;
 use Psr\Log\LoggerInterface;
 use Tests\TestCase;
+use Tests\Unit\Domains\Feedback\Jobs\AbstractFeedbackJobTest;
 
-class UserFeedbackFeatureTest extends TestCase
+class UserFeedbackFeatureTest extends AbstractFeedbackJobTest
 {
-    use WithFaker;
-
     /**
      * @test
      */
@@ -36,40 +35,19 @@ class UserFeedbackFeatureTest extends TestCase
         Mail::fake();
         Http::fake(['*' => Http::response(['ok' => true])]);
 
-        $this->mockRequest();
+        $this->app->instance(UserFeedbackRequest::class, $this->mockRequest());
         $this->mockLogger();
 
         $feature = new UserFeedbackFeature();
 
         $result = $this->app->call([$feature, 'handle']);
 
+
         Mail::assertSent(FeedbackReceived::class);
         Http::assertSent(static fn (Client $c) => $c->offsetExists('chat_id') && $c->offsetExists('text'));
 
         self::assertInstanceOf(JsonResponse::class, $result);
         self::assertEquals(1, UserEmail::query()->count());
-    }
-
-    protected function mockRequest(): void
-    {
-        /** @var Request $request */
-        $request = $this->app->make('request');
-
-        $data = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->safeEmail,
-            'message' => $this->faker->text(),
-            'subject' => $this->faker->numberBetween(0, 3),
-        ];
-
-        $request = UserFeedbackRequest::createFrom($request);
-
-        $validator = Validator::make($data, $request->rules());
-
-        $request->request->add($data);
-        $request->setValidator($validator);
-
-        $this->app->instance(UserFeedbackRequest::class, $request);
     }
 
     protected function mockLogger(): void
