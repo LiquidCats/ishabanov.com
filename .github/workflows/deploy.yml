@@ -5,16 +5,6 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-    inputs:
-      destination:
-        type: choice
-        description: 'Environment'
-        required: true
-        options:
-          - production
-          - staging
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -95,22 +85,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-
-      - name: Prepare Staging Env
-        if: ${{ github.event.inputs.destination == 'staging'}}
-        uses: franzbischoff/replace_envs@main
-        env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_STAGING }}
-          GH_DATABASE: ${{ secrets.DATABASE_STAGING }}
-          GH_MAIL: ${{ secrets.MAIL_STAGING }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_STAGING }}
-        with:
-          from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env'
-          commit: 'false'
-
-      - name: Prepare Production Env
-        if: ${{ github.event.inputs.destination == 'production'}}
+      - name: Prepare Env
         uses: franzbischoff/replace_envs@main
         env:
           GH_APP_KEY: ${{ secrets.APP_KEY_PRODUCTION }}
