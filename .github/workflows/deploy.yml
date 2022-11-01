@@ -41,7 +41,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
+          script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
 
   upload:
     runs-on: ubuntu-latest
@@ -57,8 +57,8 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          source: './deploy/${{ github.event.inputs.destination }}/deploy.sh,./deploy/${{ github.event.inputs.destination }}/docker-stack.yml'
-          target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
+          source: './deploy/production/deploy.sh,./deploy/production/docker-stack.yml'
+          target: '~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
 
   cert:
     runs-on: ubuntu-latest
@@ -93,7 +93,7 @@ jobs:
           GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
           GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
         with:
-          from_file: '.env.${{ github.event.inputs.destination }}'
+          from_file: '.env.production'
           to_file: '.env'
           commit: 'false'
 
@@ -159,7 +159,7 @@ jobs:
           push: true
           context: .
           platforms: linux/amd64
-          file: ./docker/${{ github.event.inputs.destination }}/${{ matrix.container }}/Dockerfile
+          file: ./docker/production/${{ matrix.container }}/Dockerfile
           tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/${{ matrix.container }}:latest
 
   deploy:
@@ -178,7 +178,7 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }}
+            cd ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}/deploy/production
             export REGISTRY=${{ secrets.PROD_REGISTRY }}
             bash deploy.sh
 
