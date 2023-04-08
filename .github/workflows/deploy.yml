@@ -5,16 +5,6 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-    inputs:
-      destination:
-        type: choice
-        description: 'Environment'
-        required: true
-        options:
-          - production
-          - staging
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -40,100 +30,11 @@ jobs:
           DB_DATABASE: ':memory:'
         run: vendor/bin/phpunit
 
-  backup:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
-          script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
-
-  upload:
-    runs-on: ubuntu-latest
-
-    needs: backup
-
-    steps:
-      - uses: actions/checkout@master
-
-      - uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          source: './deploy/${{ github.event.inputs.destination }}/deploy.sh,./deploy/${{ github.event.inputs.destination }}/docker-stack.yml'
-          target: '~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}'
-
-  cert:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          mkdir -p ./certs
-          echo "\${CERT}" | tee ./certs/ca.crt
-
-      - uses: franzbischoff/replace_envs@main
-        env:
-          CERT: ${{ secrets.PROD_REGISTRY_CA }}
-        with:
-          from_file: './certs/ca.crt'
-          to_file: './certs/ca.crt'
-          commit: 'false'
-
-      - uses: actions/upload-artifact@master
-        with:
-          name: certificate
-          path: ./certs/ca.crt
-
-  env:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Prepare Staging Env
-        if: ${{ github.event.inputs.destination == 'staging'}}
-        uses: franzbischoff/replace_envs@main
-        env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_STAGING }}
-          GH_DATABASE: ${{ secrets.DATABASE_STAGING }}
-          GH_MAIL: ${{ secrets.MAIL_STAGING }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_STAGING }}
-        with:
-          from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env'
-          commit: 'false'
-
-      - name: Prepare Production Env
-        if: ${{ github.event.inputs.destination == 'production'}}
-        uses: franzbischoff/replace_envs@main
-        env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_PRODUCTION }}
-          GH_DATABASE: ${{ secrets.DATABASE_PRODUCTION }}
-          GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
-        with:
-          from_file: '.env.${{ github.event.inputs.destination }}'
-          to_file: '.env'
-          commit: 'false'
-
-      - uses: actions/upload-artifact@master
-        with:
-          name: dot-env
-          path: .env
-
   build:
     runs-on: ubuntu-latest
 
     needs:
       - tests
-      - cert
-      - env
 
     strategy:
       matrix:
@@ -142,38 +43,28 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Remove Dotenvs
+      - name: Prepare Env
+        uses: franzbischoff/replace_envs@main
+        env:
+          GH_APP_KEY: ${{ secrets.APP_KEY_PRODUCTION }}
+          GH_DATABASE: ${{ secrets.DATABASE_PRODUCTION }}
+          GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
+          GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
+        with:
+          from_file: '.env.production'
+          to_file: '.env'
+          commit: 'false'
+
+      - name: Clean Up
         run: |
           rm .env.*
           rm -rf ./tests
-
-      - name: Get Certificate
-        uses: actions/download-artifact@master
-        with:
-          name: certificate
-          path: ./certs
-
-      - name: Get Env File
-        uses: actions/download-artifact@master
-        with:
-          name: dot-env
-          path: .
-
-      - name: Add Certificate
-        run: |
-          sudo mkdir -p /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          sudo mv ./certs/ca.crt /etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}
-          rm -rf ./certs
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          config-inline: |
-            [registry."${{ secrets.PROD_REGISTRY_HOST }}"]
-              ca=["/etc/docker/certs.d/${{ secrets.PROD_REGISTRY_HOST }}/ca.crt"]
 
       - name: Login to DockerHub
         run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
@@ -184,7 +75,7 @@ jobs:
           push: true
           context: .
           platforms: linux/amd64
-          file: ./docker/${{ github.event.inputs.destination }}/${{ matrix.container }}/Dockerfile
+          file: ./docker/production/${{ matrix.container }}/Dockerfile
           tags: ${{ secrets.PROD_REGISTRY_HOST }}/${{ github.event.repository.name }}/${{ matrix.container }}:latest
 
   deploy:
@@ -192,10 +83,32 @@ jobs:
 
     needs:
       - build
-      - upload
 
     steps:
-      - uses: appleboy/ssh-action@master
+      - uses: actions/checkout@master
+
+      - name: Prepare Filesystem
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: 'mkdir -p ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
+
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          source: './deploy/production/deploy.sh,./deploy/production/docker-stack.yml'
+          target: '~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
+
+      - name: Deploy
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
@@ -203,23 +116,7 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            cd ~/builds/${{ github.event.repository.name }}/${{ github.event.inputs.destination }}/${{ github.run_number }}/deploy/${{ github.event.inputs.destination }}
+            cd ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}/deploy/production
             export REGISTRY=${{ secrets.PROD_REGISTRY }}
             bash deploy.sh
 
-  postdeploy:
-    runs-on: ubuntu-latest
-
-    if: always()
-
-    needs: deploy
-
-    steps:
-      - name: Clean Up Artifacts
-        if: always()
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          failOnError: false
-          name: |
-            dot-env
-            certificate
