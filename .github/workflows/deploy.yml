@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - development
 
 jobs:
   tests:
@@ -107,16 +108,16 @@ jobs:
           source: './deploy/production/deploy.sh,./deploy/production/docker-stack.yml'
           target: '~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
 
-      - name: Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
-          script: |
-            cd ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}/deploy/production
-            export REGISTRY=${{ secrets.PROD_REGISTRY }}
-            bash deploy.sh
+#      - name: Deploy
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.VPS_HOST }}
+#          username: ${{ secrets.VPS_USERNAME }}
+#          key: ${{ secrets.VPS_PRIVATE_KEY }}
+#          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+#          port: 22
+#          script: |
+#            cd ~/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}/deploy/production
+#            export REGISTRY=${{ secrets.PROD_REGISTRY }}
+#            bash deploy.sh
 
