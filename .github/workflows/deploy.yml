@@ -20,7 +20,7 @@ jobs:
         run: cp .env.testing .env
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
 
       - name: Generate Key
         run: php artisan key:generate
@@ -62,16 +62,16 @@ jobs:
           rm -rf ./tests
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@master
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@master
 
       - name: Login to DockerHub
         run: docker login -u ${{ secrets.PROD_REGISTRY_LOGIN }} --password-stdin ${{ secrets.PROD_REGISTRY_HOST }} <<< ${{ secrets.PROD_REGISTRY_PASSWORD }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@master
         with:
           push: true
           context: .
