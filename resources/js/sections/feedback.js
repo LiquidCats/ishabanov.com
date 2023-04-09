@@ -61,8 +61,12 @@ class Feedback {
 
         if (isDisabled) {
             submit.classList.add('disabled')
+            submit.classList.add('btn-outline-secondary')
+            submit.classList.remove('btn-outline-primary')
         } else {
             submit.classList.remove('disabled')
+            submit.classList.remove('btn-outline-secondary')
+            submit.classList.add('btn-outline-primary')
         }
     }
 
@@ -83,13 +87,12 @@ class Feedback {
     }
 
     /**
-     * @return {{subject: string, name: string, _token: string, message: string, email: string}}
+     * @return {{name: string, _token: string, message: string, email: string}}
      */
     getData = () => {
         return {
             name: this.#getElement('name').value,
             email: this.#getElement('email').value,
-            subject: this.#getElement('subject').value,
             message: this.#getElement('message').value,
             _token: this.#getElement('_token').value,
         }

@@ -43,11 +43,6 @@ class UserFeedbackRequest extends FormRequest
                 'min:1',
                 'max:200',
             ],
-            'subject' => [
-                'required',
-                'integer',
-                new Enum(FeedbackType::class),
-            ],
         ];
     }
 }
