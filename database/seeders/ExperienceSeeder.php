@@ -12,6 +12,16 @@ class ExperienceSeeder extends Seeder
 {
     protected static array $values = [
         [
+            'id' => 7,
+            'company_name' => 'coinspaid.com',
+            'company_url' => 'https://coinspaid.com',
+            'company_logo' => 'images/experience/coinspaid.svg',
+            'position' => 'Senior Software Engineer',
+            'description' => 'As a developer here, I designed and implemented software solutions for the payment gateway and cryptocurrency wallet services. I wrote clean, maintainable code, conducting code reviews and debugging, identified opportunities for improvement, and mentored junior engineers. I collaborated with stakeholders to define requirements, prioritize features, and plan releases. The role challenged me to innovate with new technologies and contribute to shaping the future of the cryptocurrency industry.',
+            'started_at' => '2021-11-04 00:00:00',
+            'ended_at' => '2022-12-24 00:00:00',
+        ],
+        [
             'id' => 6,
             'company_name' => 'everli.com',
             'company_url' => 'https://it.everli.com',
@@ -19,7 +29,7 @@ class ExperienceSeeder extends Seeder
             'position' => 'Senior Software Engineer',
             'description' => 'Here I was involved in microservices architecture improvement and development. It is an application for grocery orders and delivery. My responsibility here is pretty the same with previous, I am trying to improve the services architecture and communication and interaction between them. I took a whole responsibility for one of the microservices -- a product search engine based on ElasticSearch.',
             'started_at' => '2021-11-04 00:00:00',
-            'ended_at' => null,
+            'ended_at' => '2022-12-24 00:00:00',
         ],
         [
             'id' => 5,
