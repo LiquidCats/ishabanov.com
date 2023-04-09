@@ -5,7 +5,7 @@
     <div class="row justify-content-center min-vh-100">
         <div class="col-md-12 col-lg align-self-center text-white">
             <div class="display-1 m-0 fw-bold text-center text-lg-end">SOFTWARE DEVELOPER</div>
-            <div class="display-1 m-0 mb-4 fw-light text-center text-lg-end">WHO SOLVING PROBLEMS</div>
+            <div class="display-1 m-0 mb-4 fw-light text-center text-lg-end">SOLVING PROBLEMS</div>
             <div class="row">
                 <div class="col col-md-8 offset-md-2 col-lg-8 offset-lg-4">
                     <div class="row g-2 justify-content-lg-end justify-content-center">
