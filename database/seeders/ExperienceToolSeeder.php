@@ -63,6 +63,15 @@ class ExperienceToolSeeder extends Seeder
         [6,     'redis',                ExperienceLevel::SENIOR],
         [6,     'mysql',                ExperienceLevel::SENIOR],
         [6,     'docker',               ExperienceLevel::SENIOR],
+        // /
+        [7,     'php',                  ExperienceLevel::SENIOR],
+        [7,     'laravel',              ExperienceLevel::SENIOR],
+        [7,     'rabbitmq',             ExperienceLevel::SENIOR],
+        [7,     'redis',                ExperienceLevel::SENIOR],
+        [7,     'mysql',                ExperienceLevel::SENIOR],
+        [7,     'docker',               ExperienceLevel::SENIOR],
+        [7,     'golang',               ExperienceLevel::SENIOR],
+
     ];
 
     /**
