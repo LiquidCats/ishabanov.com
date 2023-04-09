@@ -24,7 +24,7 @@
                 {{ $experience->company_name }}
             </a>
 
-            <div class="display-6 m-0 fw-semibold">{{ $experience->position }}</div>
+            <div class="display-6 m-4 fw-semibold">{{ $experience->position }}</div>
             <div>
                 @foreach($experience->tools as $tool)
                     <span class="badge bg-light text-dark fw-normal fs-6 mb-1">{{ $tool->name }}: {{ $tool?->pivot?->level_id?->getText() }}</span>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="col-12">
-            <div class="fs-5 my-2 px-2">
+            <div class="fs-5 m-2 px-2">
                 {{ $experience->description }}
             </div>
         </div>
