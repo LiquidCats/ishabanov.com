@@ -22,7 +22,7 @@ class GetListOfExperiencesJob extends Job
         return Experience::query()
             ->with(['tools'])
             ->orderByDesc('started_at')
-            ->take(6)
+            //->take(6)
             ->get();
     }
 }
