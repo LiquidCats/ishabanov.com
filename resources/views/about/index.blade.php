@@ -8,9 +8,23 @@
                 <div class="rounded-4 p-5">
                     <div>
                         <h2>About Me</h2>
-                        <p>Hey! 👋 This is me 👆 and my name is Ilya. Already for many years, I am working as a Software Engineer. And the first thing you have to know about me I am mad about coding. From the very begging of my carrier I was concentrating on delivering optimized and highly maintainable features.
-                        <p>My geeky nature never let me stop improving my skills and constantly learning new stuff. For the past years, I tried myself as a developer in different domains such as remote education, music distribution, grocery delivery, and fintech. Filled my stack with different programming languages: PHP, Golang, NodeJS, JavaScript; frameworks: Laravel, React, Vue; Tools: Kafka, ElasticSearch, RabbitMQ, Redis, Doker, Docker Swarm, Kubernetes, etc.; and databases: MySQL, PostgreSQL, MSSQL</p>
-                        <p>Currently, all of my experience allows me to build high-end web applications with all modern technologies and approaches. </p>
+
+                        <p>I am Ilya, a passionate Software Engineer who has been working in the industry for several
+                            years. Coding is not just a job for me, it's a way of life. I have always been focused on
+                            delivering optimized and highly maintainable features to my clients.</p>
+
+                        <p>As a self-proclaimed geek, I'm always looking to improve my skills and stay up-to-date with
+                            the latest technologies. Throughout my career, I have worked in various domains such as
+                            remote education, music distribution, grocery delivery, and fintech. I have gained
+                            experience in a variety of programming languages including PHP, Golang, NodeJS, and
+                            JavaScript, as well as frameworks like Laravel, React, and Vue. I am also proficient in
+                            working with tools such as Kafka, ElasticSearch, RabbitMQ, Redis, Docker, Docker Swarm,
+                            Kubernetes, and databases including MySQL, PostgreSQL, and MSSQL.</p>
+
+                        <p>My experience and knowledge enable me to build high-end web applications using modern
+                            technologies and approaches. I'm always excited to take on new challenges and help bring
+                            ideas to life. Feel free to explore my website and get in touch if you have any questions or
+                            projects you'd like to discuss. Let's build something great together!</p>
                     </div>
                     <div class="text-muted fs-4 my-1">
                         Current experience: {{ $duration->getYears() }} years {{ $duration->getMonths() }} months
