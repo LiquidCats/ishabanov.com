@@ -139,7 +139,7 @@ class Feedback {
      */
     #setUpInvalidFields = (data, messages) => {
         for (let key of Object.keys(data)) {
-            if (messages.hasOwnProperty(key)) {
+            if (messages && messages.hasOwnProperty(key)) {
                 this.setInvalidField(key);
             } else {
                 this.setValidField(key);
