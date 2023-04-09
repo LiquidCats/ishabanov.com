@@ -24,7 +24,7 @@ class SaveFeedbackToDatabaseJob extends Job
 
             $model->email = $this->request->validated('email');
             $model->name = $this->request->validated('name');
-            $model->subject = FeedbackType::from((int) $this->request->validated('subject'));
+            $model->subject = FeedbackType::NO_SUBJECT;
 
             $model->save();
         }

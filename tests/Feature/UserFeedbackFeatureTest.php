@@ -43,7 +43,7 @@ class UserFeedbackFeatureTest extends AbstractFeedbackJobTest
         $result = $this->app->call([$feature, 'handle']);
 
 
-        Mail::assertSent(FeedbackReceived::class);
+//        Mail::assertSent(FeedbackReceived::class);
         Http::assertSent(static fn (Client $c) => $c->offsetExists('chat_id') && $c->offsetExists('text'));
 
         self::assertInstanceOf(JsonResponse::class, $result);

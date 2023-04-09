@@ -23,16 +23,6 @@
             <label for="feedback-message">Message</label>
         </div>
 
-        <div class="form-floating mb-3">
-            <select id="feedback-subject" class="form-select" aria-label="Subject">
-                @php($feedbackTypes = App\Data\Enums\FeedbackType::cases())
-                @foreach($feedbackTypes as $type)
-                    <option value="{{ $type->value }}">{{ $type->getText() }}</option>
-                @endforeach
-            </select>
-            <label for="feedback-subject">Subject</label>
-        </div>
-
         <div class="text-end">
             <button type="submit" id="feedback-submit" class="btn btn-outline-primary btn-lg">
                 <span class="d-inline-flex justify-content-center align-items-center gap-2 text-uppercase">

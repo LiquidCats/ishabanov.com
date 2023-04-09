@@ -6,7 +6,6 @@ namespace App\Features\Feedback;
 
 use App\Domains\Feedback\Jobs\{
     LogFeedbackToFileJob,
-    MailFeedbackToAdminJob,
     PublishFeedbackToTelegramJob,
     SaveFeedbackToDatabaseJob
 };
@@ -22,7 +21,7 @@ class UserFeedbackFeature extends Feature
         $this->run(new SaveFeedbackToDatabaseJob($request));
         $this->run(new LogFeedbackToFileJob($request));
         $this->run(new PublishFeedbackToTelegramJob($request));
-        $this->run(new MailFeedbackToAdminJob($request));
+//        $this->run(new MailFeedbackToAdminJob($request));
 
         return $this->run(new RespondWithJsonJob([
             'ok' => true,
