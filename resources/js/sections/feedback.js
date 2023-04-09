@@ -1,6 +1,5 @@
-import validator from "./validation/validator";
-import FeedbackService from "./services/feedback";
-import feedbackValidator from "./validation/feedback";
+import FeedbackService from "../services/feedback";
+import feedbackValidator from "../validation/feedback";
 
 class Feedback {
     /** @type {HTMLFormElement} */

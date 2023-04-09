@@ -1,8 +1,10 @@
 import * as Bootstrap from 'bootstrap'
+import Feedback from "./sections/feedback";
 
-import Feedback from "./feedback";
+document.addEventListener('DOMContentLoaded', function () {
+    const feedback = Feedback.capture();
+    feedback.disableSubmit(true)
+    feedback.addCounter('message')
+})
 
-const feedback = Feedback.capture();
 
-feedback.disableSubmit(true)
-feedback.addCounter('message')
