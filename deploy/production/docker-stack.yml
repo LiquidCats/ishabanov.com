@@ -9,12 +9,6 @@ services:
     ports:
       - "8000:80"
 
-  cron:
-    image: ${REGISTRY}/onepager/cron:latest
-    deploy:
-      mode: replicated
-      replicas: 1
-
   redis:
     image: redis:latest
     deploy:

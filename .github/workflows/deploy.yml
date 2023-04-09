@@ -38,7 +38,7 @@ jobs:
 
     strategy:
       matrix:
-        container: ['app', 'cron']
+        container: ['app']
 
     steps:
       - uses: actions/checkout@master
