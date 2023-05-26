@@ -60,6 +60,7 @@ jobs:
           GH_DATABASE: ${{ secrets.DATABASE_PRODUCTION }}
           GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
           GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
+          GH_CACHE: ${{ secrets.CACHE_PRODUCTION }}
         with:
           from_file: '.env.production'
           to_file: '.env'
