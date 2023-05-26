@@ -3,10 +3,7 @@ set -e
 
 chown $USER:www-data -R .
 
-chmod 777 -R .
-
-find . -type f -exec chmod 644 {} \;
-find . -type d -exec chmod 755 {} \;
+chmod 755 -R .
 
 rm /var/www/www.liquid-cats.com
 ln -s $(pwd) /var/www/www.liquid-cats.com
