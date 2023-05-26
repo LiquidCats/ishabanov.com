@@ -3,6 +3,8 @@ set -e
 
 chown $USER:www-data -R .
 
+chmod 777 -R .
+
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 
