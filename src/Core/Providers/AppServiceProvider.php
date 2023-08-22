@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace LiquidCats\Core\Providers;
 
 use App\Data\Contracts\Repositories\TelegramRepositoryContract;
 use App\Data\Repositories\TelegramRepository;
 use App\Data\ValueObject\Telegram\{
     ChatId,
-    Token
-};
+    Token};
 use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use App\Domains\Feedback\Services\FeedbackService;
 use Illuminate\Contracts\Config\Repository;

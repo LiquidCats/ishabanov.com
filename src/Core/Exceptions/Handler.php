@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Exceptions;
+namespace LiquidCats\Core\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\{JsonResponse, Request};
+use Illuminate\Http\{
+    JsonResponse,
+    Request};
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;

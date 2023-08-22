@@ -191,11 +191,9 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        // App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        LiquidCats\Core\Providers\AppServiceProvider::class,
+        LiquidCats\Core\Providers\EventServiceProvider::class,
+        LiquidCats\Core\Providers\RouteServiceProvider::class,
 
     ],
 
