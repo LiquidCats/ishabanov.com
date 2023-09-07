@@ -13,8 +13,8 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::create('tools', static function (Blueprint $table) {
-            $table->string('id', 15)->primary();
-            $table->string('name', 15);
+            $table->string('id', 50)->primary();
+            $table->string('name', 50);
             $table->string('type', 15)->nullable();
             $table->string('level', 15)->nullable();
             $table->timestamps();

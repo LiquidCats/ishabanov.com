@@ -14,7 +14,7 @@ return new class() extends Migration {
     {
         Schema::create('experience_tool', static function (Blueprint $table) {
             $table->integer('experience_id')->index();
-            $table->integer('tool_id')->index();
+            $table->string('tool_id', 50)->index();
             $table->tinyInteger('level_id')
                 ->default(0);
 

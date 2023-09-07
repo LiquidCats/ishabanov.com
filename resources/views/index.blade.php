@@ -14,7 +14,7 @@
         @include("about.index")
         @include("experience.index")
 
-        @include("contacts.index")
+{{--        @include("contacts.index")--}}
 
         @include("footer")
 
