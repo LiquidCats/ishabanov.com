@@ -1,48 +1,32 @@
 FROM node:current-alpine as frontend
 
+WORKDIR /app
+
 ADD . /app
+
+RUN npm install --no-fund --silent
+RUN npm run build
+
+FROM composer:latest as backend
 
 WORKDIR /app
 
-RUN npm install && npm run build
-
-FROM php:8.2-fpm-alpine
-
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
-# Install Laravel framework system requirements
-RUN apk add --no-cache  $PHPIZE_DEPS postgresql-dev
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_pgsql bcmath
-
-# Install Redis Exstention
-RUN pecl install redis
-RUN docker-php-ext-enable redis.so
-
-RUN apk del $PHPIZE_DEPS
-
-RUN apk add --no-cache nginx
-
-ADD ./docker/production/app/config /etc/nginx/http.d
 ADD . /app
+
+RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs --no-dev
+
+FROM webdevops/php-nginx:8.2-alpine
 
 WORKDIR /app
 
-COPY --from=frontend ./app/public/static /app/public/static
+ENV WEB_DOCUMENT_ROOT=/app/public
+ENV PHP_DISMOD=bz2,calendar,exiif,ffi,intl,gettext,ldap,mysqli,imap,soap,sockets,sysvmsg,sysvsm,sysvshm,shmop,xsl,zip,gd,apcu,vips,yaml,imagick,mongodb,amqp
 
-RUN rm -rf /etc/nginx/http.d/default.conf
+COPY --from=backend /app /app
+COPY --from=frontend /app/public/static /app/public/static
 
-RUN chmod -R 0777 .
+RUN chown -R application:application .
+RUN php artisan optimize
 
-RUN composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
-
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
-
-EXPOSE 8000
-
-CMD nginx && php-fpm
 
 
