@@ -101,4 +101,4 @@ jobs:
             docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
             docker stop ${{ github.event.repository.name }} || true
             docker rm ${{ github.event.repository.name }} || true
-            docker run -d --name ${{ github.event.repository.name }} -p 8000:8000 --restart=on-failure:3 -m 128MB ${{ steps.repository.outputs.lowercase }}
+            docker run -d --name ${{ github.event.repository.name }} -p 8000:8000 --restart=on-failure:3 -m 128MB ghcr.io/${{ steps.repository.outputs.lowercase }}
