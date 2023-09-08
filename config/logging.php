@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Monolog\Handler\StreamHandler;
+
 return [
 
     /*
@@ -51,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['daily', 'stderr'],
             'ignore_exceptions' => false,
         ],
 
@@ -66,6 +68,16 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 3,
+        ],
+
+        'stderr' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+            'with' => [
+                'stream' => 'php://stderr',
+            ],
         ],
 
         'feedback' => [
