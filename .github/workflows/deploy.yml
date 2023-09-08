@@ -70,7 +70,7 @@ jobs:
 
       - name: Lowercase Repository Name
         id: repository
-        uses: Entepotenz/change-string-case-action@v1
+        uses: Entepotenz/change-string-case-action-min-dependencies@v1
         with:
           string: ${{ github.repository }}
 
