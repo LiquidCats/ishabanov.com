@@ -1,9 +1,13 @@
 name: Deployment
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   tests:
@@ -43,17 +47,8 @@ jobs:
         container: ['app']
 
     steps:
-      - uses: actions/checkout@master
-      - uses: shivammathur/setup-php@master
-        with:
-          php-version: '8.2'
-      - uses: actions/setup-node@main
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
-
-      - uses: shivammathur/setup-php@master
+      - name: Checkout
+        uses: actions/checkout@master
 
       - name: Prepare Env
         uses: franzbischoff/replace_envs@main
@@ -73,31 +68,26 @@ jobs:
           rm .env.*
           rm -rf ./tests
 
-      - name: Install Dependencies
-        run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs --no-dev
-          npm install --no-fund --silent
-          npm run build
-
-      - name: Prepare Filesystem
-        uses: appleboy/ssh-action@master
+      - name: Lowercase Repository Name
+        id: repository
+        uses: Entepotenz/change-string-case-action-min-dependencies@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
-          script: 'mkdir -p /builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
+          string: ${{ github.repository }}
 
-      - name: Upload
-        uses: appleboy/scp-action@master
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          source: '.'
-          target: '/builds/${{ github.event.repository.name }}/production/${{ github.run_number }}'
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: docker/production/app/Dockerfile
+          push: true
+          tags: ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
 
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -108,5 +98,7 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            cd /builds/${{ github.event.repository.name }}/production/${{ github.run_number }}
-            bash deploy.sh
+            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
+            docker stop ${{ github.event.repository.name }} || true
+            docker rm ${{ github.event.repository.name }} || true
+            docker run -d --name ${{ github.event.repository.name }} -p 8080:80 --restart=on-failure:3 -m 128MB ghcr.io/${{ steps.repository.outputs.lowercase }}
