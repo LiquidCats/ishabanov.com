@@ -92,7 +92,7 @@ jobs:
           context: .
           file: docker/production/app/Dockerfile
           push: true
-          tags: ghcr.io/$REPO:latest
+          tags: ghcr.io/${REPO}:latest
 
       - name: Deploy
         uses: appleboy/ssh-action@master
