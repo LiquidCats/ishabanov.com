@@ -2,7 +2,7 @@
 
 namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 
-use Database\Factories\ToolFactory;
+use Database\Factories\UserFeedbackFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use ishabanov\Core\Domain\Enums\FeedbackType;
@@ -17,7 +17,6 @@ class UserFeedback extends Model
 {
     use HasFactory;
 
-
     protected $casts = [
         'email' => 'string',
         'name' => 'string',
@@ -25,8 +24,8 @@ class UserFeedback extends Model
         'message' => 'string',
     ];
 
-    protected static function newFactory(): ToolFactory
+    protected static function newFactory(): UserFeedbackFactory
     {
-        return UserFeedback::new();
+        return UserFeedbackFactory::new();
     }
 }
