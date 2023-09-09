@@ -10,7 +10,7 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('user_feedbacks', function (Blueprint $table) {
+        Schema::create('user_feedback', function (Blueprint $table) {
             $table->id();
             $table->string('email', 100);
             $table->string('name', 100);
@@ -25,6 +25,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_feedbacks');
+        Schema::dropIfExists('user_feedback');
     }
 };
