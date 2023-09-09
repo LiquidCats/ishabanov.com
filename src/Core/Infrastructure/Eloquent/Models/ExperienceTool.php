@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models;
+namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 
-use App\Data\Enums\ExperienceLevel;
 use Database\Factories\ExperienceToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use ishabanov\Core\Domain\Enums\ExperienceLevel;
 
 /**
  * @property int             $experience_id

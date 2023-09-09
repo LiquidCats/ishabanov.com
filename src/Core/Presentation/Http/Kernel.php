@@ -2,44 +2,38 @@
 
 declare(strict_types=1);
 
-namespace App\Http;
+namespace ishabanov\Core\Presentation\Http;
 
-use App\Http\Middleware\{
-    Authenticate,
-    EncryptCookies,
-    PreventRequestsDuringMaintenance,
-    RedirectIfAuthenticated,
-    TrimStrings,
-    TrustHosts,
-    TrustProxies,
-    VerifyCsrfToken
-};
 use Illuminate\Auth\Middleware\{
     AuthenticateWithBasicAuth,
     Authorize,
     EnsureEmailIsVerified,
-    RequirePassword
-};
+    RequirePassword};
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\{
     Kernel as HttpKernel,
     Middleware\ConvertEmptyStringsToNull,
-    Middleware\ValidatePostSize
-};
+    Middleware\ValidatePostSize};
 use Illuminate\Http\Middleware\{
     HandleCors,
-    SetCacheHeaders
-};
+    SetCacheHeaders};
 use Illuminate\Routing\Middleware\{
     SubstituteBindings,
     ThrottleRequests,
-    ValidateSignature
-};
+    ValidateSignature};
 use Illuminate\Session\Middleware\{
     AuthenticateSession,
-    StartSession
-};
+    StartSession};
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use ishabanov\Core\Presentation\Http\Middleware\{
+    TrustHosts};
+use ishabanov\Core\Presentation\Http\Middleware\Authenticate;
+use ishabanov\Core\Presentation\Http\Middleware\EncryptCookies;
+use ishabanov\Core\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
+use ishabanov\Core\Presentation\Http\Middleware\RedirectIfAuthenticated;
+use ishabanov\Core\Presentation\Http\Middleware\TrimStrings;
+use ishabanov\Core\Presentation\Http\Middleware\TrustProxies;
+use ishabanov\Core\Presentation\Http\Middleware\VerifyCsrfToken;
 
 class Kernel extends HttpKernel
 {

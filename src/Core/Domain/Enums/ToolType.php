@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Enums;
+namespace ishabanov\Core\Domain\Enums;
 
 enum ToolType: string
 {

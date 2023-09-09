@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace LiquidCats\Core\Exceptions;
+namespace ishabanov\Core\Application\Handlers;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
+use Illuminate\Support\Facades\Log;
+use ishabanov\Core\Domain\Enums\Response\Status;
 use Illuminate\Http\{
     JsonResponse,
-    Request};
+    Request
+};
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;
 
-class Handler extends ExceptionHandler
+class ExceptionHandler extends BaseExceptionHandler
 {
     /**
      * A list of exception types with their corresponding custom log levels.
@@ -49,8 +52,8 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(static function (Throwable $e) {
-            \Illuminate\Support\Facades\Log::error($e->getMessage());
-            \Illuminate\Support\Facades\Log::debug($e->getTraceAsString());
+            Log::error($e->getMessage());
+            Log::debug($e->getTraceAsString());
         })->stop();
 
         $this->renderable(static function (Throwable $e, Request $request) {
@@ -58,14 +61,14 @@ class Handler extends ExceptionHandler
                 $response = new JsonResponse();
 
                 $data = [
-                    'ok' => false,
+                    'status' => Status::FAIL,
                     'message' => $e->getMessage(),
                 ];
 
                 $response->setStatusCode(400);
 
                 if ($e instanceof ValidationException) {
-                    $data['validation'] = $e->validator->getMessageBag()->getMessages();
+                    $data['data'] = $e->validator->getMessageBag()->getMessages();
 
                     $response->setStatusCode(422);
                 }

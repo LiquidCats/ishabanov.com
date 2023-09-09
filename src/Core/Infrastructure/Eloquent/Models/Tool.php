@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models;
+namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 
-use App\Data\Enums\{ExperienceLevel, ToolType};
 use Database\Factories\ToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use ishabanov\Core\Domain\Enums\{
+    ExperienceLevel};
+use ishabanov\Core\Domain\Enums\ToolType;
 
 /**
  * Class Tool.

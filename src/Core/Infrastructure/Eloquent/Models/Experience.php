@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models;
+namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 
 use Carbon\Carbon;
 use Database\Factories\ExperienceFactory;
 use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
     Model,
-    Relations\BelongsToMany
-};
+    Relations\BelongsToMany};
 
 /**
  * Class Experience.
