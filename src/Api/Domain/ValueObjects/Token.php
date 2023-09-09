@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Data\ValueObject\Telegram;
+namespace ishabanov\Api\Domain\ValueObjects;
 
 /**
  * @template TValue
  */
-class ChatId
+class Token
 {
     /**
      * @param TValue $value

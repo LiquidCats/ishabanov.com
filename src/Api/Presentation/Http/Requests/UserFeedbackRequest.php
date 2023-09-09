@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace ishabanov\Api\Presentation\Http\Requests;
 
-use App\Data\Enums\FeedbackType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class UserFeedbackRequest extends FormRequest
 {

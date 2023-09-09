@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Contracts\Repositories;
+namespace ishabanov\Api\Domain\Contracts\Repositories;
 
-use App\Data\ValueObject\Telegram\ChatId;
+use ishabanov\Api\Domain\ValueObjects\ChatId;
 
 interface TelegramRepositoryContract
 {
