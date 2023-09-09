@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Feedback\Jobs;
 
-use App\Http\Requests\UserFeedbackRequest;
 use Illuminate\Log\LogManager;
+use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
 use Lucid\Units\Job;
 
 class LogFeedbackToFileJob extends Job

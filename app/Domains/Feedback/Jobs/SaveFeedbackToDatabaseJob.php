@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domains\Feedback\Jobs;
 
-use App\Data\Enums\FeedbackType;
 use App\Data\Models\UserEmail;
-use App\Http\Requests\UserFeedbackRequest;
+use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
+use ishabanov\Core\Domain\Enums\FeedbackType;
 use Lucid\Units\Job;
 
 class SaveFeedbackToDatabaseJob extends Job
