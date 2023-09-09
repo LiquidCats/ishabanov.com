@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Experience\ValueObjects;
+namespace ishabanov\Pages\Domain\ValueObjects;
 
 /**
  * Class WorkingExperience.
