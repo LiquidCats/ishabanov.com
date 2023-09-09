@@ -5,13 +5,14 @@ namespace ishabanov\Pages\Infrastructure\Repositories\Eloquent\Repositories;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\{Experience, Tool};
+use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
+use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
 use ishabanov\Pages\Domain\Contracts\Repositories\ExperienceRepositoryContract;
 use ishabanov\Pages\Domain\ValueObjects\WorkingExperience;
 
 class ExperienceRepository implements ExperienceRepositoryContract
 {
-   /**
+    /**
      * @param ToolType $type
      * @param int      $limit
      *

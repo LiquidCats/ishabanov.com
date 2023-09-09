@@ -6,10 +6,9 @@ namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 
 use Carbon\Carbon;
 use Database\Factories\ExperienceFactory;
-use Illuminate\Database\Eloquent\{
-    Factories\HasFactory,
-    Model,
-    Relations\BelongsToMany};
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Experience.

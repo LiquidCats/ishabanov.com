@@ -4,7 +4,8 @@ namespace ishabanov\Pages\Domain\Contracts\Repositories;
 
 use Illuminate\Support\Collection;
 use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\{Experience, Tool};
+use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
+use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
 use ishabanov\Pages\Domain\ValueObjects\WorkingExperience;
 
 interface ExperienceRepositoryContract

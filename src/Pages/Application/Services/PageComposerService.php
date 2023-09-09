@@ -2,7 +2,8 @@
 
 namespace ishabanov\Pages\Application\Services;
 
-use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use ishabanov\Core\Domain\Enums\ToolType;
 use ishabanov\Pages\Domain\Contracts\Repositories\ExperienceRepositoryContract;
 use ishabanov\Pages\Domain\Contracts\Services\PageComposerServiceContract;

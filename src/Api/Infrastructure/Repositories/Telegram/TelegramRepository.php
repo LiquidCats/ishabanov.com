@@ -6,7 +6,8 @@ namespace ishabanov\Api\Infrastructure\Repositories\Telegram;
 
 use Illuminate\Support\Facades\Http;
 use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
-use ishabanov\Api\Domain\ValueObjects\{Token, ChatId};
+use ishabanov\Api\Domain\ValueObjects\ChatId;
+use ishabanov\Api\Domain\ValueObjects\Token;
 
 class TelegramRepository implements TelegramRepositoryContract
 {

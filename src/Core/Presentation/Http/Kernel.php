@@ -4,29 +4,22 @@ declare(strict_types=1);
 
 namespace ishabanov\Core\Presentation\Http;
 
-use Illuminate\Auth\Middleware\{
-    AuthenticateWithBasicAuth,
-    Authorize,
-    EnsureEmailIsVerified,
-    RequirePassword};
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Foundation\Http\{
-    Kernel as HttpKernel,
-    Middleware\ConvertEmptyStringsToNull,
-    Middleware\ValidatePostSize};
-use Illuminate\Http\Middleware\{
-    HandleCors,
-    SetCacheHeaders};
-use Illuminate\Routing\Middleware\{
-    SubstituteBindings,
-    ThrottleRequests,
-    ValidateSignature};
-use Illuminate\Session\Middleware\{
-    AuthenticateSession,
-    StartSession};
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Http\Middleware\HandleCors;
+use Illuminate\Http\Middleware\SetCacheHeaders;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use ishabanov\Core\Presentation\Http\Middleware\{
-    TrustHosts};
 use ishabanov\Core\Presentation\Http\Middleware\Authenticate;
 use ishabanov\Core\Presentation\Http\Middleware\EncryptCookies;
 use ishabanov\Core\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
@@ -34,6 +27,8 @@ use ishabanov\Core\Presentation\Http\Middleware\RedirectIfAuthenticated;
 use ishabanov\Core\Presentation\Http\Middleware\TrimStrings;
 use ishabanov\Core\Presentation\Http\Middleware\TrustProxies;
 use ishabanov\Core\Presentation\Http\Middleware\VerifyCsrfToken;
+use ishabanov\Core\Presentation\Http\Middleware\{
+    TrustHosts};
 
 class Kernel extends HttpKernel
 {

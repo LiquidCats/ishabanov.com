@@ -7,9 +7,9 @@ namespace ishabanov\Core\Infrastructure\Eloquent\Models;
 use Database\Factories\ToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use ishabanov\Core\Domain\Enums\ToolType;
 use ishabanov\Core\Domain\Enums\{
     ExperienceLevel};
-use ishabanov\Core\Domain\Enums\ToolType;
 
 /**
  * Class Tool.

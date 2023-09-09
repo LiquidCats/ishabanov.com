@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace ishabanov\Core\Application\Handlers;
 
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use ishabanov\Core\Domain\Enums\Response\Status;
-use Illuminate\Http\{
-    JsonResponse,
-    Request
-};
 use Illuminate\Validation\ValidationException;
+use ishabanov\Core\Domain\Enums\Response\Status;
 use Psr\Log\LogLevel;
 use Throwable;
 

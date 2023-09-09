@@ -23,7 +23,7 @@ readonly class TelegramFeedbackMessage implements Stringable
         $message .= "Email: {$this->name}\n";
         $message .= "Subject: {$this->subject->getText()}\n";
         $message .= "Message: {$this->message}\n\n";
-        $message .= 'ENV: '. $this->environment;
+        $message .= 'ENV: '.$this->environment;
 
         return $message;
     }
