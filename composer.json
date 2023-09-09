@@ -38,12 +38,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
             "ishabanov\\Core\\": "src/Core",
             "ishabanov\\Admin\\": "src/Admin",
             "ishabanov\\Api\\": "src/Api",
             "ishabanov\\Pages\\": "src/Pages",
-            "ishabanov\\Bot\\": "src/Bot",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
