@@ -3,6 +3,7 @@
 namespace ishabanov\Api\Application\Services;
 
 use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
+use ishabanov\Api\Domain\Contracts\Repositories\UserFeedbackRepositoryContract;
 use ishabanov\Api\Domain\Contracts\Services\FeedbackServiceContract;
 use ishabanov\Api\Domain\Entities\TelegramFeedbackMessage;
 use ishabanov\Api\Domain\ValueObjects\ChatId;
@@ -15,6 +16,7 @@ readonly class FeedbackService implements FeedbackServiceContract
     public function __construct(
         private LoggerInterface            $logger,
         private TelegramRepositoryContract $telegramRepository,
+        private UserFeedbackRepositoryContract $userFeedbackRepository,
         private ChatId                     $chatId,
         private string                     $environment,
     ) {
@@ -28,7 +30,7 @@ readonly class FeedbackService implements FeedbackServiceContract
         $name = $request->validated('name');
         $message = $request->validated('message');
 
-        $this->saveToDatabase(
+        $this->userFeedbackRepository->save(
             $email,
             $name,
             $message,
@@ -44,22 +46,8 @@ readonly class FeedbackService implements FeedbackServiceContract
             $subject
         );
 
-        if ($this->telegramRepository->sendMessage($this->chatId, $message)) {
+        if (!$this->telegramRepository->sendMessage($this->chatId, $message)) {
             $this->logger->error('feedback to telegram failed', ['data' => $request->validated()]);
         }
-    }
-
-    protected function saveToDatabase(string $email, string $name, string $message): mixed
-    {
-        $model = new UserEmail();
-
-        $model->email = $email;
-        $model->name = $name;
-        $model->subject = FeedbackType::NO_SUBJECT;
-        $model->message = $message;
-
-        $model->save();
-
-        return $model;
     }
 }
