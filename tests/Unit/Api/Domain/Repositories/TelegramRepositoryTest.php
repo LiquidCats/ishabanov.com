@@ -15,6 +15,7 @@ use Tests\TestCase;
 class TelegramRepositoryTest extends TestCase
 {
     use WithFaker;
+
     /**
      * @test
      * @covers ::sendMessage
@@ -36,9 +37,10 @@ class TelegramRepositoryTest extends TestCase
         $result = $repo->sendMessage($chatId, $message);
 
         // Assert
-        self::assertTrue($result);;
+        self::assertTrue($result);
 
-        Http::assertSent(fn (Request $request) => $request->offsetExists('chat_id')
+        Http::assertSent(
+            fn (Request $request) => $request->offsetExists('chat_id')
             && $request->offsetExists('text')
             && $request->offsetGet('chat_id') === $chatId->getValue()
             && $request->offsetGet('text') === $message

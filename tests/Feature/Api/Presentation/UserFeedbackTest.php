@@ -7,10 +7,10 @@ namespace Tests\Feature\Api\Presentation;
 use Illuminate\Http\Client\Request as Client;
 use Illuminate\Support\Facades\Http;
 use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
-use Tests\Asset\Api\Traits\WithLoggerMocks;
-use Tests\TestCase;
-
 use function route;
+use Tests\Asset\Api\Traits\WithLoggerMocks;
+
+use Tests\TestCase;
 
 class UserFeedbackTest extends TestCase
 {
@@ -46,5 +46,4 @@ class UserFeedbackTest extends TestCase
 
         $this->assertDatabaseCount($feedback->getTable(), 1);
     }
-
 }

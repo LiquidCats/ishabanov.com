@@ -19,7 +19,7 @@ class UserFeedbackController extends Controller
 
     public function __invoke(UserFeedbackRequest $request): JsonResponse
     {
-        $this->feedbackService->handleFeedback($request);;
+        $this->feedbackService->handleFeedback($request);
 
         return new JsonResponse([
             'status' => Status::SUCCESS,

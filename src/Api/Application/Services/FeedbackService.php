@@ -46,7 +46,7 @@ readonly class FeedbackService implements FeedbackServiceContract
             $subject
         );
 
-        if (!$this->telegramRepository->sendMessage($this->chatId, $message)) {
+        if (! $this->telegramRepository->sendMessage($this->chatId, $message)) {
             $this->logger->error('feedback to telegram failed', ['data' => $request->validated()]);
         }
     }

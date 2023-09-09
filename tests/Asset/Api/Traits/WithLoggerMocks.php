@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 
 trait WithLoggerMocks
 {
-
     protected function mockFeedbackLogger(): void
     {
         $logMock = \Mockery::mock(LoggerInterface::class);

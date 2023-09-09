@@ -8,7 +8,6 @@ use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
 
 trait WithRequestMocks
 {
-
     protected function mockFeedbackRequest(): UserFeedbackRequest
     {
         $request = new UserFeedbackRequest();
