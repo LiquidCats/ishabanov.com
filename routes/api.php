@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Api\UserFeedbackController;
 use Illuminate\Support\Facades\Route;
+use ishabanov\Api\Presentation\Http\Controllers\UserFeedbackController;
 
 /*
 |--------------------------------------------------------------------------

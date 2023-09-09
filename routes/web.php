@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
+use ishabanov\Pages\Presentation\Http\Controllers\HomepageController;
 
 /*
 |--------------------------------------------------------------------------

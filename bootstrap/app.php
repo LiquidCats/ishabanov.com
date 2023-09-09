@@ -31,17 +31,17 @@ $app->useAppPath(__DIR__ . '/../src');
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    LiquidCats\Core\Http\Kernel::class
+    ishabanov\Core\Presentation\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    LiquidCats\Core\Console\Kernel::class
+    ishabanov\Core\Presentation\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    LiquidCats\Core\Exceptions\Handler::class
+    ishabanov\Core\Application\Handlers\ExceptionHandler::class
 );
 
 /*
