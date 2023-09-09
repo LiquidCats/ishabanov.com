@@ -1,16 +1,14 @@
 <?php
+
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $rules = [
-    '@PSR12' => true,
-    '@Symfony' => true,
     'array_syntax' => ['syntax' => 'short'],
 
     'no_unused_imports' => true,
     'blank_line_after_namespace' => true,
     'blank_line_after_opening_tag' => true,
-    'braces' => true,
     'cast_spaces' => true,
     'concat_space' => [
         'spacing' => 'none',
@@ -21,7 +19,6 @@ $rules = [
     'full_opening_tag' => true,
     'fully_qualified_strict_types' => true, // added by Shift
     'function_declaration' => true,
-    'function_typehint_space' => true,
     'heredoc_to_nowdoc' => true,
     'include' => true,
     'increment_style' => ['style' => 'post'],
@@ -40,7 +37,6 @@ $rules = [
         'tokens' => [
             'extra',
             'throw',
-            'use',
             'use_trait',
         ],
     ],
@@ -62,8 +58,7 @@ $rules = [
     'no_singleline_whitespace_before_semicolons' => true,
     'no_spaces_after_function_name' => true,
     'no_spaces_inside_parenthesis' => true,
-    'no_trailing_comma_in_list_call' => true,
-    'no_trailing_comma_in_singleline_array' => true,
+    'no_trailing_comma_in_singleline' => true, // updated from deprecated rules
     'no_trailing_whitespace' => true,
     'no_trailing_whitespace_in_comment' => true,
     'no_unreachable_default_argument_value' => true,
@@ -88,8 +83,8 @@ $rules = [
     'short_scalar_cast' => true,
     'simplified_null_return' => false, // disabled by Shift
     'single_blank_line_at_eof' => true,
-    'single_blank_line_before_namespace' => true,
-    'single_import_per_statement' => false,
+    'blank_lines_before_namespace' => true, // updated from deprecated rule
+    'single_import_per_statement' => true,
     'single_line_after_imports' => true,
     'single_line_comment_style' => [
         'comment_types' => ['hash'],
@@ -125,6 +120,7 @@ $rules = [
             'const' => 'one',
             'method' => 'one',
             'property' => 'one',
+            'trait_import' => 'one', // updated from deprecated rule
         ],
     ],
     'class_definition' => [
@@ -132,10 +128,8 @@ $rules = [
         'single_item_single_line' => true,
         'single_line' => true,
     ],
-    'group_import' => true,
     'ordered_imports' => [
         'sort_algorithm' => 'alpha',
-        'imports_order' => ['class', 'function', 'const']
     ],
 
     // php-cs-fixer 3: Removed rootless options (*)
@@ -148,23 +142,24 @@ $rules = [
     'visibility_required' => [
         'elements' => ['property', 'method', 'const'],
     ],
+
 ];
 
 $finder = Finder::create()
     ->in([
-        __DIR__ . '/app',
-        __DIR__ . '/config',
-        __DIR__ . '/database',
-        __DIR__ . '/resources',
-        __DIR__ . '/routes',
-        __DIR__ . '/tests',
+        __DIR__.'/src',
+        __DIR__.'/config',
+        __DIR__.'/database',
+        __DIR__.'/resources',
+        __DIR__.'/routes',
+        __DIR__.'/tests',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
-return (new Config)
+return (new Config())
     ->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)

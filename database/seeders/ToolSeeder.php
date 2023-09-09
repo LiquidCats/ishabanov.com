@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Data\Enums\{ExperienceLevel, ToolType};
-use App\Data\Models\Tool;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use ishabanov\Core\Domain\Enums\ToolType;
+use ishabanov\Core\Domain\Enums\{
+    ExperienceLevel};
+use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
 
 class ToolSeeder extends Seeder
 {
@@ -52,7 +54,7 @@ class ToolSeeder extends Seeder
         }
     }
 
-    protected function createModel(string $name, ?ToolType $type, ?ExperienceLevel $level = null): void
+    protected function createModel(string $name, ?ToolType $type, ExperienceLevel $level = null): void
     {
         $model = new Tool();
 
