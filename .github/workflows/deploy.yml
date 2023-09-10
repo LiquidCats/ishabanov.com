@@ -95,7 +95,20 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
             docker stop ${{ github.event.repository.name }} || true
             docker rm ${{ github.event.repository.name }} || true
-            docker run -d --name ${{ github.event.repository.name }} -p 8080:80 --restart=on-failure:3 -m 128MB ghcr.io/${{ steps.repository.outputs.lowercase }}
+            docker run --detach \
+                       --pull \
+                       --name ${{ github.event.repository.name }} \
+                       --publish=8080:80 \
+                       --restart=on-failure:3 \
+                       --health-cmd="curl http://0.0.0.0/heathz" \
+                       --health-interval=60s \
+                       --health-retries=3 \
+                       --health-start-period=20s \
+                       --health-timeout=10s \
+                       --cpus=1 \
+                       --cpu-period=30000
+                       --cpu-quota=15000
+                       --memory-reservation=128M \
+                       --memory=256MB ghcr.io/${{ steps.repository.outputs.lowercase }}:latest

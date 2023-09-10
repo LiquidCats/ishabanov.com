@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use ishabanov\Api\Presentation\Http\Controllers\HealthcheckController;
 use ishabanov\Api\Presentation\Http\Controllers\UserFeedbackController;
 
 /*
@@ -19,3 +20,7 @@ use ishabanov\Api\Presentation\Http\Controllers\UserFeedbackController;
 Route::middleware('throttle:3,60')
     ->post('feedback', UserFeedbackController::class)
     ->name('api.feedback');
+
+Route::middleware('throttle:3,60')
+    ->post('healthz', HealthcheckController::class)
+    ->name('api.healthcheck');
