@@ -101,7 +101,7 @@ jobs:
             docker run --detach \
                        --name ${{ github.event.repository.name }} \
                        --publish=8080:80 \
-                       --restart=on-failure:3 \
+                       --restart=always:3 \
                        --health-cmd="curl http://0.0.0.0/heathz" \
                        --health-interval=60s \
                        --health-retries=3 \
