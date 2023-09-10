@@ -102,13 +102,12 @@ jobs:
               --name ishabanov.com \
               --network ishabanov.com \
               --publish=8080:80 \
-              --restart=always:3 \
+              --restart=always \
               --health-cmd="curl http://0.0.0.0/heathz" \
               --health-interval=60s \
               --health-retries=3 \
               --health-start-period=20s \
               --health-timeout=10s \
-              --cpus=1 \
               --cpu-period=30000 \
               --cpu-quota=15000 \
               --memory-reservation=128MB \
