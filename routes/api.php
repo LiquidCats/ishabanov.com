@@ -22,5 +22,5 @@ Route::middleware('throttle:3,60')
     ->name('api.feedback');
 
 Route::middleware('throttle:3,60')
-    ->post('healthz', HealthcheckController::class)
+    ->any('healthz', HealthcheckController::class)
     ->name('api.healthcheck');
