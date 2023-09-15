@@ -38,6 +38,7 @@
     },
     "autoload": {
         "psr-4": {
+            "App\\": "src",
             "ishabanov\\Core\\": "src/Core",
             "ishabanov\\Admin\\": "src/Admin",
             "ishabanov\\Api\\": "src/Api",

@@ -103,7 +103,7 @@ jobs:
               --network ishabanov.com \
               --publish=8080:80 \
               --restart=always \
-              --health-cmd="curl http://0.0.0.0/heathz" \
+              --health-cmd="curl --fail http://0.0.0.0/api/heathz || exit 1" \
               --health-interval=60s \
               --health-retries=3 \
               --health-start-period=20s \
