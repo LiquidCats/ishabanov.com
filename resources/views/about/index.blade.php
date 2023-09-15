@@ -27,7 +27,7 @@
                             projects you'd like to discuss. Let's build something great together!</p>
                     </div>
                     <div class="text-muted fs-4 my-1">
-                        Current experience: {{ $duration->getYears() }} years {{ $duration->getMonths() }} months
+                        Current experience: {{ $duration->years }} years {{ $duration->months }} months
                     </div>
                 </div>
             </div>
