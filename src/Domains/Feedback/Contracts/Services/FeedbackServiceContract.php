@@ -1,8 +1,8 @@
 <?php
 
-namespace ishabanov\Api\Domain\Contracts\Services;
+namespace App\Domains\Feedback\Contracts\Services;
 
-use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
+use App\Api\Presentation\Http\Requests\UserFeedbackRequest;
 
 interface FeedbackServiceContract
 {

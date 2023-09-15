@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Api\Domain\ValueObjects;
+namespace App\Domains\Telegram\ValueObjects;
 
 /**
  * @template TValue
  */
-class Token
+class ChatId
 {
     /**
-     * @param TValue $value
+     * @param  TValue  $value
      */
     public function __construct(protected mixed $value)
     {

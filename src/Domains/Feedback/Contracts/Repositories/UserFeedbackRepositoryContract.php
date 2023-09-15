@@ -1,8 +1,8 @@
 <?php
 
-namespace ishabanov\Api\Domain\Contracts\Repositories;
+namespace App\Domains\Feedback\Contracts\Repositories;
 
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use App\Data\Database\Eloquent\Models\UserFeedback;
 
 interface UserFeedbackRepositoryContract
 {

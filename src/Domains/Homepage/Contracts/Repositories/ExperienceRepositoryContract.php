@@ -1,19 +1,16 @@
 <?php
 
-namespace ishabanov\Pages\Domain\Contracts\Repositories;
+namespace App\Domains\Homepage\Contracts\Repositories;
 
 use Illuminate\Support\Collection;
-use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
-use ishabanov\Pages\Domain\ValueObjects\WorkingExperience;
+use App\Data\Database\Eloquent\Models\Experience;
+use App\Data\Database\Eloquent\Models\Tool;
+use App\Domains\Homepage\ValueObjects\WorkingExperience;
+use App\Foundation\Enums\ToolType;
 
 interface ExperienceRepositoryContract
 {
     /**
-     * @param ToolType $type
-     * @param int      $limit
-     *
      * @return Collection<int, Tool>
      */
     public function getTopToolByTypeJob(ToolType $type, int $limit = 3): Collection;

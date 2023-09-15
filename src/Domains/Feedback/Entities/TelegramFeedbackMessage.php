@@ -1,8 +1,8 @@
 <?php
 
-namespace ishabanov\Api\Domain\Entities;
+namespace App\Domains\Feedback\Entities;
 
-use ishabanov\Core\Domain\Enums\FeedbackType;
+use App\Foundation\Enums\FeedbackType;
 use Stringable;
 
 readonly class TelegramFeedbackMessage implements Stringable
@@ -13,8 +13,7 @@ readonly class TelegramFeedbackMessage implements Stringable
         public string $message,
         public string $environment,
         public FeedbackType $subject,
-    )
-    {
+    ) {
     }
 
     public function toText(): string
