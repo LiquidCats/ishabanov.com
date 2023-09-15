@@ -1,14 +1,14 @@
 <?php
 
-namespace ishabanov\Pages\Application\Services;
+namespace App\Pages\Application\Services;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Pages\Domain\Contracts\Repositories\ExperienceRepositoryContract;
-use ishabanov\Pages\Domain\Contracts\Services\PageComposerServiceContract;
+use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
+use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use App\Foundation\Enums\ToolType;
 
-readonly class PageComposerService implements PageComposerServiceContract
+readonly class HomepageService implements PageComposerServiceContract
 {
     public function __construct(
         private Factory $factory,
@@ -16,7 +16,7 @@ readonly class PageComposerService implements PageComposerServiceContract
     ) {
     }
 
-    public function homepage(): View
+    public function view(): View
     {
         $languages = $this->experienceRepository->getTopToolByTypeJob(ToolType::LANGUAGE, 4);
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);
