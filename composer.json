@@ -27,9 +27,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^v3.9.5",
-        "laravel/dusk": "^7.10",
         "laravel/pint": "^1.0",
-        "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
@@ -38,10 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ishabanov\\Core\\": "src/Core",
-            "ishabanov\\Admin\\": "src/Admin",
-            "ishabanov\\Api\\": "src/Api",
-            "ishabanov\\Pages\\": "src/Pages",
+            "ishabanov\\": "src",
+            "ishabanov\\Admin\\": "src/Services/Admin",
+            "ishabanov\\Api\\": "src/Services/Api",
+            "ishabanov\\Pages\\": "src/Services/Pages",
+            "ishabanov\\Authz\\": "src/Services/Authz",
+            "ishabanov\\Healthz\\": "src/Services/Healthz",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
