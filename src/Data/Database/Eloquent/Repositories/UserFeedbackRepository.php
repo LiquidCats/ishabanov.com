@@ -1,10 +1,10 @@
 <?php
 
-namespace ishabanov\Api\Infrastructure\Repositories\Eloquent\Repositories;
+namespace App\Data\Database\Eloquent\Repositories;
 
-use ishabanov\Api\Domain\Contracts\Repositories\UserFeedbackRepositoryContract;
-use ishabanov\Core\Domain\Enums\FeedbackType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use App\Data\Database\Eloquent\Models\UserFeedback;
+use App\Domains\Feedback\Contracts\Repositories\UserFeedbackRepositoryContract;
+use App\Foundation\Enums\FeedbackType;
 
 class UserFeedbackRepository implements UserFeedbackRepositoryContract
 {

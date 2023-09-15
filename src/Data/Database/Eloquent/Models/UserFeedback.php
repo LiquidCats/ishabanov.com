@@ -1,11 +1,11 @@
 <?php
 
-namespace ishabanov\Core\Infrastructure\Eloquent\Models;
+namespace App\Data\Database\Eloquent\Models;
 
 use Database\Factories\UserFeedbackFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use ishabanov\Core\Domain\Enums\FeedbackType;
+use App\Foundation\Enums\FeedbackType;
 
 /**
  * @property string $email

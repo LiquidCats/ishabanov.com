@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Api\Infrastructure\Repositories\Telegram;
+namespace App\Data\Api\Telegram\Repositories;
 
 use Illuminate\Support\Facades\Http;
-use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
-use ishabanov\Api\Domain\ValueObjects\ChatId;
-use ishabanov\Api\Domain\ValueObjects\Token;
+use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
+use App\Domains\Telegram\ValueObjects\ChatId;
+use App\Domains\Telegram\ValueObjects\Token;
 
 class TelegramRepository implements TelegramRepositoryContract
 {

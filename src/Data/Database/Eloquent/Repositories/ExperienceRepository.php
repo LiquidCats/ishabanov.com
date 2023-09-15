@@ -1,21 +1,18 @@
 <?php
 
-namespace ishabanov\Pages\Infrastructure\Repositories\Eloquent\Repositories;
+namespace App\Data\Database\Eloquent\Repositories;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
-use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
-use ishabanov\Pages\Domain\Contracts\Repositories\ExperienceRepositoryContract;
-use ishabanov\Pages\Domain\ValueObjects\WorkingExperience;
+use App\Data\Database\Eloquent\Models\Experience;
+use App\Data\Database\Eloquent\Models\Tool;
+use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
+use App\Domains\Homepage\ValueObjects\WorkingExperience;
+use App\Foundation\Enums\ToolType;
 
 class ExperienceRepository implements ExperienceRepositoryContract
 {
     /**
-     * @param ToolType $type
-     * @param int      $limit
-     *
      * @return Collection<int, Tool>
      */
     public function getTopToolByTypeJob(ToolType $type, int $limit = 3): Collection

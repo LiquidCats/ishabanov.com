@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Infrastructure\Eloquent\Models;
+namespace App\Data\Database\Eloquent\Models;
 
 use Carbon\Carbon;
 use Database\Factories\ExperienceFactory;
