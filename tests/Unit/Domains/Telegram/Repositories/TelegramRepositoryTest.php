@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Unit\Api\Domain\Repositories;
+namespace Tests\Unit\Domains\Telegram\Repositories;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
-use ishabanov\Api\Domain\ValueObjects\ChatId;
+use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
+use App\Domains\Telegram\ValueObjects\ChatId;
 use Tests\TestCase;
 
 /**
- * @coversDefaultClass \ishabanov\Api\Infrastructure\Repositories\Telegram\TelegramRepository
+ * @coversDefaultClass \App\Data\Api\Telegram\Repositories\TelegramRepository
  */
 class TelegramRepositoryTest extends TestCase
 {
@@ -18,6 +18,7 @@ class TelegramRepositoryTest extends TestCase
 
     /**
      * @test
+     *
      * @covers ::sendMessage
      */
     public function shouldSendMessageToTelegram(): void

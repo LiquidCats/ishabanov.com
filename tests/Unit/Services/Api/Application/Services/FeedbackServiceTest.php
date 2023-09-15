@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\Unit\Api\Application\Services;
+namespace Tests\Unit\Services\Api\Application\Services;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use ishabanov\Api\Domain\Contracts\Services\FeedbackServiceContract;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use App\Data\Database\Eloquent\Models\UserFeedback;
+use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use Tests\Asset\Api\Traits\WithLoggerMocks;
 use Tests\Asset\Api\Traits\WithRequestMocks;
 use Tests\TestCase;
 
 /**
- * @coversDefaultClass \ishabanov\Api\Application\Services\FeedbackService
+ * @coversDefaultClass \App\Api\Application\Services\FeedbackService
  */
 class FeedbackServiceTest extends TestCase
 {
@@ -22,8 +22,8 @@ class FeedbackServiceTest extends TestCase
 
     /**
      * @test
+     *
      * @covers ::handleFeedback
-     * @return void
      */
     public function shouldHandleUSerFeedback(): void
     {

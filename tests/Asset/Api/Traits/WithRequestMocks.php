@@ -3,8 +3,8 @@
 namespace Tests\Asset\Api\Traits;
 
 use Illuminate\Support\Facades\Validator;
-use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use App\Api\Presentation\Http\Requests\UserFeedbackRequest;
+use App\Data\Database\Eloquent\Models\UserFeedback;
 
 trait WithRequestMocks
 {

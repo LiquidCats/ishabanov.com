@@ -6,11 +6,11 @@ namespace Tests\Feature\Api\Presentation;
 
 use Illuminate\Http\Client\Request as Client;
 use Illuminate\Support\Facades\Http;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
-use function route;
+use App\Data\Database\Eloquent\Models\UserFeedback;
 use Tests\Asset\Api\Traits\WithLoggerMocks;
-
 use Tests\TestCase;
+
+use function route;
 
 class UserFeedbackTest extends TestCase
 {

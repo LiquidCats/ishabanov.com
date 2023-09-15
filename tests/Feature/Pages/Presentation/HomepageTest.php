@@ -5,7 +5,7 @@ namespace Tests\Feature\Pages\Presentation;
 use Tests\TestCase;
 
 /**
- * @coversDefaultClass \ishabanov\Pages\Presentation\Http\Controllers\HomepageController
+ * @coversDefaultClass \App\Pages\Presentation\Http\Controllers\HomepageController
  */
 class HomepageTest extends TestCase
 {

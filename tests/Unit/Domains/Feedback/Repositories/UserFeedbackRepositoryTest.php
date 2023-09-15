@@ -1,21 +1,20 @@
 <?php
 
-namespace Tests\Unit\Api\Domain\Repositories;
+namespace Tests\Unit\Domains\Feedback\Repositories;
 
-use ishabanov\Api\Domain\Contracts\Repositories\UserFeedbackRepositoryContract;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use App\Data\Database\Eloquent\Models\UserFeedback;
+use App\Domains\Feedback\Contracts\Repositories\UserFeedbackRepositoryContract;
 use Tests\TestCase;
 
 /**
- * @coversDefaultClass \ishabanov\Api\Infrastructure\Repositories\Eloquent\Repositories\UserFeedbackRepository
+ * @coversDefaultClass \App\Data\Database\Eloquent\Repositories\UserFeedbackRepository
  */
 class UserFeedbackRepositoryTest extends TestCase
 {
     /**
      * @test
-     * @covers ::save
      *
-     * @return void
+     * @covers ::save
      */
     public function shouldSaveUserFeedback(): void
     {
