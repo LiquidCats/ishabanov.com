@@ -1,24 +1,27 @@
 <?php
 
-namespace ishabanov\Api;
+namespace App\Api;
 
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Log\LogManager;
-use ishabanov\Api\Application\Services\FeedbackService;
-use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
-use ishabanov\Api\Domain\Contracts\Repositories\UserFeedbackRepositoryContract;
-use ishabanov\Api\Domain\Contracts\Services\FeedbackServiceContract;
-use ishabanov\Api\Domain\ValueObjects\ChatId;
-use ishabanov\Api\Domain\ValueObjects\Token;
-use ishabanov\Api\Infrastructure\Repositories\Eloquent\Repositories\UserFeedbackRepository;
-use ishabanov\Api\Infrastructure\Repositories\Telegram\TelegramRepository;
+use App\Api\Application\Services\FeedbackService;
+use App\Api\Provides\RouteServiceProvider;
+use App\Data\Api\Telegram\Repositories\TelegramRepository;
+use App\Data\Database\Eloquent\Repositories\UserFeedbackRepository;
+use App\Domains\Feedback\Contracts\Repositories\UserFeedbackRepositoryContract;
+use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
+use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
+use App\Domains\Telegram\ValueObjects\ChatId;
+use App\Domains\Telegram\ValueObjects\Token;
 
-class ApplicationServiceProvider extends ServiceProvider
+class ApiServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->register(RouteServiceProvider::class);
+        //
         $this->app->singleton(FeedbackServiceContract::class, static function (Application $app) {
             /** @var Repository $config */
             $config = $app->make('config');

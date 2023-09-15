@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Api\Presentation\Http\Controllers;
+namespace App\Api\Presentation\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use ishabanov\Api\Domain\Contracts\Services\FeedbackServiceContract;
-use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
-use ishabanov\Core\Domain\Enums\Response\Status;
+use App\Api\Presentation\Http\Requests\UserFeedbackRequest;
+use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
+use App\Foundation\Enums\Response\Status;
 
 class UserFeedbackController extends Controller
 {

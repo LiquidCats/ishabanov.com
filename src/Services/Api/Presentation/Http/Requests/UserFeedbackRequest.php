@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Api\Presentation\Http\Requests;
+namespace App\Api\Presentation\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,24 +1,24 @@
 <?php
 
-namespace ishabanov\Api\Application\Services;
+namespace App\Api\Application\Services;
 
-use ishabanov\Api\Domain\Contracts\Repositories\TelegramRepositoryContract;
-use ishabanov\Api\Domain\Contracts\Repositories\UserFeedbackRepositoryContract;
-use ishabanov\Api\Domain\Contracts\Services\FeedbackServiceContract;
-use ishabanov\Api\Domain\Entities\TelegramFeedbackMessage;
-use ishabanov\Api\Domain\ValueObjects\ChatId;
-use ishabanov\Api\Presentation\Http\Requests\UserFeedbackRequest;
-use ishabanov\Core\Domain\Enums\FeedbackType;
+use App\Api\Presentation\Http\Requests\UserFeedbackRequest;
+use App\Domains\Feedback\Contracts\Repositories\UserFeedbackRepositoryContract;
+use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
+use App\Domains\Feedback\Entities\TelegramFeedbackMessage;
+use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
+use App\Domains\Telegram\ValueObjects\ChatId;
+use App\Foundation\Enums\FeedbackType;
 use Psr\Log\LoggerInterface;
 
 readonly class FeedbackService implements FeedbackServiceContract
 {
     public function __construct(
-        private LoggerInterface            $logger,
+        private LoggerInterface $logger,
         private TelegramRepositoryContract $telegramRepository,
         private UserFeedbackRepositoryContract $userFeedbackRepository,
-        private ChatId                     $chatId,
-        private string                     $environment,
+        private ChatId $chatId,
+        private string $environment,
     ) {
     }
 
