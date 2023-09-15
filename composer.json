@@ -37,12 +37,11 @@
     "autoload": {
         "psr-4": {
             "App\\": "src",
-            "ishabanov\\": "src",
-            "ishabanov\\Admin\\": "src/Services/Admin",
-            "ishabanov\\Api\\": "src/Services/Api",
-            "ishabanov\\Pages\\": "src/Services/Pages",
-            "ishabanov\\Authz\\": "src/Services/Authz",
-            "ishabanov\\Healthz\\": "src/Services/Healthz",
+            "App\\Admin\\": "src/Services/Admin",
+            "App\\Api\\": "src/Services/Api",
+            "App\\Pages\\": "src/Services/Pages",
+            "App\\Authz\\": "src/Services/Authz",
+            "App\\Healthz\\": "src/Services/Healthz",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
