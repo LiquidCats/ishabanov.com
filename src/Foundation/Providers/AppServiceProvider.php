@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Foundation\Providers;
+namespace App\Foundation\Providers;
 
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use ishabanov\Admin\AdminServiceProvider;
-use ishabanov\Api\ApiServiceProvider;
-use ishabanov\Pages\PagesServiceProvider;
+use App\Admin\AdminServiceProvider;
+use App\Api\ApiServiceProvider;
+use App\Healthz\HealthzServiceProvider;
+use App\Pages\PagesServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(AdminServiceProvider::class);
         $this->app->register(ApiServiceProvider::class);
         $this->app->register(PagesServiceProvider::class);
+        $this->app->register(HealthzServiceProvider::class);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Foundation\Providers;
+namespace App\Foundation\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

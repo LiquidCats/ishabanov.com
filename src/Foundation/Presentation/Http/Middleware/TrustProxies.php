@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Foundation\Presentation\Http\Middleware;
+namespace App\Foundation\Presentation\Http\Middleware;
 
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Illuminate\Http\Request;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Foundation\Exceptions;
+namespace App\Foundation\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use ishabanov\Foundation\Enums\Response\Status;
+use App\Foundation\Enums\Response\Status;
 use Psr\Log\LogLevel;
 use Throwable;
 
