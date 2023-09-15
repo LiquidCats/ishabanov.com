@@ -6,7 +6,7 @@ namespace Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use ishabanov\Data\Database\Eloquent\Models\Experience;
+use App\Data\Database\Eloquent\Models\Experience;
 
 /**
  * @extends Factory<Experience>

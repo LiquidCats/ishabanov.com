@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use ishabanov\Data\Database\Eloquent\Models\UserFeedback;
-use ishabanov\Foundation\Enums\FeedbackType;
+use App\Data\Database\Eloquent\Models\UserFeedback;
+use App\Foundation\Enums\FeedbackType;
 
 use function fake;
 
