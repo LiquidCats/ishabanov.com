@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Domain\Enums;
+namespace ishabanov\Foundation\Enums;
 
 enum ExperienceLevel: int
 {

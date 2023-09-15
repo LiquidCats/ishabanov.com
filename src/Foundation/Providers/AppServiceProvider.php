@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Infrastructure\Providers;
+namespace ishabanov\Foundation\Providers;
 
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use ishabanov\Admin\ApplicationServiceProvider as AdminServiceProvider;
-use ishabanov\Api\ApplicationServiceProvider as ApiServiceProvider;
-use ishabanov\Pages\ApplicationServiceProvider as PagesServiceProvider;
+use ishabanov\Admin\AdminServiceProvider;
+use ishabanov\Api\ApiServiceProvider;
+use ishabanov\Pages\PagesServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +24,6 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {

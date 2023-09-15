@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Infrastructure\Providers;
+namespace ishabanov\Foundation\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

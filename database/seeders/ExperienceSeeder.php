@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
+use ishabanov\Data\Database\Eloquent\Models\Experience;
 
 class ExperienceSeeder extends Seeder
 {
@@ -96,7 +96,7 @@ class ExperienceSeeder extends Seeder
     }
 
     /**
-     * @param array<string, string> $experience
+     * @param  array<string, string>  $experience
      */
     protected function createModel(array $experience): void
     {

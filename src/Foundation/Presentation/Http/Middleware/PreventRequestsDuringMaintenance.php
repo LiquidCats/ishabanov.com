@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Presentation\Http\Middleware;
+namespace ishabanov\Foundation\Presentation\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Middleware;
 

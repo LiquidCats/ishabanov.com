@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Application\Handlers;
+namespace ishabanov\Foundation\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use ishabanov\Core\Domain\Enums\Response\Status;
+use ishabanov\Foundation\Enums\Response\Status;
 use Psr\Log\LogLevel;
 use Throwable;
 
-class ExceptionHandler extends BaseExceptionHandler
+class Handler extends BaseExceptionHandler
 {
     /**
      * A list of exception types with their corresponding custom log levels.

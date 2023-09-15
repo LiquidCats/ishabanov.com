@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Domain\Enums;
+namespace ishabanov\Foundation\Enums;
 
 enum FeedbackType: int
 {
     case NO_SUBJECT = 0;
     case CONSULTATION = 1;
     case SERVICES = 2;
-   case PRICING = 3;
+    case PRICING = 3;
 
     public function getText(): string
     {

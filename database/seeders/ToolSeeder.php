@@ -6,10 +6,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Domain\Enums\{
-    ExperienceLevel};
-use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
+use ishabanov\Data\Database\Eloquent\Models\Tool;
+use ishabanov\Foundation\Enums\ExperienceLevel;
+use ishabanov\Foundation\Enums\ToolType;
 
 class ToolSeeder extends Seeder
 {

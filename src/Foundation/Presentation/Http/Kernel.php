@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ishabanov\Core\Presentation\Http;
+namespace ishabanov\Foundation\Presentation\Http;
 
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
@@ -20,15 +20,15 @@ use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use ishabanov\Core\Presentation\Http\Middleware\Authenticate;
-use ishabanov\Core\Presentation\Http\Middleware\EncryptCookies;
-use ishabanov\Core\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
-use ishabanov\Core\Presentation\Http\Middleware\RedirectIfAuthenticated;
-use ishabanov\Core\Presentation\Http\Middleware\TrimStrings;
-use ishabanov\Core\Presentation\Http\Middleware\TrustProxies;
-use ishabanov\Core\Presentation\Http\Middleware\VerifyCsrfToken;
-use ishabanov\Core\Presentation\Http\Middleware\{
-    TrustHosts};
+use ishabanov\Foundation\Presentation\Http\Middleware\Authenticate;
+use ishabanov\Foundation\Presentation\Http\Middleware\EncryptCookies;
+use ishabanov\Foundation\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
+use ishabanov\Foundation\Presentation\Http\Middleware\RedirectIfAuthenticated;
+use ishabanov\Foundation\Presentation\Http\Middleware\TrimStrings;
+use ishabanov\Foundation\Presentation\Http\Middleware\TrustHosts;
+use ishabanov\Foundation\Presentation\Http\Middleware\TrustProxies;
+use ishabanov\Foundation\Presentation\Http\Middleware\VerifyCsrfToken;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
 {
@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
         ],

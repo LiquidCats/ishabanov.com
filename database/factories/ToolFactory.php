@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use ishabanov\Core\Domain\Enums\ToolType;
-use ishabanov\Core\Domain\Enums\{
+use Eloquent\Models\Tool;
+use Enums\ToolType;
+use Enums\{
     ExperienceLevel};
-use ishabanov\Core\Infrastructure\Eloquent\Models\Tool;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Tool>

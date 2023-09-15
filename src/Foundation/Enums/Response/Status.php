@@ -1,6 +1,6 @@
 <?php
 
-namespace ishabanov\Core\Domain\Enums\Response;
+namespace ishabanov\Foundation\Enums\Response;
 
 enum Status: string
 {

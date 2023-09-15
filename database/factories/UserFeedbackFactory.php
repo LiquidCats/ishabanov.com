@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use function fake;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use ishabanov\Core\Domain\Enums\FeedbackType;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
+use ishabanov\Data\Database\Eloquent\Models\UserFeedback;
+use ishabanov\Foundation\Enums\FeedbackType;
+
+use function fake;
 
 /**
  * @extends Factory<UserFeedback>
@@ -14,7 +15,7 @@ class UserFeedbackFactory extends Factory
 {
     protected $model = UserFeedback::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'email' => fake()->safeEmail(),

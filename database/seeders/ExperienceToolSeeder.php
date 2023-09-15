@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use ishabanov\Core\Domain\Enums\ExperienceLevel;
-use ishabanov\Core\Infrastructure\Eloquent\Models\ExperienceTool;
+use ishabanov\Data\Database\Eloquent\Models\ExperienceTool;
+use ishabanov\Foundation\Enums\ExperienceLevel;
 
 class ExperienceToolSeeder extends Seeder
 {
