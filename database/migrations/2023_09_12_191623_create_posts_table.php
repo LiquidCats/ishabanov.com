@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('content');
             $table->unsignedBigInteger('author_id')->nullable();
+            $table->boolean('is_draft')->default(true);
             $table->timestamp('published_at');
             $table->timestamps();
 
