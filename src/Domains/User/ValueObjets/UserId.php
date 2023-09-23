@@ -8,7 +8,7 @@ namespace App\Domains\User\ValueObjets;
 readonly class UserId
 {
     /**
-     * @param T $value
+     * @param  T  $value
      */
     public function __construct(public mixed $value)
     {

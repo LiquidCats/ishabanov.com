@@ -8,7 +8,7 @@ namespace App\Domains\Blog\ValueObjects;
 readonly class TagSlug
 {
     /**
-     * @param T $value
+     * @param  T  $value
      */
     public function __construct(public mixed $value)
     {

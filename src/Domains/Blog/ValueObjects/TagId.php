@@ -8,7 +8,7 @@ namespace App\Domains\Blog\ValueObjects;
 readonly class TagId
 {
     /**
-     * @param T $value
+     * @param  T  $value
      */
     public function __construct(public mixed $value)
     {

@@ -10,7 +10,10 @@ use Illuminate\Support\Collection;
 interface TagRepositoryContract
 {
     public function create(string $name): Tag;
+
     public function search(string $search): Collection;
+
     public function unlinkFromPost(PostId $postId, TagId $tagId): bool;
+
     public function linkToPost(PostId $postId, TagId $tagId): bool;
 }
