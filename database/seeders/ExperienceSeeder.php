@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Data\Database\Eloquent\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use App\Data\Database\Eloquent\Models\Experience;
 
 class ExperienceSeeder extends Seeder
 {

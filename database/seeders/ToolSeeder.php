@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 use App\Data\Database\Eloquent\Models\Tool;
 use App\Foundation\Enums\ExperienceLevel;
 use App\Foundation\Enums\ToolType;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ToolSeeder extends Seeder
 {

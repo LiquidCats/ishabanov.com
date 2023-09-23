@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Data\Database\Eloquent\Models\ExperienceTool;
 use App\Foundation\Enums\ExperienceLevel;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<ExperienceTool>

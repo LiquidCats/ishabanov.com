@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Data\Database\Eloquent\Models\ExperienceTool;
 use App\Foundation\Enums\ExperienceLevel;
+use Illuminate\Database\Seeder;
 
 class ExperienceToolSeeder extends Seeder
 {

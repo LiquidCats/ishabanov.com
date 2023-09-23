@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Data\Database\Eloquent\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Data\Database\Eloquent\Models\Experience;
 
 /**
  * @extends Factory<Experience>
