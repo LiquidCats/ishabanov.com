@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
  * @property string $title
  * @property string $content
  * @property int $author_id
- * @property boolean $is_draft
+ * @property bool $is_draft
  * @property Carbon|null $published_at
  * @property User|null $author
  * @property Collection<int, Tag> $tags

@@ -2,10 +2,10 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Foundation\Enums\FeedbackType;
 use Database\Factories\UserFeedbackFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Foundation\Enums\FeedbackType;
 
 /**
  * @property string $email

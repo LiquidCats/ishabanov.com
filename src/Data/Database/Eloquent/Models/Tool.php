@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Foundation\Enums\ExperienceLevel;
+use App\Foundation\Enums\ToolType;
 use Database\Factories\ToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Foundation\Enums\ExperienceLevel;
-use App\Foundation\Enums\ToolType;
 
 /**
  * Class Tool.

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Foundation\Enums\ExperienceLevel;
 use Database\Factories\ExperienceToolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use App\Foundation\Enums\ExperienceLevel;
 
 /**
  * @property int             $experience_id
