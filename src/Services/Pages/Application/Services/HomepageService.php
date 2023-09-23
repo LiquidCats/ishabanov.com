@@ -2,11 +2,12 @@
 
 namespace App\Pages\Application\Services;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use App\Foundation\Enums\ToolType;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 readonly class HomepageService implements PageComposerServiceContract
 {
@@ -16,7 +17,7 @@ readonly class HomepageService implements PageComposerServiceContract
     ) {
     }
 
-    public function view(): View
+    public function view(Request $request): View
     {
         $languages = $this->experienceRepository->getTopToolByTypeJob(ToolType::LANGUAGE, 4);
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);

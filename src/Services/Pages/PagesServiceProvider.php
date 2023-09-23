@@ -2,12 +2,12 @@
 
 namespace App\Pages;
 
-use Carbon\Laravel\ServiceProvider;
 use App\Data\Database\Eloquent\Repositories\ExperienceRepository;
 use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use App\Pages\Application\Services\HomepageService;
 use App\Pages\Provides\RouteServiceProvider;
+use Carbon\Laravel\ServiceProvider;
 
 class PagesServiceProvider extends ServiceProvider
 {
