@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Api\Presentation\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use App\Api\Presentation\Http\Requests\UserFeedbackRequest;
 use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use App\Foundation\Enums\Response\Status;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 class UserFeedbackController extends Controller
 {

@@ -2,10 +2,6 @@
 
 namespace App\Api;
 
-use Carbon\Laravel\ServiceProvider;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Log\LogManager;
 use App\Api\Application\Services\FeedbackService;
 use App\Api\Provides\RouteServiceProvider;
 use App\Data\Api\Telegram\Repositories\TelegramRepository;
@@ -15,6 +11,10 @@ use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
 use App\Domains\Telegram\ValueObjects\ChatId;
 use App\Domains\Telegram\ValueObjects\Token;
+use Carbon\Laravel\ServiceProvider;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Log\LogManager;
 
 class ApiServiceProvider extends ServiceProvider
 {
