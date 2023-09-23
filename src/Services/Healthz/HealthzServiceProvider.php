@@ -2,8 +2,8 @@
 
 namespace App\Healthz;
 
-use Illuminate\Support\ServiceProvider;
 use App\Healthz\Providers\RouteServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class HealthzServiceProvider extends ServiceProvider
 {

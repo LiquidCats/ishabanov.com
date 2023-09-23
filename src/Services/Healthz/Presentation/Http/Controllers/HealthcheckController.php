@@ -2,9 +2,9 @@
 
 namespace App\Services\Healthz\Presentation\Http\Controllers;
 
+use App\Foundation\Enums\Response\Status;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use App\Foundation\Enums\Response\Status;
 
 class HealthcheckController extends Controller
 {
