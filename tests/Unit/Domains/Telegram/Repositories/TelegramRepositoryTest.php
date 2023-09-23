@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Domains\Telegram\Repositories;
 
+use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
+use App\Domains\Telegram\ValueObjects\ChatId;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;
-use App\Domains\Telegram\ValueObjects\ChatId;
 use Tests\TestCase;
 
 /**

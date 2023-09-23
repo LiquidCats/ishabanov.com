@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Services\Api\Application\Services;
 
+use App\Data\Database\Eloquent\Models\UserFeedback;
+use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use App\Data\Database\Eloquent\Models\UserFeedback;
-use App\Domains\Feedback\Contracts\Services\FeedbackServiceContract;
 use Tests\Asset\Api\Traits\WithLoggerMocks;
 use Tests\Asset\Api\Traits\WithRequestMocks;
 use Tests\TestCase;
