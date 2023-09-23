@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Foundation\Exceptions;
 
+use App\Foundation\Enums\Response\Status;
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use App\Foundation\Enums\Response\Status;
 use Psr\Log\LogLevel;
 use Throwable;
 

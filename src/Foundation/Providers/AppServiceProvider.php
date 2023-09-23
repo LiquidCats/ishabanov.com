@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Foundation\Providers;
 
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\ServiceProvider;
 use App\Admin\AdminServiceProvider;
 use App\Api\ApiServiceProvider;
 use App\Healthz\HealthzServiceProvider;
 use App\Pages\PagesServiceProvider;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

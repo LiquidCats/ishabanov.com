@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace App\Foundation\Presentation\Http;
 
+use App\Foundation\Presentation\Http\Middleware\Authenticate;
+use App\Foundation\Presentation\Http\Middleware\EncryptCookies;
+use App\Foundation\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
+use App\Foundation\Presentation\Http\Middleware\RedirectIfAuthenticated;
+use App\Foundation\Presentation\Http\Middleware\TrimStrings;
+use App\Foundation\Presentation\Http\Middleware\TrustHosts;
+use App\Foundation\Presentation\Http\Middleware\TrustProxies;
+use App\Foundation\Presentation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -20,14 +28,6 @@ use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Foundation\Presentation\Http\Middleware\Authenticate;
-use App\Foundation\Presentation\Http\Middleware\EncryptCookies;
-use App\Foundation\Presentation\Http\Middleware\PreventRequestsDuringMaintenance;
-use App\Foundation\Presentation\Http\Middleware\RedirectIfAuthenticated;
-use App\Foundation\Presentation\Http\Middleware\TrimStrings;
-use App\Foundation\Presentation\Http\Middleware\TrustHosts;
-use App\Foundation\Presentation\Http\Middleware\TrustProxies;
-use App\Foundation\Presentation\Http\Middleware\VerifyCsrfToken;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
