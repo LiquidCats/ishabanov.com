@@ -10,6 +10,10 @@
 
     </head>
     <body>
+        <header class="p-3 bg-dark text-white">
+            <x-navbar/>
+        </header>
+
         @yield("content")
 
         @include("includes.footer")
