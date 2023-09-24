@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col col-md-8 offset-md-2 col-lg-8 offset-lg-4">
                     <div class="row g-2 justify-content-lg-end justify-content-center">
-                        @each('hero.chip', $languages, 'tool')
-                        @each('hero.chip', $frameworks, 'tool')
+                        @each('pages.home.hero.chip', $languages, 'tool')
+                        @each('pages.home.hero.chip', $frameworks, 'tool')
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Data\Database\Eloquent\Models\User;
+
 return [
 
     /*
@@ -64,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => null,
+            'model' => User::class,
         ],
 
         // 'users' => [

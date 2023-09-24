@@ -35,13 +35,13 @@ class User extends Model
         'password',
     ];
 
-    protected static function newFactory(): UserFactory
-    {
-        return UserFactory::new();
-    }
-
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'author_id', 'id');
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
     }
 }

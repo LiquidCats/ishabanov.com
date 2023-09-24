@@ -24,7 +24,7 @@ readonly class HomepageService implements PageComposerServiceContract
         $experiences = $this->experienceRepository->getListOfExperiencesJob();
         $duration = $this->experienceRepository->calculateExperienceDurationJob($experiences->last());
 
-        return $this->factory->make('index', [
+        return $this->factory->make('pages.home.index', [
             'duration' => $duration,
             'experiences' => $experiences,
             'languages' => $languages,

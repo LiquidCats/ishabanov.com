@@ -7,11 +7,11 @@
 
     <div class="row g-4">
         <div class="col-12 col-md-7 col-lg-8">
-            @include('contacts.form')
+            @include('pages.home.contacts.form')
         </div>
         <div class="col-12 col-md-5 col-lg-4 d-flex flex-column justify-content-center align-items-center">
-            @include("contacts.info")
-            @include("contacts.links")
+            @include("pages.home.contacts.info")
+            @include("pages.home.contacts.links")
         </div>
 
     </div>

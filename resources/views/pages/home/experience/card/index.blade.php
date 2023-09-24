@@ -6,7 +6,7 @@
                      alt="{{ $experience->company_name }}">
             </div>
             <div class="col-12-auto mx-auto">
-                @include("experience.card.body")
+                @include("pages.home.experience.card.body")
             </div>
             <div class="col-12 mb-4">
                 <a class="btn btn-link card-link lc-card-more mt-1 text-decoration-none d-inline-flex gap-2 px-4"
@@ -23,5 +23,5 @@
 
 
 @push('modals')
-    @include('experience.card.modal.index')
+    @include('pages.home.experience.card.modal.index')
 @endpush

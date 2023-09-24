@@ -6,12 +6,17 @@ namespace App\Pages\Presentation\Http\Controllers;
 
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class HomepageController extends Controller
 {
-    public function __invoke(PageComposerServiceContract $service): View
+    public function __construct(private readonly PageComposerServiceContract $service)
     {
-        return $service->view();
+    }
+
+    public function __invoke(Request $request): View
+    {
+        return $this->service->view($request);
     }
 }

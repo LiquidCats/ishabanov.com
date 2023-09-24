@@ -3,6 +3,8 @@
 namespace App\Data\Database\Eloquent\Models;
 
 use Carbon\Carbon;
+use Database\Factories\PostFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -19,6 +21,8 @@ use Illuminate\Support\Collection;
  */
 class Post extends Model
 {
+    use HasFactory;
+
     protected $casts = [
         'title' => 'string',
         'content' => 'string',
@@ -42,5 +46,10 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    protected static function newFactory(): PostFactory
+    {
+        return PostFactory::new();
     }
 }
