@@ -13,8 +13,9 @@
         <header class="p-3 bg-dark text-white">
             <x-navbar/>
         </header>
-
-        @yield("content")
+        <main>
+            @yield("content")
+        </main>
 
         @include("includes.footer")
 
