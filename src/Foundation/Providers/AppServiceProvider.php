@@ -6,6 +6,7 @@ namespace App\Foundation\Providers;
 
 use App\Admin\AdminServiceProvider;
 use App\Api\ApiServiceProvider;
+use App\Authz\AuthzServiceProvider;
 use App\Healthz\HealthzServiceProvider;
 use App\Pages\PagesServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(AuthzServiceProvider::class);
         $this->app->register(AdminServiceProvider::class);
         $this->app->register(ApiServiceProvider::class);
         $this->app->register(PagesServiceProvider::class);
