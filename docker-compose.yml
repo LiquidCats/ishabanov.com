@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+    backend:
+        image: php
+        entrypoint: "php ./artisan serve --host=0.0.0.0"
+        working_dir: /app
+        volumes:
+            - .:/app
+        ports:
+            - "8000:8000"
+
+    frontend:
+        image: node
+        entrypoint: "npm run dev"
+        working_dir: /app
+        volumes:
+            - .:/app
+        ports:
+            - "5173:5173"
