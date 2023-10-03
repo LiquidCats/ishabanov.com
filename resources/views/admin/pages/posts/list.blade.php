@@ -1,6 +1,6 @@
 @php
     use App\Data\Database\Eloquent\Models\Post;
-    use App\Data\Database\Eloquent\Models\Tag;use App\Foundation\Enums\PostStates;
+    use App\Data\Database\Eloquent\Models\Tag;
 @endphp
 @php /** @var Post $post */ @endphp
 @php /** @var Tag $tag */ @endphp
@@ -40,7 +40,7 @@
                          <form method="post"
                               action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
                             @method('patch')
-                            <input type="hidden" name="state" value="{{ $post->is_draft ? PostStates::PUBLISHED->value : PostStates::DRAFT->value}}">
+                            <input type="hidden" name="state" value="{{ $post->is_draft ? 'Publish' : 'Hide'}}">
                             <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
                                 {{ $post->is_draft ? 'Publish' : 'Hide' }}
                             </button>
