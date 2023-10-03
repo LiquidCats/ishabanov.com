@@ -7,7 +7,6 @@
 @section('content')
     @include('admin.components.page-header', ['title' => 'Creat New Post'])
     <form method="POST" action="{{ route('admin.posts.store') }}">
-        @dump($errors)
         @csrf
         @method('post')
         <div class="mb-3">
