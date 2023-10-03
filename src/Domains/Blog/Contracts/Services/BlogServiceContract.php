@@ -1,16 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Blog\Contracts\Services;
 
-use App\Domains\Blog\Entities\Post;
-use App\Domains\Blog\ValueObjects\TagSlug;
-use Illuminate\Support\Collection;
+use App\Data\Database\Eloquent\Models\Post;
+use App\Domains\Blog\ValueObjects\PostId;
 
 interface BlogServiceContract
 {
     /**
-     * @param  Collection<int, TagSlug>  $tags
-     * @return Collection<int, Post>
+     * @param array $data
+     *
+     * @return Post
      */
-    public function getPosts(Collection $tags, int $page = 1): Collection;
+    public function createPost(array $data): Post;
+
+    /**
+     * @param PostId<int> $postId
+     * @param array  $data
+     *
+     * @return Post
+     */
+    public function updatePost(PostId $postId, array $data = []): Post;
+
+    /**
+     * @param PostId<int> $postId
+     *
+     * @return Post
+     */
+    public function changeState(PostId $postId): Post;
+
+    /**
+     * @param PostId<int> $postId
+     *
+     * @return bool
+     */
+    public function deletePost(PostId $postId): bool;
 }
