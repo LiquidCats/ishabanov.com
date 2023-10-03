@@ -12,13 +12,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use function now;
 
-class PostRepository //implements PostRepositoryContract
+class PostRepository implements PostRepositoryContract
 {
     public function findById(PostId $id): Post
     {
         return Post::query()
             ->with('tags')
             ->findOrFail($id);
+    }
+
+    public function getAll(): LengthAwarePaginator
+    {
+        return Post::query()
+            ->with('tags')
+            ->latest()
+            ->paginate(perPage: 5);
     }
 
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
@@ -33,6 +41,7 @@ class PostRepository //implements PostRepositoryContract
                     ->whereIn('slug', $tags)
                 )
             )
+            ->latest()
             ->paginate(perPage: 5);
     }
 
