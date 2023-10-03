@@ -39,7 +39,8 @@
                     <div class="d-flex flex-row justify-content-end gap-1 mb-1 align-content-end small">
                          <form method="post"
                               action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
-                            @method('patch')
+                            @csrf
+                             @method('patch')
                             <input type="hidden" name="state" value="{{ $post->is_draft ? 'Publish' : 'Hide'}}">
                             <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
                                 {{ $post->is_draft ? 'Publish' : 'Hide' }}
@@ -48,6 +49,7 @@
                         <div>
                             <form method="post"
                                   action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>

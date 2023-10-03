@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use App\Admin\Presentation\Http\Controllers\DashboardController;
+use App\Admin\Presentation\Http\Controllers\PostChangeStateController;
 use App\Admin\Presentation\Http\Controllers\PostCreateController;
+use App\Admin\Presentation\Http\Controllers\PostDeleteController;
 use App\Admin\Presentation\Http\Controllers\PostEditController;
 use App\Admin\Presentation\Http\Controllers\PostListController;
 use App\Admin\Presentation\Http\Controllers\PostStoreController;
@@ -25,8 +27,8 @@ Route::prefix('posts')
         // handle
         Route::post('store', PostStoreController::class)->name('admin.posts.store');
         Route::post('update/{post_id}', PostUpdateController::class)->name('admin.posts.update');
-        Route::patch('state/{post_id}', fn () => redirect(route('admin.posts.list')))->name('admin.posts.state');
-        Route::delete('delete/{post_id}', fn () => redirect(route('admin.posts.list')))->name('admin.posts.delete');
+        Route::patch('state/{post_id}', PostChangeStateController::class)->name('admin.posts.state');
+        Route::delete('delete/{post_id}', PostDeleteController::class)->name('admin.posts.delete');
         // TAGS
         // FILES
     });
