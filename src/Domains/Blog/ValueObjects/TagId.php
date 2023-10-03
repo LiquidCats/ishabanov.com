@@ -2,15 +2,8 @@
 
 namespace App\Domains\Blog\ValueObjects;
 
-/**
- * @template T
- */
-readonly class TagId
+use App\Foundation\ValueObjects\AbstractValueObject;
+
+readonly class TagId extends AbstractValueObject
 {
-    /**
-     * @param  T  $value
-     */
-    public function __construct(public mixed $value)
-    {
-    }
 }

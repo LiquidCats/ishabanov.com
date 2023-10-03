@@ -2,16 +2,8 @@
 
 namespace App\Domains\Blog\ValueObjects;
 
-/**
- * @template T
- */
-readonly class PostId
-{
-    /**
-     * @param  T  $value
-     */
-    public function __construct(public mixed $value)
-    {
+use App\Foundation\ValueObjects\AbstractValueObject;
 
-    }
+readonly class PostId extends AbstractValueObject
+{
 }
