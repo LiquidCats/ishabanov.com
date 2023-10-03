@@ -1,6 +1,6 @@
 @php
     use App\Data\Database\Eloquent\Models\Post;
-    use App\Data\Database\Eloquent\Models\Tag;
+    use App\Data\Database\Eloquent\Models\Tag;use App\Foundation\Enums\PostStates;
 @endphp
 @php /** @var Post $post */ @endphp
 @php /** @var Tag $tag */ @endphp
@@ -37,23 +37,17 @@
                         {{ substr($post->content, 0, 100) }}...
                     </div>
                     <div class="d-flex flex-row justify-content-end gap-1 mb-1 align-content-end small">
-                        @if($post->is_draft)
-                            <div>
-                                <form method="post" action="{{ route('admin.api.posts.state', ['state' => 'published']) }}">
-                                    @method('patch')
-                                    <button type="submit" class="btn btn-success btn-sm">Publish</button>
-                                </form>
-                            </div>
-                        @else
-                            <div>
-                                <form method="post" action="{{ route('admin.api.posts.state', ['state' => 'draft']) }}">
-                                    @method('patch')
-                                    <button type="submit" class="btn btn-warning btn-sm">Hide</button>
-                                </form>
-                            </div>
-                        @endif
+                         <form method="post"
+                              action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
+                            @method('patch')
+                            <input type="hidden" name="state" value="{{ $post->is_draft ? PostStates::PUBLISHED->value : PostStates::DRAFT->value}}">
+                            <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
+                                {{ $post->is_draft ? 'Publish' : 'Hide' }}
+                            </button>
+                        </form>
                         <div>
-                            <form method="post" action="{{ route('admin.api.posts.delete') }}">
+                            <form method="post"
+                                  action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
@@ -64,7 +58,9 @@
         </div>
     </div>
     <div class="d-flex flex-row justify-content-start my-3">
-        <div><button class="btn btn-primary">Create</button></div>
+        <div>
+            <button class="btn btn-primary">Create</button>
+        </div>
     </div>
     {!! $posts->links() !!}
 @stop
