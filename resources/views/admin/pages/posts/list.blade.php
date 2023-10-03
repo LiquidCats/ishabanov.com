@@ -1,9 +1,5 @@
-@php
-    use App\Data\Database\Eloquent\Models\Post;
-    use App\Data\Database\Eloquent\Models\Tag;
-@endphp
-@php /** @var Post $post */ @endphp
-@php /** @var Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
 
 @extends('layouts.admin')
 
