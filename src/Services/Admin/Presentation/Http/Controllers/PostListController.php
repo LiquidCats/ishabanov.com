@@ -5,15 +5,21 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Controllers;
 
 use App\Data\Database\Eloquent\Models\Post;
+use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use function compact;
 use function view;
 
 class PostListController extends Controller
 {
-    public function __invoke()
+    public function __construct(private readonly PageComposerServiceContract $service)
     {
-        $posts = Post::query()->with('tags')->latest()->paginate(5);
-        return view('admin.pages.posts.list', compact('posts'));
+    }
+
+    public function __invoke(Request $request): View
+    {
+        return $this->service->view($request);
     }
 }
