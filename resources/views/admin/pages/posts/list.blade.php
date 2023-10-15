@@ -11,7 +11,7 @@
         <div><a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a></div>
     </div>
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-        <div class="list-group list-group-flush border-bottom scrollarea">
+        <div class="list-group list-group-flush border-bottom">
             @foreach($posts as $post)
                 <a href="{{ route('admin.posts.edit', ['post_id' => $post->getKey()]) }}"
                    class="list-group-item list-group-item-action py-3 lh-tight">
@@ -35,30 +35,25 @@
                     <div class="d-flex flex-row justify-content-end gap-1 mb-1 align-content-end small">
                          <form method="post"
                               action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
-                            @csrf
+                             @csrf
                              @method('patch')
-                            <input type="hidden" name="state" value="{{ $post->is_draft ? 'Publish' : 'Hide'}}">
                             <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
                                 {{ $post->is_draft ? 'Publish' : 'Hide' }}
                             </button>
                         </form>
-                        <div>
-                            <form method="post"
-                                  action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
+                        <form method="post"
+                              action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </div>
                 </a>
             @endforeach
         </div>
     </div>
     <div class="d-flex flex-row justify-content-start my-3">
-        <div>
-            <button class="btn btn-primary">Create</button>
-        </div>
+        <div><a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a></div>
     </div>
     {!! $posts->links() !!}
 @stop
