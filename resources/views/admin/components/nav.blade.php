@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.tags.list') }}">
             <i data-feather="tag"
                stroke-width="1.5"
                width="24"
