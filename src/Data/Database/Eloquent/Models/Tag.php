@@ -2,12 +2,15 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $name
  * @property string $slug
+ * @property Carbon $created_at
+ * @property Carbon|null $updated_at
  */
 class Tag extends Model
 {
