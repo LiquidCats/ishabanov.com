@@ -28,7 +28,8 @@ readonly class PostEditViewService implements PageComposerServiceContract
         $post = $this->postRepository->findById($postId);
         $tags = $this->tagRepository->getAll();
 
-        $postTagIds = $post?->tags?->pluck('id');
+        $inputPostTags = $request->old('post_tags');
+        $postTagIds = empty($inputPostTags) ? $post?->tags?->pluck('id') : $inputPostTags;
 
         return view(
             'admin.pages.posts.edit',

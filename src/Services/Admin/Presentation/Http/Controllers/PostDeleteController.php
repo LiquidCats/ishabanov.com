@@ -19,12 +19,8 @@ class PostDeleteController extends Controller
 
     public function __invoke(string $postId): RedirectResponse
     {
-        $postId = new PostId($postId);
+        $this->service->deletePost(new PostId($postId));
 
-        $this->service->deletePost($postId);
-
-        return redirect()->intended(
-            route('admin.posts.list')
-        );
+        return redirect(route('admin.posts.list'));
     }
 }
