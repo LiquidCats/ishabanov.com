@@ -59,10 +59,10 @@ Route::prefix('files')
         // view
         Route::get('/', FilesListController::class)->name('admin.files.list');
         Route::get('create', FilesCreateController::class)->name('admin.files.create');
-        Route::get('edit/{file_id}', FilesEditController::class)->name('admin.files.edit');
+        // Route::get('edit/{file_id}', FilesEditController::class)->name('admin.files.edit');
 
         //handle
         Route::post('store', FilesStoreController::class)->name('admin.files.store');
-        Route::put('update/{file_id}', static fn () => back())->name('admin.files.update');
+        // Route::put('update/{file_id}', static fn () => back())->name('admin.files.update');
         Route::delete('delete/{file_id}', FilesDeleteController::class)->name('admin.files.delete');
     });
