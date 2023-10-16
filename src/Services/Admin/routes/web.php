@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 use App\Admin\Presentation\Http\Controllers\DashboardController;
+use App\Admin\Presentation\Http\Controllers\FilesCreateController;
+use App\Admin\Presentation\Http\Controllers\FilesDeleteController;
+use App\Admin\Presentation\Http\Controllers\FilesEditController;
+use App\Admin\Presentation\Http\Controllers\FilesListController;
+use App\Admin\Presentation\Http\Controllers\FilesStoreController;
 use App\Admin\Presentation\Http\Controllers\PostChangeStateController;
 use App\Admin\Presentation\Http\Controllers\PostCreateController;
 use App\Admin\Presentation\Http\Controllers\PostDeleteController;
@@ -47,4 +52,17 @@ Route::prefix('tags')
         Route::post('store', TagStoreController::class)->name('admin.tags.store');
         Route::put('update/{tag_id}', TagUpdateController::class)->name('admin.tags.update');
         Route::delete('delete/{tag_id}', TagDeleteController::class)->name('admin.tags.delete');
+    });
+Route::prefix('files')
+    ->group(static function () {
+        // FILES
+        // view
+        Route::get('/', FilesListController::class)->name('admin.files.list');
+        Route::get('create', FilesCreateController::class)->name('admin.files.create');
+        Route::get('edit/{file_id}', FilesEditController::class)->name('admin.files.edit');
+
+        //handle
+        Route::post('store', FilesStoreController::class)->name('admin.files.store');
+        Route::put('update/{file_id}', static fn () => back())->name('admin.files.update');
+        Route::delete('delete/{file_id}', FilesDeleteController::class)->name('admin.files.delete');
     });

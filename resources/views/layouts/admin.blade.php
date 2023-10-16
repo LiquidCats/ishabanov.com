@@ -27,12 +27,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
      <script src="https://cdn.tiny.cloud/1/gwnmmtvbsjz0a1q4aolugs385wc6es97mf904lw4okwjzv8j/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
      <script>
-       tinymce.init({
-           selector: 'textarea.mce-editable', // Replace this CSS selector to match the placeholder element for TinyMCE
-           tinycomments_mode: 'embedded',
-           plugins: 'code table lists link emoticons',
-           toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table | link | emoticons'
-       });
+         var imageList = {{ Illuminate\Support\Js::from($images ?? []) }};
+         tinymce.init({
+             selector: 'textarea.mce-editable', // Replace this CSS selector to match the placeholder element for TinyMCE
+             tinycomments_mode: 'embedded',
+             plugins: 'code table lists link emoticons image',
+             toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table | link | emoticons | image',
+             image_list: imageList
+         });
      </script>
 
 </body>

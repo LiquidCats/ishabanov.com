@@ -1,5 +1,4 @@
-@php use App\Data\Database\Eloquent\Models\Tag;use Illuminate\Support\Arr; @endphp
-@php /** @var Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
 @extends('layouts.admin')
 
 @section('title', 'Create New Post')
