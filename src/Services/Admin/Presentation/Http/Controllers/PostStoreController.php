@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Controllers;
 
 use App\Admin\Presentation\Http\Requests\PostStoreRequest;
-use App\Data\Database\Eloquent\Models\Post;
 use App\Domains\Blog\Contracts\Services\BlogServiceContract;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+
 use function redirect;
 use function route;
 

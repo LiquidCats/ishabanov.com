@@ -9,6 +9,7 @@ use App\Domains\Blog\Contracts\Services\BlogServiceContract;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+
 use function redirect;
 use function route;
 

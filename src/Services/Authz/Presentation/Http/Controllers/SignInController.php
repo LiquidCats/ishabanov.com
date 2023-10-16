@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+
 use function redirect;
 use function route;
 
@@ -26,6 +27,7 @@ class SignInController extends Controller
 
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
+
             //
             return redirect()->intended(route('admin.dashboard'));
         }

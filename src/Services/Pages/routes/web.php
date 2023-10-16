@@ -12,4 +12,3 @@ Route::prefix('blog')
         Route::get('/', BlogController::class)->name('pages.blog');
         Route::get('{post_id}', PostController::class)->name('pages.blog.post');
     });
-

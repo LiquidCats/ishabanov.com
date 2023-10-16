@@ -7,8 +7,8 @@ namespace App\Pages\Presentation\Http\Views\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
-use function route;
 
+use function route;
 
 class Navbar extends Component
 {
@@ -21,6 +21,7 @@ class Navbar extends Component
     private function links(): array
     {
         $currentRouteName = Route::currentRouteName();
+
         return [
             [
                 'name' => 'Home',

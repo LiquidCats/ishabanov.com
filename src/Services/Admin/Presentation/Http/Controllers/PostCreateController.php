@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers;
 
-use App\Data\Database\Eloquent\Models\Tag;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use function compact;
-use function view;
 
 class PostCreateController extends Controller
 {

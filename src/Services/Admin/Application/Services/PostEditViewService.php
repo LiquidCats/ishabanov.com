@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Admin\Application\Services;
 
+use App\Data\Database\Eloquent\Models\File;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use function compact;
+use Illuminate\Support\Facades\Storage;
+
 use function view;
 
 readonly class PostEditViewService implements PageComposerServiceContract
@@ -31,9 +33,12 @@ readonly class PostEditViewService implements PageComposerServiceContract
         $inputPostTags = $request->old('post_tags');
         $postTagIds = empty($inputPostTags) ? $post?->tags?->pluck('id') : $inputPostTags;
 
-        return view(
-            'admin.pages.posts.edit',
-            compact('tags', 'post', 'postTagIds')
-        );
+        $images = File::all()->map(fn (File $f) => ['title' => $f->name, 'value' => Storage::url($f->path)]);
+
+        return view('admin.pages.posts.edit')
+            ->with('images', $images)
+            ->with('tags', $tags)
+            ->with('post', $post)
+            ->with('postTagIds', $postTagIds);
     }
 }

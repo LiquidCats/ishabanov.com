@@ -12,4 +12,3 @@ Route::prefix('auth')
         //
         Route::post('sign-in', SignInController::class)->name('auth.sign-in');
     });
-

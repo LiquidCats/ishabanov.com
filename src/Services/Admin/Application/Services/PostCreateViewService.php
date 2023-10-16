@@ -8,6 +8,7 @@ use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+
 use function compact;
 use function view;
 

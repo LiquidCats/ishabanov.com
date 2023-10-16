@@ -8,6 +8,7 @@ use App\Data\Database\Eloquent\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+
 use function compact;
 use function view;
 

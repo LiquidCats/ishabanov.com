@@ -7,6 +7,7 @@ namespace App\Admin\Presentation\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+
 use function view;
 
 class TagCreateController extends Controller

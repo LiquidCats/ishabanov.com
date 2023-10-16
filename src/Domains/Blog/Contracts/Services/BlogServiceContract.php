@@ -9,32 +9,20 @@ use App\Domains\Blog\ValueObjects\PostId;
 
 interface BlogServiceContract
 {
-    /**
-     * @param array $data
-     *
-     * @return Post
-     */
     public function createPost(array $data): Post;
 
     /**
-     * @param PostId<int> $postId
-     * @param array  $data
-     *
-     * @return Post
+     * @param  PostId<int>  $postId
      */
     public function updatePost(PostId $postId, array $data = []): Post;
 
     /**
-     * @param PostId<int> $postId
-     *
-     * @return Post
+     * @param  PostId<int>  $postId
      */
     public function changeState(PostId $postId): Post;
 
     /**
-     * @param PostId<int> $postId
-     *
-     * @return bool
+     * @param  PostId<int>  $postId
      */
     public function deletePost(PostId $postId): bool;
 }

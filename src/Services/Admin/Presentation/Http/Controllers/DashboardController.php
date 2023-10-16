@@ -8,7 +8,6 @@ use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use function view;
 
 class DashboardController extends Controller
 {

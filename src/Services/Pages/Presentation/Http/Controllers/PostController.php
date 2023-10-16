@@ -10,10 +10,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
+
 use function now;
 use function view;
-use function with;
 
 class PostController extends Controller
 {

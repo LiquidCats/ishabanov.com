@@ -7,6 +7,7 @@ namespace App\Admin\Application\Services;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+
 use function view;
 
 readonly class DashboardViewService implements PageComposerServiceContract

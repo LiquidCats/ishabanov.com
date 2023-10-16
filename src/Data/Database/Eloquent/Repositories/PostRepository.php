@@ -10,6 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+
 use function now;
 
 class PostRepository implements PostRepositoryContract
@@ -34,15 +35,15 @@ class PostRepository implements PostRepositoryContract
         return Post::query()
             ->select(['id', 'content', 'title', 'published_at'])
             ->with('tags', fn (BelongsToMany $q) => $q->limit(3))
-            // ->where('published_at', '=<', now())
+            ->where('published_at', '<=', now())
             ->where('is_draft', 0)
             ->when($tags->isNotEmpty(), fn (Builder $q) => $q
                 ->whereHas('tags', fn (Builder $q) => $q
                     ->whereIn('slug', $tags)
                 )
             )
-            ->latest()
-            ->paginate(perPage: 5);
+            ->latest('id')
+            ->paginate(perPage: 6);
     }
 
     /**
