@@ -3,34 +3,22 @@
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">
-            <i data-feather="home"
-               stroke-width="1.5"
-               width="24"
-               height="24"></i> Dashboard
+            <i class="bi bi-clipboard-data-fill"></i> Dashboard
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.posts.list') }}">
-            <i data-feather="file-text"
-               stroke-width="1.5"
-               width="24"
-               height="24"></i> Posts
+            <i class="bi bi-postcard-fill"></i> Posts
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.tags.list') }}">
-            <i data-feather="tag"
-               stroke-width="1.5"
-               width="24"
-               height="24"></i> Tags
+            <i class="bi bi-tags-fill"></i> Tags
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i data-feather="file"
-               stroke-width="1.5"
-               width="24"
-               height="24"></i> Files
+        <a class="nav-link" href="{{ route('admin.files.list') }}">
+            <i class="bi bi-file-earmark-image-fill"></i>Files
         </a>
       </li>
     </ul>

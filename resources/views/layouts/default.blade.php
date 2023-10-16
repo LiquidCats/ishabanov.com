@@ -5,7 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Ilya Shabanov - Software Engineer</title>
+        <title>Ilya Shabanov - Software Engineer - @yield("title")</title>
         @include("includes.assets")
 
     </head>
@@ -18,10 +18,7 @@
         </main>
 
         @include("includes.footer")
-
-        <script defer>
-            feather.replace()
-        </script>
+        @stack('modals')
     </body>
 
 </html>

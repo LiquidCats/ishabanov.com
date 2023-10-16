@@ -1,4 +1,5 @@
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
 @production
     @vite
@@ -6,13 +7,13 @@
 
 @env('local')
     @client
-    @tag('scripts')
+{{--    @tag('scripts')--}}
     @tag('styles')
 @endenv
 
 @env('testing')
     @client
-    @tag('scripts')
+{{--    @tag('scripts')--}}
     @tag('styles')
 @endenv
 
