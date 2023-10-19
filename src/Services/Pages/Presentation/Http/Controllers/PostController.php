@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Pages\Presentation\Http\Controllers;
 
 use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\Tag;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -42,12 +44,19 @@ class PostController extends Controller
 
         $latest = Post::query()
             ->select(['title', 'content', 'published_at', 'id'])
-            ->with('tags', fn (BelongsToMany $q) => $q->limit(3))
-            ->where('id', '<', $post->getKey())
-            ->latest('id')
+            ->whereHas('tags', static function (Builder $builder) use ($post) {
+                $builder->where(function (Builder $builder) use ($post) {
+                    /** @var Tag $tag */
+                    foreach ($post->tags as $tag) {
+                        $builder->orWhere('id', $tag->getKey());
+                    }
+                });
+            })
+            ->where('id', '!=', $post->getKey())
             ->where('is_draft', 0)
             ->where('published_at', '<=', now())
-            ->limit(5)
+            ->latest('id')
+            ->limit(3)
             ->get();
 
         return view('pages.blog.post')

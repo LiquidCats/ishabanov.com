@@ -18,7 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->words(asText: true),
-            'content' => fake()->paragraph(),
+            'content' => fake()->paragraphs(5, true),
             'author_id' => 1,
             'is_draft' => false,
             'published_at' => now()->subDay(),

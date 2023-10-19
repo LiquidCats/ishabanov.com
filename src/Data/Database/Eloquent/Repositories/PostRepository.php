@@ -34,7 +34,7 @@ class PostRepository implements PostRepositoryContract
     {
         return Post::query()
             ->select(['id', 'content', 'title', 'published_at'])
-            ->with('tags', fn (BelongsToMany $q) => $q->limit(3))
+            ->with('tags')
             ->where('published_at', '<=', now())
             ->where('is_draft', 0)
             ->when($tags->isNotEmpty(), fn (Builder $q) => $q

@@ -3,6 +3,8 @@
 namespace App\Data\Database\Eloquent\Models;
 
 use Carbon\Carbon;
+use Database\Factories\TagFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -14,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Tag extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
     ];
@@ -26,5 +30,10 @@ class Tag extends Model
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);
+    }
+
+    protected static function newFactory(): TagFactory
+    {
+        return TagFactory::new();
     }
 }

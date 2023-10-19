@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Eloquent\Models\Tool;
-use Enums\ToolType;
-use Enums\{
-    ExperienceLevel};
+use App\Data\Database\Eloquent\Models\Tool;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
