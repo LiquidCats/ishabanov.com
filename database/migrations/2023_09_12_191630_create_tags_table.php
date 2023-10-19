@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug', 255)->unique();
             $table->timestamps();
 
-            $table->fullText(['name', 'slug']);
+            // $table->fullText(['name', 'slug']);
         });
     }
 
