@@ -22,10 +22,8 @@ readonly class HomepageService implements PageComposerServiceContract
         $languages = $this->experienceRepository->getTopToolByTypeJob(ToolType::LANGUAGE, 4);
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);
         $experiences = $this->experienceRepository->getListOfExperiencesJob();
-        $duration = $this->experienceRepository->calculateExperienceDurationJob($experiences->last());
 
         return $this->factory->make('pages.home.index', [
-            'duration' => $duration,
             'experiences' => $experiences,
             'languages' => $languages,
             'frameworks' => $frameworks,

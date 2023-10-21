@@ -19,6 +19,4 @@ interface ExperienceRepositoryContract
      * @return Collection<int, Experience>
      */
     public function getListOfExperiencesJob(): Collection;
-
-    public function calculateExperienceDurationJob(Experience $experience): WorkingExperience;
 }

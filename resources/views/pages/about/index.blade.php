@@ -1,13 +1,19 @@
+@php use Carbon\Carbon; @endphp
+@extends('layouts.default')
+
+@section("title", "Home")
+
+@section('content')
 <section id="about" class="bg-body">
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-5">
                 <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto my-4">
             </div>
-            <div class="col-12 col-lg-6 fs-5">
+            <div class="col-12 col-lg-7 fs-5">
                 <div class="rounded-4 p-5">
                     <div>
-                        <h2>About Me</h2>
+                        <h1>About Me</h1>
 
                         <p>I am Ilya, a passionate Software Engineer who has been working in the industry for several
                             years. Coding is not just a job for me, it's a way of life. I have always been focused on
@@ -26,11 +32,13 @@
                             ideas to life. Feel free to explore my website and get in touch if you have any questions or
                             projects you'd like to discuss. Let's build something great together!</p>
                     </div>
-                    <div class="text-muted fs-4 my-1">
-                        Current experience: {{ $duration->years }} years {{ $duration->months }} months
+                    <div class="fs-5 my-1">
+                        Current experience: {{ $duration }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@endsection

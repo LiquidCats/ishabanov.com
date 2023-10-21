@@ -9,7 +9,7 @@
                 @include("pages.home.experience.card.body")
             </div>
             <div class="col-12 mb-4">
-                <a class="btn btn-link card-link card-more mt-1 text-decoration-none d-inline-flex gap-2 px-4"
+                <a class="btn card-more mt-1 d-inline-flex gap-2 px-4"
                    data-bs-toggle="modal"
                    data-bs-target="#experience-{{ $experience->id }}">
                     <span class="card-more-dot">&nbsp;</span>

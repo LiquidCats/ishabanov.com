@@ -33,19 +33,6 @@ class ExperienceRepository implements ExperienceRepositoryContract
         return Experience::query()
             ->with(['tools'])
             ->orderByDesc('started_at')
-            //->take(6)
             ->get();
-    }
-
-    public function calculateExperienceDurationJob(Experience $experience): WorkingExperience
-    {
-        $beginning = $experience->started_at;
-        $now = CarbonImmutable::now();
-
-        $durationInYears = $now->diffInYears($beginning);
-
-        $durationInMonth = (int) $now->diffInMonths($beginning) - $durationInYears * 12;
-
-        return new WorkingExperience($durationInYears, $durationInMonth);
     }
 }

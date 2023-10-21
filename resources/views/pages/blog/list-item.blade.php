@@ -4,7 +4,7 @@
 @endphp
 
 <div class="col-12 col-md-6 col-lg-6">
-    <div class="card p-2 rounded-4 card">
+    <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}" class="card p-2 rounded-4 card text-decoration-none">
         <div class="row g-0">
             <div class="col-12">
                 <div class="card-body">
@@ -12,9 +12,7 @@
                     <div class="mb-2 small text-muted">{{ $post->published_at->diffForHumans() }}</div>
                     <div class="mb-2">
                     @foreach($post->tags as $tag)
-                        <span class="badge rounded-pill text-bg-light p-2">
-                            <i class="bi bi-tag mx-1"></i>{{ $tag->name }}
-                        </span>
+                        <x-tag :tag="$tag"/>
                     @endforeach
                     </div>
                     <div class="mb-2"  style="min-height: 6rem">
@@ -23,13 +21,12 @@
                 </div>
             </div>
             <div class="col-12 mb-4 text-center">
-                <a class="btn btn-link card-link card-more mt-1 text-decoration-none d-inline-flex gap-2 px-4"
-                   href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}">
+                <span class="btn card-more mt-1 d-inline-flex gap-2 px-4">
                     <span class="card-more-dot">&nbsp;</span>
                     <span class="card-more-dot">&nbsp;</span>
                     <span class="card-more-dot">&nbsp;</span>
-                </a>
+                </span>
             </div>
         </div>
-    </div>
+    </a>
 </div>

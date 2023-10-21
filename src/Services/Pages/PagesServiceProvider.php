@@ -12,6 +12,8 @@ use App\Pages\Application\Services\HomepageService;
 use App\Pages\Presentation\Http\Controllers\BlogController;
 use App\Pages\Presentation\Http\Controllers\HomepageController;
 use App\Pages\Presentation\Http\Views\Components\Navbar;
+use App\Pages\Presentation\Http\Views\Components\Posts\PrevNext;
+use App\Pages\Presentation\Http\Views\Components\Tag;
 use App\Pages\Provides\RouteServiceProvider;
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -35,5 +37,7 @@ class PagesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('navbar', Navbar::class);
+        Blade::component('tag', Tag::class);
+        Blade::componentNamespace('App\\Pages\\Presentation\\Http\\Views\\Components\\Posts', 'posts');
     }
 }

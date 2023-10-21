@@ -33,6 +33,11 @@ class Navbar extends Component
                 'link' => route('pages.blog'),
                 'is_active' => $currentRouteName === 'pages.blog',
             ],
+            [
+                'name' => 'About',
+                'link' => route('pages.about'),
+                'is_active' => $currentRouteName === 'pages.about',
+            ],
         ];
     }
 }
