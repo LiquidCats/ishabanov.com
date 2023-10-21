@@ -18,8 +18,8 @@ class ExperienceSeeder extends Seeder
             'company_logo' => 'images/experience/coinspaid.svg',
             'position' => 'Senior Software Engineer',
             'description' => 'As a developer here, I designed and implemented software solutions for the payment gateway and cryptocurrency wallet services. I wrote clean, maintainable code, conducting code reviews and debugging, identified opportunities for improvement, and mentored junior engineers. I collaborated with stakeholders to define requirements, prioritize features, and plan releases. The role challenged me to innovate with new technologies and contribute to shaping the future of the cryptocurrency industry.',
-            'started_at' => '2021-11-04 00:00:00',
-            'ended_at' => '2022-12-24 00:00:00',
+            'started_at' => '2022-12-24 00:00:00',
+            'ended_at' => null,
         ],
         [
             'id' => 6,
