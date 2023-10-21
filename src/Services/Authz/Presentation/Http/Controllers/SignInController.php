@@ -25,7 +25,7 @@ class SignInController extends Controller
             return redirect()->intended(route('admin.dashboard'));
         }
 
-        if (Auth::attempt($credentials, true)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             //
