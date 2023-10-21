@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        (new UserSeeder())->run();
         (new ToolSeeder())->run();
         (new ExperienceSeeder())->run();
         (new ExperienceToolSeeder())->run();
