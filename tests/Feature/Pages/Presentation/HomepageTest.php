@@ -20,7 +20,7 @@ class HomepageTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertSeeText('Ilia Shabanov - Software Developer');
+        $response->assertSeeText('Ilya Shabanov - Software Developer');
         $response->assertSeeText('SOFTWARE DEVELOPER');
         $response->assertSeeText('SOLVING PROBLEMS');
     }
