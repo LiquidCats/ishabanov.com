@@ -10,9 +10,9 @@
                 <div class="col-12 text-center">
                     <img src="{{ asset('images/void.svg') }}" alt="nothing" class="img-fluid mx-auto d-block" style="max-width: 320px">
                     <div class="mt-5">
-                        <span class="h1">There is not posts yet</span>
+                        <span class="h1">Sorry, I haven't written anything yet</span>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-3">
                         <a href="{{ back()->getTargetUrl() }}" class="btn btn-lg btn-outline-primary">
                             <i class="bi bi-chevron-left"></i>
                             Go Back
