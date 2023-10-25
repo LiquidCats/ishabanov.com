@@ -21,7 +21,7 @@
                 <hr>
                 <div class="mb-3">
                 @foreach($post->tags as $tag)
-                    <span class="badge bg-secondary">{{ $tag->name }}</span>
+                    <x-tag :tag="$tag"/>
                 @endforeach
                 </div>
 
