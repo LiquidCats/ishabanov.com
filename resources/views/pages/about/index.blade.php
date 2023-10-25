@@ -34,8 +34,13 @@
                             into innovative ideas. Dive into my website, reach out with any queries or dream projects.
                             Let's code the future together!</p>
                     </div>
-
+                    <div>
+                        <a href="https://github.com/LiquidCats" class="btn btn-light" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+                        <a href="https://www.instagram.com/degradation.of.mine" class="btn btn-light" target="_blank"><i class="bi bi-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/in/ilia-shabanov" class="btn btn-light" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
