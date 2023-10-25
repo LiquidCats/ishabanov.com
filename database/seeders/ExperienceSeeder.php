@@ -109,7 +109,9 @@ class ExperienceSeeder extends Seeder
         $model->position = $experience['position'];
         $model->description = $experience['description'];
         $model->started_at = Carbon::parse($experience['started_at']);
-        $model->ended_at = Carbon::parse($experience['ended_at']);
+        if ($experience['ended_at'] !== null) {
+            $model->ended_at = Carbon::parse($experience['ended_at']);
+        }
 
         $model->save();
     }
