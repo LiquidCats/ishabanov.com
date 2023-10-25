@@ -13,17 +13,17 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $posts = Post::factory(16)->create();
-        Tag::factory(6)->create();
+        $tags = Tag::query()->get();
+        if ($tags->count() === 0) {
+            $tags = Tag::factory(6)->create();
+        }
+        $tags = $tags->pluck('id');
 
         /** @var Post $post */
         foreach ($posts as $post) {
-            $ids = Tag::query()
-                ->inRandomOrder()
-                ->take(2)
-                ->get()
-                ->map(fn (Tag $t) => $t->getKey());
+            $tagIds = $tags->random(3);
 
-            $post->tags()->sync($ids);
+            $post->tags()->sync($tagIds);
         }
     }
 }

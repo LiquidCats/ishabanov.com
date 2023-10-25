@@ -31,8 +31,8 @@
          tinymce.init({
              selector: 'textarea.mce-editable', // Replace this CSS selector to match the placeholder element for TinyMCE
              tinycomments_mode: 'embedded',
-             plugins: 'code table lists link emoticons image',
-             toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table | link | emoticons | image',
+             plugins: 'code table lists link emoticons image pagebreak',
+             toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent pagebreak | bullist numlist | code | table | link | emoticons | image',
              image_list: imageList
          });
      </script>

@@ -22,11 +22,11 @@ class PostRepository implements PostRepositoryContract
             ->findOrFail($id);
     }
 
-    public function getAll(): LengthAwarePaginator
+    public function getLatest(): LengthAwarePaginator
     {
         return Post::query()
             ->with('tags')
-            ->latest()
+            ->latest('id')
             ->paginate(perPage: 5);
     }
 

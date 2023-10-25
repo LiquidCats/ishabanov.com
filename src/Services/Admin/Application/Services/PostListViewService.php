@@ -19,7 +19,7 @@ readonly class PostListViewService implements PageComposerServiceContract
 
     public function view(Request $request): View
     {
-        $posts = $this->postRepository->getAll();
+        $posts = $this->postRepository->getLatest();
 
         $images = File::all()->map(fn (File $f) => ['title' => $f->name, 'value' => Storage::url($f->path)]);
 

@@ -3,7 +3,7 @@
     /** @var App\Data\Database\Eloquent\Models\Tag $tag */
 @endphp
 
-<div class="col-12 col-md-6 col-lg-6">
+<div class="col-12">
     <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}" class="card p-2 rounded-4 card text-decoration-none">
         <div class="row g-0">
             <div class="col-12">
@@ -21,11 +21,11 @@
                 </div>
             </div>
             <div class="col-12 mb-4 text-center">
-                <span class="btn card-more mt-1 d-inline-flex gap-2 px-4">
+                <div class="btn card-more mt-1 d-inline-flex gap-2 px-4">
                     <span class="card-more-dot">&nbsp;</span>
                     <span class="card-more-dot">&nbsp;</span>
                     <span class="card-more-dot">&nbsp;</span>
-                </span>
+                </div>
             </div>
         </div>
     </a>

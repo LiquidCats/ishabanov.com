@@ -21,7 +21,7 @@ interface PostRepositoryContract
      */
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator;
 
-    public function getAll(): LengthAwarePaginator;
+    public function getLatest(): LengthAwarePaginator;
 
     /**
      * @param  UserId<int>  $userId
