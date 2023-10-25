@@ -10,7 +10,8 @@
                 <div class="col-12 text-center">
                     <img src="{{ asset('images/void.svg') }}" alt="nothing" class="img-fluid mx-auto d-block" style="max-width: 320px">
                     <div class="mt-5">
-                        <span class="h1">Sorry, I haven't written anything yet</span>
+                        <div class="fs-1">I haven't written anything yet</div>
+                        <div class="fs-1">¯\_(ツ)_/¯</div>
                     </div>
                     <div class="mt-3">
                         <a href="{{ back()->getTargetUrl() }}" class="btn btn-lg btn-outline-primary">
