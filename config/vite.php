@@ -13,10 +13,10 @@ return [
     'configs' => [
         'default' => [
             'entrypoints' => [
-                'ssr' => 'resources/scripts/ssr.ts',
+                // 'ssr' => 'resources/scripts/ssr.ts',
                 'paths' => [
-                    'resources/js/scripts.js',
-                    'resources/scss/styles.scss',
+                    'resources/js/themes/default/scripts.js',
+                    'resources/scss/themes/default/styles.scss',
                 ],
                 'ignore' => '/\\.(d\\.ts|json)$/',
             ],
