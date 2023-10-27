@@ -10,49 +10,65 @@
     <div class="d-flex flex-row justify-content-start">
         <div><a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a></div>
     </div>
-    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-        <div class="list-group list-group-flush border-bottom">
+    <div class="d-flex flex-column mt-2">
+        <div class="list-group border-bottom">
             @foreach($posts as $post)
-                <a href="{{ route('admin.posts.edit', ['post_id' => $post->getKey()]) }}"
-                   class="list-group-item list-group-item-action py-3 lh-tight">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">
-                            #{{ $post->getKey() }}: {{ $post->title }}
+                <div class="list-group-item p-3">
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <h2>
+                            ID {{ $post->getKey() }}:
+                            <a href="{{ route('admin.posts.edit', ['post_id' => $post->getKey()]) }}">{{ $post->title }}</a>
                             @if($post->is_draft)
                                 <span class="badge bg-warning text-dark">Draft</span>
                             @else @endif
-                        </strong>
-                        <small>{{ $post->published_at->diffForHumans() }}</small>
+                        </h2>
+                        <div class="d-flex flex-row gap-2">
+                            <form method="post"
+                                  action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
+                                 @csrf
+                                 @method('patch')
+                                <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
+                                    {{ $post->is_draft ? 'Publish' : 'Hide' }}
+                                </button>
+                            </form>
+                            <form method="post"
+                                  action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="col-10 mb-1">
+                    <div>{{ $post->published_at->diffForHumans() }}</div>
+                    <div class="mt-2 ">
                         @foreach($post->tags as $tag)
-                            <span class="badge rounded-pill bg-dark">#{{ $tag->name }}</span>
+                            <x-tag :tag="$tag"/>
                         @endforeach
                     </div>
-                    <div class="col-10 mb-1 small">
-                        {{ substr($post->content, 0, 100) }}...
+
+                    <div class="mt-2 accordion" id="post-{{$post->getKey()}}">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#post-preview-{{$post->getKey()}}"
+                                        aria-expanded="false"
+                                        aria-controls="post-preview-{{$post->getKey()}}">Preview</button>
+                            </h2>
+                            <div id="post-preview-{{$post->getKey()}}"
+                                 class="accordion-collapse collapse"
+                                 data-bs-parent="#post-{{$post->getKey()}}">
+                                <div class="accordion-body">{!! $post->preview !!}</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="d-flex flex-row justify-content-end gap-1 mb-1 align-content-end small">
-                         <form method="post"
-                              action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
-                             @csrf
-                             @method('patch')
-                            <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
-                                {{ $post->is_draft ? 'Publish' : 'Hide' }}
-                            </button>
-                        </form>
-                        <form method="post"
-                              action="{{ route('admin.posts.delete', ['post_id' => $post->getKey()]) }}">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </div>
-                </a>
+                </div>
             @endforeach
         </div>
     </div>
-    <div class="d-flex flex-row justify-content-start my-3">
+    <div class="d-flex flex-row justify-content-start mt-3">
         <div><a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create</a></div>
     </div>
     {!! $posts->links() !!}

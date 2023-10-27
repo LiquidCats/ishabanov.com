@@ -7,7 +7,7 @@
     <div class="d-flex flex-row justify-content-start">
         <a href="{{ route('admin.files.create') }}" class="btn btn-primary">Upload</a>
     </div>
-    <div class="mt-2">
+    <div class="mt-2 border-bottom">
         <div class="row">
             @each('admin.pages.files.list-item', $files, 'file')
         </div>

@@ -52,8 +52,17 @@
         </div>
 
         <div class="mb-3">
+            <label for="post-content" class="form-label">Preview</label>
+            <textarea class="form-control mce-editable" name="preview" id="post-content" rows=30" placeholder="Preview">
+                {{ old('preview', $post->preview) }}
+            </textarea>
+        </div>
+
+        <div class="mb-3">
             <label for="post-content" class="form-label">Content</label>
-            <textarea class="form-control mce-editable" name="content" id="post-content" rows=15" placeholder="Content">{{$post->content}}</textarea>
+            <textarea class="form-control mce-editable" name="content" id="post-content" rows=30" placeholder="Content">
+                {{ old('content', $post->content) }}
+            </textarea>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Save</button>

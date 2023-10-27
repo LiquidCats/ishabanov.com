@@ -25,6 +25,7 @@
                 @endforeach
                 </div>
 
+                {!! $post->preview !!}
                 {!! $post->content !!}
             </div>
             @include('pages.blog.post-latests')

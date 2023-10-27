@@ -9,26 +9,28 @@
     <div class="d-flex flex-row justify-content-start">
         <a href="{{ route('admin.tags.create') }}" class="btn btn-primary">Create</a>
     </div>
-    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-        <div class="list-group list-group-flush border-bottom">
+    <div class="d-flex flex-column mt-2">
+        <div class="list-group border-bottom">
             @foreach($tags as $tag)
-                <a href="{{ route('admin.tags.edit', ['tag_id' => $tag->getKey()]) }}"
-                   class="list-group-item list-group-item-action py-3 lh-tight">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">#{{ $tag->getKey() }}: {{ $tag->name }}</strong>
-                        <small>{{ $tag->created_at->diffForHumans() }}</small>
+                <div class="list-group-item p-3">
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <h2>
+                            <span>ID {{ $tag->getKey() }}:</span>
+                            <a href="{{ route('admin.tags.edit', ['tag_id' => $tag->getKey()]) }}">{{ $tag->name }}</a>
+                        </h2>
+                        <div class="d-flex flex-row gap-2">
+                            <form method="post"
+                                  action="{{ route('admin.tags.delete', ['tag_id' => $tag->getKey()]) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="col-10 mb-1">Posts Count: {{ $tag->getAttribute('posts_count') }}</div>
-                    <div class="col-10 mb-1 small">Slug: {{ $tag->slug }}</div>
-                    <div class="d-flex flex-row justify-content-end gap-1 mb-1 align-content-end small">
-                        <form method="post"
-                              action="{{ route('admin.tags.delete', ['tag_id' => $tag->getKey()]) }}">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </div>
-                </a>
+                    <div>{{ $tag->created_at->diffForHumans() }}</div>
+                    <div>Posts Count: {{ $tag->getAttribute('posts_count') }}</div>
+                    <div>Slug: {{ $tag->slug }}</div>
+                </div>
             @endforeach
         </div>
     </div>
