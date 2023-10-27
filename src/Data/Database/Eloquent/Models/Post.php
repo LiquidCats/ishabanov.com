@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 
 /**
  * @property string $title
+ * @property string $preview
  * @property string $content
  * @property int $author_id
  * @property bool $is_draft
