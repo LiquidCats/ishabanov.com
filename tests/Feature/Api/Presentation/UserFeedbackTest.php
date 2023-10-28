@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\Presentation;
 
+use App\Data\Database\Eloquent\Models\UserFeedback;
 use Illuminate\Http\Client\Request as Client;
 use Illuminate\Support\Facades\Http;
-use ishabanov\Core\Infrastructure\Eloquent\Models\UserFeedback;
-use function route;
 use Tests\Asset\Api\Traits\WithLoggerMocks;
-
 use Tests\TestCase;
+
+use function route;
 
 class UserFeedbackTest extends TestCase
 {

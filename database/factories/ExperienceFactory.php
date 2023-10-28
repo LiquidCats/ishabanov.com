@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Data\Database\Eloquent\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
 
 /**
  * @extends Factory<Experience>
@@ -24,12 +24,12 @@ class ExperienceFactory extends Factory
     {
         return [
             'company_name' => \fake()->domainName(),
-            'company_url'  => \fake()->url(),
+            'company_url' => \fake()->url(),
             'company_logo' => 'images/experience/'.\fake()->word().'.svg',
-            'position'     => \fake()->jobTitle(),
-            'description'  => \fake()->text,
-            'started_at'   => Carbon::parse(\fake()->date()),
-            'ended_at'     => Carbon::parse(\fake()->date()),
+            'position' => \fake()->jobTitle(),
+            'description' => \fake()->text,
+            'started_at' => Carbon::parse(\fake()->date()),
+            'ended_at' => Carbon::parse(\fake()->date()),
         ];
     }
 }

@@ -191,9 +191,9 @@ return [
         /*
          * Application Service Providers...
          */
-        ishabanov\Core\Infrastructure\Providers\AppServiceProvider::class,
-        ishabanov\Core\Infrastructure\Providers\EventServiceProvider::class,
-        ishabanov\Core\Infrastructure\Providers\RouteServiceProvider::class,
+        App\Foundation\Providers\AppServiceProvider::class,
+        App\Foundation\Providers\EventServiceProvider::class,
+        App\Foundation\Providers\RouteServiceProvider::class,
 
     ],
 

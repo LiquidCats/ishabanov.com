@@ -110,5 +110,6 @@ jobs:
               --health-timeout=10s \
               --cpu-period=30000 \
               --cpu-quota=15000 \
+              --volume=ishabanov_storage:/app/storage/app/public
               --memory-reservation=32MB \
               --memory=128MB ghcr.io/liquidcats/ishabanov.com:latest

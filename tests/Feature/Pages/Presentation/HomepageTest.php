@@ -5,7 +5,7 @@ namespace Tests\Feature\Pages\Presentation;
 use Tests\TestCase;
 
 /**
- * @coversDefaultClass \ishabanov\Pages\Presentation\Http\Controllers\HomepageController
+ * @coversDefaultClass \App\Pages\Presentation\Http\Controllers\HomepageController
  */
 class HomepageTest extends TestCase
 {
@@ -20,8 +20,8 @@ class HomepageTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertSeeText('Ilia Shabanov - Software Developer');
-        $response->assertSeeText('SOFTWARE DEVELOPER');
-        $response->assertSeeText('SOLVING PROBLEMS');
+        $response->assertSeeText('Ilya Shabanov - Software Engineer - Home');
+        $response->assertSeeText('Software Engineer');
+        $response->assertSeeText('Solving Problems');
     }
 }

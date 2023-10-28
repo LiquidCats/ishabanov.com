@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: docker/local/backend/Dockerfile
+        tty: true
+        volumes:
+            - .:/app
+        ports:
+            - "8000:8000"
+
+    frontend:
+        build:
+            context: .
+            dockerfile: docker/local/frontend/Dockerfile
+        tty: true
+        volumes:
+            - .:/app
+        ports:
+            - "5173:5173"
+
+    database:
+        image: postgres:alpine
+        environment:
+            POSTGRES_DB: "ishabanov"
+            POSTGRES_USER: "PxZ2"
+            POSTGRES_PASSWORD: "Htmp2X"
+        ports:
+            - "5432:5432"
+        volumes:
+            - database:/var/lib/postgresql/data
+
+    cache:
+        image: redis:alpine
+        ports:
+            - "6379:6379"
+
+volumes:
+    database:

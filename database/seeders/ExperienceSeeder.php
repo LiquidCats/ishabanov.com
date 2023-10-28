@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Data\Database\Eloquent\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use ishabanov\Core\Infrastructure\Eloquent\Models\Experience;
 
 class ExperienceSeeder extends Seeder
 {
@@ -18,8 +18,8 @@ class ExperienceSeeder extends Seeder
             'company_logo' => 'images/experience/coinspaid.svg',
             'position' => 'Senior Software Engineer',
             'description' => 'As a developer here, I designed and implemented software solutions for the payment gateway and cryptocurrency wallet services. I wrote clean, maintainable code, conducting code reviews and debugging, identified opportunities for improvement, and mentored junior engineers. I collaborated with stakeholders to define requirements, prioritize features, and plan releases. The role challenged me to innovate with new technologies and contribute to shaping the future of the cryptocurrency industry.',
-            'started_at' => '2021-11-04 00:00:00',
-            'ended_at' => '2022-12-24 00:00:00',
+            'started_at' => '2022-12-24 00:00:00',
+            'ended_at' => null,
         ],
         [
             'id' => 6,
@@ -96,7 +96,7 @@ class ExperienceSeeder extends Seeder
     }
 
     /**
-     * @param array<string, string> $experience
+     * @param  array<string, string>  $experience
      */
     protected function createModel(array $experience): void
     {
@@ -109,7 +109,9 @@ class ExperienceSeeder extends Seeder
         $model->position = $experience['position'];
         $model->description = $experience['description'];
         $model->started_at = Carbon::parse($experience['started_at']);
-        $model->ended_at = Carbon::parse($experience['ended_at']);
+        if ($experience['ended_at'] !== null) {
+            $model->ended_at = Carbon::parse($experience['ended_at']);
+        }
 
         $model->save();
     }
