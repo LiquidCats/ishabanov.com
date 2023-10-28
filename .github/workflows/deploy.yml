@@ -31,17 +31,10 @@ jobs:
           DB_DATABASE: ':memory:'
         run: vendor/bin/phpunit
 
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     environment: production
-
-    needs:
-      - tests
-
-    strategy:
-      matrix:
-        container: ['app']
 
     steps:
       - name: Checkout
@@ -86,6 +79,22 @@ jobs:
           push: true
           tags: ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
 
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    needs:
+      - tests
+      - build
+
+    steps:
+      - name: Lowercase Repository Name
+        id: repository
+        uses: Entepotenz/change-string-case-action-min-dependencies@v1
+        with:
+          string: ${{ github.repository }}
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -110,6 +119,6 @@ jobs:
               --health-timeout=10s \
               --cpu-period=30000 \
               --cpu-quota=15000 \
-              --volume=ishabanov_storage:/app/storage/app/public
+              --volume=ishabanov_storage:/app/storage/app/public \
               --memory-reservation=32MB \
               --memory=128MB ghcr.io/liquidcats/ishabanov.com:latest
