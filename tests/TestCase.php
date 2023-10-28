@@ -13,4 +13,11 @@ abstract class TestCase extends BaseTestCase
     use DatabaseMigrations;
 
     protected bool $seed = true;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutVite();
+    }
 }

@@ -14,6 +14,7 @@ class PostStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'min:5', 'max:250'],
+            'preview' => ['required', 'string', 'min:5'],
             'content' => ['required', 'string', 'min:5'],
             'is_draft' => ['sometimes', 'accepted'],
             'published_at' => ['date'],

@@ -12,19 +12,5 @@
 </script>
 @endproduction
 
-@production
-    @vite
-@endproduction
-
-@env('local')
-    @client
-{{--    @tag('scripts')--}}
-    @tag('styles')
-@endenv
-
-@env('testing')
-    @client
-{{--    @tag('scripts')--}}
-    @tag('styles')
-@endenv
-
+@vite('resources/scss/themes/default/styles.scss')
+@vite('resources/js/themes/default/scripts.js')

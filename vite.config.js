@@ -6,8 +6,8 @@ export default defineConfig({
         laravel({
             buildDirectory: "static",
             input: [
-                'resources/scss/styles.scss',
-                'resources/js/scripts.js',
+                'resources/scss/themes/default/styles.scss',
+                'resources/js/themes/default/scripts.js',
             ],
             refresh: true,
         }),

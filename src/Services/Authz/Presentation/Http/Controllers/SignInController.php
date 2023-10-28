@@ -18,7 +18,7 @@ class SignInController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'string', 'current_password'],
         ]);
 
         if (Auth::check()) {

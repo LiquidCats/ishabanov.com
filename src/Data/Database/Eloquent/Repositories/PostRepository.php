@@ -8,7 +8,6 @@ use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
 use function now;
@@ -33,7 +32,7 @@ class PostRepository implements PostRepositoryContract
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
     {
         return Post::query()
-            ->select(['id', 'content', 'title', 'published_at'])
+            ->select(['id', 'content', 'preview', 'title', 'published_at'])
             ->with('tags')
             ->where('published_at', '<=', now())
             ->where('is_draft', 0)

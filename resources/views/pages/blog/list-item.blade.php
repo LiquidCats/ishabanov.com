@@ -15,8 +15,8 @@
                         <x-tag :tag="$tag"/>
                     @endforeach
                     </div>
-                    <div class="mb-2"  style="min-height: 6rem">
-                        {{ strip_tags(substr($post->content, 0, 300)) }}...
+                    <div class="mb-2">
+                        {!! $post->preview !!}
                     </div>
                 </div>
             </div>

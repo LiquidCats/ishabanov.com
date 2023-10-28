@@ -7,8 +7,10 @@ namespace App\Admin\Application\Services;
 use App\Data\Database\Eloquent\Models\Post;
 use App\Domains\Blog\Contracts\Services\BlogServiceContract;
 use App\Domains\Blog\ValueObjects\PostId;
+use App\Foundation\Enums\AllowedTags;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use function strip_tags;
 
 class BlogService implements BlogServiceContract
 {
@@ -47,7 +49,8 @@ class BlogService implements BlogServiceContract
     private function saveDataToPost(Post $model, array $data): Post
     {
         $model->title = Arr::get($data, 'title');
-        $model->content = Arr::get($data, 'content');
+        $model->preview = trim(strip_tags(Arr::get($data, 'preview', ''), AllowedTags::toArray()));
+        $model->content = trim(strip_tags(Arr::get($data, 'content', ''), AllowedTags::toArray()));
         $model->published_at = Carbon::parse(Arr::get($data, 'published_at'))->startOfMinute();
         $model->is_draft = Arr::exists($data, 'is_draft');
 

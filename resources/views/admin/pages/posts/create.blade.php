@@ -38,14 +38,23 @@
             <label for="post-tags" class="form-label">Tags</label>
             <select class="form-select" id="post-tags" name="post_tags[]" multiple aria-label="multiple select example">
                 @foreach($tags as $tag)
-                    <option value="{{ $tag->getKey() }}" @selected( in_array($tag->getKey(), old('post_tags')) )>{{ $tag->name }}</option>
+                    <option value="{{ $tag->getKey() }}" @selected( in_array($tag->getKey(), old('post_tags', [])) )>{{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="mb-3">
+            <label for="post-content" class="form-label">Preview</label>
+            <textarea class="form-control mce-editable" name="preview" id="post-content" rows=15" placeholder="Preview">
+                {{ old('preview') }}
+            </textarea>
+        </div>
+
+        <div class="mb-3">
             <label for="post-content" class="form-label">Content</label>
-            <textarea class="form-control" name="content" id="post-content" rows=15" placeholder="Content"></textarea>
+            <textarea class="form-control mce-editable" name="content" id="post-content" rows=30" placeholder="Content">
+                {{ old('content') }}
+            </textarea>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Save</button>

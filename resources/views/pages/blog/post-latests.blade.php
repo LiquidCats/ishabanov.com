@@ -11,9 +11,6 @@
                         <div class="h5 mb-0">{{ $latestPost->title }}</div>
                         <div class="small text-muted">{{ $latestPost->published_at->diffForHumans() }}</div>
                     </div>
-
-{{--                    <div>@foreach($latestPost->tags as $tag) <x-tag :tag="$tag"/> @endforeach</div>--}}
-                    <div>{{ strip_tags(substr($latestPost->content, 0, 100)) }}</div>
                 </div>
             </a>
         </div>
