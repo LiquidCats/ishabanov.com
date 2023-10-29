@@ -2,6 +2,9 @@
 
 <div class="col-4">
     <div class="row"><div class="col"><h4>Similar</h4></div></div>
+    @if($latest->isEmpty())
+        <div>No similar posts</div>
+    @endif
     @foreach($latest as $latestPost)
     <div class="row">
         <div class="col">
