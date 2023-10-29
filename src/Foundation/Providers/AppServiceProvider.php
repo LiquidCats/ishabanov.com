@@ -11,6 +11,7 @@ use App\Healthz\HealthzServiceProvider;
 use App\Pages\PagesServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+        Vite::useBuildDirectory('static');
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }

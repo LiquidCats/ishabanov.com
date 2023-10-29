@@ -1,4 +1,3 @@
-@php use Carbon\Carbon; @endphp
 @extends('layouts.default')
 
 @section("title", "Home")
@@ -10,8 +9,8 @@
             <div class="col-12 col-lg-5">
                 <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto my-4">
             </div>
-            <div class="col-12 col-lg-7 fs-5">
-                <div class="rounded-4 p-5">
+            <div class="col-12 col-lg-7">
+                <div>
                     <div>
                         <h1>About Me</h1>
                         <div class="fs-5 mt-2 mb-2">Current experience: {{ $duration }}</div>

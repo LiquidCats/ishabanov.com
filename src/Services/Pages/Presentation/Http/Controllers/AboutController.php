@@ -14,7 +14,7 @@ class AboutController extends Controller
 {
     public function __invoke(): View
     {
-        $duration = Carbon::parse('2014-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
+        $duration = Carbon::parse('2015-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
         return view('pages.about.index')
             ->with('duration', $duration);
     }

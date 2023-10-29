@@ -27,7 +27,7 @@
             </li>
             <hr />
             <li class="nav-item">
-                <a class="nav-link link-danger" href="#">
+                <a class="nav-link link-danger" href="{{ route('auth.logout') }}">
                     <i class="bi bi-power"></i> Sign Out
                 </a>
             </li>

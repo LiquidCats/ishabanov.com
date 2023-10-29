@@ -29,7 +29,7 @@ class Navbar extends Component
                 'is_active' => $currentRouteName === 'pages.home',
             ],
             [
-                'name' => 'Blog',
+                'name' => 'Posts',
                 'link' => route('pages.blog'),
                 'is_active' => $currentRouteName === 'pages.blog',
             ],
