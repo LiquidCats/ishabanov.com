@@ -43,11 +43,10 @@ jobs:
       - name: Prepare Env
         uses: franzbischoff/replace_envs@main
         env:
-          GH_APP_KEY: ${{ secrets.APP_KEY_PRODUCTION }}
-          GH_DATABASE: ${{ secrets.DATABASE_PRODUCTION }}
-          GH_MAIL: ${{ secrets.MAIL_PRODUCTION }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM_PRODUCTION }}
-          GH_CACHE: ${{ secrets.CACHE_PRODUCTION }}
+          GH_APP_KEY: ${{ secrets.APP_KEY }}
+          GH_DATABASE: ${{ secrets.DATABASE }}
+          GH_TELEGRAM: ${{ secrets.TELEGRAM }}
+          GH_CACHE: ${{ secrets.CACHE }}
         with:
           from_file: '.env.production'
           to_file: '.env'
@@ -105,11 +104,11 @@ jobs:
           port: 22
           script: |
             docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
-            docker stop ${{ github.event.repository.name }} || true
-            docker rm ${{ github.event.repository.name }} || true
+            docker stop ishabanov_prod || true
+            docker rm ishabanov_prod || true
             docker run --detach \
-              --name ishabanov.com \
-              --network ishabanov.com \
+              --name ishabanov_prod \
+              --network ishabanov_prod \
               --publish=8080:80 \
               --restart=always \
               --health-cmd="curl --fail http://0.0.0.0/api/heathz || exit 1" \
