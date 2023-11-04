@@ -1,6 +1,10 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.default')
 
 @section("title", "Home")
+@section("preview", "Hey, I'm Ilya! I love coding and have been doing it for years across cool areas like music, fintech, and more. I know my way around tech stuff, from PHP and JavaScript to Docker and Kubernetes. Got a project or idea? Let's chat and make it happen!")
+@section("published_time", Carbon::parse('2023-10-21')->startOfDay()->toAtomString())
+@section('self_url', route('pages.about'))
 
 @section('content')
 <section id="about" class="bg-body">
@@ -10,7 +14,7 @@
                 <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto my-4">
             </div>
             <div class="col-12 col-lg-7">
-                <div>
+                <article>
                     <div>
                         <h1>About Me</h1>
                         <div class="fs-5 mt-2 mb-2">Current experience: {{ $duration }}</div>
@@ -38,7 +42,7 @@
                         <a href="https://www.instagram.com/degradation.of.mine" class="btn btn-light" target="_blank"><i class="bi bi-instagram"></i> Instagram</a>
                         <a href="https://www.linkedin.com/in/ilia-shabanov" class="btn btn-light" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
                     </div>
-                </div>
+                </article>
 
             </div>
         </div>
