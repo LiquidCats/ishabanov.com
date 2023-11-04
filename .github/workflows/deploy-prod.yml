@@ -1,0 +1,74 @@
+name: Deployment
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      envFile: ".env.production"
+      tag: "production"
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    needs:
+      - tests
+      - build
+
+    steps:
+      - name: Lowercase Repository Name
+        id: repository
+        uses: Entepotenz/change-string-case-action-min-dependencies@v1
+        with:
+          string: ${{ github.repository }}
+
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: |
+            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:production
+            docker stop ishabanov_prod || true
+            docker rm ishabanov_prod || true
+            docker run --detach \
+              --name ishabanov_prod \
+              --network ishabanov_prod \
+              --publish=8080:80 \
+              --restart=always \
+              --health-cmd="curl --fail http://0.0.0.0/api/heathz || exit 1" \
+              --health-interval=60s \
+              --health-retries=3 \
+              --health-start-period=20s \
+              --health-timeout=10s \
+              --cpu-period=30000 \
+              --cpu-quota=15000 \
+              --env APP_ENV=production \
+              --env APP_KEY=${{ secrets.APP_KEY }} \
+              --env DB_CONNECTION=${{ secrets.DB_CONNECTION }} \
+              --env DB_DATABASE=${{ secrets.DB_DATABASE }} \
+              --env DB_HOST=${{ secrets.DB_HOST }} \
+              --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              --env DB_PORT=${{ secrets.DB_PORT }} \
+              --env DB_PREFIX=${{ secrets.DB_PREFIX }} \
+              --env DB_USERNAME=${{ secrets.DB_USERNAME }} \
+              --env REDIS_HOST=${{ secrets.REDIS_HOST }} \
+              --env REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} \
+              --env REDIS_PORT=${{ secrets.REDIS_PORT }} \
+              --env TG_ANNOUNCER_CHAT_ID=${{ secrets.TG_ANNOUNCER_CHAT_ID }} \
+              --env TG_ANNOUNCER_TOKEN=${{ secrets.TG_ANNOUNCER_TOKEN }} \
+              --volume=ishabanov_storage:/app/storage/app/public \
+              --memory-reservation=32MB \
+              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production
