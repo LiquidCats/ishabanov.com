@@ -11,24 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment: ${{ inputs.env }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Prepare Env
-        uses: franzbischoff/replace_envs@main
-        env:
-          GH_APP_KEY: ${{ secrets.APP_KEY }}
-          GH_DATABASE: ${{ secrets.DATABASE }}
-          GH_MAIL: ${{ secrets.MAIL }}
-          GH_TELEGRAM: ${{ secrets.TELEGRAM }}
-          GH_CACHE: ${{ secrets.CACHE }}
-        with:
-          from_file: '.env.production'
-          to_file: '.env'
-          commit: 'false'
+      - name: Copy Env File
+        run: |
+          cp ${{ inputs.envFile }} .env
 
       - name: Clean Up
         run: |
@@ -54,4 +43,4 @@ jobs:
           context: .
           file: docker/production/app/Dockerfile
           push: true
-          tags: ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
+          tags: ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ inputs.tag }}

@@ -13,7 +13,8 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
-      env: "staging"
+      envFile: ".env.staging"
+      tag: "staging"
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +41,7 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:latest
+            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
             docker stop ishabanov_staging || true
             docker rm ishabanov_staging || true
             docker run --detach \
@@ -55,6 +56,20 @@ jobs:
               --health-timeout=10s \
               --cpu-period=30000 \
               --cpu-quota=15000 \
+              --env APP_ENV=staging \
+              --env APP_KEY=${{ secrets.APP_KEY }} \
+              --env DB_CONNECTION=${{ secrets.DB_CONNECTION }} \
+              --env DB_DATABASE=${{ secrets.DB_DATABASE }} \
+              --env DB_HOST=${{ secrets.DB_HOST }} \
+              --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              --env DB_PORT=${{ secrets.DB_PORT }} \
+              --env DB_PREFIX=${{ secrets.DB_PREFIX }} \
+              --env DB_USERNAME=${{ secrets.DB_USERNAME }} \
+              --env REDIS_HOST=${{ secrets.REDIS_HOST }} \
+              --env REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} \
+              --env REDIS_PORT=${{ secrets.REDIS_PORT }} \
+              --env TG_ANNOUNCER_CHAT_ID=${{ secrets.TG_ANNOUNCER_CHAT_ID }} \
+              --env TG_ANNOUNCER_TOKEN=${{ secrets.TG_ANNOUNCER_TOKEN }} \
               --volume=ishabanov_staging_storage:/app/storage/app/public \
               --memory-reservation=32MB \
-              --memory=128MB ghcr.io/liquidcats/ishabanov.com:latest
+              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
