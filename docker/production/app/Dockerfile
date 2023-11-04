@@ -27,7 +27,4 @@ COPY --from=frontend /app/public/static /app/public/static
 
 RUN chown -R application:application .
 RUN php artisan storage:link
-RUN php artisan optimize
-
-
-
+RUN php artisan optimize:clear
