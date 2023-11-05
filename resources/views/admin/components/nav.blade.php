@@ -25,6 +25,17 @@
                     <i class="bi bi-file-earmark-image-fill"></i> Files
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-people-fill"></i> Users
+                </a>
+            </li>
+            <hr />
+                 <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-sliders"></i> Settings
+                </a>
+            </li>
             <hr />
             <li class="nav-item">
                 <a class="nav-link link-danger" href="{{ route('auth.logout') }}">

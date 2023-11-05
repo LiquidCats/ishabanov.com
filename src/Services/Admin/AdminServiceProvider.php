@@ -2,21 +2,27 @@
 
 namespace App\Admin;
 
-use App\Admin\Application\Services\BlogService;
 use App\Admin\Application\Services\DashboardViewService;
+use App\Admin\Application\Services\FileCreateViewService;
+use App\Admin\Application\Services\FilesListViewService;
 use App\Admin\Application\Services\PostCreateViewService;
 use App\Admin\Application\Services\PostEditViewService;
 use App\Admin\Application\Services\PostListViewService;
+use App\Admin\Application\Services\TagCreateViewService;
+use App\Admin\Application\Services\TagEditViewService;
+use App\Admin\Application\Services\TagListViewService;
 use App\Admin\Presentation\Http\Controllers\DashboardController;
-use App\Admin\Presentation\Http\Controllers\PostCreateController;
-use App\Admin\Presentation\Http\Controllers\PostEditController;
-use App\Admin\Presentation\Http\Controllers\PostListController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesCreateController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesListController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostCreateController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostEditController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostListController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagCreateController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagEditController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagListController;
 use App\Admin\Provides\RouteServiceProvider;
-use App\Data\Database\Eloquent\Repositories\PostRepository;
-use App\Data\Database\Eloquent\Repositories\TagRepository;
-use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
-use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
-use App\Domains\Blog\Contracts\Services\BlogServiceContract;
+use App\Domains\Blog\BlogServiceProvider;
+use App\Domains\Files\FileServiceProvider;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Carbon\Laravel\ServiceProvider;
 
@@ -25,16 +31,14 @@ class AdminServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
-
-        $this->app->singleton(PostRepositoryContract::class, PostRepository::class);
-        $this->app->singleton(TagRepositoryContract::class, TagRepository::class);
-
-        $this->app->singleton(BlogServiceContract::class, BlogService::class);
+        $this->app->register(BlogServiceProvider::class);
+        $this->app->register(FileServiceProvider::class);
 
         $this->app->when(DashboardController::class)
             ->needs(PageComposerServiceContract::class)
             ->give(DashboardViewService::class);
 
+        // POST
         $this->app->when(PostListController::class)
             ->needs(PageComposerServiceContract::class)
             ->give(PostListViewService::class);
@@ -46,5 +50,24 @@ class AdminServiceProvider extends ServiceProvider
         $this->app->when(PostEditController::class)
             ->needs(PageComposerServiceContract::class)
             ->give(PostEditViewService::class);
+
+        // FILE
+        $this->app->when(FilesCreateController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(FileCreateViewService::class);
+        $this->app->when(FilesListController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(FilesListViewService::class);
+
+        // TAG
+        $this->app->when(TagEditController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(TagEditViewService::class);
+        $this->app->when(TagCreateController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(TagCreateViewService::class);
+        $this->app->when(TagListController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(TagListViewService::class);
     }
 }

@@ -31,10 +31,10 @@ interface PostRepositoryContract
     /**
      * @param  PostId<int>  $id
      */
-    public function update(PostId $id, Post $post): Post;
+    public function updateById(PostId $id, Post $post): Post;
 
     /**
      * @param  PostId<int>  $id
      */
-    public function delete(PostId $id): bool;
+    public function deleteById(PostId $id): bool;
 }

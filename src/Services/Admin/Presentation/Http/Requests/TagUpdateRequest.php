@@ -12,7 +12,7 @@ class TagUpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'min:3', 'max:250'],
-            'slug' => ['string', 'min:3', 'max:250'],
+            'slug' => ['max:250'],
         ];
     }
 }

@@ -2,15 +2,11 @@
 
 namespace App\Domains\User\ValueObjets;
 
+use App\Foundation\ValueObjects\AbstractValueObject;
+
 /**
  * @template T
  */
-readonly class UserId
+readonly class UserId extends AbstractValueObject
 {
-    /**
-     * @param  T  $value
-     */
-    public function __construct(public mixed $value)
-    {
-    }
 }

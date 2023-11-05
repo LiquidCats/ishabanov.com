@@ -25,7 +25,7 @@ readonly class PostEditViewService implements PageComposerServiceContract
 
     public function view(Request $request): View
     {
-        $postId = new PostId($request->route()->parameter('post_id'));
+        $postId = new PostId($request->route()?->parameter('post_id'));
 
         $post = $this->postRepository->findById($postId);
         $tags = $this->tagRepository->getAll();

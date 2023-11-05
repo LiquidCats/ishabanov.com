@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Pages\Application\Services;
 
-use App\Data\Database\Eloquent\Repositories\PostRepository;
+use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 readonly class BlogService implements PageComposerServiceContract
 {
-    public function __construct(private PostRepository $postRepository)
+    public function __construct(private PostRepositoryContract $postRepository)
     {
     }
 
