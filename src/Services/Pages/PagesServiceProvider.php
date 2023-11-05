@@ -39,14 +39,12 @@ class PagesServiceProvider extends ServiceProvider
         $this->app->when(AboutController::class)
             ->needs(PageComposerServiceContract::class)
             ->give(AboutService::class);
-
-
     }
 
     public function boot(): void
     {
-        Blade::component('navbar', Navbar::class);
-        Blade::component('tag', Tag::class);
+        Blade::component(Navbar::class, 'navbar');
+        Blade::component(Tag::class, 'tag');
         Blade::componentNamespace('App\\Pages\\Presentation\\Http\\Views\\Components\\Posts', 'posts');
     }
 }
