@@ -64,8 +64,6 @@ class Post extends Model implements PostRepositoryContract
     {
         return Post::query()
             ->with('tags')
-            ->where('published_at', '<=', now())
-            ->where('is_draft', 0)
             ->findOrFail($id);
     }
 
@@ -121,5 +119,52 @@ class Post extends Model implements PostRepositoryContract
     public function deleteById(PostId $id): bool
     {
         return Post::destroy($id->value) === 1;
+    }
+
+    public function getPrevious(PostId $postId): ?Post
+    {
+        return $this->newQuery()
+            ->select(['title', 'id'])
+            ->where('id', '<', $postId->value)
+            ->latest('id')
+            ->where('is_draft', 0)
+            ->where('published_at', '<=', now())
+            ->first();
+    }
+
+    public function getNext(PostId $postId): ?Post
+    {
+        return $this->newQuery()
+            ->select(['title', 'id'])
+            ->where('id', '>', $postId)
+            ->oldest('id')
+            ->where('is_draft', 0)
+            ->where('published_at', '<=', now())
+            ->first();
+    }
+
+    /**
+     * @param PostId     $postId
+     * @param Collection<int, Tag> $tags
+     *
+     * @return Collection<int, Post>
+     */
+    public function getSimilarByTag(PostId $postId, Collection $tags): Collection
+    {
+        return $this->newQuery()
+            ->select(['title', 'content', 'published_at', 'id'])
+            ->whereHas('tags', static function (Builder $builder) use ($tags) {
+                $builder->where(function (Builder $builder) use ($tags) {
+                    foreach ($tags as $tag) {
+                        $builder->orWhere('id', $tag->getKey());
+                    }
+                });
+            })
+            ->where('id', '!=', $postId)
+            ->where('is_draft', 0)
+            ->where('published_at', '<=', now())
+            ->latest('id')
+            ->limit(3)
+            ->get();
     }
 }

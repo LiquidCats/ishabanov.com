@@ -2,17 +2,17 @@
 
 namespace App\Pages;
 
-use App\Data\Database\Eloquent\Models\Experience;
-use App\Data\Database\Eloquent\Models\Post;
 use App\Domains\Blog\BlogServiceProvider;
-use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
-use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Homepage\HomepageServiceProvider;
 use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use App\Pages\Application\Services\AboutService;
 use App\Pages\Application\Services\BlogService;
 use App\Pages\Application\Services\HomepageService;
+use App\Pages\Application\Services\PostService;
+use App\Pages\Presentation\Http\Controllers\AboutController;
 use App\Pages\Presentation\Http\Controllers\BlogController;
 use App\Pages\Presentation\Http\Controllers\HomepageController;
+use App\Pages\Presentation\Http\Controllers\PostController;
 use App\Pages\Presentation\Http\Views\Components\Navbar;
 use App\Pages\Presentation\Http\Views\Components\Tag;
 use App\Pages\Provides\RouteServiceProvider;
@@ -33,6 +33,12 @@ class PagesServiceProvider extends ServiceProvider
         $this->app->when(BlogController::class)
             ->needs(PageComposerServiceContract::class)
             ->give(BlogService::class);
+        $this->app->when(PostController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(PostService::class);
+        $this->app->when(AboutController::class)
+            ->needs(PageComposerServiceContract::class)
+            ->give(AboutService::class);
 
 
     }

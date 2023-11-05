@@ -3,6 +3,7 @@
 namespace App\Domains\Blog\Contracts\Repositories;
 
 use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\Tag;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Blog\ValueObjects\TagSlug;
 use App\Domains\User\ValueObjets\UserId;
@@ -37,4 +38,21 @@ interface PostRepositoryContract
      * @param  PostId<int>  $id
      */
     public function deleteById(PostId $id): bool;
+
+    /**
+     * @param  PostId<int>  $postId
+     */
+    public function getPrevious(PostId $postId): ?Post;
+
+    /**
+     * @param  PostId<int>  $postId
+     */
+    public function getNext(PostId $postId): ?Post;
+
+    /**
+     * @param  PostId<int>  $postId
+     * @param  Collection<int, Tag>  $tags
+     * @return Collection<int, Post>
+     */
+    public function getSimilarByTag(PostId $postId, Collection $tags): Collection;
 }

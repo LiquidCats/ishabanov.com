@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Pages\Presentation\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use function now;
-use function view;
 
 class AboutController extends Controller
 {
-    public function __invoke(): View
+    public function __construct(private readonly PageComposerServiceContract $service)
     {
-        $duration = Carbon::parse('2015-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
-        return view('pages.about.index')
-            ->with('duration', $duration);
+    }
+
+    public function __invoke(Request $request): View
+    {
+        return $this->service->view($request);
     }
 }

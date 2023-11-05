@@ -20,8 +20,7 @@ class PostController extends Controller
 {
     public function __invoke(Request $request): View
     {
-        $postId = $request->route()?->parameter('post_id');
-        $postId = new PostId($postId);
+        $postId = PostId::fromRequest($request);
 
         $post = Post::query()->with('tags')
             ->findOrFail($postId->value);
