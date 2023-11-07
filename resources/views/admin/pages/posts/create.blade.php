@@ -1,5 +1,5 @@
 @php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
-@extends('layouts.admin')
+@extends('admin.layouts.default')
 
 @section('title', 'Create New Post')
 

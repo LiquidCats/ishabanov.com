@@ -1,7 +1,7 @@
 @php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
 @php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
 @php /** @var Illuminate\Support\Collection $postTagIds */ @endphp
-@extends('layouts.admin')
+@extends('admin.layouts.default')
 
 @section('title', 'Create New Post')
 
