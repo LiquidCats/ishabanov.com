@@ -1,6 +1,6 @@
 @php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
 @php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
-@extends('layouts.default')
+@extends('themes.default.layouts.default')
 
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))

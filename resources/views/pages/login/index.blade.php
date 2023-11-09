@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('themes.default.layouts.default')
 
 @section("content")
 <div class="container mt-5">
