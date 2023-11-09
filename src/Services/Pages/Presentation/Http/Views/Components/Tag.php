@@ -16,7 +16,7 @@ class Tag extends Component
 
     public function render(): View
     {
-        return $this->view('components.tag')
+        return $this->view('themes.default.components.tag')
             ->with('text', $this->tag->name);
     }
 }

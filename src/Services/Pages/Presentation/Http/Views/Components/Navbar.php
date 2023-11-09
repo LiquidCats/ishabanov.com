@@ -15,7 +15,7 @@ class Navbar extends Component
     public function render(): View
     {
 
-        return view('components.navbar', ['links' => $this->links()]);
+        return view('themes.default.components.navbar', ['links' => $this->links()]);
     }
 
     private function links(): array

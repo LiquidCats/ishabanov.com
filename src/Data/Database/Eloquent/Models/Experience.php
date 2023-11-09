@@ -24,6 +24,7 @@ use Illuminate\Support\Collection;
  * @property string      $description
  * @property Carbon      $started_at
  * @property Carbon|null $ended_at
+ * @property Collection<int, Tool> $tools
  */
 class Experience extends Model implements ExperienceRepositoryContract
 {

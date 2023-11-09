@@ -23,7 +23,7 @@ readonly class HomepageService implements PageComposerServiceContract
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);
         $experiences = $this->experienceRepository->getListOfExperiencesJob();
 
-        return $this->factory->make('pages.home.index', [
+        return $this->factory->make('themes.default.pages.home.index', [
             'experiences' => $experiences,
             'languages' => $languages,
             'frameworks' => $frameworks,
