@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark overflow-hidden" style="background: #1B41B2">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('pages.home') }}">
-            <img src="{{ asset('images/logo.svg') }}" alt="logo" width="32" class="rounded-1"> iShabanov
+        <a class="navbar-brand shadow" href="{{ route('pages.home') }}">
+            <img src="{{ asset('images/logo.svg') }}" alt="logo" width="24" class="rounded-1">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#default-navbar" aria-controls="default-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
