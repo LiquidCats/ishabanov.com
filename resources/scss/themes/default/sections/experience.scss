@@ -1,0 +1,55 @@
+@mixin experience-year-visible {
+    height: auto;
+    opacity: 1;
+}
+@mixin experience-year-active {
+    @include experience-year-visible;
+    border-left: 3px solid $black;
+    padding-left: 1.75rem;
+    color: $black;
+    font-size: 2rem;
+}
+
+.experience {
+    &-year {
+        transition: all .3s ease-in-out, opacity .5s ease-in-out;
+        overflow: hidden;
+        text-decoration: none;
+        color: $gray-400;
+        padding: 0;
+        &:has( + &.active) {
+            @include experience-year-visible;
+            color: $lc-dark-gray;
+        }
+        &:has(+ & + &.active) {
+            @include experience-year-visible;
+            color: $gray-500
+
+        }
+        &.active {
+            @include experience-year-active;
+
+            & + .experience-year {
+                @include experience-year-visible;
+                color: $lc-dark-gray;
+
+                & + .experience-year {
+                    @include experience-year-visible;
+                    color: $gray-500
+                }
+            }
+        }
+    }
+    &-description {
+        scroll-snap-align: start;
+        background: $lc-night;
+        & div {
+            max-width: 640px;
+        }
+        &__image {
+            border-radius: 1000px;
+            width: 250px;
+            height: 250px;
+        }
+    }
+}

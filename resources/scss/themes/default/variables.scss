@@ -4,11 +4,29 @@ $box-shadow-sm: 0 51px 30px rgba(0, 0, 0, 0.01),
                 0 6px 12px rgba(0, 0, 0, 0.02),
                 0 0 0 rgba(0, 0, 0, 0.02);
 
-$box-shadow-lg: 0 146px 59px rgba(0, 0, 0, 0.01),
-                0 82px 49px rgba(0, 0, 0, 0.03),
-                0 37px 37px rgba(0, 0, 0, 0.04),
-                0 9px 20px rgba(0, 0, 0, 0.05),
-                0 0 0 rgba(0, 0, 0, 0.05);
+$box-shadow: 0 146px 59px rgba(0, 0, 0, 0.01),
+             0 82px 49px rgba(0, 0, 0, 0.03),
+             0 37px 37px rgba(0, 0, 0, 0.04),
+             0 9px 20px rgba(0, 0, 0, 0.05),
+             0 0 0 rgba(0, 0, 0, 0.05);
 
-$black: #1E1E1E;
+$box-shadow-lg: 0 298px 84px rgba(0, 0, 0, 0.00),
+                0 191px 76px rgba(0, 0, 0, 0.03),
+                0 107px 64px rgba(0, 0, 0, 0.1),
+                0 48px 48px rgba(0, 0, 0, 0.17),
+                0 12px 26px rgba(0, 0, 0, 0.2),
+                0 0 0 rgba(0, 0, 0, 0.2);
 
+$black: #333333;
+$white: #FAFAFA;
+
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$headings-font-family: 'Montserrat', sans-serif !default;
+$display-font-family: 'Montserrat', sans-serif;
+
+// internal
+
+$lc-blue: #1B41B2;
+$lc-night: #22212A;
+$lc-gray: #F5F5F5;
+$lc-dark-gray: #808080;
