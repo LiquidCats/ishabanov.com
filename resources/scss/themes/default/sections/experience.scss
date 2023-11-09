@@ -11,35 +11,38 @@
 }
 
 .experience {
-    &-year {
-        transition: all .3s ease-in-out, opacity .5s ease-in-out;
-        overflow: hidden;
-        text-decoration: none;
-        color: $gray-400;
-        padding: 0;
-        &:has( + &.active) {
-            @include experience-year-visible;
-            color: $lc-dark-gray;
-        }
-        &:has(+ & + &.active) {
-            @include experience-year-visible;
-            color: $gray-500
-
-        }
-        &.active {
-            @include experience-year-active;
-
-            & + .experience-year {
+    &-timeline {
+        &__year {
+            transition: all .3s ease-in-out, opacity .5s ease-in-out;
+            overflow: hidden;
+            text-decoration: none;
+            color: $gray-400;
+            padding: 0;
+            &:has( + &.active) {
                 @include experience-year-visible;
                 color: $lc-dark-gray;
+            }
+            &:has(+ & + &.active) {
+                @include experience-year-visible;
+                color: $gray-500
+
+            }
+            &.active {
+                @include experience-year-active;
 
                 & + .experience-year {
                     @include experience-year-visible;
-                    color: $gray-500
+                    color: $lc-dark-gray;
+
+                    & + .experience-year {
+                        @include experience-year-visible;
+                        color: $gray-500
+                    }
                 }
             }
         }
     }
+
     &-description {
         scroll-snap-align: start;
         background: $lc-night;
