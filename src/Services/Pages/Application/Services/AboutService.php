@@ -18,7 +18,7 @@ class AboutService implements PageComposerServiceContract
     {
         $duration = Carbon::parse('2015-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
 
-        return view('pages.about.index')
+        return view('themes.default.pages.about.index')
             ->with('duration', $duration);
     }
 }
