@@ -41,8 +41,8 @@ class PostController extends Controller
             ->where('published_at', '<=', now())
             ->first();
 
-        $latest = Post::query()
-            ->select(['title', 'content', 'published_at', 'id'])
+        $similar = Post::query()
+            ->select(['title', 'preview', 'published_at', 'id'])
             ->whereHas('tags', static function (Builder $builder) use ($post) {
                 $builder->where(function (Builder $builder) use ($post) {
                     /** @var Tag $tag */
@@ -58,10 +58,10 @@ class PostController extends Controller
             ->limit(3)
             ->get();
 
-        return view('pages.blog.post')
+        return view('themes.default.pages.post.article')
             ->with('prev', $prev)
             ->with('next', $next)
-            ->with('latest', $latest)
+            ->with('similar', $similar)
             ->with('post', $post);
     }
 }

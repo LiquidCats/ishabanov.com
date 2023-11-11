@@ -1,31 +1,24 @@
-<a href="{{ $link ?? '#' }}" class="card card text-decoration-none">
-   <div class="card-body card-body">
-       <div class="row">
-           @if($type === 'next')
-           <div class="col-1 d-flex align-items-center justify-content-center">
-               <i class="bi bi-chevron-double-left"></i>
-           </div>
-           @endif
+<a href="{{ $link ?? '#' }}" class="post__nav d-block bg-white px-3 py-1 rounded-3 text-black text-decoration-none d-flex flex-row align-items-center">
+   @if($type === 'next')
+   <i class="bi bi-chevron-double-left"></i>
 
-            <div class="col-11">
-               <p class="mb-1 text-muted">
-                   @switch($type)
-                   @case('next')
-                       Next
-                       @break
-                   @case('prev')
-                       Previous
-                       @break
-                   @endswitch
-               </p>
-               <p class="h5">{{ $title ?? "" }}</p>
-           </div>
+   @endif
 
-           @if($type === 'prev')
-           <div class="col-1 d-flex align-items-center justify-content-center">
-               <i class="bi bi-chevron-double-right"></i>
-           </div>
-           @endif
-       </div>
+    <div @class(['col', 'text-end' => $type === 'next', 'text-start' => $type === 'prev']) >
+       <small class="mb-1 text-muted">
+           @switch($type)
+           @case('next')
+               Next
+               @break
+           @case('prev')
+               Previous
+               @break
+           @endswitch
+       </small>
+       <h5>{{ $title ?? "" }}</h5>
    </div>
+
+   @if($type === 'prev')
+   <i class="bi bi-chevron-double-right"></i>
+   @endif
 </a>

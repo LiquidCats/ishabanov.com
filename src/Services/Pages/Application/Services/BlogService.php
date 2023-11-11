@@ -19,6 +19,6 @@ readonly class BlogService implements PageComposerServiceContract
     {
         $posts = $this->postRepository->getWithTags();
 
-        return \view('pages.blog.list', ['posts' => $posts]);
+        return \view('themes.default.pages.posts.list', ['posts' => $posts]);
     }
 }

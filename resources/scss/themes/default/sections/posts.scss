@@ -1,0 +1,16 @@
+.posts {
+    background-color: $lc-gray !important;
+    &__item {
+        border: 1px solid $lc-dark-gray;
+        &:hover .read-more__dots {
+            gap: 1rem !important;
+        }
+
+        &__preview  small {
+            color: $lc-dark-gray
+        }
+    }
+
+
+
+}
