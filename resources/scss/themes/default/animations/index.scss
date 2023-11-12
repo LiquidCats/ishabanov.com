@@ -1,6 +1,7 @@
 @import "squeeze-out";
 @import "slide-left";
 @import "slide-right";
+@import "slide-up";
 
 [data-animation].animation-init {
     transition: all .7s ease-in-out;
