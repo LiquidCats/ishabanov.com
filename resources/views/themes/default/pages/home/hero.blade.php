@@ -19,7 +19,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3 d-flex align-items-center">
                 <div class="rounded-4 text-white fs-2 fw-light" data-animation="slide-left">
                     <p>Unveil the Secrets to Success: Explore My Exclusive Insights and Expert Tips!</p>
-                    <button class="btn btn-secondary btn-lg text-up">Learn More <i class="bi bi-chevron-right fw-bold"></i></button>
+                    <a href="{{ route('pages.blog') }}" class="btn btn-secondary btn-lg text-up">Learn More <i class="bi bi-chevron-right fw-bold"></i></a>
                 </div>
             </div>
         </div>
@@ -27,6 +27,6 @@
     </div>
 
     <div class="col-12 mt-5 mt-lg-auto mb-2 d-flex flex-column align-items-center">
-        <p class="fs-1 text-white fw-bolder m-0 opacity-50"><i class="bi bi-chevron-down"></i></p>
+        <a href="#experience" class="fs-1 text-white fw-bolder m-0 opacity-50"><i class="bi bi-chevron-down"></i></a>
     </div>
 </section>
