@@ -7,16 +7,16 @@
 @section('self_url', route('pages.about'))
 
 @section('content')
-<section id="about" class="bg-body container-fluid position-relative pb-4">
-    <div class="container">
+<section id="about" class="about container-fluid position-relative py-4">
+    <div class="about__content container bg-white p-4 rounded-4">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 col-lg-5">
-                <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto my-4">
+            <div class="col-12 col-lg-6">
+                <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto">
             </div>
-            <div class="col-12 col-lg-7">
+            <div class="col-12 col-lg-6">
                 <article>
-                    <h1>About Me</h1>
-                    <div class="fs-5 mt-2 mb-2">Current experience: {{ $duration }}</div>
+                    <h1 class="mb-0">About Me</h1>
+                    <div class="fs-5 mb-3 text-muted fw-bold">Current experience: {{ $duration }}</div>
                     <p>Hey! 👋 I'm Ilya. For many years now, I've been immersing myself in the world of Software
                         Engineering. First thing to note? Coding isn't just a profession for me—it's a passion.
                         Since the outset of my journey, I've honed in on delivering features that are not only
@@ -32,13 +32,12 @@
                         with modern-day flair. Always game for fresh adventures in code and eager to breathe life
                         into innovative ideas. Dive into my website, reach out with any queries or dream projects.
                         Let's code the future together!</p>
-                    <div>
+                    <div class="mt-3">
                         <a href="https://github.com/LiquidCats" class="btn btn-light" target="_blank"><i class="bi bi-github"></i> GitHub</a>
                         <a href="https://www.instagram.com/degradation.of.mine" class="btn btn-light" target="_blank"><i class="bi bi-instagram"></i> Instagram</a>
                         <a href="https://www.linkedin.com/in/ilia-shabanov" class="btn btn-light" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
                     </div>
                 </article>
-
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 .posts {
     background-color: $lc-gray !important;
     &__item {
-        border: 1px solid $lc-dark-gray;
+        border: 1px solid $gray-200;
         &:hover .read-more__dots {
             gap: 1rem !important;
         }
@@ -10,7 +10,4 @@
             color: $lc-dark-gray
         }
     }
-
-
-
 }

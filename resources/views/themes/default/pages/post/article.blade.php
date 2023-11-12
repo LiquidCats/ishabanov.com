@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <article class="post__article p-4 rounded-4 mb-4">
+                    <article class="post__article p-4 rounded-4">
                         <h1 class="mb-0">{{ $post->title }}</h1>
                         <small>{{ $post->published_at->diffForHumans() }}</small>
                         <div class="my-3">
