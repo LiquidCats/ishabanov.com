@@ -7,9 +7,9 @@
 @section('self_url', route('pages.about'))
 
 @section('content')
-<section id="about" class="about container-fluid position-relative py-4">
+<section id="about" class="about container-fluid position-relative py-4 d-flex align-items-center min-vh-100">
     <div class="about__content container bg-white p-4 rounded-4">
-        <div class="row justify-content-center align-items-center">
+        <div class="row">
             <div class="col-12 col-lg-6">
                 <img src="{{ asset('images/about/man.svg') }}" alt="About" class="d-block img-fluid mx-auto">
             </div>

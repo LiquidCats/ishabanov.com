@@ -2,7 +2,10 @@
     <div class="container py-4">
         <div class="row">
             <div class="col">
-                <img alt="logo" src="{{ asset('images/logo.svg') }}" class="rounded" width="32">
+                <a href="{{ route('pages.home') }}">
+                    <img alt="logo" src="{{ asset('images/logo.svg') }}" class="rounded" width="32">
+                </a>
+
             </div>
             <div class="col-auto">
                 <div class="d-flex align-items-end">
