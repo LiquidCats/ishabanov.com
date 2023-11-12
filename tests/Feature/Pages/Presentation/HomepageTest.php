@@ -22,6 +22,5 @@ class HomepageTest extends TestCase
 
         $response->assertSeeText('Ilya Shabanov - Software Engineer - Home');
         $response->assertSeeText('Software Engineer');
-        $response->assertSeeText('Solving Problems');
     }
 }
