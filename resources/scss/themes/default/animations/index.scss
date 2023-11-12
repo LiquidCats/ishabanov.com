@@ -1,0 +1,13 @@
+@import "squeeze-out";
+@import "slide-left";
+@import "slide-right";
+
+[data-animation].animation-init {
+    transition: all .7s ease-in-out;
+}
+
+@media(prefers-reduced-motion) {
+    [data-animation] {
+        transition: none;
+    }
+}

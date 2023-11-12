@@ -3,6 +3,9 @@ import {ScrollSpy} from 'bootstrap'
 
 document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('experience')
+    if (!section) {
+        return
+    }
     const sectionRect = section.getBoundingClientRect()
 
     const descriptions = document.getElementById('experience-descriptions')
@@ -22,7 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('#experience-years a').forEach((el) => {
         el.addEventListener('click', (e) => {
+            e.preventDefault()
             linkClicked = true
+
+            const id = e.target.attributes.getNamedItem('href').value
+            const elem = document.querySelector(id)
+            const elemRect = elem.getBoundingClientRect()
+
+            window.scrollTo({
+                top: window.scrollY + elemRect.top,
+                behavior: "smooth"
+            });
         })
     })
 

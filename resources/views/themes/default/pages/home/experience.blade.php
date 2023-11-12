@@ -10,8 +10,8 @@
     <div id="experience-descriptions" class="experience-descriptions col" tabindex="0">
     @foreach($experiences as $experience)
         <div id="experience-{{ $experience?->started_at?->year }}"
-             class="experience-description min-vh-100 text-white d-flex justify-content-center align-items-center px-3">
-            <div class="py-5">
+             class="experience-description min-vh-100 text-white d-flex justify-content-center align-items-center overflow-hidden">
+            <div class="p-3" data-animation="squeeze-out">
                 <div class="experience-description__image mx-auto d-flex justify-content-center align-items-center bg-white mb-4">
                     <img class="d-block mx-auto" src="{{ asset($experience->company_logo) }}"
                          alt="{{ $experience->company_name }}">
