@@ -12,19 +12,19 @@
         <div id="experience-{{ $experience?->started_at?->year }}"
              class="experience-description min-vh-100 text-white d-flex justify-content-center align-items-center overflow-hidden">
             <div class="p-3" data-animation="squeeze-out">
-                <div class="experience-description__image mx-auto d-flex justify-content-center align-items-center bg-white mb-4">
-                    <img class="d-block mx-auto" src="{{ asset($experience->company_logo) }}"
+                <div class="experience-description__image d-flex justify-content-start align-items-center bg-white mb-4 p-3">
+                    <img class="d-block mx-auto img-fluid" src="{{ asset($experience->company_logo) }}"
                          alt="{{ $experience->company_name }}">
                 </div>
-                <div class="experience-description__content text-center">
-                    <div class="experience-description__content__years fs-5 fw-light">{{ $experience?->started_at?->year }} - {{ $experience?->ended_at?->year ?? 'now' }}</div>
+                <div class="experience-description__content">
                     <div class="experience-description__content__company fs-5 fw-light">
                         <a href="{{ $experience->company_url }}"
                            target="_blank"
                            class="text-white text-decoration-none"><i class="bi bi-link-45deg"></i> {{ $experience->company_name }}</a>
                     </div>
-                    <h2 class="experience-description__content__position fw-bold mb-3">{{ $experience->position }}</h2>
-                    <div class="experience-description__content__tools mb-3">
+                    <h2 class="experience-description__content__position fw-bold mb-0">{{ $experience->position }}</h2>
+                    <div class="experience-description__content__years fs-5 fw-light">{{ $experience?->started_at?->year }} - {{ $experience?->ended_at?->year ?? 'now' }}</div>
+                    <div class="experience-description__content__tools mb-3 mt-3">
                         @foreach($experience->tools as $tool)
                             <span class="badge bg-light text-black fw-normal fs-6 mb-1">{{ $tool->name }}: {{ $tool?->pivot?->level_id?->getText() }}</span>
                         @endforeach
