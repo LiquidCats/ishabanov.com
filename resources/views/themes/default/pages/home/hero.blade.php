@@ -27,7 +27,7 @@
             <div class="col-sm-12 col-md-12 col-lg-7 d-flex justify-content-start align-items-center">
                 <div class="container-fluid">
                     <div class="row g-4">
-                        <div class="col" data-animation="slide-up">
+                        <div class="col" data-animation="slide-down">
                             <h1 class="display-1 fw-bold lh-1 text-uppercase text-white">Software Engineer</h1>
                         </div>
                         <div class="col-12 col-md-6 fs-4 fw-light text-white bg-white bg-opacity-10 p-3 rounded-3" data-animation="slide-right">

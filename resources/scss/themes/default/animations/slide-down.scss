@@ -1,0 +1,11 @@
+[data-animation="slide-down"].animation-init {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20%);
+}
+
+[data-animation="slide-down"].animation-show {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+}

@@ -11,7 +11,10 @@
 @import "components";
 @import "sections";
 @import "animations";
-
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--scroll-padding, ($navbar-padding-y*2) + ($nav-link-padding-y*2) + 1.5rem);
+}
 html, body {
     background-color: $white;
 }

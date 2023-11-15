@@ -6,7 +6,7 @@
 
 .hero {
     background: $blue;
-    min-height: calc(100vh - ($navbar-padding-y + $nav-link-padding-y + 1rem));
+    min-height: calc(100vh - (($navbar-padding-y*2) + ($nav-link-padding-y*2) + 1.5rem));
 
     &__person {
         & #shadow-root {

@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const sectionRect = section.getBoundingClientRect()
 
-    const descriptions = document.getElementById('experience-descriptions')
+    const descriptions = document.querySelector('.experience-descriptions')
 
-    const spy = new ScrollSpy(descriptions, {
-        target: '#experience-years',
+    new ScrollSpy(descriptions, {
+        target: '.experience-timeline',
+        threshold: [.1, .25, .5, .75, 1],
+        rootMargin: '-15% 0px '
     })
-
-    spy.refresh()
 
     // switches
     let isExperienceOnScreen = sectionRect.bottom > window.innerHeight && sectionRect.top <= 0;
@@ -23,25 +23,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentElement = null
 
 
-    document.querySelectorAll('#experience-years a').forEach((el) => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault()
-            linkClicked = true
+    const clickHandler = (e) => {
+        e.preventDefault()
+        linkClicked = true
 
-            const id = e.target.attributes.getNamedItem('href').value
-            const elem = document.querySelector(id)
-            const elemRect = elem.getBoundingClientRect()
+        const id = e.target.attributes.getNamedItem('href').value
+        const elem = document.querySelector(id)
 
-            window.scrollTo({
-                top: window.scrollY + elemRect.top,
-                behavior: "smooth"
-            });
-        })
+        elem.scrollIntoView({
+            block: "start",
+            behavior: "smooth",
+        });
+    }
+
+    document.querySelectorAll('.experience-timeline a').forEach((el) => {
+        el.addEventListener('click', clickHandler)
     })
 
     descriptions.addEventListener('activate.bs.scrollspy', (e) => {
-        const id = e?.relatedTarget?.hash?.slice(1)
-        currentElement = document.getElementById(id)
+        const id = e?.relatedTarget?.hash
+        if (!id) {
+            return
+        }
+
+        /** @var {HTMLElement} currentElement */
+        currentElement = document.querySelector(id)
     })
 
     document.addEventListener('resize', () => {
@@ -67,13 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollDirection = 1
         }
 
+        lastScrollPosition = currentScrollPosition
         setTimeout(function() {
             scrollDirection = 0
         });
     })
 
     document.addEventListener('scroll', debounce(() => {
-         if (!isExperienceOnScreen) {
+        if (!isExperienceOnScreen) {
             return
         }
 
@@ -89,11 +96,63 @@ document.addEventListener('DOMContentLoaded', () => {
         if (null === currentElement) {
             return;
         }
-        const elRect = currentElement.getBoundingClientRect()
 
-        window.scrollTo({
-            top: window.scrollY + elRect.top,
-            behavior: "smooth"
-        });
+        setTimeout(() => {
+            currentElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            })
+            currentElement = null;
+
+        },50)
     }, 50))
 })
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const observer = new IntersectionObserver((entries) => {
+//         for (const entry of entries) {
+//             entry.target?.tartgetElement.classList.remove('active')
+//             if (entry.isIntersecting) {
+//                 entry.target?.tartgetElement.classList.add('active')
+//             }
+//         }
+//     }, {
+//         root: null,
+//         threshold: [0.1, 0.5, 1],
+//         rootMargin: '0px 0px -25%'
+//     })
+//
+//     const links = document.getElementById('experience-years')
+//
+//     const handler = (e) => {
+//         e.preventDefault()
+//
+//         const href = e.target.attributes.getNamedItem('href')
+//         if (!href) {
+//             return;
+//         }
+//
+//         const elementToScroll = document.querySelector(href.value)
+//         if (!elementToScroll) {
+//             return;
+//         }
+//
+//         elementToScroll.scrollIntoView(true)
+//     }
+//     for (const link of links.children) {
+//         link.addEventListener('click', handler)
+//         const href = link.attributes.getNamedItem('href')
+//         if (!href) {
+//             continue;
+//         }
+//
+//         const observable = document.querySelector(href.value)
+//         if (!observable) {
+//             continue;
+//         }
+//
+//         observable.tartgetElement = link
+//
+//         observer.observe(observable)
+//     }
+// })

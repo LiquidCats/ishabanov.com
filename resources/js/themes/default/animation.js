@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.classList.remove('animation-show')
             }
         }
+    }, {
+        root: null,
+        threshold: 0,
+        rootMargin: '0px 0px -25% 0px'
     })
 
     const animated = document.querySelectorAll('[data-animation]')

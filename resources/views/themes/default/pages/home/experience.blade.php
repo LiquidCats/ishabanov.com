@@ -1,17 +1,18 @@
 @php /** @var Illuminate\Support\Collection<int, App\Data\Database\Eloquent\Models\Experience> $experiences */ @endphp
 <section id="experience" class="d-flex experience position-relative shadow">
     <div class="col-2 d-none d-md-block" style="background-color: #F5F5F5">
-        <div id="experience-years" class="experience-timeline sticky-top min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <div class="experience-timeline sticky-top min-vh-100 d-flex flex-column align-items-center justify-content-center">
         @foreach($experiences as $experience)
-            <a href="#experience-{{ $experience?->started_at?->year }}" class="experience-timeline__year fs-3 fw-bold">{{ $experience?->started_at?->year }}</a>
+            <a href="#experience-{{ $experience?->started_at?->year }}"
+               class="experience-timeline__year fs-3 fw-bold">{{ $experience?->started_at?->year }}</a>
         @endforeach
         </div>
     </div>
-    <div id="experience-descriptions" class="experience-descriptions col" tabindex="0">
+    <div class="experience-descriptions col bg-dark" tabindex="0">
     @foreach($experiences as $experience)
         <div id="experience-{{ $experience?->started_at?->year }}"
-             class="experience-description min-vh-100 text-white d-flex justify-content-center align-items-center overflow-hidden">
-            <div class="p-3" data-animation="squeeze-out">
+             class="experience-description min-vh-100 text-white d-flex justify-content-center align-items-center">
+            <div class="px-3 py-5" data-animation="squeeze-out">
                 <div class="experience-description__image d-flex justify-content-start align-items-center bg-white mb-4 p-3">
                     <img class="d-block mx-auto img-fluid" src="{{ asset($experience->company_logo) }}"
                          alt="{{ $experience->company_name }}">
