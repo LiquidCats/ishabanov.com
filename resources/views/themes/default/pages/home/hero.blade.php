@@ -1,4 +1,4 @@
-<section id="hero" class="hero d-flex flex-column justify-content-center align-items-center overflow-hidden shadow py-5">
+<section id="hero" class="hero min-vh-100 d-flex flex-column justify-content-center align-items-center overflow-hidden shadow py-5">
     <div class="container-fluid">
         <div class="row g-5">
             <div class="col-sm-12 col-md-12 col-lg-5 d-flex align-items-center justify-content-center">

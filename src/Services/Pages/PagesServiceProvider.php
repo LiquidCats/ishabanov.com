@@ -2,6 +2,7 @@
 
 namespace App\Pages;
 
+use App\Pages\Presentation\Http\Views\Components\Footer;
 use App\Pages\Presentation\Http\Views\Components\Navbar;
 use App\Pages\Presentation\Http\Views\Components\Tag;
 use App\Pages\Provides\RouteServiceProvider;
@@ -19,6 +20,7 @@ class PagesServiceProvider extends ServiceProvider
     {
         Blade::component(Tag::class, 'tag');
         Blade::component(Navbar::class, 'navbar');
+        Blade::component(Footer::class, 'footer');
         Blade::componentNamespace('App\\Pages\\Presentation\\Http\\Views\\Components\\Posts', 'posts');
     }
 }

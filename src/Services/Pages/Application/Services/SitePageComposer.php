@@ -52,7 +52,7 @@ class SitePageComposer extends AbstractPageComposer
         return $this->compose('post.article', [
             'prev' => $prev,
             'next' => $next,
-            'latest' => $similar,
+            'similar' => $similar,
             'post' => $post,
         ]);
     }

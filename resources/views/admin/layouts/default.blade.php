@@ -34,8 +34,7 @@
             tinycomments_mode: 'embedded',
             plugins: [
                 'autolink', 'autoresize', 'codesample', 'link', 'lists', 'media',
-                'powerpaste', 'table', 'image', 'quickbars', 'codesample', 'help',
-                'code',
+                'table', 'image', 'quickbars', 'codesample', 'help', 'code',
             ],
             // plugins: 'code table lists link emoticons image',
             toolbar: 'undo redo | formatselect| bold italic underline strikethrough | alignleft aligncenter alignright | indent outdent | bullist numlist | codesample code | table | link | emoticons | image',

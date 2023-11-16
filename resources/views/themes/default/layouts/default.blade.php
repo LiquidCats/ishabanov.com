@@ -20,7 +20,7 @@
             @yield("content")
         </main>
 
-        @include("themes.default.includes.footer")
+        <x-footer/>
 
         @include("themes.default.includes.scripts")
     </body>

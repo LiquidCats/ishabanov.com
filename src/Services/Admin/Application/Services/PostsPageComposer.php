@@ -11,7 +11,11 @@ use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+
+use function old;
+use function optional;
 
 class PostsPageComposer extends AbstractPageComposer
 {
@@ -42,6 +46,8 @@ class PostsPageComposer extends AbstractPageComposer
         return $this->compose('posts.create', [
             'images' => $images,
             'tags' => $tags,
+            'post' => optional(),
+            'postTagIds' => Collection::make(old('post_tags', [])),
         ]);
     }
 

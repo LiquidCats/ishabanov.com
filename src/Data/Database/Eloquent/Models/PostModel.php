@@ -57,8 +57,8 @@ class PostModel extends Model implements PostRepositoryContract
         return $this->belongsToMany(
             TagModel::class,
             'post_tag',
-            'tag_id',
             'post_id',
+            'tag_id',
         );
     }
 

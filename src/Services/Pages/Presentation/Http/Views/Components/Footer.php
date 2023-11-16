@@ -7,12 +7,11 @@ namespace App\Pages\Presentation\Http\Views\Components;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 use function route;
 
-class Navbar extends Component
+class Footer extends Component
 {
     public function __construct(private readonly Repository $config)
     {
@@ -20,23 +19,25 @@ class Navbar extends Component
 
     public function render(): View
     {
-        return view("themes.{$this->config->get('appearance.theme.site')}.components.navbar", [
+        return view("themes.{$this->config->get('appearance.theme.site')}.components.footer", [
             'links' => $this->links(),
+            'socials' => $this->socials(),
             'logo' => $this->config->get('appearance.theme.logo'),
         ]);
     }
 
+    private function socials(): Collection
+    {
+        $links = $this->config->get('appearance.links.socials', []);
+
+        return Collection::make($links);
+    }
+
     private function links(): Collection
     {
-        $currentRouteName = Route::currentRouteName();
-
         $links = $this->config->get('appearance.links.menu', []);
 
         return Collection::make($links)
-            ->map(fn ($l) => [
-                ...$l,
-                'link' => route($l['link']),
-                'is_active' => $currentRouteName === $l['link'],
-            ]);
+            ->map(fn ($l) => [...$l, 'link' => route($l['link'])]);
     }
 }
