@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Controllers\Tags;
 
 use App\Admin\Presentation\Http\Requests\TagStoreRequest;
-use App\Data\Database\Eloquent\Models\Tag;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Str;
 use function redirect;
 use function route;
 

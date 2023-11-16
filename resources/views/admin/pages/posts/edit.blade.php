@@ -1,5 +1,5 @@
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
-@php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\PostModel $post */ @endphp
 @php /** @var Illuminate\Support\Collection $postTagIds */ @endphp
 @extends('admin.layouts.default')
 
@@ -35,7 +35,8 @@
         @enderror
         <div class="mb-3">
             <div class="form-check">
-                <input class="form-check-input" name="is_draft" type="checkbox" id="post-is-draft" @checked(old('is_draft', $post->is_draft))>
+                <input class="form-check-input" name="is_draft" type="checkbox"
+                       id="post-is-draft" @checked(old('is_draft', $post->is_draft))>
                 <label class="form-check-label" for="post-is-draft">Draft</label>
             </div>
         </div>
@@ -46,7 +47,8 @@
             <label for="post-tags" class="form-label">Tags</label>
             <select class="form-select" id="post-tags" name="post_tags[]" multiple aria-label="multiple select example">
                 @foreach($tags as $tag)
-                    <option value="{{ $tag->getKey() }}" @selected($postTagIds->contains($tag->getKey()))>{{ $tag->name }}</option>
+                    <option
+                        value="{{ $tag->getKey() }}" @selected($postTagIds->contains($tag->getKey()))>{{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>

@@ -8,7 +8,6 @@ use App\Admin\Presentation\Http\Requests\PostStoreRequest;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-
 use function redirect;
 use function route;
 

@@ -6,4 +6,3 @@
     @include('themes.default.pages.home.hero')
     @include('themes.default.pages.home.experience')
 @endsection
-

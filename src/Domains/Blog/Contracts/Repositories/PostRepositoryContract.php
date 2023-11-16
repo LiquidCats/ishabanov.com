@@ -2,8 +2,8 @@
 
 namespace App\Domains\Blog\Contracts\Repositories;
 
-use App\Data\Database\Eloquent\Models\Post;
-use App\Data\Database\Eloquent\Models\Tag;
+use App\Data\Database\Eloquent\Models\PostModel;
+use App\Data\Database\Eloquent\Models\TagModel;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Blog\ValueObjects\TagSlug;
 use App\Domains\User\ValueObjets\UserId;
@@ -15,7 +15,7 @@ interface PostRepositoryContract
     /**
      * @param  PostId<int>  $id
      */
-    public function findById(PostId $id): Post;
+    public function findById(PostId $id): PostModel;
 
     /**
      * @param  Collection<int, TagSlug>  $tags
@@ -27,12 +27,12 @@ interface PostRepositoryContract
     /**
      * @param  UserId<int>  $userId
      */
-    public function create(UserId $userId, Post $post): Post;
+    public function create(UserId $userId, PostModel $post): PostModel;
 
     /**
      * @param  PostId<int>  $id
      */
-    public function updateById(PostId $id, Post $post): Post;
+    public function updateById(PostId $id, PostModel $post): PostModel;
 
     /**
      * @param  PostId<int>  $id
@@ -42,17 +42,18 @@ interface PostRepositoryContract
     /**
      * @param  PostId<int>  $postId
      */
-    public function getPrevious(PostId $postId): ?Post;
+    public function getPrevious(PostId $postId): ?PostModel;
 
     /**
      * @param  PostId<int>  $postId
      */
-    public function getNext(PostId $postId): ?Post;
+    public function getNext(PostId $postId): ?PostModel;
 
     /**
-     * @param  PostId<int>  $postId
-     * @param  Collection<int, Tag>  $tags
-     * @return Collection<int, Post>
+     * @param  PostId<int>               $postId
+     * @param  Collection<int, TagModel> $tags
+     *
+     * @return Collection<int, PostModel>
      */
     public function getSimilarByTag(PostId $postId, Collection $tags): Collection;
 }

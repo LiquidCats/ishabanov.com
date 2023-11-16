@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract
+class UserModel extends Model implements AuthenticatableContract
 {
     use Authenticatable, HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
@@ -39,7 +41,7 @@ class User extends Model implements AuthenticatableContract
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'author_id', 'id');
+        return $this->hasMany(PostModel::class, 'author_id', 'id');
     }
 
     protected static function newFactory(): UserFactory

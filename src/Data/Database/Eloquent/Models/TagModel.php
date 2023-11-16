@@ -19,9 +19,11 @@ use Illuminate\Support\Str;
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
-class Tag extends Model implements TagRepositoryContract
+class TagModel extends Model implements TagRepositoryContract
 {
     use HasFactory;
+
+    protected $table = 'tags';
 
     protected $fillable = [
         'name',
@@ -34,11 +36,16 @@ class Tag extends Model implements TagRepositoryContract
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(
+            PostModel::class,
+            'post_tag',
+            'tag_id',
+            'post_id',
+        );
     }
 
     /**
-     * @return Collection<int, Tag>
+     * @return Collection<int, TagModel>
      */
     public function getAll(): Collection
     {
@@ -46,9 +53,9 @@ class Tag extends Model implements TagRepositoryContract
             ->get();
     }
 
-    public function create(string $name, ?string $slug): Tag
+    public function create(string $name, ?string $slug): TagModel
     {
-        $model = new Tag();
+        $model = new TagModel();
 
         $model->name = $name;
         $model->slug = $slug ?: Str::of($name)
@@ -71,9 +78,9 @@ class Tag extends Model implements TagRepositoryContract
         return TagFactory::new();
     }
 
-    public function updateById(TagId $tagId, string $name, ?string $slug): Tag
+    public function updateById(TagId $tagId, string $name, ?string $slug): TagModel
     {
-        /** @var Tag $model */
+        /** @var TagModel $model */
         $model = $this->newQuery()->findOrFail($tagId->value);
 
         $model->name = $name;
@@ -92,7 +99,7 @@ class Tag extends Model implements TagRepositoryContract
             ->exists();
     }
 
-    public function findById(TagId $tagId): Tag
+    public function findById(TagId $tagId): TagModel
     {
         return $this->newQuery()
             ->findOrFail($tagId->value);

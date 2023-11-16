@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Data\Database\Eloquent\Models;
 
-use App\Domains\Homepage\Contracts\Repositories\ExperienceRepositoryContract;
+use App\Domains\Blog\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Foundation\Enums\ToolType;
 use Carbon\Carbon;
 use Database\Factories\ExperienceFactory;
@@ -16,19 +16,21 @@ use Illuminate\Support\Collection;
 /**
  * Class Experience.
  *
- * @property int         $id
- * @property string      $company_name
- * @property string      $company_url
- * @property string      $company_logo
- * @property string      $position
- * @property string      $description
- * @property Carbon      $started_at
- * @property Carbon|null $ended_at
- * @property Collection<int, Tool> $tools
+ * @property int                        $id
+ * @property string                     $company_name
+ * @property string                     $company_url
+ * @property string                     $company_logo
+ * @property string                     $position
+ * @property string                     $description
+ * @property Carbon                     $started_at
+ * @property Carbon|null                $ended_at
+ * @property Collection<int, ToolModel> $tools
  */
-class Experience extends Model implements ExperienceRepositoryContract
+class ExperienceModel extends Model implements ExperienceRepositoryContract
 {
     use HasFactory;
+
+    protected $table = 'experiences';
 
     protected $casts = [
         'company_name' => 'string',
@@ -47,19 +49,24 @@ class Experience extends Model implements ExperienceRepositoryContract
 
     public function tools(): BelongsToMany
     {
-        return $this->belongsToMany(Tool::class)
-            ->orderByDesc((new Tool())->qualifyColumn('level'))
-            ->orderBy((new Tool())->qualifyColumn('type'))
-            ->using(ExperienceTool::class)
+        return $this->belongsToMany(
+            ToolModel::class,
+            (new ExperienceToolModel())->getTable(),
+            (new ExperienceToolModel())->qualifyColumn('experience_id'),
+            (new ExperienceToolModel())->qualifyColumn('tool_id'),
+        )
+            ->orderByDesc((new ToolModel())->qualifyColumn('level'))
+            ->orderBy((new ToolModel())->qualifyColumn('type'))
+            ->using(ExperienceToolModel::class)
             ->withPivot(['level_id']);
     }
 
     /**
-     * @return Collection<int, Tool>
+     * @return Collection<int, ToolModel>
      */
     public function getTopToolByTypeJob(ToolType $type, int $limit = 3): Collection
     {
-        return Tool::query()
+        return ToolModel::query()
             ->take($limit)
             ->where('type', $type)
             ->orderBy('type')
@@ -68,7 +75,7 @@ class Experience extends Model implements ExperienceRepositoryContract
     }
 
     /**
-     * @return Collection<int, Experience>
+     * @return Collection<int, ExperienceModel>
      */
     public function getListOfExperiencesJob(): Collection
     {

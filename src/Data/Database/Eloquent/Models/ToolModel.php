@@ -18,9 +18,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property ToolType|null        $type
  * @property ExperienceLevel|null $level
  */
-class Tool extends Model
+class ToolModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'tools';
 
     protected $keyType = 'string';
 

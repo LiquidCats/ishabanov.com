@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Data\Database\Eloquent\Models\Tool;
+use App\Data\Database\Eloquent\Models\ToolModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Tool>
+ * @extends Factory<ToolModel>
  */
 class ToolFactory extends Factory
 {
-    protected $model = Tool::class;
+    protected $model = ToolModel::class;
 
     /**
      * Define the model's default state.

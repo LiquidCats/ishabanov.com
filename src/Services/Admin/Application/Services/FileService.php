@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Admin\Application\Services;
 
-use App\Data\Database\Eloquent\Models\File;
+use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use App\Domains\Files\Contracts\Repositories\StorageRepositoryContract;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
 use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 readonly class FileService implements FileServiceContract
 {
@@ -20,7 +19,7 @@ readonly class FileService implements FileServiceContract
     ) {
     }
 
-    public function store(UploadedFile $file, string $name): ?File
+    public function store(UploadedFile $file, string $name): ?FileModel
     {
         if ($filepath = $this->storageRepository->store($file)) {
             return $this->fileRepository->create($file, $filepath, $name);

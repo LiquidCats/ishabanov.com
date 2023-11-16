@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Files;
 
-use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use App\Admin\Application\Services\FilesPageComposer;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class FilesCreateController extends Controller
 {
-    public function __construct(private readonly PageComposerServiceContract $service)
+    public function __construct(private readonly FilesPageComposer $service)
     {
     }
 
-    public function __invoke(Request $request): View
+    public function __invoke(): View
     {
-        return $this->service->view($request);
+        return $this->service->create();
     }
 }

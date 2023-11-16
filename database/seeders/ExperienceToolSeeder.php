@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Data\Database\Eloquent\Models\ExperienceTool;
+use App\Data\Database\Eloquent\Models\ExperienceToolModel;
 use App\Foundation\Enums\ExperienceLevel;
 use Illuminate\Database\Seeder;
 
@@ -79,7 +79,7 @@ class ExperienceToolSeeder extends Seeder
      */
     public function run(): void
     {
-        ExperienceTool::query()->truncate();
+        ExperienceToolModel::query()->truncate();
 
         /**
          * @var int             $experienceId
@@ -93,7 +93,7 @@ class ExperienceToolSeeder extends Seeder
 
     protected function createModel(int $experienceId, string $toolId, ExperienceLevel $level): void
     {
-        $model = new ExperienceTool();
+        $model = new ExperienceToolModel();
 
         $model->experience_id = $experienceId;
         $model->tool_id = $toolId;

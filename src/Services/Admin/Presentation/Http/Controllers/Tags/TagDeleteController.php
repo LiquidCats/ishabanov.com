@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Tags;
 
-use App\Data\Database\Eloquent\Models\Tag;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +20,7 @@ class TagDeleteController extends Controller
 
     public function __invoke(Request $request): RedirectResponse
     {
-        $this->tagService->delete(TagId::fromRequest($request));
+        $this->tagService->delete(TagId::fromRequestRoute($request));
 
         return redirect(route('admin.tags.list'));
     }

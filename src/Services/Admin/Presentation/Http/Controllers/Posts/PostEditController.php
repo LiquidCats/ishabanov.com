@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Posts;
 
-use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use App\Admin\Application\Services\PostsPageComposer;
+use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class PostEditController extends Controller
 {
-    public function __construct(private readonly PageComposerServiceContract $service)
+    public function __construct(private readonly PostsPageComposer $service)
     {
     }
 
-    public function __invoke(Request $request): View
+    public function __invoke(string $postId): View
     {
-        return $this->service->view($request);
+        return $this->service->edit(new PostId($postId));
     }
 }

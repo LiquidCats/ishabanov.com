@@ -1,4 +1,4 @@
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
 @extends('admin.layouts.default')
 
 @section('title', 'Create New Post')
@@ -38,7 +38,8 @@
             <label for="post-tags" class="form-label">Tags</label>
             <select class="form-select" id="post-tags" name="post_tags[]" multiple aria-label="multiple select example">
                 @foreach($tags as $tag)
-                    <option value="{{ $tag->getKey() }}" @selected( in_array($tag->getKey(), old('post_tags', [])) )>{{ $tag->name }}</option>
+                    <option
+                        value="{{ $tag->getKey() }}" @selected( in_array($tag->getKey(), old('post_tags', [])) )>{{ $tag->name }}</option>
                 @endforeach
             </select>
         </div>

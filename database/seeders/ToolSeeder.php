@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Data\Database\Eloquent\Models\Tool;
+use App\Data\Database\Eloquent\Models\ToolModel;
 use App\Foundation\Enums\ExperienceLevel;
 use App\Foundation\Enums\ToolType;
 use Illuminate\Database\Seeder;
@@ -46,7 +46,7 @@ class ToolSeeder extends Seeder
      */
     public function run(): void
     {
-        Tool::query()->truncate();
+        ToolModel::query()->truncate();
 
         foreach (self::$values as $tool) {
             $this->createModel(...$tool);
@@ -55,7 +55,7 @@ class ToolSeeder extends Seeder
 
     protected function createModel(string $name, ?ToolType $type, ExperienceLevel $level = null): void
     {
-        $model = new Tool();
+        $model = new ToolModel();
 
         $model->id = Str::of($name)
             ->lower()

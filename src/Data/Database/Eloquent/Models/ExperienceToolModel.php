@@ -14,9 +14,11 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property string          $tool_id
  * @property ExperienceLevel $level_id
  */
-class ExperienceTool extends Pivot
+class ExperienceToolModel extends Pivot
 {
     use HasFactory;
+
+    protected $table = 'experience_tool';
 
     protected $casts = [
         'experience_id' => 'int',
@@ -26,7 +28,7 @@ class ExperienceTool extends Pivot
 
     public $timestamps = null;
 
-    protected $dates = [];
+    protected array $dates = [];
 
     protected static function newFactory(): ExperienceToolFactory
     {

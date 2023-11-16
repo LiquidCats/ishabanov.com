@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
-@php /** @var App\Data\Database\Eloquent\Models\File $file */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\FileModel $file */ @endphp
 
 <div class="col-6">
     <div class="card mb-3">
@@ -22,7 +22,7 @@
                         </form>
                     </div>
                 </div>
-          </div>
+            </div>
         </div>
     </div>
 

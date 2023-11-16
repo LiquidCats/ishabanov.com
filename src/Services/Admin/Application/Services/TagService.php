@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Application\Services;
 
-use App\Data\Database\Eloquent\Models\Tag;
+use App\Data\Database\Eloquent\Models\TagModel;
 use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
@@ -17,12 +17,12 @@ readonly class TagService implements TagServiceContract
     {
     }
 
-    public function create(string $name, ?string $slug): Tag
+    public function create(string $name, ?string $slug): TagModel
     {
         return $this->tagRepository->create($name, $slug);
     }
 
-    public function update(TagId $tagId, string $name, ?string $slug): Tag|false
+    public function update(TagId $tagId, string $name, ?string $slug): TagModel|false
     {
         if ($slug && $this->tagRepository->slugExists(new TagSlug($slug))) {
             return false;

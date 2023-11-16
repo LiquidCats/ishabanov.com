@@ -1,4 +1,4 @@
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
 @extends('admin.layouts.default')
 
 @section('title', 'Edit Tag')
@@ -10,14 +10,16 @@
         @method('put')
         <div class="mb-3">
             <label for="tag-name" class="form-label">Name</label>
-            <input type="text" name="name" value="{{ old('name', $tag->name) }}" class="form-control" id="tag-name" placeholder="Name">
+            <input type="text" name="name" value="{{ old('name', $tag->name) }}" class="form-control" id="tag-name"
+                   placeholder="Name">
         </div>
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="mb-3">
             <label for="tag-slug" class="form-label">Slug</label>
-            <input type="text" name="slug" value="{{ old('slug', $tag->slug) }}" class="form-control" id="tag-slug" placeholder="Slug">
+            <input type="text" name="slug" value="{{ old('slug', $tag->slug) }}" class="form-control" id="tag-slug"
+                   placeholder="Slug">
         </div>
         @error('slug')
         <div class="alert alert-danger">{{ $message }}</div>

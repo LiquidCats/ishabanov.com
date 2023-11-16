@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Pages\Presentation\Http\Views\Components\Posts;
 
-use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\PostModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+
 use function route;
 
 class PrevNext extends Component
 {
     public function __construct(
-        private readonly ?Post $post,
+        private readonly ?PostModel $post,
         private readonly string $type = 'next'
     ) {
     }

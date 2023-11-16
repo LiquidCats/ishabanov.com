@@ -17,18 +17,20 @@ use Illuminate\Support\Collection;
 use function now;
 
 /**
- * @property string $title
- * @property string $preview
- * @property string $content
- * @property int $author_id
- * @property bool $is_draft
- * @property Carbon|null $published_at
- * @property User|null $author
- * @property Collection<int, Tag> $tags
+ * @property string                    $title
+ * @property string                    $preview
+ * @property string                    $content
+ * @property int                       $author_id
+ * @property bool                      $is_draft
+ * @property Carbon|null               $published_at
+ * @property UserModel|null            $author
+ * @property Collection<int, TagModel> $tags
  */
-class Post extends Model implements PostRepositoryContract
+class PostModel extends Model implements PostRepositoryContract
 {
     use HasFactory;
+
+    protected $table = 'posts';
 
     protected $casts = [
         'title' => 'string',
@@ -47,12 +49,17 @@ class Post extends Model implements PostRepositoryContract
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id', 'id');
+        return $this->belongsTo(UserModel::class, 'author_id', 'id');
     }
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(
+            TagModel::class,
+            'post_tag',
+            'tag_id',
+            'post_id',
+        );
     }
 
     protected static function newFactory(): PostFactory
@@ -60,16 +67,16 @@ class Post extends Model implements PostRepositoryContract
         return PostFactory::new();
     }
 
-    public function findById(PostId $id): Post
+    public function findById(PostId $id): PostModel
     {
-        return Post::query()
+        return $this->newQuery()
             ->with('tags')
             ->findOrFail($id);
     }
 
     public function getLatest(): LengthAwarePaginator
     {
-        return Post::query()
+        return $this->newQuery()
             ->with('tags')
             ->latest('id')
             ->paginate(perPage: 5);
@@ -77,7 +84,7 @@ class Post extends Model implements PostRepositoryContract
 
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
     {
-        return Post::query()
+        return PostModel::query()
             ->select(['id', 'content', 'preview', 'title', 'published_at'])
             ->with('tags')
             ->where('published_at', '<=', now())
@@ -94,7 +101,7 @@ class Post extends Model implements PostRepositoryContract
     /**
      * @param  UserId<int>  $userId
      */
-    public function create(UserId $userId, Post $post): Post
+    public function create(UserId $userId, PostModel $post): PostModel
     {
         $post->save();
 
@@ -104,10 +111,10 @@ class Post extends Model implements PostRepositoryContract
     /**
      * @param  PostId<int>  $id
      */
-    public function updateById(PostId $id, Post $post): Post
+    public function updateById(PostId $id, PostModel $post): PostModel
     {
-        /** @var Post $model */
-        $model = Post::query()
+        /** @var PostModel $model */
+        $model = PostModel::query()
             ->findOrFail($id->value);
 
         $model->title = $post->title;
@@ -118,10 +125,10 @@ class Post extends Model implements PostRepositoryContract
 
     public function deleteById(PostId $id): bool
     {
-        return Post::destroy($id->value) === 1;
+        return PostModel::destroy($id->value) === 1;
     }
 
-    public function getPrevious(PostId $postId): ?Post
+    public function getPrevious(PostId $postId): ?PostModel
     {
         return $this->newQuery()
             ->select(['title', 'id'])
@@ -132,7 +139,7 @@ class Post extends Model implements PostRepositoryContract
             ->first();
     }
 
-    public function getNext(PostId $postId): ?Post
+    public function getNext(PostId $postId): ?PostModel
     {
         return $this->newQuery()
             ->select(['title', 'id'])
@@ -144,10 +151,10 @@ class Post extends Model implements PostRepositoryContract
     }
 
     /**
-     * @param PostId     $postId
-     * @param Collection<int, Tag> $tags
+     * @param PostId                    $postId
+     * @param Collection<int, TagModel> $tags
      *
-     * @return Collection<int, Post>
+     * @return Collection<int, PostModel>
      */
     public function getSimilarByTag(PostId $postId, Collection $tags): Collection
     {

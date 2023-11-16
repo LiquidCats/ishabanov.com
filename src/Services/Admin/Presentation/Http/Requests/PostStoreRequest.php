@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Requests;
 
-use App\Data\Database\Eloquent\Models\Tag;
+use App\Data\Database\Eloquent\Models\TagModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +19,7 @@ class PostStoreRequest extends FormRequest
             'is_draft' => ['sometimes', 'accepted'],
             'published_at' => ['date'],
             'post_tags' => ['array'],
-            'post_tags.*' => ['numeric', Rule::exists(Tag::class, 'id')],
+            'post_tags.*' => ['numeric', Rule::exists(TagModel::class, 'id')],
         ];
     }
 }

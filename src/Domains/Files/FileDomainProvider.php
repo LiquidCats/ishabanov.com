@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Files;
 
 use App\Admin\Application\Services\FileService;
-use App\Data\Database\Eloquent\Models\File;
+use App\Data\Database\Eloquent\Models\FileModel;
 use App\Data\Filesystem\Storage\Repositories\StorageRepository;
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use App\Domains\Files\Contracts\Repositories\StorageRepositoryContract;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Support\ServiceProvider;
 
-class FileServiceProvider extends ServiceProvider
+class FileDomainProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -23,7 +23,7 @@ class FileServiceProvider extends ServiceProvider
             $f = $app->make(Factory::class);
             return new StorageRepository($f->disk('public'));
         });
-        $this->app->singleton(FileRepositoryContract::class, File::class);
+        $this->app->singleton(FileRepositoryContract::class, FileModel::class);
         $this->app->singleton(FileServiceContract::class, FileService::class);
     }
 }

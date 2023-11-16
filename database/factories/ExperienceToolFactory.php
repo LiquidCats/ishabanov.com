@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Data\Database\Eloquent\Models\ExperienceTool;
+use App\Data\Database\Eloquent\Models\ExperienceToolModel;
 use App\Foundation\Enums\ExperienceLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<ExperienceTool>
+ * @extends Factory<ExperienceToolModel>
  */
 class ExperienceToolFactory extends Factory
 {
-    protected $model = ExperienceTool::class;
+    protected $model = ExperienceToolModel::class;
 
     /**
      * Define the model's default state.

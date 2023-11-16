@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Files;
 
-use App\Data\Database\Eloquent\Models\File;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
 use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Storage;
 use function redirect;
 use function route;
 

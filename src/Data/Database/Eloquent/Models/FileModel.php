@@ -22,8 +22,11 @@ use function sha1_file;
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
-class File extends Model implements FileRepositoryContract
+class FileModel extends Model implements FileRepositoryContract
 {
+
+    protected $table = 'files';
+
     protected $primaryKey = 'hash';
 
     protected $keyType = 'string';
@@ -37,9 +40,9 @@ class File extends Model implements FileRepositoryContract
         'file_size' => 'int',
     ];
 
-    public function create(UploadedFile $file, string $filepath, string $name): File
+    public function create(UploadedFile $file, string $filepath, string $name): FileModel
     {
-        $model = new File();
+        $model = new FileModel();
 
         $model->hash = sha1_file($file->path());
         $model->type = $file->getMimeType();
@@ -53,7 +56,7 @@ class File extends Model implements FileRepositoryContract
         return $model;
     }
 
-    public function findById(FileId $fileId): File
+    public function findById(FileId $fileId): FileModel
     {
         return $this->newQuery()
             ->findOrFail($fileId);

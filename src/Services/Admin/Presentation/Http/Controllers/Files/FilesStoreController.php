@@ -8,7 +8,6 @@ use App\Admin\Presentation\Http\Requests\FileStoreRequest;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-
 use function redirect;
 use function route;
 

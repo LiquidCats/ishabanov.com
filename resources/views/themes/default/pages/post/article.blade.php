@@ -1,5 +1,5 @@
-@php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\PostModel $post */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
 @extends('themes.default.layouts.default')
 
 @section('title', $post->title)
@@ -16,9 +16,9 @@
                         <h1 class="mb-0">{{ $post->title }}</h1>
                         <small>{{ $post->published_at->diffForHumans() }}</small>
                         <div class="my-3">
-                        @foreach ($post->tags as $tag)
-                            <x-tag :tag="$tag" />
-                        @endforeach
+                            @foreach ($post->tags as $tag)
+                                <x-tag :tag="$tag"/>
+                            @endforeach
                         </div>
                         {!! $post->preview !!}
                         {!! $post->content !!}

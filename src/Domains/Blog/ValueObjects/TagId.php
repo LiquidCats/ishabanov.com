@@ -3,15 +3,11 @@
 namespace App\Domains\Blog\ValueObjects;
 
 use App\Foundation\ValueObjects\AbstractValueObject;
-use Illuminate\Http\Request;
-use function assert;
+use App\Foundation\ValueObjects\Resolvable;
 
 readonly class TagId extends AbstractValueObject
 {
-    public static function fromRequest(Request $request): static
-    {
-        return new static(
-            $request->route()?->parameter('tag_id')
-        );
-    }
+    use Resolvable;
+
+    public const AS_KEY = 'tag_id';
 }

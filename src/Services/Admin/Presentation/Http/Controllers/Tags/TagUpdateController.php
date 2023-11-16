@@ -9,7 +9,6 @@ use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-
 use function redirect;
 use function route;
 

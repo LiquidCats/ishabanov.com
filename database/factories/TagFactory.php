@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Data\Database\Eloquent\Models\Tag;
+use App\Data\Database\Eloquent\Models\TagModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 use function fake;
 
 /**
- * @extends Factory<Tag>
+ * @extends Factory<TagModel>
  */
 class TagFactory extends Factory
 {
-    protected $model = Tag::class;
+    protected $model = TagModel::class;
 
     public function definition(): array
     {

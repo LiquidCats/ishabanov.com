@@ -1,4 +1,4 @@
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
 
 @extends('admin.layouts.default')
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Application\Services;
 
-use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Foundation\Enums\AllowedTags;
@@ -14,25 +14,25 @@ use function strip_tags;
 
 readonly class PostService implements PostServiceContract
 {
-    public function createPost(array $data): Post
+    public function createPost(array $data): PostModel
     {
-        $model = new Post();
+        $model = new PostModel();
 
         return $this->saveDataToPost($model, $data);
     }
 
-    public function updatePost(PostId $postId, array $data = []): Post
+    public function updatePost(PostId $postId, array $data = []): PostModel
     {
-        /** @var Post $model */
-        $model = Post::query()->findOrFail($postId->value);
+        /** @var PostModel $model */
+        $model = PostModel::query()->findOrFail($postId->value);
 
         return $this->saveDataToPost($model, $data);
     }
 
-    public function changeState(PostId $postId): Post
+    public function changeState(PostId $postId): PostModel
     {
-        /** @var Post $model */
-        $model = Post::query()->findOrFail($postId->value);
+        /** @var PostModel $model */
+        $model = PostModel::query()->findOrFail($postId->value);
 
         $model->is_draft = ! $model->is_draft;
 
@@ -43,10 +43,10 @@ readonly class PostService implements PostServiceContract
 
     public function deletePost(PostId $postId): bool
     {
-        return Post::destroy($postId->value) > 0;
+        return PostModel::destroy($postId->value) > 0;
     }
 
-    private function saveDataToPost(Post $model, array $data): Post
+    private function saveDataToPost(PostModel $model, array $data): PostModel
     {
         $model->title = Arr::get($data, 'title');
         $model->preview = trim(strip_tags(Arr::get($data, 'preview', ''), AllowedTags::toArray()));

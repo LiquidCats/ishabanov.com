@@ -1,11 +1,12 @@
 @php
-    /** @var App\Data\Database\Eloquent\Models\Post $post */
-    /** @var App\Data\Database\Eloquent\Models\Tag $tag */
+    /** @var App\Data\Database\Eloquent\Models\PostModel $post */
+    /** @var App\Data\Database\Eloquent\Models\TagModel $tag */
 @endphp
 
 <div class="col-12">
     <article class="posts__item p-4 rounded-4 bg-white">
-        <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}" class="text-decoration-none d-block text-black">
+        <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}"
+           class="text-decoration-none d-block text-black">
             <div class="posts__item__preview mb-3">
                 <h2 class="mb-0">{{ $post->title }}</h2>
                 <small>{{ $post->published_at->diffForHumans() }}</small>

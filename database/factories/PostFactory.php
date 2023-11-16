@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\PostModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use function fake;
@@ -12,7 +12,7 @@ use function now;
 
 class PostFactory extends Factory
 {
-    protected $model = Post::class;
+    protected $model = PostModel::class;
 
     public function definition(): array
     {
