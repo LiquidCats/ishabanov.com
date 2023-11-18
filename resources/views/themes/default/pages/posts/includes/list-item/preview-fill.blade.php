@@ -9,7 +9,7 @@
            class="text-decoration-none d-block text-black position-relative z-1">
             <div class="posts__item__preview mb-3">
                 <h2 class="mb-0 text-white">{{ $post->title }}</h2>
-                <small class="text-white">{{ $post->published_at->diffForHumans() }}</small>
+                <small class="text-white-50">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }} min</small>
             </div>
 
             <div class="posts__item__tags mb-3">

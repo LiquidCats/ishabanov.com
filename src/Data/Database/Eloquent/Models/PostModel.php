@@ -10,13 +10,17 @@ use Carbon\Carbon;
 use Database\Factories\PostFactory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use function ceil;
 use function now;
+use function str_word_count;
+use function strip_tags;
 
 /**
  * @property string                    $title
@@ -27,6 +31,7 @@ use function now;
  * @property int                       $author_id
  * @property bool                      $is_draft
  * @property Carbon|null               $published_at
+ * @property int                       $reading_time
  * @property UserModel|null            $author
  * @property Collection<int, TagModel> $tags
  * @property FileModel|null            $previewImage
@@ -39,6 +44,7 @@ class PostModel extends Model implements PostRepositoryContract
 
     protected $casts = [
         'title' => 'string',
+        'preview' => 'string',
         'content' => 'string',
         'author_id' => 'int',
         'is_draft' => 'boolean',
@@ -53,6 +59,20 @@ class PostModel extends Model implements PostRepositoryContract
         'is_draft',
         'published_at',
     ];
+
+    protected function readingTime(): Attribute
+    {
+        return Attribute::make(
+            get: static function (mixed $value, array $attributes): int {
+                $wordsCount = str_word_count(strip_tags($attributes['preview']));
+                $wordsCount += str_word_count(strip_tags($attributes['content']));
+
+                $averageReadingSpeed = 200; // You can adjust this value
+
+                return (int) ceil($wordsCount / $averageReadingSpeed);
+            },
+        );
+    }
 
     public function author(): BelongsTo
     {

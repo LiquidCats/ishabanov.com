@@ -14,7 +14,7 @@
                 <div class="col-12">
                     <article class="post__article p-4 rounded-4">
                         <h1 class="mb-0">{{ $post->title }}</h1>
-                        <small>{{ $post->published_at->diffForHumans() }}</small>
+                        <small>{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
                         <div class="my-3">
                             @foreach ($post->tags as $tag)
                                 <x-tag :tag="$tag"/>

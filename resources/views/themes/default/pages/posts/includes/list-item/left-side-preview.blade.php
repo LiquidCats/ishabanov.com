@@ -13,7 +13,7 @@
                 <div class="col-12 col-md-8 p-4">
                     <div class="posts__item__preview mb-3">
                         <h2 class="mb-0">{{ $post->title }}</h2>
-                        <small>{{ $post->published_at->diffForHumans() }}</small>
+                        <small class="text-light-emphasis">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }} min</small>
                     </div>
 
                     <div class="posts__item__tags mb-3">
