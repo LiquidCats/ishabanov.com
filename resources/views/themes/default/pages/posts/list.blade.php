@@ -9,7 +9,7 @@
                   @include('themes.default.pages.posts.includes.nothing')
                   @each('themes.default.pages.posts.includes.list-item', $posts, 'post')
               </div>
-              {!! $posts->links() !!}
+              {!! $posts->links('themes.default.includes.pagination') !!}
           </div>
     </section>
 @endsection
