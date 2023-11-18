@@ -8,6 +8,7 @@ use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\ValueObjects\PostId;
+use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,7 @@ class PostsPageComposer extends AbstractPageComposer
     public function __construct(
         private readonly PostRepositoryContract $postRepository,
         private readonly TagRepositoryContract $tagRepository,
+        private readonly FileRepositoryContract  $fileRepository,
         Factory $factory,
         Repository $config
     ) {
@@ -47,6 +49,7 @@ class PostsPageComposer extends AbstractPageComposer
             'images' => $images,
             'tags' => $tags,
             'post' => optional(),
+            'previews' => $this->fileRepository->getAllImages(),
             'postTagIds' => Collection::make(old('post_tags', [])),
         ]);
     }
@@ -56,15 +59,17 @@ class PostsPageComposer extends AbstractPageComposer
         $post = $this->postRepository->findById($postId);
         $tags = $this->tagRepository->getAll();
 
-        $inputPostTags = old('post_tags');
-        $postTagIds = empty($inputPostTags) ? $post?->tags?->pluck('id') : $inputPostTags;
+        $inputPostTags = Collection::make(old('post_tags'));
+        $postTagIds = $inputPostTags->isEmpty() ? $post?->tags?->pluck('id') : $inputPostTags;
 
-        $images = FileModel::all()->map(fn (FileModel $f) => ['title' => $f->name, 'value' => Storage::url($f->path)]);
+        $previews = $this->fileRepository->getAllImages();
+        $images = $previews->map(fn (FileModel $f) => ['title' => $f->name, 'value' => asset('storage/'.$f->path)]);
 
         return $this->compose('posts.edit', [
             'images' => $images,
             'tags' => $tags,
             'post' => $post,
+            'previews' => $previews,
             'postTagIds' => $postTagIds,
         ]);
     }

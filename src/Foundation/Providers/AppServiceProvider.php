@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Foundation\Providers;
 
 use App\Admin\AdminServiceProvider;
-use App\Admin\Provides\RouteServiceProvider;
 use App\Api\ApiServiceProvider;
 use App\Authz\AuthzServiceProvider;
 use App\Domains\Blog\BlogDomainProvider;

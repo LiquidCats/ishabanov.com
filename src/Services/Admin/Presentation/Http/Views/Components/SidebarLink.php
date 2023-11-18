@@ -14,7 +14,7 @@ class SidebarLink extends Component
 {
     public function __construct(
         private readonly string $link,
-        private readonly string $name,
+        private readonly string $text,
         private readonly string $icon,
         private readonly ?string $type = null,
     ) {
@@ -23,9 +23,9 @@ class SidebarLink extends Component
     public function render(): View
     {
         return view('admin.components.sidebar-link')
-            ->with('sidebarLink', $this->link)
-            ->with('sidebarName', $this->name)
-            ->with('sidebarIcon', $this->icon)
-            ->with('sidebarType', $this->type);
+            ->with('link', $this->link)
+            ->with('text', $this->text)
+            ->with('icon', $this->icon)
+            ->with('type', $this->type);
     }
 }

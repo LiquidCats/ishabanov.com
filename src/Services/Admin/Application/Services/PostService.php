@@ -6,10 +6,12 @@ namespace App\Admin\Application\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
+use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Foundation\Enums\AllowedTags;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use function filter_var;
 use function strip_tags;
 
 readonly class PostService implements PostServiceContract
@@ -53,6 +55,12 @@ readonly class PostService implements PostServiceContract
         $model->content = trim(strip_tags(Arr::get($data, 'content', ''), AllowedTags::toArray()));
         $model->published_at = Carbon::parse(Arr::get($data, 'published_at'))->startOfMinute();
         $model->is_draft = Arr::exists($data, 'is_draft');
+
+        $previewImageId = (string) Arr::get($data, 'preview_image_id');
+        $model->preview_image_id = $previewImageId === 'none' ? null : $previewImageId;
+
+        $previewImageType = (string) Arr::get($data, 'preview_image_type');
+        $model->preview_image_type = $previewImageType === 'none' ? null : PostPreviewType::tryFrom($previewImageType);
 
         $model->save();
 

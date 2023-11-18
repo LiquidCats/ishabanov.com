@@ -11,3 +11,4 @@
 @endproduction
 
 @vite('resources/js/themes/default/scripts.js')
+@stack('scripts')

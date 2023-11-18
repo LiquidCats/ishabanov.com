@@ -13,7 +13,7 @@
                 <x-admin-sidebar-link :type="$sidebarLink['type'] ?? ''"
                                 :link="$sidebarLink['link']"
                                 :icon="$sidebarLink['icon']"
-                                :name="$sidebarLink['name']" />
+                                :text="$sidebarLink['text']" />
             @endforeach
         </ul>
     </div>

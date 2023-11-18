@@ -15,7 +15,7 @@ readonly class Config
     public static function fromConfig(Repository $repository): static
     {
         return new static(
-            $repository->get('appearance.theme.site', 'default')
+            $repository->get('appearance.site.theme', 'default')
         );
     }
 }

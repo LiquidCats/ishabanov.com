@@ -1,5 +1,6 @@
 <meta name="title" content=@yield("title")>
 @hasSection('preview')
+    <meta property="og:site_name" content="iShabanov">
     <meta property="og:type" content="article">
     <meta property="og:title" content="@yield("title")">
     <meta name="description" content="@yield("preview")">

@@ -3,7 +3,7 @@
 namespace App\Pages;
 
 use App\Pages\Presentation\Http\Views\Components\Footer;
-use App\Pages\Presentation\Http\Views\Components\Navbar;
+use App\Pages\Presentation\Http\Views\Components\Header;
 use App\Pages\Presentation\Http\Views\Components\Tag;
 use App\Pages\Provides\RouteServiceProvider;
 use Carbon\Laravel\ServiceProvider;
@@ -19,7 +19,7 @@ class PagesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component(Tag::class, 'tag');
-        Blade::component(Navbar::class, 'navbar');
+        Blade::component(Header::class, 'header');
         Blade::component(Footer::class, 'footer');
         Blade::componentNamespace('App\\Pages\\Presentation\\Http\\Views\\Components\\Posts', 'posts');
     }

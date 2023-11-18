@@ -13,9 +13,8 @@
         @include('themes.default.includes.styles')
     </head>
     <body>
-        <header class="sticky-top">
-            <x-navbar/>
-        </header>
+        <x-header/>
+
         <main class="position-relative z-1">
             @yield("content")
         </main>

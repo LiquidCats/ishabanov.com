@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Data\Database\Eloquent\Models;
 
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
+use App\Domains\Files\Enums\AllowedTypes;
 use App\Domains\Files\ValueObjects\FileId;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use function sha1_file;
 
 /**
@@ -72,5 +74,12 @@ class FileModel extends Model implements FileRepositoryContract
     {
         return $this->newQuery()
             ->paginate();
+    }
+
+    public function getAllImages(): Collection
+    {
+        return $this->newQuery()
+            ->whereIn('type', AllowedTypes::images())
+            ->get();
     }
 }

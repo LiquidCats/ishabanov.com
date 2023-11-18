@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a @class(['nav-link', 'link-danger' => $sidebarType === 'danger']) aria-current="page" href="{{ $sidebarLink }}">
-        <i class="bi bi-{{ $sidebarIcon }}"></i> {{ $sidebarName }}
+    <a @class(['nav-link', 'link-danger' => $type === 'danger']) aria-current="page" href="{{ $link }}">
+        <i class="bi bi-{{ $icon }}"></i> {{ $text }}
     </a>
 </li>

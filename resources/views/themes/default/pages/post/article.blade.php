@@ -5,7 +5,7 @@
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))
 @section('published_time', $post->published_at->toAtomString())
-@section('self_url', route('pages.blog', ['post_id' => $post?->getKey()]))
+@section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
 
 @section('content')
     <section id="post" class="post container-fluid pt-5 pb-4 position-relative">

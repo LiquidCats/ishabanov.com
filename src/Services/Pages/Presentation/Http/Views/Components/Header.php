@@ -9,10 +9,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
-
+use function asset;
 use function route;
 
-class Navbar extends Component
+class Header extends Component
 {
     public function __construct(private readonly Repository $config)
     {
@@ -20,9 +20,9 @@ class Navbar extends Component
 
     public function render(): View
     {
-        return view("themes.{$this->config->get('appearance.theme.site')}.components.navbar", [
+        return view("themes.{$this->config->get('appearance.site.theme')}.components.header", [
             'links' => $this->links(),
-            'logo' => $this->config->get('appearance.theme.logo'),
+            'logo' => asset($this->config->get('appearance.site.logo')),
         ]);
     }
 
@@ -30,7 +30,7 @@ class Navbar extends Component
     {
         $currentRouteName = Route::currentRouteName();
 
-        $links = $this->config->get('appearance.links.menu', []);
+        $links = $this->config->get('appearance.site.links.menu', []);
 
         return Collection::make($links)
             ->map(fn ($l) => [

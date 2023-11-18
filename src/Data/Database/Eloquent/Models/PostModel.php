@@ -3,6 +3,7 @@
 namespace App\Data\Database\Eloquent\Models;
 
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
+use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\User\ValueObjets\UserId;
 use Carbon\Carbon;
@@ -13,18 +14,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use function now;
 
 /**
  * @property string                    $title
  * @property string                    $preview
+ * @property PostPreviewType           $preview_image_type
+ * @property string                    $preview_image_id
  * @property string                    $content
  * @property int                       $author_id
  * @property bool                      $is_draft
  * @property Carbon|null               $published_at
  * @property UserModel|null            $author
  * @property Collection<int, TagModel> $tags
+ * @property FileModel|null            $previewImage
  */
 class PostModel extends Model implements PostRepositoryContract
 {
@@ -38,6 +43,8 @@ class PostModel extends Model implements PostRepositoryContract
         'author_id' => 'int',
         'is_draft' => 'boolean',
         'published_at' => 'datetime',
+        'preview_image_type' => PostPreviewType::class,
+        'preview_image_id' => 'string',
     ];
 
     protected $fillable = [
@@ -62,15 +69,22 @@ class PostModel extends Model implements PostRepositoryContract
         );
     }
 
+    public function previewImage(): HasOne
+    {
+        return $this->hasOne(FileModel::class, 'hash', 'preview_image_id');
+    }
+
     protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
     }
 
+    // Repository
     public function findById(PostId $id): PostModel
     {
         return $this->newQuery()
             ->with('tags')
+            ->with('previewImage')
             ->findOrFail($id);
     }
 
@@ -78,6 +92,7 @@ class PostModel extends Model implements PostRepositoryContract
     {
         return $this->newQuery()
             ->with('tags')
+            ->with('previewImage')
             ->latest('id')
             ->paginate(perPage: 5);
     }
@@ -85,8 +100,9 @@ class PostModel extends Model implements PostRepositoryContract
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
     {
         return PostModel::query()
-            ->select(['id', 'content', 'preview', 'title', 'published_at'])
+            ->select(['id', 'content', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
             ->with('tags')
+            ->with('previewImage')
             ->where('published_at', '<=', now())
             ->where('is_draft', 0)
             ->when($tags->isNotEmpty(), fn (Builder $q) => $q
