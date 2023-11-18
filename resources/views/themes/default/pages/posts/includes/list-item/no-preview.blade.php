@@ -14,7 +14,7 @@
 
             <div class="posts__item__tags mb-3">
                 @foreach($post->tags as $tag)
-                    <x-tag :tag="$tag"/>
+                    <x-tag>{{ $tag->name }}</x-tag>
                 @endforeach
             </div>
             <div class="posts__item__content">

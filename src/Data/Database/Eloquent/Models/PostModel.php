@@ -195,7 +195,7 @@ class PostModel extends Model implements PostRepositoryContract
     public function getSimilarByTag(PostId $postId, Collection $tags): Collection
     {
         return $this->newQuery()
-            ->select(['title', 'content', 'published_at', 'id'])
+            ->select(['title', 'preview', 'published_at', 'id'])
             ->whereHas('tags', static function (Builder $builder) use ($tags) {
                 $builder->where(function (Builder $builder) use ($tags) {
                     foreach ($tags as $tag) {

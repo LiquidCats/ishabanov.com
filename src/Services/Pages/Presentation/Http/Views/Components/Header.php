@@ -20,7 +20,7 @@ class Header extends Component
 
     public function render(): View
     {
-        return view("themes.{$this->config->get('appearance.site.theme')}.components.header", [
+        return $this->view("themes.{$this->config->get('appearance.site.theme')}.components.header", [
             'links' => $this->links(),
             'logo' => asset($this->config->get('appearance.site.logo')),
         ]);

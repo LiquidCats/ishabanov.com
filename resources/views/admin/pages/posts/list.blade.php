@@ -43,7 +43,7 @@
                     <div>{{ $post->published_at->diffForHumans() }}</div>
                     <div class="mt-2 ">
                         @foreach($post->tags as $tag)
-                            <x-tag :tag="$tag"/>
+                            <x-tag>{{ $tag->name }}</x-tag>
                         @endforeach
                     </div>
 

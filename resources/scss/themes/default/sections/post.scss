@@ -7,18 +7,38 @@
             color: $lc-dark-gray;
 
         }
+
+        &__preview {
+            padding-top: 16rem;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            &:after {
+                position: absolute;
+                display: block;
+                content: " ";
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 0;
+                background-color: hsla(0,0,0,.7);
+            }
+        }
     }
 
     &__similar {
+        & small {
+                color: $lc-dark-gray;
+        }
         &__preview {
+            color: $gray-500;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             height: 3rem;
-            & small {
-                color: $lc-gray;
-            }
+
         }
     }
 }

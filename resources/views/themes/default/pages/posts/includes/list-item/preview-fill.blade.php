@@ -14,10 +14,10 @@
 
             <div class="posts__item__tags mb-3">
                 @foreach($post->tags as $tag)
-                    <x-tag :tag="$tag"/>
+                    <x-tag type="light">{{ $tag->name }}</x-tag>
                 @endforeach
             </div>
-            <div class="posts__item__content  text-white">
+            <div class="posts__item__content text-white">
                 {!! $post->preview !!}
             </div>
             <div class="text-center">

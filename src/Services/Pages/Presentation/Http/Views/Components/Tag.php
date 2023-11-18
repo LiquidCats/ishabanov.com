@@ -10,13 +10,8 @@ use Illuminate\View\Component;
 
 class Tag extends Component
 {
-    public function __construct(private readonly TagModel $tag)
-    {
-    }
-
     public function render(): View
     {
-        return $this->view('themes.default.components.tag')
-            ->with('text', $this->tag->name);
+        return $this->view('themes.default.components.tag');
     }
 }
