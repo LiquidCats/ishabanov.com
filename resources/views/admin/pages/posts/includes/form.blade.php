@@ -101,7 +101,7 @@
                            name="preview_image_id"
                            id="image-{{ $preview->hash }}"
                            value="{{ $preview->hash }}" @checked($preview->hash === old('preview_image_id', $post->preview_image_id))>
-                    <label for="image-{{ $preview->hash }}" class="btn text-truncate" style="max-height: 128px;">
+                    <label for="image-{{ $preview->hash }}" class="btn text-truncate" style="max-height: 128px;max-width: 128px">
                         <img class="d-block img-thumbnail" src="{{ asset('storage/'.$preview->path) }}" alt="{{ $preview->name }}">
                         <span class="text-truncate">{{ $preview->name }}</span>
                     </label>

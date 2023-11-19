@@ -1,5 +1,5 @@
 <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark overflow-hidden bg-opacity-75 bg-primary" style="backdrop-filter: blur(10px)">
+    <nav class="navbar navbar-expand-lg navbar-dark overflow-hidden bg-primary">
         <div class="container">
             <a class="navbar-brand shadow" href="/">
                 <img src="{{ $logo }}" alt="logo" width="24" class="rounded-1">
