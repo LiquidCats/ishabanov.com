@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AuthzServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
     }

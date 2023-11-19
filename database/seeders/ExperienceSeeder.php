@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Data\Database\Eloquent\Models\Experience;
+use App\Data\Database\Eloquent\Models\ExperienceModel;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -88,7 +88,7 @@ class ExperienceSeeder extends Seeder
      */
     public function run(): void
     {
-        Experience::query()->truncate();
+        ExperienceModel::query()->truncate();
 
         foreach (array_reverse(self::$values) as $experience) {
             $this->createModel($experience);
@@ -100,7 +100,7 @@ class ExperienceSeeder extends Seeder
      */
     protected function createModel(array $experience): void
     {
-        $model = new Experience();
+        $model = new ExperienceModel();
 
         $model->id = $experience['id'];
         $model->company_name = $experience['company_name'];

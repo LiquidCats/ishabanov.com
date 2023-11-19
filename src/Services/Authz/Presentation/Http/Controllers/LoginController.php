@@ -21,6 +21,6 @@ class LoginController extends Controller
             return redirect()->intended(route('admin.dashboard'));
         }
 
-        return view('pages.login.index');
+        return view('themes.default.pages.login.index');
     }
 }

@@ -1,7 +1,7 @@
-@php /** @var App\Data\Database\Eloquent\Models\Post $post */ @endphp
-@php /** @var App\Data\Database\Eloquent\Models\Tag $tag */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\PostModel $post */ @endphp
+@php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
 
-@extends('layouts.admin')
+@extends('admin.layouts.default')
 
 @section('title', 'Posts')
 
@@ -25,9 +25,10 @@
                         <div class="d-flex flex-row gap-2">
                             <form method="post"
                                   action="{{ route('admin.posts.state', ['post_id' => $post->getKey()]) }}">
-                                 @csrf
-                                 @method('patch')
-                                <button type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
+                                @csrf
+                                @method('patch')
+                                <button
+                                    type="submit" @class(['btn','btn-sm', 'btn-warning' => !$post->is_draft, 'btn-success' => $post->is_draft])>
                                     {{ $post->is_draft ? 'Publish' : 'Hide' }}
                                 </button>
                             </form>
@@ -42,7 +43,7 @@
                     <div>{{ $post->published_at->diffForHumans() }}</div>
                     <div class="mt-2 ">
                         @foreach($post->tags as $tag)
-                            <x-tag :tag="$tag"/>
+                            <x-tag>{{ $tag->name }}</x-tag>
                         @endforeach
                     </div>
 
@@ -54,7 +55,8 @@
                                         data-bs-toggle="collapse"
                                         data-bs-target="#post-preview-{{$post->getKey()}}"
                                         aria-expanded="false"
-                                        aria-controls="post-preview-{{$post->getKey()}}">Preview</button>
+                                        aria-controls="post-preview-{{$post->getKey()}}">Preview
+                                </button>
                             </h2>
                             <div id="post-preview-{{$post->getKey()}}"
                                  class="accordion-collapse collapse"

@@ -2,23 +2,15 @@
 
 namespace App\Admin;
 
-use App\Admin\Application\Services\BlogService;
-use App\Admin\Application\Services\DashboardViewService;
-use App\Admin\Application\Services\PostCreateViewService;
-use App\Admin\Application\Services\PostEditViewService;
-use App\Admin\Application\Services\PostListViewService;
-use App\Admin\Presentation\Http\Controllers\DashboardController;
-use App\Admin\Presentation\Http\Controllers\PostCreateController;
-use App\Admin\Presentation\Http\Controllers\PostEditController;
-use App\Admin\Presentation\Http\Controllers\PostListController;
+use App\Admin\Application\Services\PostService;
+use App\Admin\Application\Services\TagService;
+use App\Admin\Presentation\Http\Views\Components\Sidebar;
+use App\Admin\Presentation\Http\Views\Components\SidebarLink;
 use App\Admin\Provides\RouteServiceProvider;
-use App\Data\Database\Eloquent\Repositories\PostRepository;
-use App\Data\Database\Eloquent\Repositories\TagRepository;
-use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
-use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
-use App\Domains\Blog\Contracts\Services\BlogServiceContract;
-use App\Domains\Kernel\Contracts\Services\PageComposerServiceContract;
+use App\Domains\Blog\Contracts\Services\PostServiceContract;
+use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use Carbon\Laravel\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -26,25 +18,13 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
-        $this->app->singleton(PostRepositoryContract::class, PostRepository::class);
-        $this->app->singleton(TagRepositoryContract::class, TagRepository::class);
+        $this->app->singleton(PostServiceContract::class, PostService::class);
+        $this->app->singleton(TagServiceContract::class, TagService::class);
+    }
 
-        $this->app->singleton(BlogServiceContract::class, BlogService::class);
-
-        $this->app->when(DashboardController::class)
-            ->needs(PageComposerServiceContract::class)
-            ->give(DashboardViewService::class);
-
-        $this->app->when(PostListController::class)
-            ->needs(PageComposerServiceContract::class)
-            ->give(PostListViewService::class);
-
-        $this->app->when(PostCreateController::class)
-            ->needs(PageComposerServiceContract::class)
-            ->give(PostCreateViewService::class);
-
-        $this->app->when(PostEditController::class)
-            ->needs(PageComposerServiceContract::class)
-            ->give(PostEditViewService::class);
+    public function boot(): void
+    {
+        Blade::component(Sidebar::class, 'sidebar', 'admin');
+        Blade::component(SidebarLink::class, 'sidebar-link', 'admin');
     }
 }

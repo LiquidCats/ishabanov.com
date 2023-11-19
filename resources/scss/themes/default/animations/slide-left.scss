@@ -1,0 +1,11 @@
+[data-animation="slide-left"].animation-init {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(20%);
+}
+
+[data-animation="slide-left"].animation-show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0%);
+}

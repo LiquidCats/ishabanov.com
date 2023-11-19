@@ -3,24 +3,23 @@
 declare(strict_types=1);
 
 use App\Admin\Presentation\Http\Controllers\DashboardController;
-use App\Admin\Presentation\Http\Controllers\FilesCreateController;
-use App\Admin\Presentation\Http\Controllers\FilesDeleteController;
-use App\Admin\Presentation\Http\Controllers\FilesEditController;
-use App\Admin\Presentation\Http\Controllers\FilesListController;
-use App\Admin\Presentation\Http\Controllers\FilesStoreController;
-use App\Admin\Presentation\Http\Controllers\PostChangeStateController;
-use App\Admin\Presentation\Http\Controllers\PostCreateController;
-use App\Admin\Presentation\Http\Controllers\PostDeleteController;
-use App\Admin\Presentation\Http\Controllers\PostEditController;
-use App\Admin\Presentation\Http\Controllers\PostListController;
-use App\Admin\Presentation\Http\Controllers\PostStoreController;
-use App\Admin\Presentation\Http\Controllers\PostUpdateController;
-use App\Admin\Presentation\Http\Controllers\TagCreateController;
-use App\Admin\Presentation\Http\Controllers\TagDeleteController;
-use App\Admin\Presentation\Http\Controllers\TagEditController;
-use App\Admin\Presentation\Http\Controllers\TagListController;
-use App\Admin\Presentation\Http\Controllers\TagStoreController;
-use App\Admin\Presentation\Http\Controllers\TagUpdateController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesCreateController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesDeleteController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesListController;
+use App\Admin\Presentation\Http\Controllers\Files\FilesStoreController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostChangeStateController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostCreateController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostDeleteController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostEditController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostListController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostStoreController;
+use App\Admin\Presentation\Http\Controllers\Posts\PostUpdateController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagCreateController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagDeleteController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagEditController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagListController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagStoreController;
+use App\Admin\Presentation\Http\Controllers\Tags\TagUpdateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect(route('admin.dashboard')));
@@ -59,10 +58,8 @@ Route::prefix('files')
         // view
         Route::get('/', FilesListController::class)->name('admin.files.list');
         Route::get('create', FilesCreateController::class)->name('admin.files.create');
-        // Route::get('edit/{file_id}', FilesEditController::class)->name('admin.files.edit');
 
         //handle
         Route::post('store', FilesStoreController::class)->name('admin.files.store');
-        // Route::put('update/{file_id}', static fn () => back())->name('admin.files.update');
         Route::delete('delete/{file_id}', FilesDeleteController::class)->name('admin.files.delete');
     });

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Pages\Presentation\Http\Views\Components\Posts;
 
-use App\Data\Database\Eloquent\Models\Post;
+use App\Data\Database\Eloquent\Models\PostModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+
 use function route;
 
 class PrevNext extends Component
 {
     public function __construct(
-        private readonly ?Post $post,
+        private readonly ?PostModel $post,
         private readonly string $type = 'next'
     ) {
     }
@@ -24,7 +25,7 @@ class PrevNext extends Component
 
     public function render(): View
     {
-        return view('components.posts.prev-next')
+        return view('themes.default.components.posts.prev-next')
             ->with('link', $this->getLink())
             ->with('title', $this->post->title)
             ->with('type', $this->type);

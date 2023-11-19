@@ -2,15 +2,15 @@
 
 namespace App\Domains\User\ValueObjets;
 
+use App\Foundation\ValueObjects\AbstractValueObject;
+use App\Foundation\ValueObjects\Resolvable;
+
 /**
  * @template T
  */
-readonly class UserId
+readonly class UserId extends AbstractValueObject
 {
-    /**
-     * @param  T  $value
-     */
-    public function __construct(public mixed $value)
-    {
-    }
+    use Resolvable;
+
+    public const AS_KEY = 'user_id';
 }

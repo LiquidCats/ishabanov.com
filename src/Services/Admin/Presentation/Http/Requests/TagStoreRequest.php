@@ -13,7 +13,7 @@ class TagStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:250'],
-            'slug' => ['required', 'string', 'min:3', 'max:250', Rule::unique('tags', 'slug')],
+            'slug' => ['max:250', Rule::unique('tags', 'slug')],
         ];
     }
 }

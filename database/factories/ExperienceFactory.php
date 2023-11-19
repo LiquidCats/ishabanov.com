@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Data\Database\Eloquent\Models\Experience;
+use App\Data\Database\Eloquent\Models\ExperienceModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Experience>
+ * @extends Factory<ExperienceModel>
  */
 class ExperienceFactory extends Factory
 {
-    protected $model = Experience::class;
+    protected $model = ExperienceModel::class;
 
     /**
      * Define the model's default state.
