@@ -20,8 +20,26 @@ class PostStoreRequest extends FormRequest
             'is_draft' => ['sometimes', 'accepted'],
             'published_at' => ['date'],
             'post_tags' => ['array'],
-            'preview_image_id' => ['sometimes', 'nullable', 'string', Rule::exists('files', 'hash')],
-            'preview_image_type' => ['sometimes', 'nullable', 'string', Rule::enum(PostPreviewType::class)],
+            'preview_image_id' => [
+                'sometimes',
+                'string',
+                Rule::when(
+                    $this->get('preview_image_id') !== 'none',
+                    [
+                        Rule::exists('files', 'hash'),
+                    ],
+                ),
+            ],
+            'preview_image_type' => [
+                'sometimes',
+                'string',
+                Rule::when(
+                    $this->get('preview_image_type') !== 'none',
+                    [
+                        Rule::enum(PostPreviewType::class),
+                    ],
+                ),
+            ],
             'post_tags.*' => ['numeric', Rule::exists(TagModel::class, 'id')],
         ];
     }
