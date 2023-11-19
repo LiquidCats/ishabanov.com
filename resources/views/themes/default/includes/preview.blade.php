@@ -7,7 +7,11 @@
     <meta property="og:title" content="@yield('title')">
     <meta property="og:description" content="@yield('preview')">
     <meta property="og:url" content="@yield('self_url')">
+@hasSection('preview_image')
     <meta property="og:image" content="@yield('preview_image')">
+@endif
 
     <meta property="article:published_time" content="@yield('published_time')">
 @endif
+
+

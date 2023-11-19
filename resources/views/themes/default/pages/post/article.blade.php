@@ -4,7 +4,9 @@
 
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))
-@section('preview_image', asset('storage/' . $post->previewImage->path))
+@if($post?->previewImage)
+    @section('preview_image', asset('storage/' . $post?->previewImage?->path))
+@endif
 @section('published_time', $post->published_at->toAtomString())
 @section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
 
