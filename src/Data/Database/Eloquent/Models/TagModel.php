@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
  * @property string $slug
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property Collection $posts
  */
 class TagModel extends Model implements TagRepositoryContract
 {
