@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Foundation\Exceptions;
 
 use App\Foundation\Enums\Response\Status;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;
@@ -55,7 +57,7 @@ class Handler extends BaseExceptionHandler
         })->stop();
 
         $this->renderable(static function (Throwable $e, Request $request) {
-            if ($request->is('api/*')) {
+            if ($request->is('*/api/*')) {
                 $response = new JsonResponse();
 
                 $data = [
@@ -69,6 +71,14 @@ class Handler extends BaseExceptionHandler
                     $data['data'] = $e->validator->getMessageBag()->getMessages();
 
                     $response->setStatusCode(422);
+                }
+
+                if ($e instanceof AuthenticationException) {
+                    $response->setStatusCode(401);
+                }
+
+                if ($e instanceof UnauthorizedException) {
+                    $response->setStatusCode(403);
                 }
 
                 return $response->setData($data);
