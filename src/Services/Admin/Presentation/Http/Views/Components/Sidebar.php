@@ -8,7 +8,9 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Fluent;
 use Illuminate\View\Component;
+
 use function route;
 use function view;
 
@@ -29,18 +31,17 @@ class Sidebar extends Component
 
         return Collection::make($this->config->get('appearance.admin.links.menu', []))
             ->map(function (array $l) {
-                if (!$l) {
+                if (! $l) {
                     return [];
                 }
 
                 $link = $this->router->has($l['link'])
-                    ? route($l['link'])
+                    ? route($l['link'], absolute: false)
                     : $l['link'];
 
-                return [
-                    ...$l,
-                    'link' => $link,
-                ];
+                return new Fluent([
+                    ...$l, 'link' => $link,
+                ]);
             });
     }
 }
