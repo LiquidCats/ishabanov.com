@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Posts;
 
+use App\Admin\Presentation\Http\Resources\PostResource;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\ValueObjects\PostId;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class PostDeleteController extends Controller
 {
@@ -17,10 +16,10 @@ class PostDeleteController extends Controller
     {
     }
 
-    public function __invoke(string $postId): RedirectResponse
+    public function __invoke(string $postId): AnonymousResourceCollection
     {
-        $this->service->deletePost(new PostId($postId));
+        $touchedPosts = $this->service->deletePost(new PostId($postId));
 
-        return redirect(route('admin.posts.list'));
+        return PostResource::collection($touchedPosts);
     }
 }

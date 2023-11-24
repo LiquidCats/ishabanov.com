@@ -9,7 +9,7 @@ use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Routing\Controller;
 
-class PostChangeStateController extends Controller
+class PostController extends Controller
 {
     public function __construct(private readonly PostServiceContract $service)
     {
@@ -17,8 +17,8 @@ class PostChangeStateController extends Controller
 
     public function __invoke(string $postId): PostResource
     {
-        $model = $this->service->changeState(new PostId($postId));
+        $post = $this->service->getPost(new PostId($postId));
 
-        return PostResource::make($model);
+        return PostResource::make($post);
     }
 }
