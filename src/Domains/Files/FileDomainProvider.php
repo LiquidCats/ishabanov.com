@@ -12,10 +12,16 @@ use App\Domains\Files\Contracts\Repositories\StorageRepositoryContract;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Filesystem\Factory;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class FileDomainProvider extends ServiceProvider
 {
+    public function boot(): void
+    {
+        Route::pattern('file_id', '[a-z0-9]{32,255}');
+    }
+
     public function register(): void
     {
         $this->app->singleton(StorageRepositoryContract::class, static function (Container $app) {
