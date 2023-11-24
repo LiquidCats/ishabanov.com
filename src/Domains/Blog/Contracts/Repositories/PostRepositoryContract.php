@@ -18,6 +18,11 @@ interface PostRepositoryContract
     public function findById(PostId $id): PostModel;
 
     /**
+     * @return Collection<int, PostModel>
+     */
+    public function findManyById(PostId ...$id): Collection;
+
+    /**
      * @param  Collection<int, TagSlug>  $tags
      */
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator;
@@ -50,9 +55,8 @@ interface PostRepositoryContract
     public function getNext(PostId $postId): ?PostModel;
 
     /**
-     * @param  PostId<int>               $postId
-     * @param  Collection<int, TagModel> $tags
-     *
+     * @param  PostId<int>  $postId
+     * @param  Collection<int, TagModel>  $tags
      * @return Collection<int, PostModel>
      */
     public function getSimilarByTag(PostId $postId, Collection $tags): Collection;

@@ -6,6 +6,8 @@ namespace App\Domains\Blog\Contracts\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blog\ValueObjects\PostId;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface PostServiceContract
 {
@@ -22,7 +24,15 @@ interface PostServiceContract
     public function changeState(PostId $postId): PostModel;
 
     /**
-     * @param  PostId<int>  $postId
+     * @param  PostId<int>[]  $postId
+     * @return Collection<int, PostModel>
      */
-    public function deletePost(PostId $postId): bool;
+    public function deletePost(PostId ...$postId): Collection;
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function paginate(): LengthAwarePaginator;
+
+    public function getPost(PostId $postId): PostModel;
 }
