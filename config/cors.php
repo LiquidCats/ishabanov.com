@@ -17,13 +17,22 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => ['api/*', 'admin/api/*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [env('APP_URL')],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [
+        'Accept',
+        'Content-Type',
+        'X-Requested-With',
+        'Origin',
+        'X-Xsrf-Token',
+        'Cache-Control',
+        'Expires',
+        'Pragma',
+    ],
 
     'allowed_headers' => ['*'],
 
@@ -31,6 +40,6 @@ return [
 
     'max_age' => 120,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

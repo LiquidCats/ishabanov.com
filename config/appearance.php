@@ -44,33 +44,33 @@ return [
         'links' => [
             'menu' => [
                 [
-                    'link' => 'admin.dashboard',
+                    'link' => '/admin/dashboard',
                     'text' => 'Dashboard',
                     'icon' => 'clipboard-data-fill',
                 ],
                 [
-                    'link' => 'admin.posts.list',
+                    'link' => '/admin/posts',
                     'text' => 'Posts',
                     'icon' => 'postcard-fill',
                 ],
                 [
-                    'link' => 'admin.tags.list',
+                    'link' => '/admin/tags',
                     'text' => 'Tags',
                     'icon' => 'tags-fill',
                 ],
                 [
-                    'link' => 'admin.files.list',
+                    'link' => '/admin/files',
                     'text' => 'Files',
                     'icon' => 'file-earmark-image-fill',
                 ],
                 [
-                    'link' => '#',
+                    'link' => '/admin/users',
                     'text' => 'Users',
                     'icon' => 'people-fill',
                 ],
                 [],
                 [
-                    'link' => '#',
+                    'link' => '/admin/settings',
                     'text' => 'Settings',
                     'icon' => 'sliders',
                 ],
