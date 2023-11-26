@@ -2,7 +2,6 @@ import {defineStore} from "pinia";
 import {File} from "../types/data";
 import useNotificationState from "./notfications";
 import {getImages} from "../api/files";
-import usePostEditState from "./pages/posts/edit";
 
 interface State {
     items: File[],

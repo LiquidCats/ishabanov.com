@@ -1,12 +1,12 @@
 import {defineStore} from "pinia";
-import {Post} from "../../../types/data";
-import {ResponseLinks} from "../../../types/ApiResponse";
-import useNotificationState from "../../notfications";
-import {changePostState, getPosts, removePost} from "../../../api/posts";
+import {Post} from "../types/data";
+import {ResponseLinks, ResponseMeta} from "../types/ApiResponse";
+import useNotificationState from "./notfications";
+import {changeState, paginate, removeById} from "../api/posts";
 
 interface State {
     items: Post[],
-    pagination: ResponseLinks
+    pagination: {current_page: number} & ResponseLinks
     status: {
         listLoading: boolean,
         deletingId: null|number,
@@ -15,15 +15,16 @@ interface State {
 }
 
 interface Actions {
-    loadPosts(): Promise<any>
+    paginate(page?: number): Promise<any>
     delete(id: number): Promise<any>
     changeState(id: number): Promise<any>
 }
 
-const usePostListState = defineStore<string, State, any, Actions>('post-list', {
+const usePostListState = defineStore<string, State, any, Actions>('posts', {
     state: () => ({
         items: [],
         pagination: {
+            current_page: 1,
             first: "",
             last: "",
             prev: "",
@@ -36,12 +37,15 @@ const usePostListState = defineStore<string, State, any, Actions>('post-list', {
         }
     }),
     actions: {
-        async loadPosts() {
+        async paginate(page: number = 1) {
             this.status.listLoading = true;
             try {
-                const response = await getPosts()
-                this.items = response.data
-                this.pagination = response.links
+                const {data, links, meta} = await paginate(page)
+                this.items = data
+                this.pagination = {
+                    current_page: meta.current_page,
+                    ...links
+                }
             } catch (e) {
                 const notifications = useNotificationState()
 
@@ -53,9 +57,9 @@ const usePostListState = defineStore<string, State, any, Actions>('post-list', {
         async delete(id: number) {
             try {
                 this.status.deletingId = id
-                await removePost(id)
+                await removeById(id)
 
-                await this.loadPosts()
+                await this.paginate()
             } catch (e) {
                 const notifications = useNotificationState()
 
@@ -68,7 +72,7 @@ const usePostListState = defineStore<string, State, any, Actions>('post-list', {
             try {
                 this.status.changingStateId = id
 
-                const response = await changePostState(id)
+                const response = await changeState(id)
                 const post = response.data
                 const index = this.items.findIndex((p: Post) => p.id = post.id)
 

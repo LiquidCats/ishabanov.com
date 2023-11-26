@@ -1,11 +1,12 @@
 import {defineStore} from "pinia";
+import {MandeError} from "mande";
 
 interface State {
     items: [],
 }
 
 interface Actions {
-    push(e: Error): void
+    push(e: any): void
 }
 
 const useNotificationState = defineStore<string, State, any, Actions>('notifications', {
@@ -13,9 +14,9 @@ const useNotificationState = defineStore<string, State, any, Actions>('notificat
         items: [],
     }),
     actions: {
-        push(e: Error) {
-            console.log(e)
-            //this.items.push()
+        push(e): void {
+            const err = e as MandeError
+            console.error(err.body)
         }
     }
 })
