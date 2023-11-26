@@ -57,7 +57,7 @@
                 <label for="post-published-at" class="form-label">Published At (UTC)</label>
                 <input type="text"
                        name="published_at"
-                       value="{{ old('published_at', $post?->published_at?->toDateTimeString('minutes') ?? now()->diffForHumans('minutes')) }}"
+                       value="{{ old('published_at', $post?->published_at?->toDateTimeString('minute') ?? now()->toDateTimeString('minute')) }}"
                        class="form-control"
                        id="post-published-at" placeholder="Published At"/>
             </div>
