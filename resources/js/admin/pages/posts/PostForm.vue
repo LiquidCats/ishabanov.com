@@ -6,12 +6,17 @@ import type {Post, File, Tag as TagData} from "../../types/data";
 //
 import Editor from "../../components/Editor.vue";
 import MultiSelect from "../../components/MultiSelect.vue";
+import dayjs from "dayjs";
+import useTagsState from "../../states/tags";
+import debounce from "../../utils/debounce";
 
 enum Tabs {
     main = 'main',
     preview = 'preview',
     content = 'content',
 }
+
+const tagsMapperFn = (v: any) => ({value: v.id, text: v.name})
 
 interface Props {
     post: Post
@@ -22,6 +27,8 @@ interface Props {
 }
 
 defineProps<Props>()
+
+const tagsState = useTagsState()
 
 const currentTab= ref<Tabs>(Tabs.main)
 
@@ -34,6 +41,14 @@ const checkTab = computed(() => ({
 function selectTab(value: Tabs) {
     currentTab.value = value
 }
+
+
+async function handleTagSearch(e: Event) {
+    const searchString: string = e?.target?.value ?? '';
+
+    await tagsState.search(searchString)
+}
+const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
 
 </script>
 
@@ -84,17 +99,16 @@ function selectTab(value: Tabs) {
                    class="form-control"
                    id="post-title"
                    :value="post.title"
-                   @input="post.title = $event.target.value"
+                   @input="post.title = $event?.target?.value"
                    placeholder="Title">
         </div>
 
         <div class="mb-3">
             <label for="post-published-at" class="form-label">Published At (UTC)</label>
-            <input type="text"
-                   name="published_at"
+            <input name="published_at"
                    class="form-control"
-                   :value="post.published_at"
-                   @input="post.published_at = $event.target.value"
+                   :value="post?.published_at || dayjs().format('YYYY-MM-DD HH:mm')"
+                   @input="post.published_at = $event?.target?.value"
                    id="post-published-at" placeholder="Published At"/>
         </div>
 
@@ -111,20 +125,17 @@ function selectTab(value: Tabs) {
 
         <div class="mb-3">
             <div class="mb-2">Tags</div>
-                <MultiSelect :items="[
-                                 {id: 1, name: 'test 1'},
-                                 {id: 2, name: 'test 2'},
-                                 {id: 3, name: 'test'},
-                                 {id: 4, name: 'test 4'},
-                                 {id: 5, name: 'test 5'},
-                                 {id: 6, name: 'test 6'},
-                                 {id: 7, name: 'test 7'},
-                                 {id: 8, name: 'test 8'},
-                                 {id: 9, name: 'test 9'},
-                                 {id: 10, name: 'test 10'},
-                             ]"
-                             :mapper="(v: any) => ({value: v.id, text: v.name})"
-                             v-model="post.tags"/>
+                <MultiSelect :items="tags"
+                             @input="debouncedHandleTagSearch($event)"
+                             :mapper="tagsMapperFn"
+                             v-model="post.tags">
+<!--                    <template #nothing>-->
+<!--                        <div class="d-flex justify-content-center mb-2">-->
+<!--                            <span>Nothing Found</span>-->
+<!--                        </div>-->
+<!--                        <Btn type="primary" class="btn-sm"><i class="bi bi-plus-lg"></i> Create</Btn>-->
+<!--                    </template>-->
+                </MultiSelect>
         </div>
     </div>
     <div v-if="checkTab.isPreview"
