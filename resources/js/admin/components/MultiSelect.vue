@@ -109,7 +109,7 @@ function selectItem(e: Event, index: number|string) {
                        class="align-self-stretch"
                        type="text"
                        @focus="focusedItemIndex = 0"
-                       @input="$emit('input')"
+                       @input="$emit('input', $event)"
                        @keydown.down="focusDownItem()"
                        @keydown.up="focusUpperItem()"
                        @keydown.enter="selectItem($event, focusedItemIndex)">
@@ -128,6 +128,9 @@ function selectItem(e: Event, index: number|string) {
                         'focused': focusedItemIndex === index
                  }"
                  v-for="(item, index) in allItems">{{ item.text }}</div>
+            <div v-if="allItems.length === 0" class="p-2 text-center">
+                <slot name="nothing">nothing found</slot>
+            </div>
         </template>
     </Popper>
 </template>

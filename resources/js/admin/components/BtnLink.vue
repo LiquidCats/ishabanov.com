@@ -4,7 +4,7 @@
     interface Props {
         type: Colors,
         icon?: string,
-        to?: string,
+        to: string,
     }
 
     defineProps<Props>()
