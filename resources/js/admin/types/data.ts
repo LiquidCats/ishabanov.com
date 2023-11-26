@@ -9,7 +9,7 @@ export interface Post {
     published_at: string;
     reading_time: number;
     tags: Tag[];
-    previewImage: File;
+    previewImage: File|null;
 }
 
 export interface Tag {
