@@ -1,6 +1,6 @@
 export function baseUrl(...paths: string[]): string {
 
-    const baseUrl = import.meta.env.VITE_APP_URL
-    
+    const baseUrl = ''
+
     return `${baseUrl}/${paths.join('/')}`
 }
