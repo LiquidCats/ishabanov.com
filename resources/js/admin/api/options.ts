@@ -8,4 +8,5 @@ export const options: OptionsRaw = {
     },
     redirect: "error",
     referrerPolicy: "origin",
+    // responseAs: 'response'
 }

@@ -8,7 +8,7 @@ import {getCookie} from "../utils/getCookie";
 
 const posts = mande(baseUrl('admin', 'api', 'v1', 'posts'), options)
 
-export async function getPosts(page: number = 1) {
+export async function paginate(page: number = 1) {
     await getCsrf(posts)
 
     return posts.get<ApiResponse<Post[]>>({
@@ -16,28 +16,32 @@ export async function getPosts(page: number = 1) {
     })
 }
 
-export async function getPost(postId: number) {
+export async function getById(postId: number) {
     await getCsrf(posts)
 
     return posts.get<ApiResponse<Post>>(postId)
 }
 
-export async function changePostState(postId: number) {
+export async function changeState(postId: number) {
     await getCsrf(posts)
 
-    return posts.patch<ApiResponse<Post>>(`state/${postId}`, {
-        headers: {
-            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-        }
-    })
+    return posts.patch<ApiResponse<Post>>(`state/${postId}`)
 }
 
-export async function removePost(postId: number) {
+export async function removeById(postId: number) {
     await getCsrf(posts)
 
-    return posts.delete<ApiResponse<Post>>(postId, {
-        headers: {
-            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-        }
-    })
+    return posts.delete<ApiResponse<Post>>(postId)
+}
+
+export async function create(data: Post) {
+    await getCsrf(posts)
+
+    return posts.post<ApiResponse<Post>>(data)
+}
+
+export async function updateById(postId: number, data: Post) {
+    await getCsrf(posts)
+
+    return posts.put<ApiResponse<Post>>(postId, data)
 }
