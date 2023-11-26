@@ -19,6 +19,7 @@
         "@popperjs/core": "^2.11.8",
         "@tinymce/tinymce-vue": "^5.1.1",
         "bootstrap": "latest",
+        "dayjs": "^1.11.10",
         "mande": "^2.0.8",
         "pinia": "^2.1.7",
         "vue": "latest",
