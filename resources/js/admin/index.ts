@@ -1,3 +1,5 @@
+import "bootstrap"
+//
 import {createApp} from "vue"
 import {RouterView} from "vue-router";
 import Popper from "vue3-popper";
