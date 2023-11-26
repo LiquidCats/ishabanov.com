@@ -21,7 +21,7 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    'allowed_origins' => [env('APP_URL')],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [
         'Accept',
