@@ -6,6 +6,9 @@ services:
             context: .
             dockerfile: docker/local/backend/Dockerfile
         tty: true
+        depends_on:
+            - database
+            - cache
         volumes:
             - .:/app
         ports:
