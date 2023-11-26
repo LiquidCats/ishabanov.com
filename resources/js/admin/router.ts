@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import PostList from "./pages/posts/PostList.vue";
-import PostEdit from "./pages/posts/PostEdit.vue";
+import PostEdit from "./pages/posts/PostEditor.vue";
+import RouteNames from "./enums/RouteNames";
 
 const router =  createRouter({
     history: createWebHistory(),
@@ -19,12 +20,14 @@ const router =  createRouter({
 
         {
             path: '/admin/posts/create',
-            component: null,
+            component: PostEdit,
+            name: RouteNames.POST_CREATE,
             children: [],
         },
         {
-            path: '/admin/posts/:id(\\d+)/edit',
+            path: '/admin/posts/:post_id(\\d+)/edit',
             component: PostEdit,
+            name: RouteNames.POST_EDIT,
             children: [],
         },
         {
