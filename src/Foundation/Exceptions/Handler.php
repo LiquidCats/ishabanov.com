@@ -6,6 +6,7 @@ namespace App\Foundation\Exceptions;
 
 use App\Foundation\Enums\Response\Status;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -79,6 +80,10 @@ class Handler extends BaseExceptionHandler
 
                 if ($e instanceof UnauthorizedException) {
                     $response->setStatusCode(403);
+                }
+
+                if ($e instanceof ModelNotFoundException) {
+                    $response->setStatusCode(404);
                 }
 
                 return $response->setData($data);
