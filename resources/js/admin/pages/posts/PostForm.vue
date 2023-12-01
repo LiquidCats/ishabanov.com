@@ -42,7 +42,6 @@ function selectTab(value: Tabs) {
     currentTab.value = value
 }
 
-
 async function handleTagSearch(e: Event) {
     const searchString: string = e?.target?.value ?? '';
 
