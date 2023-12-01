@@ -63,17 +63,17 @@ return [
                     'text' => 'Files',
                     'icon' => 'file-earmark-image-fill',
                 ],
-                [
-                    'link' => '/admin/users',
-                    'text' => 'Users',
-                    'icon' => 'people-fill',
-                ],
-                [],
-                [
-                    'link' => '/admin/settings',
-                    'text' => 'Settings',
-                    'icon' => 'sliders',
-                ],
+                // [
+                //     'link' => '/admin/users',
+                //     'text' => 'Users',
+                //     'icon' => 'people-fill',
+                // ],
+                // [],
+                // [
+                //     'link' => '/admin/settings',
+                //     'text' => 'Settings',
+                //     'icon' => 'sliders',
+                // ],
                 [],
                 [
                     'link' => 'auth.logout',
