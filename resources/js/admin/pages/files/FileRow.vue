@@ -3,8 +3,8 @@
 import type {File} from "../../types/data";
 import {Colors} from "../../types/colors";
 import formatBytes from "../../utils/fromBytes";
-import Tag from "../../components/Tag.vue";
-import Btn from "../../components/Btn.vue";
+import Tag from "../../components/atoms/Tag.vue";
+import Btn from "../../components/atoms/Btn.vue";
 
 interface Props {
     file: File

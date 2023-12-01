@@ -3,15 +3,15 @@
 import {computed, onMounted, toValue} from "vue";
 import {useRoute, useRouter} from "vue-router";
 //
-import PageHeader from "../../components/PageHeader.vue";
-import Tag from "../../components/Tag.vue";
+import PageHeader from "../../components/molecules/PageHeader.vue";
+import Tag from "../../components/atoms/Tag.vue";
 import PostForm from "./PostForm.vue";
 //
 import usePostState from "../../states/post";
 import useImagesState from "../../states/images";
 import useTagsState from "../../states/tags";
 import RouteNames from "../../enums/RouteNames";
-import PostButtons from "../../components/PageButtons.vue";
+import PostButtons from "../../components/molecules/PageButtons.vue";
 import {Colors} from "../../types/colors";
 
 const postState = usePostState()

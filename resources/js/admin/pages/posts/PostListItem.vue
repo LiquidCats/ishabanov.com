@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import Tag from "../../components/Tag.vue";
+import Tag from "../../components/atoms/Tag.vue";
 import {Post} from "../../types/data";
 import {Colors} from "../../types/colors";
 import RouteNames from "../../enums/RouteNames";

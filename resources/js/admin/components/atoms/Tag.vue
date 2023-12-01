@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type {Colors} from "../types/colors";
+    import type {Colors} from "../../types/colors";
 
     interface Props {
         type: Colors

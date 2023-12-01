@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 import {onMounted, ref, watch} from "vue";
-import Tag from "../../components/Tag.vue";
-import PageHeader from "../../components/PageHeader.vue";
-import Btn from "../../components/Btn.vue";
+import Tag from "../../components/atoms/Tag.vue";
+import PageHeader from "../../components/molecules/PageHeader.vue";
+import Btn from "../../components/atoms/Btn.vue";
 
 import useTagsState from "../../states/tags";
 import {Colors} from "../../types/colors";

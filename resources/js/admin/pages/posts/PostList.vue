@@ -4,12 +4,12 @@ import {onMounted} from "vue";
 //
 import usePostListState from "../../states/posts";
 //
-import PageHeader from "../../components/PageHeader.vue";
-import BtnLink from "../../components/BtnLink.vue";
-import Btn from "../../components/Btn.vue";
+import PageHeader from "../../components/molecules/PageHeader.vue";
+import BtnLink from "../../components/atoms/BtnLink.vue";
+import Btn from "../../components/atoms/Btn.vue";
 import PostListItem from "./PostListItem.vue";
 import {Colors} from "../../types/colors";
-import Pagination from "../../components/Pagination.vue";
+import Pagination from "../../components/molecules/Pagination.vue";
 
 const state = usePostListState()
 

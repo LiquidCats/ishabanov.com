@@ -5,12 +5,12 @@ import {onBeforeUnmount, onMounted} from "vue";
 import type {FileToUpload} from "../../types/internals";
 import type {File} from "../../types/data";
 //
-import PageHeader from "../../components/PageHeader.vue";
-import Btn from "../../components/Btn.vue";
+import PageHeader from "../../components/molecules/PageHeader.vue";
+import Btn from "../../components/atoms/Btn.vue";
 import {Colors} from "../../types/colors";
 import FilePreview from "./FilePreview.vue";
 import DropZone from "./DropZone.vue";
-import Pagination from "../../components/Pagination.vue";
+import Pagination from "../../components/molecules/Pagination.vue";
 import useFilesState from "../../states/files";
 import FileRow from "./FileRow.vue";
 

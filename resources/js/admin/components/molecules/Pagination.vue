@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {ResponseLinks} from "../types/api";
-import Btn from "./Btn.vue";
-import {Colors} from "../types/colors";
+import {ResponseLinks} from "../../types/api";
+import Btn from "../atoms/Btn.vue";
+import {Colors} from "../../types/colors";
 
 interface Props {
   links: {current_page: number} & ResponseLinks

@@ -3,7 +3,7 @@
 import {Colors} from "../../types/colors";
 import formatBytes from "../../utils/fromBytes";
 import {FileToUpload} from "../../types/internals";
-import Btn from "../../components/Btn.vue";
+import Btn from "../../components/atoms/Btn.vue";
 
 interface Props {
     file: FileToUpload

@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import MceEditor from '@tinymce/tinymce-vue'
     import {computed, onMounted, reactive} from "vue";
-    import useImagesState from "../states/images";
+    import useImagesState from "../../states/images";
 
     const state = useImagesState()
 

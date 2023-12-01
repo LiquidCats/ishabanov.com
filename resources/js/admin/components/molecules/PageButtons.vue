@@ -2,8 +2,8 @@
 
 import {useRouter} from "vue-router";
 //
-import Btn from "./Btn.vue";
-import {Colors} from "../types/colors";
+import Btn from "../atoms/Btn.vue";
+import {Colors} from "../../types/colors";
 
 const router = useRouter()
 
