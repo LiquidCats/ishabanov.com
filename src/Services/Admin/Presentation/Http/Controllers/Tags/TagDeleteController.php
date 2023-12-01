@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Tags;
 
+use App\Admin\Presentation\Http\Resources\TagResource;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class TagDeleteController extends Controller
 {
@@ -18,10 +17,10 @@ class TagDeleteController extends Controller
     {
     }
 
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(Request $request): AnonymousResourceCollection
     {
-        $this->tagService->delete(TagId::fromRequestRoute($request));
+        $models = $this->tagService->delete(TagId::fromRequestRoute($request));
 
-        return redirect(route('admin.tags.list'));
+        return TagResource::collection($models);
     }
 }

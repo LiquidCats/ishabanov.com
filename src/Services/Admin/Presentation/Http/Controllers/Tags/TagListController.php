@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\Admin\Presentation\Http\Controllers\Tags;
 
-use App\Admin\Application\Services\TagsPageComposer;
-use Illuminate\Contracts\View\View;
+use App\Admin\Presentation\Http\Resources\TagResource;
+use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 
 class TagListController extends Controller
 {
-    public function __construct(private readonly TagsPageComposer $service)
+    public function __construct(private readonly TagServiceContract $service)
     {
     }
 
-    public function __invoke(Request $request): View
+    public function __invoke(Request $request): AnonymousResourceCollection
     {
-        return $this->service->list();
+        $tags = $this->service->search($request->get('q', '') ?? '');
+
+        return TagResource::collection($tags);
     }
 }

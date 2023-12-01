@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Controllers\Tags;
 
 use App\Admin\Presentation\Http\Requests\TagStoreRequest;
+use App\Admin\Presentation\Http\Resources\TagResource;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
@@ -17,13 +18,13 @@ class TagStoreController extends Controller
     {
     }
 
-    public function __invoke(TagStoreRequest $request): RedirectResponse
+    public function __invoke(TagStoreRequest $request): TagResource
     {
         $tag = $this->tagService->create(
             $request->validated('name'),
             $request->validated('slug'),
         );
 
-        return redirect(route('admin.tags.edit', ['tag_id' => $tag->getKey()]));
+        return TagResource::make($tag);
     }
 }

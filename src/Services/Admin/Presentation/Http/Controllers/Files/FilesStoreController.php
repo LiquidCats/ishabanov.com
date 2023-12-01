@@ -7,8 +7,7 @@ namespace App\Admin\Presentation\Http\Controllers\Files;
 use App\Admin\Presentation\Http\Requests\FileStoreRequest;
 use App\Admin\Presentation\Http\Resources\FileResource;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
-use App\Foundation\Enums\Response\Status;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 
 class FilesStoreController extends Controller
@@ -17,19 +16,12 @@ class FilesStoreController extends Controller
     {
     }
 
-    public function __invoke(FileStoreRequest $request): JsonResponse|FileResource
+    public function __invoke(FileStoreRequest $request): AnonymousResourceCollection
     {
-        $file = $request->file('file');
-        $name = $request->validated('name');
+        $data = $request->validated('list');
 
-        $model = $this->fileService->store($file, $name);
-        if ($model === null) {
-            return new JsonResponse([
-                'status' => Status::FAIL,
-                'message' => 'File was not created',
-            ], 400);
-        }
+        $model = $this->fileService->storeMany($data);
 
-        return FileResource::make($model);
+        return FileResource::collection($model);
     }
 }

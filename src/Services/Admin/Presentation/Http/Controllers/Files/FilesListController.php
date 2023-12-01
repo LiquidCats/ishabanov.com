@@ -6,6 +6,8 @@ namespace App\Admin\Presentation\Http\Controllers\Files;
 
 use App\Admin\Presentation\Http\Resources\FileResource;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
+use App\Domains\Files\Enums\FilterTypes;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 
@@ -15,9 +17,11 @@ class FilesListController extends Controller
     {
     }
 
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(Request $request): AnonymousResourceCollection
     {
-        $files = $this->service->paginate();
+        $type = $request->enum('type', FilterTypes::class);
+
+        $files = $this->service->list($type);
 
         return FileResource::collection($files);
     }
