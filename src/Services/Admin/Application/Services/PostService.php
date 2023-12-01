@@ -15,6 +15,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use function strip_tags;
 use function trim;
@@ -37,23 +38,37 @@ readonly class PostService implements PostServiceContract
 
     public function createPost(array $data): PostModel
     {
-        $userId = new UserId(Auth::id());
-        $model = $this->createFromData($data);
-        $model = $this->postRepository->create($userId, $model);
+        return DB::transaction(function () use ($data) {
+            $userId = new UserId(Auth::id());
+            $dto = $this->createFromData($data);
+            $model = $this->postRepository->create($userId, $dto);
 
-        $model->tags()->sync(Arr::get($data, 'post_tags'));
+            $tags = Arr::get($data, 'tags', []);
+            $tagIds = Collection::make($tags)
+                ->pluck('id');
 
-        return $model;
+            $model->tags()->sync($tagIds);
+
+            return $model;
+        });
     }
 
     public function updatePost(PostId $postId, array $data = []): PostModel
     {
-        $model = $this->createFromData($data);
-        $this->postRepository->updateById($postId, $model);
+        return DB::transaction(function () use ($postId, $data) {
+            $dto = $this->createFromData($data);
+            $model = $this->postRepository->updateById($postId, $dto);
 
-        $model->tags()->sync(Arr::get($data, 'post_tags'));
+            $tags = Arr::get($data, 'tags', []);
+            $tagIds = Collection::make($tags)
+                ->pluck('id');
 
-        return $model;
+            $model->tags()->sync($tagIds);
+
+            $model->load(['previewImage', 'tags']);
+
+            return $model;
+        });
     }
 
     public function changeState(PostId $postId): PostModel
@@ -71,9 +86,11 @@ readonly class PostService implements PostServiceContract
     {
         $posts = $this->postRepository->findManyById(...$postId);
 
-        foreach ($posts as $post) {
-            $this->postRepository->deleteById(new PostId($post->getKey()));
-        }
+        DB::transaction(function () use ($posts) {
+            foreach ($posts as $post) {
+                $this->postRepository->deleteById(new PostId($post->getKey()));
+            }
+        });
 
         return $posts;
     }
@@ -86,7 +103,7 @@ readonly class PostService implements PostServiceContract
         $model->preview = $this->sanitizeHtml($data, 'preview');
         $model->content = $this->sanitizeHtml($data, 'content');
         $model->published_at = Carbon::parse(Arr::get($data, 'published_at'))->startOfMinute();
-        $model->is_draft = Arr::exists($data, 'is_draft');
+        $model->is_draft = Arr::get($data, 'is_draft', true);
 
         $previewImageId = Arr::get($data, 'preview_image_id');
         $model->preview_image_id = $previewImageId === false ? null : $previewImageId;

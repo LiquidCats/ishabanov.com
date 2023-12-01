@@ -6,50 +6,61 @@ namespace App\Admin\Application\Services;
 
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
-use App\Domains\Files\Contracts\Repositories\StorageRepositoryContract;
+use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
+use App\Domains\Files\Enums\FilterTypes;
 use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
-use function asset;
-
 readonly class FileService implements FileServiceContract
 {
     public function __construct(
-        private StorageRepositoryContract $storageRepository,
+        private UploadedFilesStorageContract $storageRepository,
         private FileRepositoryContract $fileRepository,
     ) {
     }
 
-    public function store(UploadedFile $file, string $name): ?FileModel
+    public function storeMany(array $data = []): Collection
     {
-        if ($filepath = $this->storageRepository->store($file)) {
-            return $this->fileRepository->create($file, $filepath, $name);
+        /** @var Collection<int, FileModel> $processedFiles */
+        $processedFiles = Collection::make();
+
+        /** @var array{name: string, file: UploadedFile} $item */
+        foreach ($data as $item) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $item['file'];
+
+            if ($this->fileRepository->isUploaded($uploadedFile)) {
+                continue;
+            }
+            if ($this->storageRepository->upload($item['file'])) {
+                $file = $this->fileRepository->create($item['name'], $item['file']);
+                $processedFiles->push($file);
+            }
         }
 
-        return null;
+        return $processedFiles;
     }
 
-    public function drop(FileId $fileId): bool
+    public function drop(FileId $fileId): FileModel
     {
         $file = $this->fileRepository->findById($fileId);
 
         if ($this->fileRepository->removeById($fileId)) {
-            return $this->storageRepository->drop($file->path);
+            $this->storageRepository->drop($file);
         }
 
-        return false;
+        return $file;
     }
 
-    public function paginate(): LengthAwarePaginator
+    public function list(FilterTypes $type = null): LengthAwarePaginator|Collection
     {
-        return $this->fileRepository->getAllPaginated();
-    }
+        return match ($type) {
+            FilterTypes::IMAGES => $this->fileRepository->getAllImages(),
+            default => $this->fileRepository->getAllPaginated(),
+        };
 
-    public function getImages(): Collection
-    {
-        return $this->fileRepository->getAllImages();
     }
 }
