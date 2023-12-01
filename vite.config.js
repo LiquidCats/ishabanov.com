@@ -19,7 +19,6 @@ export default defineConfig({
             refresh: [
                 'lang/**',
                 'resources/views/**',
-                'src/Services/**',
             ],
         }),
      vue({
