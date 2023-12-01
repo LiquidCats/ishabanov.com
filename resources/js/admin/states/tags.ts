@@ -12,7 +12,7 @@ interface State {
     }
 }
 interface Actions {
-    search(v?: string): Promise<any>
+    search(v?: string, force?: boolean): Promise<any>
 }
 
 const useTagsState = defineStore<string, State, any, Actions>('tags', {
@@ -25,8 +25,8 @@ const useTagsState = defineStore<string, State, any, Actions>('tags', {
         }
     }),
     actions: {
-        async search(q: string = '') {
-            if (this.status.tagsLoaded && q === this.q) {
+        async search(q: string = '', force: boolean = false) {
+            if (this.status.tagsLoaded && q === this.q && !force) {
                 this.q = q
                 return
             }

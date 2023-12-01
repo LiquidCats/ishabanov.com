@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {Post} from "../types/data";
-import {ResponseLinks, ResponseMeta} from "../types/ApiResponse";
+import {ResponseLinks} from "../types/api";
 import useNotificationState from "./notfications";
 import {changeState, paginate, removeById} from "../api/posts";
 

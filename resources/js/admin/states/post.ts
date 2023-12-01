@@ -5,7 +5,7 @@ import {Post} from "../types/data";
 //
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
-import {ApiResponse} from "../types/ApiResponse";
+import {Api} from "../types/api";
 import {Router} from "vue-router";
 import RouteNames from "../enums/RouteNames";
 
@@ -55,7 +55,7 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
     }),
     actions: {
         async save(router: Router) {
-            let response:ApiResponse<Post>
+            let response:Api<Post>
 
             try {
                 this.status.postSaving = true
