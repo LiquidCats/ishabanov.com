@@ -12,6 +12,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+
 use function sha1_file;
 
 /**
@@ -26,7 +27,6 @@ use function sha1_file;
  */
 class FileModel extends Model implements FileRepositoryContract
 {
-
     protected $table = 'files';
 
     protected $primaryKey = 'hash';
@@ -35,23 +35,23 @@ class FileModel extends Model implements FileRepositoryContract
 
     protected $casts = [
         'hash' => 'string',
-        'type' => 'string',
+        'type' => AllowedTypes::class,
         'path' => 'string',
         'extension' => 'string',
         'name' => 'string',
         'file_size' => 'int',
     ];
 
-    public function create(UploadedFile $file, string $filepath, string $name): FileModel
+    public function create(string $filename, UploadedFile $uploadedFile): FileModel
     {
         $model = new FileModel();
 
-        $model->hash = sha1_file($file->path());
-        $model->type = $file->getMimeType();
-        $model->path = $filepath;
-        $model->file_size = $file->getSize();
-        $model->extension = $file->getClientOriginalExtension();
-        $model->name = $name;
+        $model->hash = sha1_file($uploadedFile->path());
+        $model->type = $uploadedFile->getMimeType();
+        $model->path = $uploadedFile->hashName();
+        $model->file_size = $uploadedFile->getSize();
+        $model->extension = $uploadedFile->getClientOriginalExtension();
+        $model->name = $filename;
 
         $model->save();
 
@@ -63,7 +63,6 @@ class FileModel extends Model implements FileRepositoryContract
         return $this->newQuery()
             ->findOrFail($fileId);
     }
-
 
     public function removeById(FileId $fileId): bool
     {
@@ -81,5 +80,12 @@ class FileModel extends Model implements FileRepositoryContract
         return $this->newQuery()
             ->whereIn('type', AllowedTypes::images())
             ->get();
+    }
+
+    public function isUploaded(UploadedFile $uploadedFile): bool
+    {
+        return $this->newQuery()
+            ->where('hash', sha1_file($uploadedFile->path()))
+            ->exists();
     }
 }
