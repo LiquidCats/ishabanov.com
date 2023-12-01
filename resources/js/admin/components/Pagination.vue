@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ResponseLinks} from "../types/ApiResponse";
+import {ResponseLinks} from "../types/api";
 import Btn from "./Btn.vue";
 import {Colors} from "../types/colors";
 

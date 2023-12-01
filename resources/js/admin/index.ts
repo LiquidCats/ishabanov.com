@@ -2,10 +2,11 @@ import "bootstrap"
 //
 import {createApp} from "vue"
 import {RouterView} from "vue-router";
+import {createPinia} from "pinia";
 import Popper from "vue3-popper";
 //
 import router from "./router";
-import {createPinia} from "pinia";
+import navigation from "./navigation";
 
 const pinia = createPinia()
 const app = createApp(RouterView)
@@ -17,31 +18,6 @@ app.use(router)
 
 app.mount('#app')
 
-
-
-
-
-
-
-
-const links = document.querySelectorAll('.sidebar-link')
-const handler = (e: Event) => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    const elem  = e.target as HTMLLinkElement
-    const elAttr = elem.attributes as NamedNodeMap
-
-    if (elem) {
-        const route = elAttr.getNamedItem('href')?.value
-        if (route) {
-            router?.push(route)
-        }
-    }
-}
-for (const link of links) {
-    link.addEventListener('click', handler)
-}
-
+navigation(router)
 
 

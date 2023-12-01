@@ -1,4 +1,4 @@
-export interface ApiResponse<T> {
+export interface Api<T> {
     data: T
     links: ResponseLinks
     meta: ResponseMeta
