@@ -49,7 +49,7 @@ const usePostListState = defineStore<string, State, any, Actions>('posts', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.listLoading = false;
             }
@@ -63,7 +63,7 @@ const usePostListState = defineStore<string, State, any, Actions>('posts', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.deletingId = null
             }
@@ -80,7 +80,7 @@ const usePostListState = defineStore<string, State, any, Actions>('posts', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.changingStateId = null
             }

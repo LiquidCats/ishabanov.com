@@ -44,7 +44,7 @@ const useTagsState = defineStore<string, State, any, Actions>('tags', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.tagsLoading = false
             }

@@ -42,7 +42,7 @@ const useImagesState = defineStore<string, State, any, Action>('images',{
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.imagesLoading = false
             }
@@ -53,7 +53,7 @@ const useImagesState = defineStore<string, State, any, Action>('images',{
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.imagesUploading = false
             }

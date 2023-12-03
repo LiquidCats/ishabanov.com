@@ -1,7 +1,13 @@
-export interface Api<T> {
+export interface Api<T extends any> {
     data: T
     links: ResponseLinks
     meta: ResponseMeta
+}
+
+export interface ApiError<T = undefined> {
+    data?: T
+    message: string
+    status: "success"|"fail"|"error"
 }
 
 export interface ResponseLinks {

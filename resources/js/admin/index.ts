@@ -1,15 +1,16 @@
 import "bootstrap"
 //
 import {createApp} from "vue"
-import {RouterView} from "vue-router";
 import {createPinia} from "pinia";
 import Popper from "vue3-popper";
+//
+import App from "./pages/App.vue";
 //
 import router from "./router";
 import navigation from "./navigation";
 
 const pinia = createPinia()
-const app = createApp(RouterView)
+const app = createApp(App)
 
 app.component('Popper', Popper)
 

@@ -83,7 +83,7 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                         .some(f => f.name === u.name))
             } catch (e) {
                 const notifications = useNotificationState()
-                notifications.push(e)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.filesUploading = []
             }
@@ -101,7 +101,7 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                 this.status.filesLoaded = true
             } catch (e) {
                 const notifications = useNotificationState()
-                notifications.push(e)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.filesLoading = true
             }
@@ -115,7 +115,7 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.filesDeleting = this.status
                     .filesDeleting

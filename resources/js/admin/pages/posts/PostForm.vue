@@ -4,7 +4,7 @@ import {computed, defineProps, ref} from "vue";
 //
 import type {Post, File, Tag as TagData} from "../../types/data";
 //
-import Editor from "../../components/atoms/Editor.vue";
+import Editor from "../../components/organisms/Editor.vue";
 import MultiSelect from "../../components/atoms/MultiSelect.vue";
 import dayjs from "dayjs";
 import useTagsState from "../../states/tags";

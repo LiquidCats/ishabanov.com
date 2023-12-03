@@ -80,10 +80,9 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
 
                 this.status.postSaved = true
             } catch (e: any) {
-                console.log(e)
                 const notifications = useNotificationState()
 
-                notifications.push(e)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.postSaving = false
             }
@@ -106,7 +105,7 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
             } catch (e) {
                 const notifications = useNotificationState()
 
-                notifications.push(e as Error)
+                notifications.pushError(e as Error)
             } finally {
                 this.status.postLoading = false
             }

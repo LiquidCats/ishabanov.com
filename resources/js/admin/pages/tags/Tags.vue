@@ -39,7 +39,7 @@ async function handleDelete(tagId: number) {
         await tags.removeById(tagId)
         await tagsState.search(tagName.value)
     } catch (e) {
-        notificationState.push(e)
+        notificationState.pushError(e as Error)
     } finally {
         tagDeleting.value = tagDeleting.value.filter(id => id !== tagId)
     }
@@ -70,7 +70,7 @@ async function handleSave() {
 
         await tagsState.search(tagName.value, true)
     } catch (e) {
-        notificationState.push(e)
+        notificationState.pushError(e as Error)
     } finally {
         tagSaving.value = false
     }

@@ -1,12 +1,19 @@
 import {defineStore} from "pinia";
 import {MandeError} from "mande";
+import {NotificationMessage} from "../types/internals";
+import {Colors} from "../types/colors";
+import {ApiError} from "../types/api";
+import Timer from "../utils/Timer";
 
 interface State {
-    items: [],
+    items: NotificationMessage[],
 }
 
 interface Actions {
-    push(e: any): void
+    pushSuccess(message: string): void
+    pushError(e: Error): void
+    push(message: NotificationMessage): void
+    close(message: NotificationMessage): void
 }
 
 const useNotificationState = defineStore<string, State, any, Actions>('notifications', {
@@ -14,10 +21,31 @@ const useNotificationState = defineStore<string, State, any, Actions>('notificat
         items: [],
     }),
     actions: {
-        push(e): void {
-            const err = e as MandeError
-            console.error(err.body)
-        }
+        pushSuccess(message: string) {
+            this.push({
+                message,
+                type: Colors.success,
+            })
+        },
+        pushError(e: Error) {
+            const err = e as MandeError<ApiError>
+
+            this.push({
+                message: err.body?.message ?? err.message,
+                type: Colors.danger
+            })
+        },
+        push(message): void {
+            this.items = [...this.items, message]
+
+            setTimeout(() => {
+                this.items = this.items.toSpliced(0, 1)
+            }, 2500)
+        },
+        close(message: NotificationMessage): void {
+            this.items = this.items
+                .filter(m => m !== message)
+}
     }
 })
 
