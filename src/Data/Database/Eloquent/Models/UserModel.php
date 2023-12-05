@@ -3,17 +3,15 @@
 namespace App\Data\Database\Eloquent\Models;
 
 use Database\Factories\UserFactory;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class UserModel extends Model implements AuthenticatableContract
+class UserModel extends User
 {
-    use Authenticatable, HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
 
