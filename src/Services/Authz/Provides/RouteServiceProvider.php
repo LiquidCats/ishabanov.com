@@ -10,7 +10,7 @@ class RouteServiceProvider extends BaseRouteServiceProvider
     public function boot(): void
     {
         $this->routes(function () {
-            Route::middleware('web')
+            Route::middleware(['web'])
                 ->group(__DIR__.'/../routes/web.php');
         });
     }
