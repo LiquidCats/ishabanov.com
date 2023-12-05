@@ -1,7 +1,7 @@
 import {mande, defaults} from "mande";
 import {baseUrl} from "../utils/baseUrl";
 import {options} from "./options";
-import {getCsrf} from "./csrf";
+import {setCsrf} from "./csrf";
 import {Api} from "../types/api";
 import {File} from "../types/data";
 import {FileToUpload} from "../types/internals";
@@ -12,20 +12,20 @@ type FileResponse = Api<File[]>
 const files = mande(baseUrl('admin', 'api', 'v1', 'files'), options)
 
 export async function getFilesList(page: number = 1, type?: string) {
-    await getCsrf(files)
+    setCsrf(files)
 
     return files.get<FileResponse>({
         query: {page, type}
     })
 }
 export async function getImages() {
-    await getCsrf(files)
+    setCsrf(files)
 
     return getFilesList(1, 'images')
 }
 
 export async function upload(filesToUpload: FileToUpload[]) {
-    await getCsrf(files)
+    setCsrf(files)
 
     const formData = new FormData();
 
@@ -41,7 +41,7 @@ export async function upload(filesToUpload: FileToUpload[]) {
 }
 
 export async function remove(hash: string) {
-    await getCsrf(files)
+    setCsrf(files)
 
     return files.delete<FileResponse>(hash)
 }

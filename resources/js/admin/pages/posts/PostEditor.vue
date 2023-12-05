@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {computed, onMounted, toValue} from "vue";
+import {computed, onMounted, onUnmounted, toValue} from "vue";
 import {useRoute, useRouter} from "vue-router";
 //
 import PageHeader from "../../components/molecules/PageHeader.vue";
@@ -29,6 +29,10 @@ onMounted(async () => {
     if (route.name === RouteNames.POST_EDIT) {
         await postState.load(postId)
     }
+})
+
+onUnmounted(() => {
+    postState.$reset()
 })
 
 async function savePost() {

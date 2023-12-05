@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {onBeforeUnmount, onMounted} from "vue";
+import {onBeforeUnmount, onMounted, onUnmounted} from "vue";
 //
 import type {FileToUpload} from "../../types/internals";
 import type {File} from "../../types/data";
@@ -26,6 +26,10 @@ onBeforeUnmount(() => {
             URL.revokeObjectURL(fileToUpload.preview)
         }
     }
+})
+
+onUnmounted(() => {
+    filesState.$reset()
 })
 
 async function remove(file: File) {
