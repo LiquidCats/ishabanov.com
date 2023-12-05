@@ -17,13 +17,15 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'admin/api/*'],
+    'paths' => ['api/*', 'admin/api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => [
         'Accept',
         'Content-Type',
         'X-Requested-With',
@@ -33,8 +35,6 @@ return [
         'Expires',
         'Pragma',
     ],
-
-    'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 
