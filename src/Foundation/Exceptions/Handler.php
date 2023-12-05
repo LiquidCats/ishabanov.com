@@ -16,6 +16,9 @@ use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Throwable;
 
+use function app;
+use function env;
+
 class Handler extends BaseExceptionHandler
 {
     /**
@@ -37,17 +40,6 @@ class Handler extends BaseExceptionHandler
     ];
 
     /**
-     * A list of the inputs that are never flashed to the session on validation exceptions.
-     *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
-
-    /**
      * Register the exception handling callbacks for the application.
      */
     public function register(): void
@@ -65,6 +57,9 @@ class Handler extends BaseExceptionHandler
                     'status' => Status::FAIL,
                     'message' => $e->getMessage(),
                 ];
+                if (env('APP_DEBUG', false) && ! app()->isProduction()) {
+                    $data['trace'] = $e->getTrace();
+                }
 
                 $response->setStatusCode(400);
 
