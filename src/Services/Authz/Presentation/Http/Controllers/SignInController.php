@@ -22,14 +22,13 @@ class SignInController extends Controller
         ]);
 
         if (Auth::check()) {
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect(route('admin.dashboard', ['frontend' => 'dashboard']));
         }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            //
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect(route('admin.dashboard', ['frontend' => 'dashboard']));
         }
 
         return back()

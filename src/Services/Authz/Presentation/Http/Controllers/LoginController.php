@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function __invoke(): View|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect(route('admin.dashboard'));
         }
 
         return view('themes.default.pages.login.index');
