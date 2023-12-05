@@ -11,8 +11,7 @@ class RouteServiceProvider extends BaseRouteServiceProvider
     {
         $this->routes(function () {
 
-            // Route::middleware(['api', 'auth:sanctum'])
-            Route::middleware([])
+            Route::middleware(['api', 'auth:sanctum'])
                 ->name('admin.api.')
                 ->prefix('admin/api/v1')
                 ->group(__DIR__.'/../routes/api.php');
