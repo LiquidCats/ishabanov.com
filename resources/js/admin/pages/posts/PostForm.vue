@@ -9,6 +9,8 @@ import MultiSelect from "../../components/atoms/MultiSelect.vue";
 import dayjs from "dayjs";
 import useTagsState from "../../states/tags";
 import debounce from "../../utils/debounce";
+import {ValidationErrors} from "../../types/api";
+import Error from "../../components/atoms/Error.vue";
 
 enum Tabs {
     main = 'main',
@@ -20,6 +22,7 @@ const tagsMapperFn = (v: any) => ({value: v.id, text: v.name})
 
 interface Props {
     post: Post
+    errors: ValidationErrors
     suspend?: boolean
     tags: TagData[]
     previewImages: File[]
@@ -96,19 +99,23 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
             <input type="text"
                    name="title"
                    class="form-control"
+                   :class="{'is-invalid': errors.hasOwnProperty('title')}"
                    id="post-title"
                    :value="post.title"
                    @input="post.title = $event?.target?.value"
                    placeholder="Title">
+            <Error name="title" :errors="errors"/>
         </div>
 
         <div class="mb-3">
             <label for="post-published-at" class="form-label">Published At (UTC)</label>
             <input name="published_at"
                    class="form-control"
+                   :class="{'is-invalid': errors.hasOwnProperty('published_at')}"
                    :value="post?.published_at || dayjs().format('YYYY-MM-DD HH:mm')"
                    @input="post.published_at = $event?.target?.value"
                    id="post-published-at" placeholder="Published At"/>
+            <Error name="published_at" :errors="errors"/>
         </div>
 
         <div class="mb-3">
@@ -116,10 +123,12 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                 <input class="form-check-input"
                        name="is_draft"
                        type="checkbox"
+                       :class="{'is-invalid': errors.hasOwnProperty('is_draft')}"
                        id="post-is-draft"
                        v-model="post.is_draft">
                 <label class="form-check-label" for="post-is-draft">Draft</label>
             </div>
+            <Error name="is_draft" :errors="errors"/>
         </div>
 
         <div class="mb-3">
@@ -135,6 +144,7 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
 <!--                        <Btn type="primary" class="btn-sm"><i class="bi bi-plus-lg"></i> Create</Btn>-->
 <!--                    </template>-->
                 </MultiSelect>
+            <Error name="tags" :errors="errors"/>
         </div>
     </div>
     <div v-if="checkTab.isPreview"
@@ -164,6 +174,7 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                     <div class="text-truncate">{{ previewImage.name }}</div>
                 </div>
             </div>
+            <Error name="preview_image_id" :errors="errors"/>
         </div>
 
         <div class="mb-3">
@@ -184,13 +195,19 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                     {{ previewType.text }}
                 </div>
             </div>
+            <Error name="preview_image_type" :errors="errors"/>
         </div>
 
         <hr>
 
         <div class="mb-3">
-            <Editor id="post-introduction" v-model:model-value="post.preview" :initial-value="post.preview"/>
+            <Editor id="post-introduction"
+                    v-model="post.preview"
+                    :class="{'is-invalid': errors.hasOwnProperty('preview')}"
+                    :initial-value="post.preview"/>
+            <Error name="preview" :errors="errors"/>
         </div>
+
     </div>
     <div v-if="checkTab.isContent"
          class="tab-pane show"
@@ -198,8 +215,13 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
          aria-labelledby="pills-content-tab"
          tabindex="0">
         <div class="mb-3">
-            <Editor id="post-content" v-model="post.content" :initial-value="post.content"/>
+            <Editor id="post-content"
+                    v-model="post.content"
+                    :class="{'is-invalid': errors.hasOwnProperty('content')}"
+                    :initial-value="post.content"/>
+            <Error name="content" :errors="errors"/>
         </div>
+
     </div>
 </template>
 

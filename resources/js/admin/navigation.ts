@@ -1,7 +1,7 @@
 import {Router} from "vue-router";
 
 export default function navigation(router: Router): void {
-    const links = document.querySelectorAll('.sidebar-link')
+    const links = document.querySelectorAll('.sidebar-link a')
     const handler = (e: Event) => {
         e.preventDefault()
         e.stopPropagation()
@@ -17,7 +17,11 @@ export default function navigation(router: Router): void {
         }
     }
     for (const link of links) {
-        link.addEventListener('click', handler)
+        const isBackendDriven = link.attributes.getNamedItem('backend-driven')
+
+        if (!isBackendDriven) {
+            link.addEventListener('click', handler)
+        }
     }
 
 }

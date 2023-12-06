@@ -21,7 +21,7 @@ const tagsState = useTagsState()
 const route = useRoute()
 const router = useRouter()
 
-const postId: number = parseInt(route?.params?.post_id.toString())
+const postId: number = parseInt(route?.params?.post_id?.toString())
 
 onMounted(async () => {
     await tagsState.search()
@@ -56,6 +56,7 @@ const shouldDisable = computed(() =>
     </PageHeader>
     <PostButtons @click:save="savePost()" :disable="shouldDisable"/>
     <PostForm :post="postState.item"
+              :errors="postState.errors"
               :preview-images="imagesState.items"
               :preview-types="postState.previewTypes"
               :tags="tagsState.items"/>

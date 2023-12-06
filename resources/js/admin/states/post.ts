@@ -5,15 +5,15 @@ import {Post} from "../types/data";
 //
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
-import {Api} from "../types/api";
+import {Api, ApiError, ValidationErrors} from "../types/api";
 import {Router} from "vue-router";
 import RouteNames from "../enums/RouteNames";
-
 
 interface State {
     id: number|null
     item: Post
     previewTypes: {value: string, text: string}[]
+    errors: ValidationErrors
     status: {
         postLoading: boolean
         postLoaded: boolean
@@ -33,6 +33,7 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
             {value: 'left_side', text: 'Small preview on the left side'},
             {value: 'fill', text: 'Preview as a background'},
         ],
+        errors: {},
         item: {
             id: -1,
             title: '',
@@ -69,6 +70,7 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
                 }
 
                 this.item = {...this.item, ...response.data}
+
                 if (this.id === null && response.data.id) {
                     this.id = response.data.id
 
@@ -81,6 +83,9 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
                 this.status.postSaved = true
             } catch (e: any) {
                 const notifications = useNotificationState()
+                const response: ApiError<ValidationErrors> = e.body
+
+                this.errors = response.data
 
                 notifications.pushError(e as Error)
             } finally {

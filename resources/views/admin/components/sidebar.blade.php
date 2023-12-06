@@ -11,10 +11,7 @@
                         <hr />
                         @continue
                     @endif
-                    <x-admin-sidebar-link
-                        type="{{ $sidebarLink['type'] }}"
-                        link="{{ $sidebarLink['link'] }}"
-                        icon="{{ $sidebarLink['icon'] }}">{{ $sidebarLink['text'] }}</x-admin-sidebar-link>
+                    <x-admin-sidebar-link {{ $attributes->merge($sidebarLink->toArray()) }}>{{ $sidebarLink['text'] }}</x-admin-sidebar-link>
                 @endforeach
             </ul>
         </div>

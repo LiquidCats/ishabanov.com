@@ -1,7 +1,7 @@
 import {mande} from "mande";
 import {baseUrl} from "../utils/baseUrl";
 import {Post} from "../types/data";
-import {Api} from "../types/api";
+import {Api, ApiError, ValidationErrors} from "../types/api";
 import {options} from "./options";
 import {setCsrf} from "./csrf";
 
@@ -36,11 +36,11 @@ export async function removeById(postId: number) {
 export async function create(data: Post) {
     setCsrf(posts)
 
-    return posts.post<Api<Post>>(data)
+    return posts.post<Api<Post> | ApiError<ValidationErrors>>(data)
 }
 
 export async function updateById(postId: number, data: Post) {
     setCsrf(posts)
 
-    return posts.put<Api<Post>>(postId, data)
+    return posts.put<Api<Post> | ApiError<ValidationErrors>>(postId, data)
 }

@@ -9,7 +9,7 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="follow">
 
-    <title>Admin</title>
+    <title>iShabanov Admin</title>
 
     @include('admin.includes.styles')
 </head>

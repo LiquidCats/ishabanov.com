@@ -80,6 +80,7 @@ return [
                     'text' => 'Sign Out',
                     'icon' => 'power',
                     'type' => 'danger',
+                    'backend-driven' => true,
                 ],
             ],
         ],

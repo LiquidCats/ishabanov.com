@@ -10,12 +10,17 @@ export interface ApiError<T = undefined> {
     status: "success"|"fail"|"error"
 }
 
+export type ValidationErrors = {
+    [key: string]: string[]
+}
+
 export interface ResponseLinks {
     first?: string
     last?: string
     prev?: string
     next?: string
 }
+
 export interface ResponseMeta {
     current_page: number,
     from: number,

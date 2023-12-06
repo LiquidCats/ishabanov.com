@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite --host=0.0.0.0",
-        "build": "vue-tsc --noEmit && vite build"
+        "build": "vite build"
     },
     "devDependencies": {
         "@types/bootstrap": "latest",

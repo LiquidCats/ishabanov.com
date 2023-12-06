@@ -36,7 +36,7 @@ class Sidebar extends Component
                 }
 
                 $link = $this->router->has($l['link'])
-                    ? route($l['link'], absolute: false)
+                    ? route($l['link'])
                     : $l['link'];
 
                 return new Fluent([
