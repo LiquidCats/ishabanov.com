@@ -63,6 +63,6 @@ const shouldDisable = computed(() =>
     <PostButtons @click:save="savePost()" :disable="shouldDisable"/>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

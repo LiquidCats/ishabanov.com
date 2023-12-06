@@ -12,6 +12,6 @@
     <span :class="'badge text-bg-' + type"><slot></slot></span>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

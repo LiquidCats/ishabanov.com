@@ -8,6 +8,6 @@ import Notifications from "../components/organisms/Notifications.vue";
     <Notifications/>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>
