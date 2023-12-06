@@ -22,6 +22,6 @@ defineProps<Props>()
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

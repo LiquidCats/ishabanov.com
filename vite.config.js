@@ -14,6 +14,8 @@ export default defineConfig({
             input: [
                 'resources/scss/themes/default/styles.scss',
                 'resources/js/themes/default/scripts.js',
+                //
+                'resources/scss/admin/styles.scss',
                 'resources/js/admin/index.ts',
             ],
             refresh: [
