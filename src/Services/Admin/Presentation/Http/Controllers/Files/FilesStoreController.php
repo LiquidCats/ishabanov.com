@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Controllers\Files;
 
 use App\Admin\Presentation\Http\Requests\FileStoreRequest;
+use App\Admin\Presentation\Http\Resources\FileResource;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class FilesStoreController extends Controller
 {
@@ -17,17 +16,12 @@ class FilesStoreController extends Controller
     {
     }
 
-    public function __invoke(FileStoreRequest $request): RedirectResponse
+    public function __invoke(FileStoreRequest $request): AnonymousResourceCollection
     {
-        $file = $request->file('file');
-        $name = $request->validated('name');
+        $data = $request->validated('list');
 
-        if ($this->fileService->store($file, $name) === null) {
-            return redirect('admin.files.store')
-                ->withInput()
-                ->withErrors(['file' => ['Unable to upload file']]);
-        }
+        $model = $this->fileService->storeMany($data);
 
-        return redirect(route('admin.files.create'));
+        return FileResource::collection($model);
     }
 }

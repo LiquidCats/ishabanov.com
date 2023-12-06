@@ -44,42 +44,43 @@ return [
         'links' => [
             'menu' => [
                 [
-                    'link' => 'admin.dashboard',
+                    'link' => '/admin/dashboard',
                     'text' => 'Dashboard',
                     'icon' => 'clipboard-data-fill',
                 ],
                 [
-                    'link' => 'admin.posts.list',
+                    'link' => '/admin/posts',
                     'text' => 'Posts',
                     'icon' => 'postcard-fill',
                 ],
                 [
-                    'link' => 'admin.tags.list',
+                    'link' => '/admin/tags',
                     'text' => 'Tags',
                     'icon' => 'tags-fill',
                 ],
                 [
-                    'link' => 'admin.files.list',
+                    'link' => '/admin/files',
                     'text' => 'Files',
                     'icon' => 'file-earmark-image-fill',
                 ],
-                [
-                    'link' => '#',
-                    'text' => 'Users',
-                    'icon' => 'people-fill',
-                ],
-                [],
-                [
-                    'link' => '#',
-                    'text' => 'Settings',
-                    'icon' => 'sliders',
-                ],
+                // [
+                //     'link' => '/admin/users',
+                //     'text' => 'Users',
+                //     'icon' => 'people-fill',
+                // ],
+                // [],
+                // [
+                //     'link' => '/admin/settings',
+                //     'text' => 'Settings',
+                //     'icon' => 'sliders',
+                // ],
                 [],
                 [
                     'link' => 'auth.logout',
                     'text' => 'Sign Out',
                     'icon' => 'power',
                     'type' => 'danger',
+                    'backend-driven' => true,
                 ],
             ],
         ],

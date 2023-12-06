@@ -10,14 +10,15 @@ class RouteServiceProvider extends BaseRouteServiceProvider
     public function boot(): void
     {
         $this->routes(function () {
+
+            Route::middleware(['api', 'auth:sanctum'])
+                ->name('admin.api.')
+                ->prefix('admin/api/v1')
+                ->group(__DIR__.'/../routes/api.php');
+
             Route::middleware(['web', 'auth'])
                 ->prefix('admin')
                 ->group(__DIR__.'/../routes/web.php');
-
-            Route::middleware(['api', 'auth:sanctum'])
-                ->prefix('admin')
-                ->prefix('api')
-                ->group(__DIR__.'/../routes/api.php');
         });
     }
 }

@@ -10,6 +10,7 @@ use App\Authz\AuthzServiceProvider;
 use App\Domains\Blog\BlogDomainProvider;
 use App\Domains\Files\FileDomainProvider;
 use App\Domains\Pages\PagesDomainProvider;
+use App\Domains\User\UserDomainProvider;
 use App\Healthz\HealthzServiceProvider;
 use App\Pages\PagesServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Domains
+        $this->app->register(UserDomainProvider::class);
         $this->app->register(BlogDomainProvider::class);
         $this->app->register(FileDomainProvider::class);
         $this->app->register(PagesDomainProvider::class);

@@ -18,30 +18,30 @@ class PostUpdateRequest extends FormRequest
             'title' => ['string', 'min:5', 'max:250'],
             'preview' => ['string', 'min:5'],
             'content' => ['string', 'min:5'],
-            'is_draft' => ['sometimes', 'accepted'],
+            'is_draft' => ['boolean'],
             'published_at' => ['date'],
-            'post_tags' => ['array'],
             'preview_image_id' => [
-                'sometimes',
+                'nullable',
                 'string',
                 Rule::when(
-                    $this->get('preview_image_id') !== 'none',
+                    $this->get('preview_image_id') !== null,
                     [
                         Rule::exists('files', 'hash'),
                     ],
                 ),
             ],
             'preview_image_type' => [
-                'sometimes',
+                'nullable',
                 'string',
                 Rule::when(
-                    $this->get('preview_image_type') !== 'none',
+                    $this->get('preview_image_type') !== null,
                     [
                         Rule::enum(PostPreviewType::class),
                     ],
                 ),
             ],
-            'post_tags.*' => ['numeric', Rule::exists(TagModel::class, 'id')],
+            'tags' => ['array'],
+            'tags.*.id' => ['numeric', Rule::exists(TagModel::class, 'id')],
         ];
     }
 }

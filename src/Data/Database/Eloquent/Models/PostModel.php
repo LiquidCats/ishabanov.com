@@ -149,12 +149,13 @@ class PostModel extends Model implements PostRepositoryContract
      */
     public function updateById(PostId $id, PostModel $post): PostModel
     {
-        /** @var PostModel $model */
-        $model = PostModel::query()
-            ->findOrFail($id->value);
+        $model = $this->findById($id);
 
-        $model->title = $post->title;
-        $model->content = $post->content;
+        foreach ($post->getAttributes() as $key => $value) {
+            $model->setAttribute($key, $value);
+        }
+
+        $model->save();
 
         return $model;
     }
@@ -208,6 +209,13 @@ class PostModel extends Model implements PostRepositoryContract
             ->where('published_at', '<=', now())
             ->latest('id')
             ->limit(3)
+            ->get();
+    }
+
+    public function findManyById(PostId ...$id): Collection
+    {
+        return $this->newQuery()
+            ->whereIn($this->getKeyName(), $id)
             ->get();
     }
 }

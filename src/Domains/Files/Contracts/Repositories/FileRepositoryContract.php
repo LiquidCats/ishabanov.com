@@ -12,7 +12,8 @@ use Illuminate\Support\Collection;
 
 interface FileRepositoryContract
 {
-    public function create(UploadedFile $file, string $filepath, string $name): FileModel;
+    public function create(string $filename, UploadedFile $uploadedFile): FileModel;
+    public function isUploaded(UploadedFile $uploadedFile): bool;
     public function findById(FileId $fileId): FileModel;
     public function removeById(FileId $fileId): bool;
     public function getAllPaginated(): LengthAwarePaginator;

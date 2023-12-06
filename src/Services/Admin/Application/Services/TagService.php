@@ -9,7 +9,10 @@ use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Blog\ValueObjects\TagSlug;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
+use Illuminate\Validation\ValidationException;
 
 readonly class TagService implements TagServiceContract
 {
@@ -19,27 +22,52 @@ readonly class TagService implements TagServiceContract
 
     public function create(string $name, ?string $slug): TagModel
     {
-        return $this->tagRepository->create($name, $slug);
+        return $this->tagRepository->create($name, TagSlug::fromString($slug ?: $name));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function update(TagId $tagId, string $name, ?string $slug): TagModel|false
     {
-        if ($slug && $this->tagRepository->slugExists(new TagSlug($slug))) {
-            return false;
+        $slugObject = TagSlug::fromString($slug ?: $name);
+
+        $foundBySlug = $this->tagRepository->findBySlug($slugObject);
+        $foundById = $this->tagRepository->findById($tagId);
+
+        if ($foundById->getKey() !== $foundBySlug->getKey()) {
+            $messages = new MessageBag();
+            $messages->add('slug', 'The slug has already been taken.');
+
+            throw ValidationException::withMessages($messages->toArray());
         }
 
-        $tag = $this->tagRepository->findById($tagId);
+        $foundById->name = $name;
+        if ($foundById->slug !== (string) $slugObject) {
+            $foundById->slug = $slugObject;
+        }
 
-        $tag->name = $name;
-        $tag->slug = $slug ?: Str::of($name)->lower()->slug()->toString();
+        $foundById->save();
 
-        $tag->save();
-
-        return $tag;
+        return $foundById;
     }
 
-    public function delete(TagId $tagId): bool
+    public function delete(TagId ...$tagId): Collection
     {
-        return $this->tagRepository->removeById($tagId);
+        $models = $this->tagRepository->findManyById(...$tagId);
+
+        DB::transaction(function () use ($models) {
+            foreach ($models as $model) {
+                $this->tagRepository->removeById(new TagId($model->getKey()));
+            }
+        });
+
+        return $models;
+    }
+
+    public function search(string $query = ''): Collection
+    {
+        return $this->tagRepository
+            ->searchByNameOrSlug($query, TagSlug::fromString($query));
     }
 }

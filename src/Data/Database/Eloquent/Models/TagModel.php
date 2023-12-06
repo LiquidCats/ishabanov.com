@@ -7,6 +7,7 @@ use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Blog\ValueObjects\TagSlug;
 use Carbon\Carbon;
 use Database\Factories\TagFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +19,7 @@ use Illuminate\Support\Str;
  * @property string $slug
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property Collection $posts
  */
 class TagModel extends Model implements TagRepositoryContract
 {
@@ -53,15 +55,12 @@ class TagModel extends Model implements TagRepositoryContract
             ->get();
     }
 
-    public function create(string $name, ?string $slug): TagModel
+    public function create(string $name, TagSlug $slug): TagModel
     {
         $model = new TagModel();
 
         $model->name = $name;
-        $model->slug = $slug ?: Str::of($name)
-            ->lower()
-            ->slug()
-            ->toString();
+        $model->slug = $slug;
 
         $model->save();
 
@@ -78,16 +77,13 @@ class TagModel extends Model implements TagRepositoryContract
         return TagFactory::new();
     }
 
-    public function updateById(TagId $tagId, string $name, ?string $slug): TagModel
+    public function updateById(TagId $tagId, string $name, TagSlug $slug): TagModel
     {
         /** @var TagModel $model */
         $model = $this->newQuery()->findOrFail($tagId->value);
 
         $model->name = $name;
-        $model->slug = $slug ?: Str::of($name)
-            ->lower()
-            ->slug()
-            ->toString();
+        $model->slug = $slug;
 
         return $model;
     }
@@ -110,5 +106,36 @@ class TagModel extends Model implements TagRepositoryContract
         return $this->newQuery()
             ->withCount('posts')
             ->get();
+    }
+
+    public function searchByNameOrSlug(string $name, TagSlug $slug): Collection
+    {
+        if ($name === '') {
+            return $this->newQuery()
+                ->take(15)
+                ->get();
+        }
+
+        return $this->newQuery()
+            ->where(fn (Builder $q) => $q
+                ->where('name', 'like', $name.'%')
+                ->orWhere('slug', 'like', $slug->value)
+            )->take(15)
+            ->get();
+
+    }
+
+    public function findManyById(TagId ...$tagId): Collection
+    {
+        return $this->newQuery()
+            ->whereIn($this->getKeyName(), $tagId)
+            ->get();
+    }
+
+    public function findBySlug(TagSlug $tagId): TagModel
+    {
+        return $this->newQuery()
+            ->where('slug', '=', $tagId->value)
+            ->firstOrFail();
     }
 }

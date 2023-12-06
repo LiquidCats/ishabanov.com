@@ -15,12 +15,22 @@ interface TagRepositoryContract
     public function getAll(): Collection;
     public function getAllWithPostsCount(): Collection;
 
-    public function create(string $name, ?string $slug): TagModel;
+    public function create(string $name, TagSlug $slug): TagModel;
     public function findById(TagId $tagId): TagModel;
-    public function updateById(TagId $tagId, string $name, ?string $slug): TagModel;
+    public function findBySlug(TagSlug $tagId): TagModel;
+
+    /**
+     * @param TagId ...$tagId
+     *
+     * @return Collection<int, TagModel>
+     */
+    public function findManyById(TagId ...$tagId): Collection;
+    public function updateById(TagId $tagId, string $name, TagSlug $slug): TagModel;
     public function slugExists(TagSlug $slug): bool;
     /**
      * @param  TagId<int>  $tagId
      */
     public function removeById(TagId $tagId): bool;
+
+    public function searchByNameOrSlug(string $name, TagSlug $slug): Collection;
 }
