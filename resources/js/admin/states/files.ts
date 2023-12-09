@@ -4,6 +4,7 @@ import {File as FileData} from "../types/data";
 import * as files from "../api/files";
 import {FileToUpload} from "../types/internals";
 import useNotificationState from "./notfications";
+import useImagesState from "./images";
 
 
 const fileMapper = (f: File): FileToUpload => {
@@ -69,6 +70,8 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                 .map(fileMapper)
         },
         async upload(fileToUpload?: FileToUpload): Promise<void> {
+            const imageState = useImagesState()
+
             const toUpload = fileToUpload ? [fileToUpload] : this.previews
             let data: FileData[] = []
 
@@ -81,6 +84,9 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                 this.previews = this.previews
                     .filter(u => !data
                         .some(f => f.name === u.name))
+
+
+                await imageState.load()
             } catch (e) {
                 const notifications = useNotificationState()
                 notifications.pushError(e as Error)
