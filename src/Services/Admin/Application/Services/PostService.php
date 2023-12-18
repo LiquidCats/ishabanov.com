@@ -106,7 +106,10 @@ readonly class PostService implements PostServiceContract
         $model->is_draft = Arr::get($data, 'is_draft', true);
 
         $previewImageId = Arr::get($data, 'preview_image_id');
-        $model->preview_image_id = $previewImageId === false ? null : $previewImageId;
+        $model->preview_image_id = $previewImageId;
+
+        $previewImageType = Arr::get($data, 'preview_image_type');
+        $model->preview_image_type = $previewImageType;
 
         return $model;
     }

@@ -4,7 +4,8 @@
 @endphp
 
 <div class="col-12">
-    <article class="posts__item bg-fill px-4 pb-4 rounded-4 overflow-hidden position-relative" style="background-image: url('{{ asset('storage/' . $post?->previewImage?->path) }}');">
+    <article class="posts__item bg-fill px-4 pb-4 rounded-4 overflow-hidden position-relative"
+             style="background-image: url('{{ $post?->previewImage?->getFileUrl() }}');">
         <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}"
            class="text-decoration-none d-block text-black position-relative z-1">
             <div class="posts__item__preview mb-3">

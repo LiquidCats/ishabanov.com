@@ -18,7 +18,7 @@
                     <article class="post__article p-4 rounded-4">
                         @if($post->preview_image_id !== null && $post->preview_image_type !== null)
                             <div class="post__article__preview px-4 pb-4 rounded-3 mb-3 position-relative overflow-hidden"
-                                 style="background-image: url('{{ asset('storage/' . $post->previewImage->path) }}')">
+                                 style="background-image: url('{{ $post->previewImage?->getFileUrl() }}')">
                                 <header class="position-relative z-1">
                                     <h1 class="mb-0 text-light">{{ $post->title }}</h1>
                                     <small class="text-light">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
