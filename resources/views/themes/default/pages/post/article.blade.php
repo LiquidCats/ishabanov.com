@@ -5,7 +5,7 @@
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))
 @if($post?->previewImage)
-    @section('preview_image', asset('storage/' . $post?->previewImage?->path))
+    @section('preview_image', asset('storage/' . $post?->previewImage?->getFileUrl()))
 @endif
 @section('published_time', $post->published_at->toAtomString())
 @section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
