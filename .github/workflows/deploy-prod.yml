@@ -39,7 +39,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+          script: docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:production
 
 
       - name: Migration
