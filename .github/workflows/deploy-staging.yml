@@ -32,6 +32,16 @@ jobs:
         with:
           string: ${{ github.repository }}
 
+      - name: Update Image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+
       - name: Migration
         uses: appleboy/ssh-action@master
         with:
@@ -41,7 +51,8 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+            docker stop ishabanov_staging_migrator || true
+            docker rm ishabanov_staging_migrator || true
             docker run -i \
               --name ishabanov_staging_migrator \
               --network ishabanov_staging \
@@ -66,7 +77,6 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
             docker stop ishabanov_staging || true
             docker rm ishabanov_staging || true
             docker run --detach \
