@@ -1,9 +1,9 @@
 <?php
 
 use App\Pages\Presentation\Http\Controllers\AboutController;
-use App\Pages\Presentation\Http\Controllers\PostsController;
 use App\Pages\Presentation\Http\Controllers\HomepageController;
 use App\Pages\Presentation\Http\Controllers\PostController;
+use App\Pages\Presentation\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomepageController::class)->name('pages.home');

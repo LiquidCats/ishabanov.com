@@ -11,12 +11,12 @@ use Illuminate\Support\Collection;
 interface TagServiceContract
 {
     public function create(string $name, ?string $slug): TagModel;
+
     public function update(TagId $tagId, string $name, ?string $slug): TagModel|false;
+
     public function delete(TagId ...$tagId): Collection;
 
     /**
-     * @param string $query
-     *
      * @return Collection<int, TagModel>
      */
     public function search(string $query = ''): Collection;

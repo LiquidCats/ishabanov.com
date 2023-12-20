@@ -12,5 +12,6 @@ readonly class FileId extends AbstractValueObject
     use Resolvable;
 
     public const AS_KEY = 'file_id';
+
     public const AS_ROUTE_PARAMETER = '{file_id}';
 }

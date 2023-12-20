@@ -7,10 +7,7 @@ namespace App\Admin\Presentation\Http\Controllers\Posts;
 use App\Admin\Presentation\Http\Requests\PostStoreRequest;
 use App\Admin\Presentation\Http\Resources\PostResource;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class PostStoreController extends Controller
 {

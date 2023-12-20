@@ -14,6 +14,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+
 use function abort;
 use function now;
 
@@ -75,7 +76,7 @@ class SitePageComposer extends AbstractPageComposer
         $duration = Carbon::parse('2015-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
 
         return $this->compose('about.index', [
-            'duration' => $duration
+            'duration' => $duration,
         ]);
     }
 }

@@ -8,19 +8,16 @@ use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Enums\FilterTypes;
 use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 interface FileServiceContract
 {
     /**
-     * @param array $data
-     *
      * @return Collection<int, FileModel>
      */
     public function storeMany(array $data): Collection;
 
     public function drop(FileId $fileId): FileModel;
 
-    public function list(FilterTypes $type = null): LengthAwarePaginator|Collection;
+    public function list(?FilterTypes $type = null): LengthAwarePaginator|Collection;
 }

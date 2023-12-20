@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Data\Database\Eloquent\Models\UserModel;
 use Illuminate\Database\Seeder;
+
 use function app;
 
 class UserSeeder extends Seeder

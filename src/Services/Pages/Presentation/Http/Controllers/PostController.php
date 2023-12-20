@@ -20,7 +20,6 @@ class PostController extends Controller
     {
         $postId = PostId::fromRequestRoute($request);
 
-
         return $this->service->post($postId);
     }
 }

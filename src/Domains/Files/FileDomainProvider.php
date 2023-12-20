@@ -27,6 +27,7 @@ class FileDomainProvider extends ServiceProvider
         $this->app->singleton(UploadedFilesStorageContract::class, static function (Container $app) {
             /** @var Factory $f */
             $f = $app->make(Factory::class);
+
             return new UploadedFilesStorage($f->disk('public'));
         });
         $this->app->singleton(FileRepositoryContract::class, FileModel::class);

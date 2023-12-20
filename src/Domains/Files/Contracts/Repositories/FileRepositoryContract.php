@@ -13,9 +13,14 @@ use Illuminate\Support\Collection;
 interface FileRepositoryContract
 {
     public function create(string $filename, UploadedFile $uploadedFile): FileModel;
+
     public function isUploaded(UploadedFile $uploadedFile): bool;
+
     public function findById(FileId $fileId): FileModel;
+
     public function removeById(FileId $fileId): bool;
+
     public function getAllPaginated(): LengthAwarePaginator;
+
     public function getAllImages(): Collection;
 }

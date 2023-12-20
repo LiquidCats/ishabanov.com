@@ -7,6 +7,7 @@ namespace App\Authz\Presentation\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+
 use function redirect;
 use function route;
 

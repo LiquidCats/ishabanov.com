@@ -7,7 +7,6 @@ namespace App\Admin\Presentation\Http\Views\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-use function route;
 use function view;
 
 class SidebarLink extends Component

@@ -7,7 +7,6 @@ namespace App\Admin\Presentation\Http\Requests;
 use App\Data\Database\Eloquent\Models\TagModel;
 use App\Domains\Blog\Enums\PostPreviewType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Fluent;
 use Illuminate\Validation\Rule;
 
 class PostUpdateRequest extends FormRequest

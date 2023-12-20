@@ -8,10 +8,7 @@ use App\Admin\Presentation\Http\Requests\TagUpdateRequest;
 use App\Admin\Presentation\Http\Resources\TagResource;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class TagUpdateController extends Controller
 {

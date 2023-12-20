@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+
 use function ceil;
 use function now;
 use function str_word_count;
@@ -188,9 +189,7 @@ class PostModel extends Model implements PostRepositoryContract
     }
 
     /**
-     * @param PostId                    $postId
-     * @param Collection<int, TagModel> $tags
-     *
+     * @param  Collection<int, TagModel>  $tags
      * @return Collection<int, PostModel>
      */
     public function getSimilarByTag(PostId $postId, Collection $tags): Collection

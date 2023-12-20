@@ -55,7 +55,7 @@ readonly class FileService implements FileServiceContract
         return $file;
     }
 
-    public function list(FilterTypes $type = null): LengthAwarePaginator|Collection
+    public function list(?FilterTypes $type = null): LengthAwarePaginator|Collection
     {
         return match ($type) {
             FilterTypes::IMAGES => $this->fileRepository->getAllImages(),

@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
+
 use function asset;
 use function route;
 
