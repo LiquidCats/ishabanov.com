@@ -66,7 +66,8 @@ jobs:
               -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
               -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
               --memory-reservation=32MB \
-              --memory=128MB artisan migrate
+              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
+              php artisan migrate
 
       - name: Deploy
         uses: appleboy/ssh-action@master
