@@ -33,6 +33,17 @@
                         @error('password')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <div class="form-floating mb-3">
+                            <input name="2fa_otp"
+                                   type="text"
+                                   class="form-control"
+                                   id="floatingTOTP"
+                                   placeholder="TOTP">
+                            <label for="floatingTOTP">One Time Password</label>
+                        </div>
+                        @error('2fa_otp')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                         <div class="mt-3 text-center">
                             <a href="{{ route('pages.home') }}" class="text-white"><i class="bi bi-arrow-left"></i> to Homepage</a>

@@ -32,6 +32,43 @@ jobs:
         with:
           string: ${{ github.repository }}
 
+      - name: Update Image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+
+      - name: Migration
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
+          port: 22
+          script: |
+            docker stop ishabanov_staging_migrator || true
+            docker rm ishabanov_staging_migrator || true
+            docker run -i \
+              --name ishabanov_staging_migrator \
+              --network ishabanov_staging \
+              -e APP_ENV=staging \
+              -e APP_KEY="${{ secrets.APP_KEY }}" \
+              -e DB_CONNECTION="${{ secrets.DB_CONNECTION }}" \
+              -e DB_DATABASE="${{ secrets.DB_DATABASE }}" \
+              -e DB_HOST="${{ secrets.DB_HOST }}" \
+              -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+              -e DB_PORT="${{ secrets.DB_PORT }}" \
+              -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
+              -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
+              --memory-reservation=32MB \
+              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
+              php artisan migrate
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -41,7 +78,6 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
             docker stop ishabanov_staging || true
             docker rm ishabanov_staging || true
             docker run --detach \
