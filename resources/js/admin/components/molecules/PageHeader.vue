@@ -6,6 +6,6 @@
     <h1 class="my-3"><slot/></h1>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

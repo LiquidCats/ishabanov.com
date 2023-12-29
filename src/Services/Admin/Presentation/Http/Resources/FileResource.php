@@ -22,14 +22,10 @@ class FileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $path = Str::startsWith($this->resource->path, UploadedFilesStorageContract::PATH)
-            ? asset('storage/'.$this->resource->path)
-            : asset('storage/media/'.$this->resource->path);
-
         return [
             'hash' => $this->resource->hash,
             'type' => $this->resource->type,
-            'path' => $path,
+            'path' => $this->resource?->getFileUrl(),
             'extension' => $this->resource->extension,
             'name' => $this->resource->name,
             'file_size' => $this->resource->file_size,

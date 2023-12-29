@@ -5,7 +5,7 @@
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))
 @if($post?->previewImage)
-    @section('preview_image', asset('storage/' . $post?->previewImage?->path))
+    @section('preview_image', asset('storage/' . $post?->previewImage?->getFileUrl()))
 @endif
 @section('published_time', $post->published_at->toAtomString())
 @section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
@@ -18,7 +18,7 @@
                     <article class="post__article p-4 rounded-4">
                         @if($post->preview_image_id !== null && $post->preview_image_type !== null)
                             <div class="post__article__preview px-4 pb-4 rounded-3 mb-3 position-relative overflow-hidden"
-                                 style="background-image: url('{{ asset('storage/' . $post->previewImage->path) }}')">
+                                 style="background-image: url('{{ $post->previewImage?->getFileUrl() }}')">
                                 <header class="position-relative z-1">
                                     <h1 class="mb-0 text-light">{{ $post->title }}</h1>
                                     <small class="text-light">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>

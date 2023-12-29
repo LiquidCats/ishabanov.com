@@ -7,7 +7,7 @@
     <article class="posts__item rounded-4 bg-white overflow-hidden">
         <a href="{{ route('pages.blog.post', ['post_id' => $post->getKey()]) }}" class="text-decoration-none d-block text-black">
             <div class="row ">
-                <div class="posts__item__image col-12 col-md-4" style="background-image: url('{{ asset('storage/' . $post?->previewImage?->path) }}');">
+                <div class="posts__item__image col-12 col-md-4" style="background-image: url('{{ $post?->previewImage?->getFileUrl() }}');">
                     &nbsp;
                 </div>
                 <div class="col-12 col-md-8 p-4">

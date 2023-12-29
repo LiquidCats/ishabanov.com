@@ -36,6 +36,6 @@ function onFiles(e: Event | DragEvent) {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

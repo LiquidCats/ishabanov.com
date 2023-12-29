@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data\Database\Eloquent\Models;
 
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
+use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Enums\AllowedTypes;
 use App\Domains\Files\ValueObjects\FileId;
 use Carbon\Carbon;
@@ -12,7 +13,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Str;
+use function asset;
 use function sha1_file;
 
 /**
@@ -41,6 +43,13 @@ class FileModel extends Model implements FileRepositoryContract
         'name' => 'string',
         'file_size' => 'int',
     ];
+
+    public function getFileUrl(): string
+    {
+        return Str::startsWith($this->path, UploadedFilesStorageContract::PATH)
+            ? asset('storage/'.$this->path)
+            : asset('storage/media/'.$this->path);
+    }
 
     public function create(string $filename, UploadedFile $uploadedFile): FileModel
     {

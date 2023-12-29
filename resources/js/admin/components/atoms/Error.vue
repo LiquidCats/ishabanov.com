@@ -20,6 +20,6 @@ const messages = computed(() => props.errors[props.name] || [])
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

@@ -41,7 +41,7 @@ defineProps<Props>()
         </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .bg-cover {
     background-repeat: no-repeat;
     background-position: center center;
