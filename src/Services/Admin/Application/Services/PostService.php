@@ -49,6 +49,8 @@ readonly class PostService implements PostServiceContract
 
             $model->tags()->sync($tagIds);
 
+            $model->load(['previewImage', 'tags']);
+
             return $model;
         });
     }
@@ -76,6 +78,7 @@ readonly class PostService implements PostServiceContract
         $model = $this->postRepository->findById($postId);
 
         $model->is_draft = ! $model->is_draft;
+        $model->published_at = Carbon::now();
 
         $model->save();
 

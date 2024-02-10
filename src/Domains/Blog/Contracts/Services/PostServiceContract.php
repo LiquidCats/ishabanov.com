@@ -29,9 +29,6 @@ interface PostServiceContract
      */
     public function deletePost(PostId ...$postId): Collection;
 
-    /**
-     * @return LengthAwarePaginator
-     */
     public function paginate(): LengthAwarePaginator;
 
     public function getPost(PostId $postId): PostModel;

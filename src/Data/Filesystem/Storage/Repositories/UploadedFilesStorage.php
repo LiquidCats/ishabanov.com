@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Data\Filesystem\Storage\Repositories;
 
+use const DIRECTORY_SEPARATOR;
+
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
-use const DIRECTORY_SEPARATOR;
-
-class UploadedFilesStorage implements UploadedFilesStorageContract
+readonly class UploadedFilesStorage implements UploadedFilesStorageContract
 {
-    public function __construct(readonly private Filesystem $filesystem)
+    public function __construct(private Filesystem $filesystem)
     {
     }
 

@@ -25,7 +25,7 @@ Route::prefix('posts')
     ->group(static function () {
         Route::get('/', PostListController::class)->name('list');
         Route::post('/', PostStoreController::class)->name('store');
-        Route::get(PostId::AS_ROUTE_PARAMETER, PostController::class)->name('list');
+        Route::get(PostId::AS_ROUTE_PARAMETER, PostController::class)->name('show');
         Route::put(PostId::AS_ROUTE_PARAMETER, PostUpdateController::class)->name('update');
         Route::patch('/state/'.PostId::AS_ROUTE_PARAMETER, PostChangeStateController::class)->name('state');
         Route::delete(PostId::AS_ROUTE_PARAMETER, PostDeleteController::class)->name('delete');

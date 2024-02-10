@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
+
 use function asset;
 use function route;
 
@@ -20,7 +21,7 @@ class Header extends Component
 
     public function render(): View
     {
-        return $this->view("themes.{$this->config->get('appearance.site.theme')}.components.header", [
+        return $this->view('components.header', [
             'links' => $this->links(),
             'logo' => asset($this->config->get('appearance.site.logo')),
         ]);

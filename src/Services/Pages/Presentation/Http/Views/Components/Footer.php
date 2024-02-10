@@ -8,6 +8,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+
 use function asset;
 use function route;
 
@@ -19,7 +20,7 @@ class Footer extends Component
 
     public function render(): View
     {
-        return view("themes.{$this->config->get('appearance.site.theme')}.components.footer", [
+        return view('components.footer', [
             'links' => $this->links(),
             'socials' => $this->socials(),
             'logo' => asset($this->config->get('appearance.site.logo')),

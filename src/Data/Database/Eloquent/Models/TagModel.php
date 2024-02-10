@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 /**
  * @property string $name
@@ -119,7 +118,7 @@ class TagModel extends Model implements TagRepositoryContract
         return $this->newQuery()
             ->where(fn (Builder $q) => $q
                 ->where('name', 'like', $name.'%')
-                ->orWhere('slug', 'like', $slug->value)
+                ->orWhere('slug', 'like', $slug->value.'%')
             )->take(15)
             ->get();
 
@@ -132,10 +131,10 @@ class TagModel extends Model implements TagRepositoryContract
             ->get();
     }
 
-    public function findBySlug(TagSlug $tagId): TagModel
+    public function findBySlug(TagSlug $tagId): ?TagModel
     {
         return $this->newQuery()
             ->where('slug', '=', $tagId->value)
-            ->firstOrFail();
+            ->first();
     }
 }

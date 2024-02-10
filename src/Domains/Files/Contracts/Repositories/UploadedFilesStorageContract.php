@@ -12,5 +12,6 @@ interface UploadedFilesStorageContract
     public const PATH = 'media';
 
     public function upload(UploadedFile $file): bool;
+
     public function drop(FileModel $file): bool;
 }

@@ -7,10 +7,7 @@ namespace App\Admin\Presentation\Http\Controllers\Tags;
 use App\Admin\Presentation\Http\Requests\TagStoreRequest;
 use App\Admin\Presentation\Http\Resources\TagResource;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use function redirect;
-use function route;
 
 class TagStoreController extends Controller
 {
