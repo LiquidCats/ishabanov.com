@@ -20,7 +20,7 @@ interface TagRepositoryContract
 
     public function findById(TagId $tagId): TagModel;
 
-    public function findBySlug(TagSlug $tagId): TagModel;
+    public function findBySlug(TagSlug $tagId): ?TagModel;
 
     /**
      * @return Collection<int, TagModel>

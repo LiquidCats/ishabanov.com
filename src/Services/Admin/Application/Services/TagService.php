@@ -35,7 +35,7 @@ readonly class TagService implements TagServiceContract
         $foundBySlug = $this->tagRepository->findBySlug($slugObject);
         $foundById = $this->tagRepository->findById($tagId);
 
-        if ($foundById->getKey() !== $foundBySlug->getKey()) {
+        if ($foundBySlug !== null && $foundById->getKey() !== $foundBySlug->getKey()) {
             $messages = new MessageBag();
             $messages->add('slug', 'The slug has already been taken.');
 

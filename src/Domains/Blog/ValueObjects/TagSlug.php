@@ -9,6 +9,6 @@ readonly class TagSlug extends AbstractValueObject
 {
     public static function fromString(string $str): static
     {
-        return new static(Str::of($str)->lower()->slug()->toString());
+        return new static(Str::of($str)->lower()->slug()->trim()->toString());
     }
 }

@@ -9,7 +9,9 @@ use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Enums\AllowedTypes;
 use App\Domains\Files\ValueObjects\FileId;
 use Carbon\Carbon;
+use Database\Factories\FileFactory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
@@ -29,6 +31,8 @@ use function sha1_file;
  */
 class FileModel extends Model implements FileRepositoryContract
 {
+    use HasFactory;
+
     protected $table = 'files';
 
     protected $primaryKey = 'hash';
@@ -49,6 +53,11 @@ class FileModel extends Model implements FileRepositoryContract
         return Str::startsWith($this->path, UploadedFilesStorageContract::PATH)
             ? asset('storage/'.$this->path)
             : asset('storage/media/'.$this->path);
+    }
+
+    protected static function newFactory(): FileFactory
+    {
+        return FileFactory::new();
     }
 
     public function create(string $filename, UploadedFile $uploadedFile): FileModel

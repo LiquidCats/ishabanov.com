@@ -12,10 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
-use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
-use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
-use PragmaRX\Google2FALaravel\Google2FA;
 
 use function encrypt;
 
@@ -56,16 +52,14 @@ class UserModel extends User implements UserRepository
         'password',
     ];
 
-       /**
+    /**
      * Interact with the user's first name.
-     *
-     * @return Attribute
      */
     protected function g2faSecret(): Attribute
     {
         return new Attribute(
-            get: fn (string $value) =>  decrypt($value),
-            set: fn (string $value) =>  encrypt($value),
+            get: fn (string $value) => decrypt($value),
+            set: fn (string $value) => encrypt($value),
         );
     }
 

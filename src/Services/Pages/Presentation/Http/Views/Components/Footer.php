@@ -20,7 +20,7 @@ class Footer extends Component
 
     public function render(): View
     {
-        return view("themes.{$this->config->get('appearance.site.theme')}.components.footer", [
+        return view('components.footer', [
             'links' => $this->links(),
             'socials' => $this->socials(),
             'logo' => asset($this->config->get('appearance.site.logo')),

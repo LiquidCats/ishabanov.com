@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Domains\Telegram\Repositories;
+namespace Tests\Domains\Telegram\Repositories;
 
 use App\Data\Api\Telegram\Repositories\TelegramRepository;
 use App\Domains\Telegram\Contracts\Repositories\TelegramRepositoryContract;

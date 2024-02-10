@@ -12,9 +12,9 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
-class UploadedFilesStorage implements UploadedFilesStorageContract
+readonly class UploadedFilesStorage implements UploadedFilesStorageContract
 {
-    public function __construct(readonly private Filesystem $filesystem)
+    public function __construct(private Filesystem $filesystem)
     {
     }
 
