@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Data\Database\Eloquent\Models\UserModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+
 use function bcrypt;
 
 /**

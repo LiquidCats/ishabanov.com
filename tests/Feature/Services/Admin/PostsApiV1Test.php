@@ -239,7 +239,6 @@ class PostsApiV1Test extends TestCase
             'is_draft' => $data['is_draft'],
         ]);
 
-
         foreach ($tags as $tag) {
             $this->assertDatabaseHas('post_tag', [
                 'post_id' => $id,
@@ -261,7 +260,7 @@ class PostsApiV1Test extends TestCase
         $id = $response->json('data.id');
 
         $this->assertDatabaseMissing((new PostModel())->getTable(), [
-            'id' => $id
+            'id' => $id,
         ]);
     }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use LiquidCats\G2FA\Exceptions\G2FAException;
 use LiquidCats\G2FA\TOTP;
 use LiquidCats\G2FA\ValueObjects\SecretKey;
+
 use function back;
 use function redirect;
 use function route;
@@ -23,9 +24,6 @@ class SignInController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
-     * @return RedirectResponse
      * @throws G2FAException
      */
     public function __invoke(Request $request): RedirectResponse

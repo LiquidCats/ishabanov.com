@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
+
 use function fake;
 use function now;
 

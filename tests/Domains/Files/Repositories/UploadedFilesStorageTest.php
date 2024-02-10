@@ -29,6 +29,7 @@ class UploadedFilesStorageTest extends TestCase
         $this->assertNotEmpty($files);
         $this->assertCount(1, $files);
     }
+
     public function test_drop_returns_true_on_success(): void
     {
         $storage = Storage::fake('public');

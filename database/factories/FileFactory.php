@@ -8,6 +8,7 @@ use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Enums\AllowedTypes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+
 use function fake;
 use function sha1;
 

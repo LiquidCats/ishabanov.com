@@ -15,6 +15,7 @@ use function route;
 class TagApiV1Test extends TestCase
 {
     protected UserModel $user;
+
     protected Collection $tags;
 
     protected function setUp(): void
@@ -40,7 +41,7 @@ class TagApiV1Test extends TestCase
                     'name',
                     'slug',
                 ],
-            ]
+            ],
         ]);
 
         $data = $response->json('data', []);
@@ -60,7 +61,7 @@ class TagApiV1Test extends TestCase
                 'id',
                 'name',
                 'slug',
-            ]
+            ],
         ]);
 
         $id = $response->json('data.id');
@@ -80,7 +81,7 @@ class TagApiV1Test extends TestCase
         $data = TagModel::factory()->make()->toArray();
 
         $response = $this->putJson(route('admin.api.tags.update', [
-            TagId::AS_KEY => $tag->getKey()
+            TagId::AS_KEY => $tag->getKey(),
         ]), $data);
 
         $response->assertSuccessful();
@@ -99,7 +100,7 @@ class TagApiV1Test extends TestCase
         $tag = $this->tags->random();
 
         $response = $this->deleteJson(route('admin.api.tags.delete', [
-            TagId::AS_KEY => $tag->getKey()
+            TagId::AS_KEY => $tag->getKey(),
         ]));
 
         $response->assertSuccessful();
@@ -107,7 +108,7 @@ class TagApiV1Test extends TestCase
         $id = $response->json('data.id');
 
         $this->assertDatabaseMissing((new TagModel())->getTable(), [
-            'id' => $id
+            'id' => $id,
         ]);
     }
 }

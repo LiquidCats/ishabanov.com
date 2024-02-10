@@ -8,11 +8,11 @@ use App\Data\Database\Eloquent\Models\FileModel;
 use App\Data\Database\Eloquent\Models\UserModel;
 use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\ValueObjects\FileId;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+
 use function fake;
 use function route;
 
@@ -20,6 +20,7 @@ class FileApiV1Test extends TestCase
 {
     /** @var Collection<FileModel>> */
     protected Collection $files;
+
     protected UserModel $user;
 
     protected function setUp(): void
@@ -49,8 +50,8 @@ class FileApiV1Test extends TestCase
                     'extension',
                     'name',
                     'file_size',
-                ]
-            ]
+                ],
+            ],
         ]);
         $this->assertCount(15, $response->json('data'));
     }
@@ -69,7 +70,7 @@ class FileApiV1Test extends TestCase
                     'file' => UploadedFile::fake()->image('test2.png'),
                     'name' => fake()->words(5, true),
                 ],
-            ]
+            ],
         ];
 
         $response = $this->postJson(route('admin.api.files.store'), $data);
@@ -84,7 +85,7 @@ class FileApiV1Test extends TestCase
                     'extension',
                     'name',
                     'file_size',
-                ]
+                ],
             ],
         ]);
 
@@ -104,7 +105,7 @@ class FileApiV1Test extends TestCase
         $file = $this->files->random();
 
         $response = $this->deleteJson(route('admin.api.files.delete', [
-            FileId::AS_KEY => $file->getKey()
+            FileId::AS_KEY => $file->getKey(),
         ]));
 
         $response->assertSuccessful();
