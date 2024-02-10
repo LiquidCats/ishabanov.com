@@ -1,5 +1,5 @@
 @php use Carbon\Carbon; @endphp
-@extends('themes.default.layouts.default')
+@extends('.layouts.default')
 
 @section("title", "Home")
 @section("preview", "Hey, I'm Ilya! I love coding and have been doing it for years across cool areas like music, fintech, and more. I know my way around tech stuff, from PHP and JavaScript to Docker and Kubernetes. Got a project or idea? Let's chat and make it happen!")

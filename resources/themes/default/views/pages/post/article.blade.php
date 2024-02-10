@@ -1,6 +1,6 @@
 @php /** @var App\Data\Database\Eloquent\Models\PostModel $post */ @endphp
 @php /** @var App\Data\Database\Eloquent\Models\TagModel $tag */ @endphp
-@extends('themes.default.layouts.default')
+@extends('.layouts.default')
 
 @section('title', $post->title)
 @section('preview', strip_tags($post->preview))
@@ -46,12 +46,12 @@
                         {!! $post->preview !!}
                         {!! $post->content !!}
                         <footer class="row g-2">
-                            @include('themes.default.pages.post.similar')
+                            @include('.pages.post.similar')
                         </footer>
                     </article>
                 </div>
             </div>
-            @include('themes.default.pages.post.footer')
+            @include('.pages.post.footer')
         </div>
     </section>
 @endsection

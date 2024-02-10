@@ -11,19 +11,19 @@
 
     <title>iShabanov Admin</title>
 
-    @include('admin.includes.styles')
+    @include('includes.styles')
 </head>
 <body>
-    @include('admin.components.header')
-    <div class="container-fluid">
-        <div class="row">
-            <x-admin-sidebar/>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="app">
-            </main>
-        </div>
+@include('admin.components.header')
+<div class="container-fluid">
+    <div class="row">
+        <x-admin-sidebar/>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="app">
+        </main>
     </div>
-    @include('admin.components.footer')
+</div>
+@include('admin.components.footer')
 
-    @include('admin.includes.scripts')
+@include('admin.includes.scripts')
 </body>
 </html>

@@ -1,4 +1,4 @@
-@extends('themes.default.layouts.login')
+@extends('.layouts.login')
 
 @section('title', 'Sign IN')
 
