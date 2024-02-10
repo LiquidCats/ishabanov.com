@@ -7,10 +7,10 @@ namespace App\Pages\Application\Services;
 use App\Domains\Blog\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\ValueObjects\PostId;
-use App\Domains\Pages\Services\AbstractPageComposer;
+use App\Domains\Pages\Contracts\ComposerContract;
+use App\Domains\Pages\Contracts\Services\SitePagesServiceContract;
 use App\Foundation\Enums\ToolType;
 use Carbon\Carbon;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -18,22 +18,21 @@ use Illuminate\Support\Facades\Auth;
 use function abort;
 use function now;
 
-class SitePageComposer extends AbstractPageComposer
+readonly class SitePagesService implements SitePagesServiceContract
 {
     public function __construct(
-        private readonly PostRepositoryContract $postRepository,
-        private readonly ExperienceRepositoryContract $experienceRepository,
+        private ComposerContract $composer,
+        private PostRepositoryContract $postRepository,
+        private ExperienceRepositoryContract $experienceRepository,
         Factory $factory,
-        Repository $config,
     ) {
-        parent::__construct($factory, $config);
     }
 
     public function posts(): View
     {
         $posts = $this->postRepository->getWithTags();
 
-        return $this->compose('posts.list', ['posts' => $posts]);
+        return $this->composer->compose('posts.list', ['posts' => $posts]);
     }
 
     public function post(PostId $postId): View
@@ -50,7 +49,7 @@ class SitePageComposer extends AbstractPageComposer
         $next = $this->postRepository->getNext($postId);
         $similar = $this->postRepository->getSimilarByTag($postId, $post->tags);
 
-        return $this->compose('post.article', [
+        return $this->composer->compose('post.article', [
             'prev' => $prev,
             'next' => $next,
             'similar' => $similar,
@@ -64,7 +63,7 @@ class SitePageComposer extends AbstractPageComposer
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);
         $experiences = $this->experienceRepository->getListOfExperiencesJob();
 
-        return $this->compose('home.index', [
+        return $this->composer->compose('home.index', [
             'experiences' => $experiences,
             'languages' => $languages,
             'frameworks' => $frameworks,
@@ -75,7 +74,7 @@ class SitePageComposer extends AbstractPageComposer
     {
         $duration = Carbon::parse('2015-08-01 00:00:00')->longAbsoluteDiffForHumans(now(), 2);
 
-        return $this->compose('about.index', [
+        return $this->composer->compose('about.index', [
             'duration' => $duration,
         ]);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Pages\Contracts\Services;
+namespace App\Domains\Pages\Contracts;
 
 use Illuminate\Contracts\View\View;
 
-interface PageComposerContract
+interface ComposerContract
 {
     public function compose(string $page, array $withData = []): View;
 }
