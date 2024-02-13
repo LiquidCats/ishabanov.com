@@ -22,7 +22,7 @@ class Sidebar extends Component
 
     public function render(): View
     {
-        return view('admin.components.sidebar')
+        return view('views.components.sidebar')
             ->with('sidebarLinks', $this->links());
     }
 

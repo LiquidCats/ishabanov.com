@@ -14,7 +14,7 @@
     @include('includes.styles')
 </head>
 <body>
-@include('admin.components.header')
+@include('views.components.header')
 <div class="container-fluid">
     <div class="row">
         <x-admin-sidebar/>
@@ -22,8 +22,8 @@
         </main>
     </div>
 </div>
-@include('admin.components.footer')
+@include('views.components.footer')
 
-@include('admin.includes.scripts')
+@include('views.includes.scripts')
 </body>
 </html>
