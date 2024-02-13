@@ -12,7 +12,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="d-flex justify-content-end align-items-center mb-3 gap-2">
+    <div class="flex justify-end items-center gap-2">
         <Btn v-if="links.prev"
              :type="Colors.primary"
              @click="$emit('click:prev', links.current_page-1)">Prev</Btn>
