@@ -25,14 +25,15 @@ onUnmounted(() => {
 
 <template>
     <PageHeader>Posts</PageHeader>
-    <div class="mb-3">
+    <div class="flex items-center my-3 justify-between">
         <BtnLink :type="Colors.primary" icon="plus" to="/admin/posts/create">Add</BtnLink>
+        <Pagination :links="state.pagination"
+                    @click:next="state.paginate"
+                    @click:prev="state.paginate"/>
     </div>
-    <Pagination :links="state.pagination"
-                @click:next="state.paginate"
-                @click:prev="state.paginate"/>
-    <div class="vstack">
-        <div v-if="state.status.listLoading">Loading...</div>
+
+    <div>
+        <div class="text-white text-center text-5xl" v-if="state.status.listLoading">Loading...</div>
         <PostListItem v-if="!state.status.listLoading" v-for="post in state.items" :post="post">
             <Btn v-if="!post.is_draft"
                  :type="Colors.warning"
@@ -52,7 +53,8 @@ onUnmounted(() => {
             </Btn>
         </PostListItem>
     </div>
-    <Pagination :links="state.pagination"
+    <Pagination class="mb-3"
+                :links="state.pagination"
                 @click:next="state.paginate"
                 @click:prev="state.paginate"/>
 </template>

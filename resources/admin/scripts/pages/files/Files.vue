@@ -9,7 +9,7 @@ import PageHeader from "../../components/molecules/PageHeader.vue";
 import Btn from "../../components/atoms/Btn.vue";
 import {Colors} from "../../types/colors";
 import FilePreview from "./FilePreview.vue";
-import DropZone from "./DropZone.vue";
+import DropZone from "../../components/molecules/DropZone.vue";
 import Pagination from "../../components/molecules/Pagination.vue";
 import useFilesState from "../../states/files";
 import FileRow from "./FileRow.vue";
