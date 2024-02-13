@@ -8,14 +8,17 @@
         "@types/bootstrap": "latest",
         "@vitejs/plugin-vue": "latest",
         "@vue/compiler-sfc": "^3.2.6",
+        "autoprefixer": "^10.4.17",
         "laravel-vite-plugin": "latest",
-        "postcss": "latest",
+        "postcss": "^8.4.35",
         "sass": "latest",
+        "tailwindcss": "^3.4.1",
         "typescript": "latest",
         "vite": "^4.5.2",
         "vue-tsc": "^0.2.2"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.1.1",
         "@popperjs/core": "^2.11.8",
         "@tinymce/tinymce-vue": "^5.1.1",
         "bootstrap": "latest",
