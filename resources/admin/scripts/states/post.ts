@@ -30,8 +30,8 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
     state: () => ({
         id: null,
         previewTypes: [
-            {value: 'left_side', text: 'Small preview on the left side'},
-            {value: 'fill', text: 'Preview as a background'},
+            {value: 'left_side', text: 'Left Side'},
+            {value: 'fill', text: 'Background'},
         ],
         errors: {},
         item: {
