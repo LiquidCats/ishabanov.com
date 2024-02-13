@@ -1,1 +1,1 @@
-@vite('resources/js/admin/index.ts')
+@vite('resources/admin/scripts/index.ts')

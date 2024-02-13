@@ -14,15 +14,15 @@ export default defineConfig(({mode}) => {
             laravel({
                 buildDirectory: "static",
                 input: [
-                    `themes/${env.APPEARANCE_SITE_THEME}/styles/styles.scss`,
-                    `themes/${env.APPEARANCE_SITE_THEME}/scripts/scripts.js`,
+                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/styles/styles.scss`,
+                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/scripts/scripts.js`,
                     //
-                    'resources/scss/admin/styles.scss',
-                    'resources/js/admin/index.ts',
+                    'resources/admin/styles/styles.scss',
+                    'resources/admin/scripts/index.ts',
                 ],
                 refresh: [
                     'lang/**',
-                    `themes/${env.APPEARANCE_SITE_THEME}/views/**`,
+                    `themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/views/**`,
                     `admin/views/**`,
                 ],
             }),

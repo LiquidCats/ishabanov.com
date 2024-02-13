@@ -13,6 +13,6 @@ class SidebarLink extends Component
 {
     public function render(): View
     {
-        return view('admin.components.sidebar-link');
+        return view('views.components.sidebar-link');
     }
 }
