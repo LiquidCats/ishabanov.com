@@ -17,7 +17,7 @@ return [
 
     'paths' => [
         resource_path('themes/'.strtolower(env('APPEARANCE_SITE_THEME', 'default')).'/views'),
-        // resource_path('admin'),
+        resource_path('admin'),
     ],
 
     /*
