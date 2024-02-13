@@ -1,5 +1,3 @@
-import "bootstrap"
-//
 import {createApp} from "vue"
 import {createPinia} from "pinia";
 import Popper from "vue3-popper";
