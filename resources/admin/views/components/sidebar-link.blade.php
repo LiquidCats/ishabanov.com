@@ -6,15 +6,19 @@
         'nav-link',
         'flex',
         'gap-1',
+        'justify-center', 'md:justify-start',
         'items-center',
-        'hover:bg-slate-50/[.1]',
-        'px-5', 'py-1.5',
+        'py-1.5',
+        'md:px-3',
         'rounded-md',
         'duration-300',
-    ]) }}
+    ])->merge(['class' => $attributes->get('class')]) }}
        aria-current="page"
        {{ $attributes->when($attributes->has('backend-driven'), fn (ComponentAttributeBag $a) => $a->merge(['data-backend-driven' => "true"]) ) }}
        href="{{ $link }}">
-        @if($attributes->has('icon'))<i class="bi bi-{{ $attributes->get('icon') }}"></i>@endif {{ $slot }}
+        @if($attributes->has('icon'))
+            @svg('heroicon-o-'. $attributes->get('icon'), 'size-8 md:size-4')
+        @endif
+            <span class="hidden md:inline">{{ $slot }}</span>
     </a>
 </li>

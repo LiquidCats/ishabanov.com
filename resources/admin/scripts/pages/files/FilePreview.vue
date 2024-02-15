@@ -1,9 +1,13 @@
 <script setup lang="ts">
-
+import {TrashIcon, ArrowUpOnSquareIcon} from "@heroicons/vue/20/solid"
 import {Colors} from "../../types/colors";
 import formatBytes from "../../utils/fromBytes";
 import {FileToUpload} from "../../types/internals";
 import Btn from "../../components/atoms/Btn.vue";
+import Tag from "../../components/atoms/Tag.vue";
+import FormField from "../../components/atoms/Form/FormField.vue";
+import FormLabel from "../../components/atoms/Form/FormLabel.vue";
+import {hashCode} from "../../utils/hashCode";
 
 interface Props {
     file: FileToUpload
@@ -15,54 +19,36 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="files__upload-preview d-flex gap-2 border border-1 border-light-subtle rounded-3 p-3 mb-2">
-        <div class="files__upload-preview__image img-thumbnail"
-             :style="`background-image: url(${file.preview})`">
-        </div>
-        <div class="col">
-            <div class="d-flex gap-2">
-                <div class="mb-2 form-floating w-100">
-                    <input type="text"
-                           class="form-control form-control-sm"
-                           :id="file.name"
-                           :value="file.name"
-                           @input="file.name = $event.target?.value?.trim()"
-                           placeholder="search" >
-                    <label :for="file.name">Name</label>
-                </div>
-                <div class="d-flex gap-2">
-                    <div><Btn :type="Colors.primary"
-                              icon="upload"
-                              class="btn-sm"
-                              :class="{'disabled': isUploading}"
-                              :disabled="isUploading"
-                              @click="$emit('file:upload', file)"/></div>
-                    <div><Btn :type="Colors.danger"
-                              icon="trash"
-                              class="btn-sm"
-                              :class="{'disabled': isUploading}"
-                              :disabled="isUploading"
-                              @click="$emit('file:remove', file)"/></div>
-                </div>
-
+    <div class="border border-stone-700 bg-stone-800 p-3 rounded">
+        <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
+             :style="`background-image: url('${file.preview}')`"/>
+        <div>
+            <div class="flex gap-2 mb-2 text-white text-lg">
+                <Tag :type="Colors.primary">{{ file.extension }}</Tag>
             </div>
-            <div>
-                <div class="mb-0 small text-muted">type: {{ file.file.type }}</div>
-                <div class="mb-0 small text-muted">ext.: {{ file.extension }}</div>
-                <div class="mb-0 small text-muted">size: {{ formatBytes(file.file.size) }}</div>
+            <div class="text-white text-2xl mb-2"> {{ formatBytes(file.file.size) }} </div>
+            <div class="mb-3">
+                <FormLabel class="text-sm" :for="`v-file-${hashCode(file.name)}`">Name</FormLabel>
+                <FormField :id="`v-file-${hashCode(file.name)}`" v-model="file.name" />
+            </div>
+            <div class="flex gap-2 justify-end">
+                <Btn :type="Colors.primary"
+                     :disabled="isUploading"
+                     class="text-sm grow"
+                     @click="$emit('file:upload', file)">
+                    <ArrowUpOnSquareIcon class="size-4"/> Upload
+                </Btn>
+                <Btn :type="Colors.danger"
+                     :disabled="isUploading"
+                     class="text-sm grow"
+                     @click="$emit('file:remove', file)">
+                    <TrashIcon class="size-4"/> Remove
+                </Btn>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.files__upload-preview {
-    &__image {
-        width: 100px;
-        height: 100px;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-}
+
 </style>

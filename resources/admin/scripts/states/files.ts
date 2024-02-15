@@ -70,8 +70,6 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                 .map(fileMapper)
         },
         async upload(fileToUpload?: FileToUpload): Promise<void> {
-            const imageState = useImagesState()
-
             const toUpload = fileToUpload ? [fileToUpload] : this.previews
             let data: FileData[] = []
 
@@ -85,7 +83,8 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                     .filter(u => !data
                         .some(f => f.name === u.name))
 
-
+                const imageState = useImagesState()
+                imageState.status.imagesLoaded = false
                 await imageState.load()
             } catch (e) {
                 const notifications = useNotificationState()
@@ -118,6 +117,11 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
 
                 await files.remove(hash)
 
+                this.status.filesDeleting = this.status
+                    .filesDeleting
+                    .filter((h) => h !== hash)
+
+                this.items = this.items.filter((f: FileData) => f.hash !== hash)
             } catch (e) {
                 const notifications = useNotificationState()
 

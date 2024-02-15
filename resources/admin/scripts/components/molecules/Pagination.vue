@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid"
 import {ResponseLinks} from "../../types/api";
 import Btn from "../atoms/Btn.vue";
 import {Colors} from "../../types/colors";
@@ -15,10 +16,14 @@ defineProps<Props>()
     <div class="flex justify-end items-center gap-2">
         <Btn v-if="links.prev"
              :type="Colors.primary"
-             @click="$emit('click:prev', links.current_page-1)">Prev</Btn>
+             @click="$emit('click:prev', links.current_page-1)">
+            <ChevronLeftIcon class="size-5"/> Prev
+        </Btn>
         <Btn v-if="links.next"
              :type="Colors.primary"
-             @click="$emit('click:next', links.current_page+1)">Next</Btn>
+             @click="$emit('click:next', links.current_page+1)">
+            Next <ChevronRightIcon class="size-5"/>
+        </Btn>
     </div>
 </template>
 

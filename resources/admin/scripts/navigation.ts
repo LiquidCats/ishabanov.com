@@ -3,7 +3,6 @@ import {Router} from "vue-router";
 export default function navigation(router: Router): void {
     const links = document.querySelectorAll('a.nav-link')
     const handler = (e: Event) => {
-        e.preventDefault()
         e.stopPropagation()
 
         const elem  = e.target as HTMLLinkElement

@@ -4,7 +4,6 @@
 
     interface Props {
         type: Colors,
-        icon?: string,
         to: string,
     }
 
@@ -13,7 +12,7 @@
 
 <template>
     <router-link type="button" :to="to" :class="'btn btn-' + type">
-        <Btn :type="type" :icon="icon"><slot></slot></Btn>
+        <Btn :type="type"><slot></slot></Btn>
     </router-link>
 </template>
 

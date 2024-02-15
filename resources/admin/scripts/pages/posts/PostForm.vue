@@ -5,7 +5,6 @@ import {TrashIcon, PhotoIcon} from "@heroicons/vue/20/solid";
 //
 import type {Post, File, Tag as TagData} from "../../types/data";
 //
-import useImagesState from "../../states/images";
 import useTagsState from "../../states/tags";
 import debounce from "../../utils/debounce";
 import {ValidationErrors} from "../../types/api";
@@ -44,7 +43,6 @@ interface Props {
 defineProps<Props>()
 
 const tagsState = useTagsState()
-const imagesState = useImagesState()
 
 const currentTab=ref<Tabs>(Tabs.main)
 
@@ -170,7 +168,6 @@ const openModal = ref(false)
             </Btn>
             <FilesModal type="images"
                         :is-open="openModal"
-                        :list="imagesState.items"
                         @file:click="post.previewImage = $event; openModal = false; post.preview_image_id = $event.hash"
                         @modal:close="openModal = false"/>
         </div>

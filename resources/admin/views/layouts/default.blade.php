@@ -15,9 +15,9 @@
 </head>
 <body class="bg-neutral-900">
 <div class="container mx-auto">
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-6 gap-4">
         <x-admin-sidebar/>
-        <main class="col-span-5" id="app"></main>
+        <main class="lg:col-span-5 md:col-span-3 col-span-5" id="app"></main>
     </div>
 </div>
 @include('views.components.footer')

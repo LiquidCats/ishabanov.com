@@ -12,14 +12,13 @@ defineProps<Props>()
 <template>
     <Teleport to="body">
         <Transition name="modal">
-            <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50 py-2 overflow-auto" v-if="isOpen">
-                <div class="bg-white p-4 rounded-md shadow-lg min-w-sm max-w-screen-md w-full">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-start z-40 py-2 overflow-auto" v-if="isOpen">
+                <div class="bg-stone-800 p-4 rounded-md shadow-lg min-w-sm max-w-screen-md w-full">
                     <slot></slot>
                 </div>
             </div>
         </Transition>
     </Teleport>
-
 </template>
 
 <style scoped lang="scss">

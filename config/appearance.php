@@ -46,22 +46,22 @@ return [
                 [
                     'link' => '/admin/dashboard',
                     'text' => 'Dashboard',
-                    'icon' => 'clipboard-data-fill',
+                    'icon' => 'computer-desktop',
                 ],
                 [
                     'link' => '/admin/posts',
                     'text' => 'Posts',
-                    'icon' => 'postcard-fill',
+                    'icon' => 'chat-bubble-left-right',
                 ],
                 [
                     'link' => '/admin/tags',
                     'text' => 'Tags',
-                    'icon' => 'tags-fill',
+                    'icon' => 'tag',
                 ],
                 [
                     'link' => '/admin/files',
                     'text' => 'Files',
-                    'icon' => 'file-earmark-image-fill',
+                    'icon' => 'archive-box',
                 ],
                 // [
                 //     'link' => '/admin/users',

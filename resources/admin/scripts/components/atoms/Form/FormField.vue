@@ -1,11 +1,27 @@
 <script setup lang="ts">
+import {computed} from "vue";
+
 interface Props {
-    value: string
-    failed: boolean
+    modelValue?: string
+    failed?: boolean
 }
 
-defineEmits(['input'])
-defineProps<Props>()
+const emit = defineEmits(['update:modelValue'])
+
+const props = withDefaults(defineProps<Props>(), {
+    modelValue: '',
+    failed: false
+})
+
+const value = computed({
+    get() {
+        return props.modelValue
+    },
+    set(value) {
+        emit('update:modelValue', value)
+    }
+})
+
 </script>
 
 <template>
@@ -13,8 +29,7 @@ defineProps<Props>()
            :class="{
                 'border-red-500': failed
             }"
-           :value="value"
-           @input="$emit('input', $event)">
+           v-model="value">
 </template>
 
 <style scoped lang="scss">
