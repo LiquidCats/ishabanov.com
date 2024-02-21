@@ -23,19 +23,19 @@ return [
             ],
             'socials' => [
                 [
-                    'icon' => 'instagram',
-                    'link' => 'https://www.instagram.com/degradation.of.mine',
-                    'text' => 'Instagram',
-                ],
-                [
-                    'icon' => 'linkedin',
+                    'icon' => 'sparkles',
                     'link' => 'https://www.linkedin.com/in/ilia-shabanov',
-                    'text' => 'Linkedin',
+                    'text' => 'LinkedIn',
                 ],
                 [
-                    'icon' => 'github',
+                    'icon' => 'code-bracket',
                     'link' => 'https://github.com/LiquidCats',
                     'text' => 'GitHub',
+                ],
+                [
+                    'icon' => 'envelope',
+                    'link' => 'mailto:ishabanov@liquid-cat.com',
+                    'text' => 'Mail',
                 ],
             ],
         ],
