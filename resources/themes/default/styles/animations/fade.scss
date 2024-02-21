@@ -1,0 +1,9 @@
+[data-animation="fade"].animation-init {
+    opacity: 0;
+    filter: blur(10px);
+}
+
+[data-animation="fade"].animation-show {
+    opacity: 1;
+    filter: blur(0px);
+}
