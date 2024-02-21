@@ -18,7 +18,7 @@ class ExperienceToolSeeder extends Seeder
         [1,     'javascript',           ExperienceLevel::JUNIOR],
         [1,     'vue',                  ExperienceLevel::JUNIOR],
         [1,     'mysql',                ExperienceLevel::JUNIOR],
-        // /
+        //
         [2,     'php',                  ExperienceLevel::MIDDLE],
         [2,     'laravel',              ExperienceLevel::MIDDLE],
         [2,     'react',                ExperienceLevel::JUNIOR],
@@ -27,50 +27,41 @@ class ExperienceToolSeeder extends Seeder
         [2,     'mssql',                ExperienceLevel::MIDDLE],
         [2,     'docker',               ExperienceLevel::JUNIOR],
         [2,     'redis',                ExperienceLevel::JUNIOR],
-        // /
-        [3,     'php',                  ExperienceLevel::SENIOR],
+        //
         [3,     'laravel',              ExperienceLevel::SENIOR],
-        [3,     'react',                ExperienceLevel::MIDDLE],
-        [3,     'javascript',           ExperienceLevel::MIDDLE],
-        [3,     'rabbitmq',             ExperienceLevel::MIDDLE],
-        [3,     'mssql',                ExperienceLevel::MIDDLE],
-        [3,     'docker',               ExperienceLevel::MIDDLE],
-        [3,     'redis',                ExperienceLevel::MIDDLE],
-        // /
-        [4,     'laravel',              ExperienceLevel::SENIOR],
+        [3,     'php',                  ExperienceLevel::SENIOR],
+        [3,     'nodejs',               ExperienceLevel::MIDDLE],
+        [3,     'golang',               ExperienceLevel::JUNIOR],
+        [3,     'kafka',                ExperienceLevel::JUNIOR],
+        [3,     'nginx',                ExperienceLevel::MIDDLE],
+        [3,     'docker',               ExperienceLevel::SENIOR],
+        [3,     'crypto_nodes',         ExperienceLevel::MIDDLE],
+        [3,     'kubernetes',           ExperienceLevel::JUNIOR],
+        [3,     'postgresql',           ExperienceLevel::MIDDLE],
+        //
         [4,     'php',                  ExperienceLevel::SENIOR],
-        [4,     'nodejs',               ExperienceLevel::MIDDLE],
-        [4,     'golang',               ExperienceLevel::JUNIOR],
-        [4,     'kafka',                ExperienceLevel::JUNIOR],
-        [4,     'nginx',                ExperienceLevel::MIDDLE],
+        [4,     'laravel',              ExperienceLevel::SENIOR],
+        [4,     'sqs',                  ExperienceLevel::MIDDLE],
+        [4,     'redis',                ExperienceLevel::SENIOR],
+        [4,     'postgresql',           ExperienceLevel::SENIOR],
         [4,     'docker',               ExperienceLevel::SENIOR],
-        [4,     'crypto_nodes',         ExperienceLevel::MIDDLE],
-        [4,     'kubernetes',           ExperienceLevel::JUNIOR],
-        [4,     'postgresql',           ExperienceLevel::MIDDLE],
-        // /
+        [4,     'bitbucket_pipelines',  ExperienceLevel::MIDDLE],
+        //
         [5,     'php',                  ExperienceLevel::SENIOR],
         [5,     'laravel',              ExperienceLevel::SENIOR],
-        [5,     'sqs',                  ExperienceLevel::MIDDLE],
+        [5,     'rabbitmq',             ExperienceLevel::SENIOR],
+        [5,     'github_actions',       ExperienceLevel::SENIOR],
         [5,     'redis',                ExperienceLevel::SENIOR],
-        [5,     'postgresql',           ExperienceLevel::SENIOR],
+        [5,     'mysql',                ExperienceLevel::SENIOR],
         [5,     'docker',               ExperienceLevel::SENIOR],
-        [5,     'bitbucket_pipelines',  ExperienceLevel::MIDDLE],
-        // /
+        //
         [6,     'php',                  ExperienceLevel::SENIOR],
         [6,     'laravel',              ExperienceLevel::SENIOR],
         [6,     'rabbitmq',             ExperienceLevel::SENIOR],
-        [6,     'github_actions',       ExperienceLevel::SENIOR],
         [6,     'redis',                ExperienceLevel::SENIOR],
         [6,     'mysql',                ExperienceLevel::SENIOR],
         [6,     'docker',               ExperienceLevel::SENIOR],
-        // /
-        [7,     'php',                  ExperienceLevel::SENIOR],
-        [7,     'laravel',              ExperienceLevel::SENIOR],
-        [7,     'rabbitmq',             ExperienceLevel::SENIOR],
-        [7,     'redis',                ExperienceLevel::SENIOR],
-        [7,     'mysql',                ExperienceLevel::SENIOR],
-        [7,     'docker',               ExperienceLevel::SENIOR],
-        [7,     'golang',               ExperienceLevel::SENIOR],
+        [6,     'golang',               ExperienceLevel::SENIOR],
 
     ];
 
