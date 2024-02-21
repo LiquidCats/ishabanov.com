@@ -11,8 +11,10 @@ use App\Domains\Pages\Contracts\ComposerContract;
 use App\Domains\Pages\Contracts\Services\SitePagesServiceContract;
 use App\Foundation\Enums\ToolType;
 use Carbon\Carbon;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 use function abort;
@@ -21,6 +23,7 @@ use function now;
 readonly class SitePagesService implements SitePagesServiceContract
 {
     public function __construct(
+        private Repository $config,
         private ComposerContract $composer,
         private PostRepositoryContract $postRepository,
         private ExperienceRepositoryContract $experienceRepository,
@@ -63,10 +66,14 @@ readonly class SitePagesService implements SitePagesServiceContract
         $frameworks = $this->experienceRepository->getTopToolByTypeJob(ToolType::FRAMEWORK);
         $experiences = $this->experienceRepository->getListOfExperiencesJob();
 
+        $duration = Carbon::parse('2015-08-01 00:00:00')->diffInYears(now(), 2);
+
         return $this->composer->compose('home.index', [
             'experiences' => $experiences,
             'languages' => $languages,
             'frameworks' => $frameworks,
+            'duration' => $duration,
+            'socials' => Collection::make($this->config->get('appearance.site.links.socials', [])),
         ]);
     }
 
