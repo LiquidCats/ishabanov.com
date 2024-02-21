@@ -13,7 +13,7 @@
 
     @include('includes.styles')
 </head>
-<body>
+<body class="bg-neutral-900">
 <main>
     @yield("content")
 </main>
