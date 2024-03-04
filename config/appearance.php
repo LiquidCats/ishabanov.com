@@ -16,10 +16,10 @@ return [
                     'link' => 'pages.blog',
                     'text' => 'Posts',
                 ],
-                [
-                    'link' => 'pages.about',
-                    'text' => 'About',
-                ],
+                // [
+                //     'link' => 'pages.about',
+                //     'text' => 'About',
+                // ],
             ],
             'socials' => [
                 [

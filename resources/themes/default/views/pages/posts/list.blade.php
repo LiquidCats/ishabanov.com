@@ -3,12 +3,10 @@
 @section("title", "Posts")
 
 @section('content')
-    <section id="posts" class="posts py-4 container-fluid position-relative px-1">
-          <div class="container">
-              <div class="row gy-4">
-                  @include('.pages.posts.includes.nothing')
-                  @each('.pages.posts.includes.list-item', $posts, 'post')
-              </div>
+    <section id="posts" class="px-3">
+          <div class="container mx-auto max-w-6xl space-y-3">
+              @include('pages.posts.includes.nothing')
+              @each('pages.posts.includes.list-item', $posts, 'post')
               {!! $posts->links('includes.pagination') !!}
           </div>
     </section>

@@ -1,36 +1,38 @@
-import {animate, scroll, spring} from 'motion'
+import {animate, scroll, ScrollOffset} from 'motion'
 document.addEventListener('DOMContentLoaded', () => {
-    const exp = document.getElementById('experience');
+    if (window.innerWidth <= 768) {
+        return;
+    }
 
-    const cards = exp.querySelectorAll('#experience-card')
+    const cards = document.querySelectorAll('#experience > div')
 
     for (const card of cards) {
-        const header = card.querySelector('h2')
-
+        const header = card.querySelector('a')
         scroll(animate(header, {
-            y: [200, 0, 0, 200],
+            y: [100, 0, 0, 100],
             opacity: [0, 1, 1, 0],
         }), {
             target: header,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
         })
 
-        scroll(animate(card, {
+        const description = card.querySelector('& > div > div:nth-child(1)')
+        scroll(animate(description, {
+            y: [300, 0, 0, -300],
             opacity: [0, 1, 1, 0],
-            scaleX: [0.5, 1, 1, 0.5],
-            scaleY: [0.5, 1, 1, 0.5],
         }), {
-            target: card,
-            offset: ["start end", "end end", "start start", "end start"]
-        });
-    }
+            target: description,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
+        })
 
-    const logos = exp.querySelectorAll('#experience-logo')
-    for (const logo of logos) {
-        scroll(animate(logo, {
-            x: [-200, 0, 0, -200],
-            opacity: [0, 1, 1, 0],
+        const image = card.querySelector('& > div > div:nth-child(2)')
+        scroll(animate(image, {
+            // y: [100, -10, -10, 100],
+            rotateZ: [0, '15deg', null, 0],
+            // opacity: [0, 1, 1, 0],
         }), {
-            target: logo,
-        });
+            target: image,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
+        })
     }
 })

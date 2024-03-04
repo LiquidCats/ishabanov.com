@@ -1,2 +1,2 @@
-import "./experience"
-import "./animation"
+// import "./hero"
+// import "./experience"

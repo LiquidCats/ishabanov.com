@@ -1,11 +1,11 @@
-<a href="{{ $link ?? '#' }}" class="post__nav d-block bg-white px-3 py-1 rounded-3 text-black text-decoration-none d-flex flex-row align-items-center">
+<a href="{{ $link ?? '#' }}" class="block bg-night hover:bg-stone-500 duration-300 px-3 py-1 rounded-xl text-gray-50 no-underline flex flex-row items-center">
    @if($type === 'next')
-   <i class="bi bi-chevron-double-left"></i>
+   <x-heroicon-o-arrow-left class="size-5" />
 
    @endif
 
-    <div @class(['col', 'text-end' => $type === 'next', 'text-start' => $type === 'prev']) >
-       <small class="mb-1 text-muted">
+    <div @class(['grow', 'flex', 'flex-col', 'items-end' => $type === 'next', 'items-start' => $type === 'prev']) >
+       <small>
            @switch($type)
            @case('next')
                Next
@@ -15,10 +15,10 @@
                @break
            @endswitch
        </small>
-       <h5>{{ $title ?? "" }}</h5>
+       <h3 class="text-lg">{{ $title ?? "" }}</h3>
    </div>
 
    @if($type === 'prev')
-   <i class="bi bi-chevron-double-right"></i>
+   <x-heroicon-o-arrow-right class="size-5" />
    @endif
 </a>
