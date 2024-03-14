@@ -19,17 +19,22 @@
             <span class="text-xl font-bold">years</span>
             <span class="text-xl font-bold -mt-1">in IT</span>
         </div>
-        <div class="col-span-2 md:row-span-2 p-5 bg-gray-50 flex flex-col justify-start items-center gap-3 rounded-xl">
-            <div class="text-xl">Unveil the Secrets to Success: Explore My Exclusive Insights and Expert Tips!</div>
-            <a href="{{ route('pages.blog') }}" class="ml-auto border border-gray-100 p-5 block shadow-md rounded-full hover:bg-gray-200 hover:border-gray-200 duration-300 mt-auto">
-                <x-heroicon-m-chevron-right class="size-6"/>
+        <div class="col-span-2 md:row-span-2 p-5 bg-gray-50 flex flex-col justify-between items-center gap-3 rounded-xl relative">
+            <a href="{{ route('pages.blog') }}" class="ml-auto opacity-50 hover:opacity-100 duration-300 group/blog">
+                <span class="absolute -inset-x-1 -inset-y-1 block"></span>
+                <x-heroicon-o-arrow-up-right class="size-8 duration-300 group-hover/blog:-translate-y-1 group-hover/blog:translate-x-1 group-focus-visible/blog:-translate-y-1 group-focus-visible/blog:translate-x-1 motion-reduce:transition-none"/>
             </a>
+            <div class="text-xl ">Unveil the Secrets to Success: Explore My Exclusive Insights and Expert Tips!</div>
         </div>
         @foreach($socials as $social)
-            <div class="bg-gradient-to-tl from-blue-500 to-purple-500 rounded-md justify-center flex items-center">
-                 <a href="{{ $social['link'] }}" target="_blank" class="text-white py-3 duration-300 flex flex-col items-center justify-center gap-1 text-md">
-                    @svg('heroicon-o-'. $social['icon'], 'size-7')
-                    {{ $social['text'] }}
+            <div class="bg-gradient-to-tl from-blue-500 to-purple-500 rounded-md justify-center flex items-center relative">
+                 <a href="{{ $social['link'] }}"
+                    aria-label="{{ $social['text'] }}"
+                    title="{{ $social['text'] }}"
+                    target="_blank" class="text-white py-3 duration-300 flex flex-col items-center justify-center text-sm group/contact">
+                     <span class="absolute -inset-x-1 -inset-y-1 block"></span>
+                    @svg('heroicon-o-'. $social['icon'], 'size-10 md:duration-300 md:translate-y-3.5 md:group-hover/contact:translate-y-0')
+                    <span class="md:duration-300 md:opacity-0 md:-translate-y-3.5 md:group-hover/contact:translate-y-0 md:group-hover/contact:opacity-100 motion-reduce:transition-none">{{ $social['text'] }}</span>
                 </a>
             </div>
 

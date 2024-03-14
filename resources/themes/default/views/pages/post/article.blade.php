@@ -11,7 +11,7 @@
 @section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
 
 @section('content')
-    <section id="post" class="px-3">
+    <section id="post">
         <article class="container max-w-6xl mx-auto text-gray-50">
             @if($post->preview_image_id !== null)
                 <header class="h-96 rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center"

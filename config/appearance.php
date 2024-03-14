@@ -9,10 +9,12 @@ return [
         'links' => [
             'menu' => [
                 [
+                    'icon' => 'home',
                     'link' => 'pages.home',
                     'text' => 'Home',
                 ],
                 [
+                    'icon' => 'pencil-square',
                     'link' => 'pages.blog',
                     'text' => 'Posts',
                 ],

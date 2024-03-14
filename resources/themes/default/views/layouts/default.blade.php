@@ -15,7 +15,7 @@
 <body class="bg-zinc-900">
 <x-header/>
 
-<main class="px-3 md:px-0">
+<main class="px-3">
     @yield("content")
 </main>
 
