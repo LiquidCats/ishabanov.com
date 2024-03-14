@@ -32,7 +32,6 @@ class TagApiV1Test extends TestCase
     {
         $response = $this->getJson(route('admin.api.tags.list'));
 
-        $response->dump();
         $response->assertSuccessful();
         $response->assertJsonStructure([
             'data' => [

@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     // purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     content: [
         "./resources/**/*.blade.php",
         "./database/**/*.php",
+        "./resources/**/*.scss",
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
