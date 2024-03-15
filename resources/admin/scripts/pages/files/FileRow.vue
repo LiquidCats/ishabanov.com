@@ -1,6 +1,9 @@
 <script setup lang="ts">
 
 import type {File} from "../../types/data";
+
+import {TrashIcon} from "@heroicons/vue/20/solid"
+
 import {Colors} from "../../types/colors";
 import formatBytes from "../../utils/fromBytes";
 import Tag from "../../components/atoms/Tag.vue";
@@ -16,29 +19,29 @@ defineProps<Props>()
 </script>
 
 <template>
-      <div class="files__upload-preview row border border-1 border-light-subtle rounded-3 mb-2 p-3">
-            <div class="col-12 col-md-auto d-flex justify-content-center">
-                <div class="img-thumbnail bg-cover mx-auto" style="height: 200px;width: 200px;" :style="`background-image: url(${file.path})`"/>
+    <div class="border bg-stone-800 border-stone-700 rounded-md p-3">
+        <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
+             :style="`background-image: url('${file.path}')`"/>
+        <div>
+            <div class="flex gap-2 mb-2 text-white text-lg">
+                <Tag :type="Colors.primary">{{ file.extension }}</Tag>
+                <Tag :type="Colors.dark" class="truncate">ID: {{ file.hash }}</Tag>
             </div>
-            <div class="col">
-                <div class="text-truncate mb-2 fs-6">
-                    <Tag :type="Colors.dark" class="">ID</Tag> {{ file.hash }}
-                </div>
-                <div class="text-wrap mb-2 fs-5">
-                    <Tag :type="Colors.light">{{ file.extension }}</Tag> {{ file.name }}
-                </div>
-                <div class="text-muted mb-2"> {{ formatBytes(file.file_size) }} </div>
-                <hr>
-                <div class="d-flex justify-content-end align-items-center">
-                    <Btn :type="Colors.danger"
-                         icon="trash"
-                         class="btn-sm"
-                         :class="{'disabled': isDeleting}"
-                         :disabled="isDeleting"
-                         @click="$emit('file:remove', file)">Delete</Btn>
-                </div>
+            <div class="text-white text-2xl mb-2"> {{ formatBytes(file.file_size) }} </div>
+            <div class="text-white text-wrap mb-2">{{ file.name }}</div>
+
+            <hr class="opacity-30 mb-3">
+            <div class="flex justify-end items-center">
+                <Btn :type="Colors.danger"
+                     class="flex items-center justify-center"
+                     :disabled="isDeleting"
+                     @click="$emit('file:remove', file)">
+                    <TrashIcon class="size-4"/>
+                    Delete
+                </Btn>
             </div>
         </div>
+    </div>
 </template>
 
 <style scoped lang="scss">

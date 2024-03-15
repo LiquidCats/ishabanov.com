@@ -1,158 +1,38 @@
-import debounce from "./utils/debounce";
-import {ScrollSpy} from 'bootstrap'
-
+import {animate, scroll, ScrollOffset} from 'motion'
 document.addEventListener('DOMContentLoaded', () => {
-    const section = document.getElementById('experience')
-    if (!section) {
-        return
-    }
-    const sectionRect = section.getBoundingClientRect()
-
-    const descriptions = document.querySelector('.experience-descriptions')
-
-    new ScrollSpy(descriptions, {
-        target: '.experience-timeline',
-        threshold: [.1, .25, .5, .75, 1],
-        rootMargin: '-15% 0px '
-    })
-
-    // switches
-    let isExperienceOnScreen = sectionRect.bottom > window.innerHeight && sectionRect.top <= 0;
-    let linkClicked = false
-    let scrollDirection = 0 // 0 - no scroll; 1 - top; -1 - bottom
-    let currentElement = null
-
-
-    const clickHandler = (e) => {
-        e.preventDefault()
-        linkClicked = true
-
-        const id = e.target.attributes.getNamedItem('href').value
-        const elem = document.querySelector(id)
-
-        elem.scrollIntoView({
-            block: "start",
-            behavior: "smooth",
-        });
+    if (window.innerWidth <= 768) {
+        return;
     }
 
-    document.querySelectorAll('.experience-timeline a').forEach((el) => {
-        el.addEventListener('click', clickHandler)
-    })
+    const cards = document.querySelectorAll('#experience > div')
 
-    descriptions.addEventListener('activate.bs.scrollspy', (e) => {
-        const id = e?.relatedTarget?.hash
-        if (!id) {
-            return
-        }
+    for (const card of cards) {
+        const header = card.querySelector('a')
+        scroll(animate(header, {
+            y: [100, 0, 0, 100],
+            opacity: [0, 1, 1, 0],
+        }), {
+            target: header,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
+        })
 
-        /** @var {HTMLElement} currentElement */
-        currentElement = document.querySelector(id)
-    })
+        const description = card.querySelector('& > div > div:nth-child(1)')
+        scroll(animate(description, {
+            y: [300, 0, 0, -300],
+            opacity: [0, 1, 1, 0],
+        }), {
+            target: description,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
+        })
 
-    document.addEventListener('resize', () => {
-        const sectionRect = section.getBoundingClientRect()
-
-        isExperienceOnScreen = sectionRect.bottom > window.innerHeight && sectionRect.top <= 0;
-    })
-
-    document.addEventListener('scroll', () => {
-        const sectionRect = section.getBoundingClientRect()
-
-        isExperienceOnScreen = sectionRect.bottom > window.innerHeight && sectionRect.top <= 0;
-    })
-
-    let lastScrollPosition = window.scrollY;
-    document.addEventListener('scroll', () => {
-        const currentScrollPosition = window.scrollY;
-        if (currentScrollPosition > lastScrollPosition) {
-            scrollDirection = -1
-        }
-
-        if (currentScrollPosition < lastScrollPosition) {
-            scrollDirection = 1
-        }
-
-        lastScrollPosition = currentScrollPosition
-        setTimeout(function() {
-            scrollDirection = 0
-        });
-    })
-
-    document.addEventListener('scroll', debounce(() => {
-        if (!isExperienceOnScreen) {
-            return
-        }
-
-        if (linkClicked) {
-            linkClicked = false
-            return;
-        }
-
-        if (scrollDirection !== 0) {
-            return;
-        }
-
-        if (null === currentElement) {
-            return;
-        }
-
-        setTimeout(() => {
-            currentElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-            })
-            currentElement = null;
-
-        },50)
-    }, 50))
+        const image = card.querySelector('& > div > div:nth-child(2)')
+        scroll(animate(image, {
+            // y: [100, -10, -10, 100],
+            rotateZ: [0, '15deg', null, 0],
+            // opacity: [0, 1, 1, 0],
+        }), {
+            target: image,
+            offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit]
+        })
+    }
 })
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const observer = new IntersectionObserver((entries) => {
-//         for (const entry of entries) {
-//             entry.target?.tartgetElement.classList.remove('active')
-//             if (entry.isIntersecting) {
-//                 entry.target?.tartgetElement.classList.add('active')
-//             }
-//         }
-//     }, {
-//         root: null,
-//         threshold: [0.1, 0.5, 1],
-//         rootMargin: '0px 0px -25%'
-//     })
-//
-//     const links = document.getElementById('experience-years')
-//
-//     const handler = (e) => {
-//         e.preventDefault()
-//
-//         const href = e.target.attributes.getNamedItem('href')
-//         if (!href) {
-//             return;
-//         }
-//
-//         const elementToScroll = document.querySelector(href.value)
-//         if (!elementToScroll) {
-//             return;
-//         }
-//
-//         elementToScroll.scrollIntoView(true)
-//     }
-//     for (const link of links.children) {
-//         link.addEventListener('click', handler)
-//         const href = link.attributes.getNamedItem('href')
-//         if (!href) {
-//             continue;
-//         }
-//
-//         const observable = document.querySelector(href.value)
-//         if (!observable) {
-//             continue;
-//         }
-//
-//         observable.tartgetElement = link
-//
-//         observer.observe(observable)
-//     }
-// })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted} from "vue";
-//
+import {PlusIcon} from "@heroicons/vue/20/solid";
 //
 import usePostListState from "../../states/posts";
 //
@@ -25,34 +25,35 @@ onUnmounted(() => {
 
 <template>
     <PageHeader>Posts</PageHeader>
-    <div class="mb-3">
-        <BtnLink :type="Colors.primary" icon="plus" to="/admin/posts/create">Add</BtnLink>
+    <div class="flex items-center my-3 justify-between">
+        <BtnLink :type="Colors.primary" to="/admin/posts/create">
+            <PlusIcon class="size-5"/>Add
+        </BtnLink>
+        <Pagination :links="state.pagination"
+                    @click:next="state.paginate"
+                    @click:prev="state.paginate"/>
     </div>
-    <Pagination :links="state.pagination"
-                @click:next="state.paginate"
-                @click:prev="state.paginate"/>
-    <div class="vstack">
-        <div v-if="state.status.listLoading">Loading...</div>
+
+    <div>
+        <div class="text-white text-center text-5xl" v-if="state.status.listLoading">Loading...</div>
         <PostListItem v-if="!state.status.listLoading" v-for="post in state.items" :post="post">
             <Btn v-if="!post.is_draft"
                  :type="Colors.warning"
-                 icon="eye-slash"
                  @click="state.changeState(post.id)"
                  :disabled="state.status.changingStateId === post.id">Hide
             </Btn>
             <Btn v-if="post.is_draft"
                  :type="Colors.success"
-                 icon="eye"
                  @click="state.changeState(post.id)"
                  :disabled="state.status.changingStateId === post.id">Publish
             </Btn>
             <Btn :type="Colors.danger"
-                 icon="trash"
                  @click="state.delete(post.id)" :disabled="state.status.deletingId === post.id">Delete
             </Btn>
         </PostListItem>
     </div>
-    <Pagination :links="state.pagination"
+    <Pagination class="mb-3"
+                :links="state.pagination"
                 @click:next="state.paginate"
                 @click:prev="state.paginate"/>
 </template>

@@ -1,16 +1,27 @@
 <script setup lang="ts">
 
 import {computed, defineProps, ref} from "vue";
+import {TrashIcon, PhotoIcon} from "@heroicons/vue/20/solid";
 //
 import type {Post, File, Tag as TagData} from "../../types/data";
 //
-import Editor from "../../components/organisms/Editor.vue";
-import MultiSelect from "../../components/atoms/MultiSelect.vue";
-import dayjs from "dayjs";
 import useTagsState from "../../states/tags";
 import debounce from "../../utils/debounce";
 import {ValidationErrors} from "../../types/api";
+//
+import dayjs from "dayjs";
+//
+import Editor from "../../components/organisms/Editor.vue";
+import MultiSelect from "../../components/atoms/MultiSelect.vue";
 import Error from "../../components/atoms/Error.vue";
+import TabLabel from "../../components/atoms/Tabs/TabLabel.vue";
+import FormField from "../../components/atoms/Form/FormField.vue";
+import FormLabel from "../../components/atoms/Form/FormLabel.vue";
+import TabGroup from "../../components/atoms/Tabs/TabGroup.vue";
+import Btn from "../../components/atoms/Btn.vue";
+import FilesModal from "../../components/organisms/FilesModal.vue";
+import CheckboxButton from "../../components/atoms/CheckboxButton.vue";
+import FormCheckbox from "../../components/atoms/Form/FormCheckbox.vue";
 
 enum Tabs {
     main = 'main',
@@ -33,7 +44,7 @@ defineProps<Props>()
 
 const tagsState = useTagsState()
 
-const currentTab= ref<Tabs>(Tabs.main)
+const currentTab=ref<Tabs>(Tabs.main)
 
 const checkTab = computed(() => ({
     isMain: currentTab.value === Tabs.main,
@@ -52,153 +63,114 @@ async function handleTagSearch(e: Event) {
 }
 const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
 
+const openModal = ref(false)
 </script>
 
 <template>
-    <ul class="nav nav-pills mb-3" id="post-form-tabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link"
-                    :class="{'active': checkTab.isMain}"
-                    type="button"
-                    role="tab"
-                    id="pills-main-tab"
-                    aria-controls="pills-main"
-                    :aria-selected="checkTab.isMain ? 'true' : 'false'"
-                    @click="selectTab(Tabs.main)">Main</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link"
-                    :class="{'active': checkTab.isPreview}"
-                    type="button"
-                    role="tab"
-                    id="pills-preview-tab"
-                    aria-controls="pills-preview"
-                    :aria-selected="checkTab.isPreview ? 'true' : 'false'"
-                    @click="selectTab(Tabs.preview)">Preview</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link"
-                    :class="{'active': checkTab.isContent}"
-                    type="button"
-                    role="tab"
-                    id="pills-content-tab"
-                    aria-controls="pills-content"
-                    :aria-selected="checkTab.isContent ? 'true' : 'false'"
-                    @click="selectTab(Tabs.content)">Content</button>
-        </li>
-    </ul>
+    <TabGroup>
+        <TabLabel :active="checkTab.isMain" @select="selectTab(Tabs.main)">Main</TabLabel>
+        <TabLabel :active="checkTab.isPreview" @select="selectTab(Tabs.preview)">Preview</TabLabel>
+        <TabLabel :active="checkTab.isContent" @select="selectTab(Tabs.content)">Content</TabLabel>
+    </TabGroup>
 
     <div v-if="checkTab.isMain"
-         class="tab-pane show"
          role="tabpanel"
          aria-labelledby="pills-main-tab"
          tabindex="0">
 
         <div class="mb-3">
-            <label for="post-title" class="form-label">Title</label>
-            <input type="text"
-                   name="title"
-                   class="form-control"
-                   :class="{'is-invalid': errors.hasOwnProperty('title')}"
-                   id="post-title"
-                   :value="post.title"
-                   @input="post.title = $event?.target?.value"
-                   placeholder="Title">
+            <FormLabel for="post-title">Title</FormLabel>
+            <FormField placeholder="Title"
+                       id="post-title"
+                       type="text"
+                       name="title"
+                       :failed="errors.hasOwnProperty('title')"
+                       :value="post.title"
+                       @input="post.title = $event?.target?.value"/>
             <Error name="title" :errors="errors"/>
         </div>
 
         <div class="mb-3">
-            <label for="post-published-at" class="form-label">Published At (UTC)</label>
-            <input name="published_at"
-                   class="form-control"
-                   :class="{'is-invalid': errors.hasOwnProperty('published_at')}"
-                   :value="post?.published_at || dayjs().format('YYYY-MM-DD HH:mm')"
-                   @input="post.published_at = $event?.target?.value"
-                   id="post-published-at" placeholder="Published At"/>
+            <FormLabel for="post-published-at">Published At (UTC)</FormLabel>
+            <FormField placeholder="Published At"
+                       id="post-published-at"
+                       :failed="errors.hasOwnProperty('published_at')"
+                       type="text"
+                       name="published_at"
+                       :value="post?.published_at || dayjs().format('YYYY-MM-DD HH:mm')"
+                       @input="post.published_at = $event?.target?.value"/>
             <Error name="published_at" :errors="errors"/>
         </div>
 
         <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input"
-                       name="is_draft"
-                       type="checkbox"
-                       :class="{'is-invalid': errors.hasOwnProperty('is_draft')}"
-                       id="post-is-draft"
-                       v-model="post.is_draft">
-                <label class="form-check-label" for="post-is-draft">Draft</label>
-            </div>
+            <FormCheckbox id="post-is-draft"
+                          name="is_draft"
+                          v-model="post.is_draft">Draft</FormCheckbox>
+<!--            <div class="flex gap-1 items-end">-->
+<!--                <input class="block"-->
+<!--                       name="is_draft"-->
+<!--                       type="checkbox"-->
+<!--                       :class="{'is-invalid': errors.hasOwnProperty('is_draft')}"-->
+<!--                       id="post-is-draft"-->
+<!--                       v-model="post.is_draft">-->
+<!--                <FormLabel for="post-is-draft">Draft</FormLabel>-->
+<!--            </div>-->
             <Error name="is_draft" :errors="errors"/>
         </div>
 
         <div class="mb-3">
-            <div class="mb-2">Tags</div>
-                <MultiSelect :items="tags"
-                             @input="debouncedHandleTagSearch($event)"
-                             :mapper="tagsMapperFn"
-                             v-model="post.tags">
-<!--                    <template #nothing>-->
-<!--                        <div class="d-flex justify-content-center mb-2">-->
-<!--                            <span>Nothing Found</span>-->
-<!--                        </div>-->
-<!--                        <Btn type="primary" class="btn-sm"><i class="bi bi-plus-lg"></i> Create</Btn>-->
-<!--                    </template>-->
-                </MultiSelect>
+            <FormLabel>Tags</FormLabel>
+            <MultiSelect :items="tags"
+                         @input="debouncedHandleTagSearch($event)"
+                         :mapper="tagsMapperFn"
+                         v-model="post.tags">
+                <!--                    <template #nothing>-->
+                <!--                        <div class="d-flex justify-content-center mb-2">-->
+                <!--                            <span>Nothing Found</span>-->
+                <!--                        </div>-->
+                <!--                        <Btn type="primary" class="btn-sm"><i class="bi bi-plus-lg"></i> Create</Btn>-->
+                <!--                    </template>-->
+            </MultiSelect>
             <Error name="tags" :errors="errors"/>
         </div>
     </div>
     <div v-if="checkTab.isPreview"
-         class="tab-pane show"
          role="tabpanel"
          aria-labelledby="pills-preview-tab"
          tabindex="0">
-        <div class="mb-3">
-            <div class="mb-3 fw-bold">Preview Image</div>
-            <div class="d-flex flex-wrap gap-2">
-                <div style="height: 100px;width: 100px; cursor: pointer"
-                     class="d-flex justify-content-center align-items-center border border-3 rounded-3"
-                     :class="{'border-dark-subtle': post.preview_image_id !== null, 'border-primary': post.preview_image_id === null}"
-                     @click="post.preview_image_id = null; post.preview_image_type = null">
-                    none
-                </div>
-
-                <div style="max-height: 100px;max-width: 100px; cursor: pointer"
-                     class="d-flex flex-column border border-3 rounded-3"
-                     :class="{'border-dark-subtle': post.preview_image_id !== previewImage.hash, 'border-primary': post.preview_image_id === previewImage.hash}"
-                     v-for="previewImage in previewImages"
-                     @click="post.preview_image_id = previewImage.hash">
-                    <div>
-                        <img class="d-block img-thumbnail" :src="previewImage.path" :alt="previewImage.name">
+        <div class="mb-3" v-if="post?.previewImage">
+            <div class="flex flex-wrap gap-4">
+                <div>
+                    <div class="size-64 border-2 rounded-md overflow-hidden bg-no-repeat bg-clip-border bg-cover bg-center"
+                         :style="`background-image: url('${post?.previewImage?.path}')`">
                     </div>
-
-                    <div class="text-truncate">{{ previewImage.name }}</div>
+                </div>
+                <div>
+                    <div class="flex flex-col items-stretch gap-2">
+                        <CheckboxButton v-for="previewType in previewTypes"
+                                        @click="post.preview_image_type = previewType.value"
+                                        :is-checked="post.preview_image_type === previewType.value">
+                            {{ previewType.text }}
+                        </CheckboxButton>
+                        <button class="flex gap-1 justify-center items-center border border-red-400 rounded-md p-3 text-white duration-300 bg-red-500"
+                                @click="post.preview_image_id = null; post.preview_image_type = null; post.previewImage = null">
+                            <TrashIcon class="size-5"/>
+                            <span>Remove</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <Error name="preview_image_id" :errors="errors"/>
         </div>
-
         <div class="mb-3">
-            <div class="mb-3 fw-bold">Preview Type</div>
-            <div class="d-flex flex-wrap gap-2">
-                <div style="cursor: pointer"
-                     class="d-flex justify-content-center align-items-center border border-3 rounded-3 p-3"
-                     :class="{'border-dark-subtle': post.preview_image_type !== null, 'border-primary': post.preview_image_type === null}"
-                     @click="post.preview_image_id = null; post.preview_image_type = null">
-                    none
-                </div>
-
-                <div style="cursor: pointer"
-                     class="d-flex flex-column border border-3 rounded-3 p-3"
-                     :class="{'border-dark-subtle': post.preview_image_type !== previewType.value, 'border-primary': post.preview_image_type === previewType.value}"
-                     v-for="previewType in previewTypes"
-                     @click="post.preview_image_type = previewType.value">
-                    {{ previewType.text }}
-                </div>
-            </div>
-            <Error name="preview_image_type" :errors="errors"/>
+            <Btn type="primary" @click="openModal = true" class="flex gap-2">
+                <PhotoIcon class="size-5"/>
+                Set Preview
+            </Btn>
+            <FilesModal type="images"
+                        :is-open="openModal"
+                        @file:click="post.previewImage = $event; openModal = false; post.preview_image_id = $event.hash"
+                        @modal:close="openModal = false"/>
         </div>
-
-        <hr>
 
         <div class="mb-3">
             <Editor id="post-introduction"
@@ -210,7 +182,6 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
 
     </div>
     <div v-if="checkTab.isContent"
-         class="tab-pane show"
          role="tabpanel"
          aria-labelledby="pills-content-tab"
          tabindex="0">
@@ -221,10 +192,8 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                     :initial-value="post.content"/>
             <Error name="content" :errors="errors"/>
         </div>
-
     </div>
 </template>
 
 <style scoped lang="scss">
-
 </style>

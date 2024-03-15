@@ -13,7 +13,6 @@ interface State {
 }
 interface Action {
     load(): Promise<any>
-    upload(): Promise<any>
 }
 
 const useImagesState = defineStore<string, State, any, Action>('images',{
@@ -47,17 +46,6 @@ const useImagesState = defineStore<string, State, any, Action>('images',{
                 this.status.imagesLoading = false
             }
         },
-        async upload() {
-            try {
-                this.status.imagesUploading = true
-            } catch (e) {
-                const notifications = useNotificationState()
-
-                notifications.pushError(e as Error)
-            } finally {
-                this.status.imagesUploading = false
-            }
-        }
     }
 })
 

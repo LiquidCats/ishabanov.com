@@ -96,17 +96,24 @@ function selectItem(e: Event, index: number|string) {
 </script>
 
 <template>
-    <Popper offsetDistance="0"
+    <Popper offsetDistance="5 0"
             @click="inputRef?.focus()"
             placement="auto-start"
-            class="mselect position-relative">
-        <div class="mselect__field d-flex flex-wrap col gap-1 border border-1 border-light-subtle rounded-3 p-2">
-            <Tag v-for="selectedItem in selectedItems" type="secondary" class="fs-6 fw-normal">
-                {{ selectedItem?.text }} <i class="bi bi-x-lg" style="cursor: pointer" @click="removeItem(selectedItem)"/>
-            </Tag>
-            <div class="mselect__input col">
+            class="relative w-full">
+        <div class="flex flex-wrap gap-2 border text-lg rounded-md block w-full p-2 bg-stone-600 border-stone-500 placeholder-gray-400 text-white focus:ring-stone-300 focus:border-stone-300 outline-none duration-300">
+            <div class="flex gap-1 items-center">
+                <Tag class="flex gap-1 items-center text-md" v-for="selectedItem in selectedItems" type="primary">
+                    {{ selectedItem?.text }}
+                    <div @click="removeItem(selectedItem)" class="cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </Tag>
+            </div>
+            <div class="grow flex">
                 <input ref="inputRef"
-                       class="align-self-stretch"
+                       class="outline-none border-0 w-full self-stretch bg-transparent"
                        type="text"
                        @focus="focusedItemIndex = 0"
                        @input="$emit('input', $event)"
@@ -117,19 +124,21 @@ function selectItem(e: Event, index: number|string) {
         </div>
 
         <template #content>
-            <div ref="itemsRef"
-                 :id="`mselect-item-${index}`"
-                 class="mselect__item p-2 fs-5 rounded-3"
-                 @mouseover="focusedItemIndex = index; shouldAutoScroll = false"
-                 @mouseleave="shouldAutoScroll = true"
-                 @click="selectItem($event, index)"
-                 :class="{
-                        'active': selectedItems?.some(i => i.value === item.value),
-                        'focused': focusedItemIndex === index
-                 }"
-                 v-for="(item, index) in allItems">{{ item.text }}</div>
-            <div v-if="allItems.length === 0" class="p-2 text-center">
-                <slot name="nothing">nothing found</slot>
+            <div class="bg-gray-50">
+                <div ref="itemsRef"
+                     :id="`mselect-item-${index}`"
+                     class="p-1"
+                     @mouseover="focusedItemIndex = index; shouldAutoScroll = false"
+                     @mouseleave="shouldAutoScroll = true"
+                     @click="selectItem($event, index)"
+                     :class="{
+                                    'font-bold': selectedItems?.some(i => i.value === item.value),
+                                    'bg-gray-700/[.1]': focusedItemIndex === index
+                             }"
+                     v-for="(item, index) in allItems">{{ item.text }}</div>
+                <div v-if="allItems.length === 0" class="p-2 text-center">
+                    <slot name="nothing">nothing found</slot>
+                </div>
             </div>
         </template>
     </Popper>
@@ -137,56 +146,9 @@ function selectItem(e: Event, index: number|string) {
 
 <style scoped lang="scss">
     :deep(.popper) {
-        background-color: var(--bs-white);
-        padding: .5rem;
+        border-radius: .25rem;
         max-height: 10rem;
         overflow: auto;
         width: 100%;
-        border-radius: .5rem;
-        border: 1px solid;
-        box-shadow: var(--bs-box-shadow);
-        border-color: var(--bs-gray-300);
-    }
-    :deep(.popper:hover) {
-        background-color: var(--bs-white);
-    }
-
-    :deep( > div:not(.popper)) {
-        display: flex;
-        gap: .5rem;
-    }
-    .mselect {
-        display: block !important;
-        &__item {
-            &.focused {
-                background: var(--bs-light);
-            }
-            &.active {
-                font-weight: bold;
-            }
-        }
-        &__input {
-            min-width: 50%;
-            & input {
-                display: block;
-                border: none;
-                min-width: 50%;
-                width: 100%;
-                font-size: 1rem;
-                font-weight: 400;
-                line-height: 1.5;
-                appearance: none;
-                background-color: var(--bs-body-bg);
-                background-clip: padding-box;
-                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-                &:focus {
-                    color: var(--bs-body-color);
-                    background-color: var(--bs-body-bg);
-                    border: none;
-                    outline: 0;
-                    //box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
-                }
-            }
-        }
     }
 </style>

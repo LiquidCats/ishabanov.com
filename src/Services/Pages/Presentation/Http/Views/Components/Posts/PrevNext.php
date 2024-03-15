@@ -25,7 +25,7 @@ class PrevNext extends Component
 
     public function render(): View
     {
-        return view('themes.default.components.posts.prev-next')
+        return view('components.posts.prev-next')
             ->with('link', $this->getLink())
             ->with('title', $this->post->title)
             ->with('type', $this->type);

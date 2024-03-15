@@ -9,33 +9,35 @@ return [
         'links' => [
             'menu' => [
                 [
+                    'icon' => 'home',
                     'link' => 'pages.home',
                     'text' => 'Home',
                 ],
                 [
+                    'icon' => 'pencil-square',
                     'link' => 'pages.blog',
                     'text' => 'Posts',
                 ],
-                [
-                    'link' => 'pages.about',
-                    'text' => 'About',
-                ],
+                // [
+                //     'link' => 'pages.about',
+                //     'text' => 'About',
+                // ],
             ],
             'socials' => [
                 [
-                    'icon' => 'instagram',
-                    'link' => 'https://www.instagram.com/degradation.of.mine',
-                    'text' => 'Instagram',
-                ],
-                [
-                    'icon' => 'linkedin',
+                    'icon' => 'sparkles',
                     'link' => 'https://www.linkedin.com/in/ilia-shabanov',
-                    'text' => 'Linkedin',
+                    'text' => 'LinkedIn',
                 ],
                 [
-                    'icon' => 'github',
+                    'icon' => 'code-bracket',
                     'link' => 'https://github.com/LiquidCats',
                     'text' => 'GitHub',
+                ],
+                [
+                    'icon' => 'envelope',
+                    'link' => 'mailto:ishabanov@liquid-cat.com',
+                    'text' => 'Mail',
                 ],
             ],
         ],
@@ -46,22 +48,22 @@ return [
                 [
                     'link' => '/admin/dashboard',
                     'text' => 'Dashboard',
-                    'icon' => 'clipboard-data-fill',
+                    'icon' => 'computer-desktop',
                 ],
                 [
                     'link' => '/admin/posts',
                     'text' => 'Posts',
-                    'icon' => 'postcard-fill',
+                    'icon' => 'chat-bubble-left-right',
                 ],
                 [
                     'link' => '/admin/tags',
                     'text' => 'Tags',
-                    'icon' => 'tags-fill',
+                    'icon' => 'tag',
                 ],
                 [
                     'link' => '/admin/files',
                     'text' => 'Files',
-                    'icon' => 'file-earmark-image-fill',
+                    'icon' => 'archive-box',
                 ],
                 // [
                 //     'link' => '/admin/users',
@@ -74,14 +76,6 @@ return [
                 //     'text' => 'Settings',
                 //     'icon' => 'sliders',
                 // ],
-                [],
-                [
-                    'link' => 'auth.logout',
-                    'text' => 'Sign Out',
-                    'icon' => 'power',
-                    'type' => 'danger',
-                    'backend-driven' => true,
-                ],
             ],
         ],
     ],

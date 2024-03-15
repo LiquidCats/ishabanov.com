@@ -1,21 +1,24 @@
-<header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark overflow-hidden bg-primary">
-        <div class="container">
-            <a class="navbar-brand shadow" href="/">
-                <img src="{{ $logo }}" alt="logo" width="24" class="rounded-1">
+<header id="header" class="px-3">
+    <nav class="container max-w-6xl mx-auto flex items-center max-h-20 py-3 bg-zinc-900">
+        <div>
+            <a class="" href="/">
+                <img src="{{ $logo }}" alt="logo"  class="rounded size-6">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#default-navbar" aria-controls="default-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse flex-grow-0" id="default-navbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @foreach($links as $link)
-                    <li class="nav-item">
-                        <a @class(['nav-link', 'active' => $link['is_active'] ?? false]) aria-current="page" href="{{ $link['link'] }}">{{ $link['text'] }}</a>
+        </div>
+        <div class="ml-auto">
+            <ul class="list-none flex gap-3">
+                @foreach($links as $link)
+                    <li>
+                        @if($link['is_active'])
+                            <div class="text-gray-500 px-1.5 py-3">{{ $link['text'] }}</div>
+                        @else
+                            <a class="block text-white hover:underline py-3"
+                               aria-current="page"
+                               href="{{ $link['link'] }}">{{ $link['text'] }}</a>
+                        @endif
                     </li>
-                    @endforeach
-                </ul>
-            </div>
+                @endforeach
+            </ul>
         </div>
     </nav>
 </header>

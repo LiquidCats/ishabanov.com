@@ -1,33 +1,36 @@
-<footer id="footer" class="bg-black text-white sticky-bottom z-0">
-    <div class="container py-4">
-        <div class="row">
-            <div class="col">
-                <a href="/">
-                    <img alt="logo" src="{{ $logo }}" class="rounded" width="32">
-                </a>
-
+<footer id="footer" class="px-3">
+    <div class="container max-w-6xl my-6 mx-auto flex justify-between">
+        <div class="flex items-start">
+            <div class="min-w-24 md:min-w-32 gap-1.5">
+                <div class="mb-3 text-gray-500">Menu</div>
+                @foreach($links as $link)
+                    <div>
+                        <a href="{{ $link['link'] }}" class="hover:underline flex items-center gap-1 text-gray-50">
+                            @svg('heroicon-o-'. $link['icon'], 'size-4')
+                            {{ $link['text'] }}
+                        </a>
+                    </div>
+                @endforeach
             </div>
-            <div class="col-auto">
-                <div class="d-flex align-items-end">
-                    <div class="px-3">
-                        @foreach($socials as $social)
-                        <div>
-                            <a href="{{ $social['link'] }}" target="_blank" class="text-white text-decoration-none">
-                                <i class="bi bi-{{ $social['icon'] }}"></i>
-                            </a>
-                        </div>
-                        @endforeach
+            <div class="min-w-24 md:min-w-32 gap-1.5">
+                <div class="mb-3 text-gray-500">Contacts</div>
+                @foreach($socials as $social)
+                    <div>
+                        <a href="{{ $social['link'] }}" target="_blank" class="hover:underline flex items-center gap-1 text-gray-50">
+                            @svg('heroicon-o-'. $social['icon'], 'size-4')
+                            {{ $social['text'] }}
+                        </a>
                     </div>
-                    <div class="px-3" style="border-left: solid 3px var(--bs-white)">
-                        <div style="color: var(--bs-gray-600)">Menu</div>
-                        @foreach($links as $link)
-                        <div><a href="{{ $link['link'] }}" class="text-decoration-none text-white">{{ $link['text'] }}</a></div>
-                        @endforeach
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
+        <div class="flex flex-col justify-between items-end gap-1">
+            <a href="/">
+                <img alt="logo" src="{{ $logo }}" class="rounded size-8">
 
+            </a>
+            <span class="text-gray-500">&copy; Ilia Shabanov</span>
+        </div>
     </div>
 </footer>
 

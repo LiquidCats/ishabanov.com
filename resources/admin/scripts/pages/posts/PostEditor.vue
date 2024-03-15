@@ -50,17 +50,17 @@ const shouldDisable = computed(() =>
 </script>
 
 <template>
-    <PageHeader>
-        <Tag v-if="postId" :type="Colors.dark">ID: {{ postId }}</Tag>
-        <Tag v-if="!postId" :type="Colors.dark">Post:</Tag> {{ postState.item.title }}
+    <PageHeader class="mb-3 flex items-end gap-2">
+        <Tag class="text-3xl" v-if="postId" :type="Colors.dark">ID: {{ postId }}</Tag>
+        <Tag class="text-3xl" v-if="!postId" :type="Colors.dark">Post:</Tag> {{ postState.item.title }}
     </PageHeader>
-    <PostButtons @click:save="savePost()" :disable="shouldDisable"/>
+    <PostButtons class="mb-3" @click:save="savePost()" :disable="shouldDisable"/>
     <PostForm :post="postState.item"
               :errors="postState.errors"
               :preview-images="imagesState.items"
               :preview-types="postState.previewTypes"
               :tags="tagsState.items"/>
-    <PostButtons @click:save="savePost()" :disable="shouldDisable"/>
+    <PostButtons class="mb-3" @click:save="savePost()" :disable="shouldDisable"/>
 </template>
 
 <style scoped lang="scss">

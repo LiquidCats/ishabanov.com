@@ -9,17 +9,15 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="follow">
 
-    <title>iShabanov Admin</title>
+    <title>iShabanov - Admin</title>
 
-    @include('includes.styles')
+    @include('views.includes.styles')
 </head>
-<body>
-@include('views.components.header')
-<div class="container-fluid">
-    <div class="row">
+<body class="bg-neutral-900">
+<div class="container mx-auto">
+    <div class="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-6 gap-4">
         <x-admin-sidebar/>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="app">
-        </main>
+        <main class="lg:col-span-5 md:col-span-3 col-span-5" id="app"></main>
     </div>
 </div>
 @include('views.components.footer')

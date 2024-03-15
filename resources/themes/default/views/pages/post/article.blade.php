@@ -11,48 +11,42 @@
 @section('self_url', route('pages.blog.post', ['post_id' => $post?->getKey()]))
 
 @section('content')
-    <section id="post" class="post container-fluid pt-5 pb-4 position-relative">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <article class="post__article p-4 rounded-4">
-                        @if($post->preview_image_id !== null && $post->preview_image_type !== null)
-                            <div class="post__article__preview px-4 pb-4 rounded-3 mb-3 position-relative overflow-hidden"
-                                 style="background-image: url('{{ $post->previewImage?->getFileUrl() }}')">
-                                <header class="position-relative z-1">
-                                    <h1 class="mb-0 text-light">{{ $post->title }}</h1>
-                                    <small class="text-light">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
-                                    <div class="mt-3">
-                                    @foreach ($post->tags as $tag)
-                                        <x-tag type="light">{{ $tag->name }}</x-tag>
-                                    @endforeach
-                                    </div>
-                                </header>
-                            </div>
-                        @endif
-                        @if($post->preview_image_id === null && $post->preview_image_type === null)
-                            <header>
-                                <h1 class="mb-0">{{ $post->title }}</h1>
-                                <small>{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
-                                <div class="my-3">
-                                @foreach ($post->tags as $tag)
-                                    <x-tag>{{ $tag->name }}</x-tag>
-                                @endforeach
-                                </div>
-                            </header>
+    <section id="post">
+        <article class="container max-w-6xl mx-auto text-gray-50">
+            @if($post->preview_image_id !== null)
+                <header class="h-96 rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center"
+                     style="background-image: url('{{ $post->previewImage?->getFileUrl() }}')">
+                    <div class="h-full flex flex-col justify-end p-3 bg-gradient-to-t from-night from-20% to-transparent">
+                        <h1 class="mb-0 text-5xl">{{ $post->title }}</h1>
+                        <small class="mb-3">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
+                        <div class="flex flex-wrap gap-1">
+                            @foreach ($post->tags as $tag)
+                                <x-tag type="light">{{ $tag->name }}</x-tag>
+                            @endforeach
+                        </div>
+                    </div>
+                </header>
+            @endif
+            @if($post->preview_image_id === null)
+                <header>
+                    <h1 class="mb-0">{{ $post->title }}</h1>
+                    <small>{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
+                    <div class="my-3">
+                        @foreach ($post->tags as $tag)
+                            <x-tag>{{ $tag->name }}</x-tag>
+                        @endforeach
+                    </div>
+                </header>
 
-                        @endif
+            @endif
 
-                        {!! $post->preview !!}
-                        {!! $post->content !!}
-                        <footer class="row g-2">
-                            @include('.pages.post.similar')
-                        </footer>
-                    </article>
-                </div>
-            </div>
-            @include('.pages.post.footer')
-        </div>
+            {!! $post->preview !!}
+            {!! $post->content !!}
+            <footer class="mt-6 mb-3">
+                @include('pages.post.similar')
+            </footer>
+            @include('pages.post.footer')
+        </article>
     </section>
 @endsection
 
