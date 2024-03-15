@@ -31,7 +31,7 @@ onUnmounted(() => {
 <template>
     <PageHeader class="mb-3">Files</PageHeader>
     <FileUploader class="mb-3"/>
-    <div class="mb-3 grid grid-cols-3 gap-2">
+    <div class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         <FileRow v-for="file in filesState.items"
                  :file="file"
                  :is-deleting="filesState.status.filesDeleting.includes(file.hash)"
