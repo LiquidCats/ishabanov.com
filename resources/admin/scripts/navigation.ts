@@ -1,25 +1,19 @@
 import {Router} from "vue-router";
 
 export default function navigation(router: Router): void {
-    const links = document.querySelectorAll('a.nav-link')
-    const handler = (e: Event) => {
-        e.stopPropagation()
-
-        const elem  = e.target as HTMLLinkElement
-        const elAttr = elem.attributes as NamedNodeMap
-
-        if (elem) {
-            const route = elAttr.getNamedItem('href')?.value
-            if (route) {
-                router?.push(route)
-            }
-        }
-    }
+    const links = document.querySelectorAll('.sidenav > li')
     for (const link of links) {
         const isBackendDriven = link.attributes.getNamedItem('backend-driven')
 
+        const anchor = link.querySelector('a')
+        const route = anchor.attributes?.getNamedItem('href')?.value
+
         if (!isBackendDriven) {
-            link.addEventListener('click', handler)
+            link.addEventListener('click', e => {
+                e.preventDefault()
+
+                route && router?.push(route)
+            })
         }
     }
 

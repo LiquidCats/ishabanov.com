@@ -1,9 +1,8 @@
 @php use Illuminate\View\ComponentAttributeBag; @endphp
 @props(['type' => 'primary', 'link'])
 
-<li>
+<li {{ $attributes->when($attributes->has('backend-driven'), fn (ComponentAttributeBag $a) => $a->merge(['data-backend-driven' => "true"]) ) }}>
     <a {{ $attributes->class([
-        'nav-link',
         'flex',
         'gap-1',
         'justify-center', 'md:justify-start',
@@ -14,7 +13,6 @@
         'duration-300',
     ])->merge(['class' => $attributes->get('class')]) }}
        aria-current="page"
-       {{ $attributes->when($attributes->has('backend-driven'), fn (ComponentAttributeBag $a) => $a->merge(['data-backend-driven' => "true"]) ) }}
        href="{{ $link }}">
         @if($attributes->has('icon'))
             @svg('heroicon-o-'. $attributes->get('icon'), 'size-8 md:size-4')
