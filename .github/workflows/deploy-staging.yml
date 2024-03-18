@@ -65,8 +65,8 @@ jobs:
               -e DB_PORT="${{ secrets.DB_PORT }}" \
               -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
               -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-              --memory-reservation=32MB \
-              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
+              --memory-reservation=16MB \
+              --memory=32MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
               php artisan migrate
 
       - name: Deploy
@@ -85,11 +85,11 @@ jobs:
               --network ishabanov_staging \
               --publish=8090:80 \
               --restart=always \
-              --health-cmd="curl --fail http://0.0.0.0/api/heathz || exit 1" \
-              --health-interval=60s \
+              --health-cmd="curl --fail --location http://0.0.0.0/api/healthz" \
+              --health-interval=300s \
               --health-retries=3 \
-              --health-start-period=20s \
-              --health-timeout=10s \
+              --health-start-period=60s \
+              --health-timeout=120s \
               --cpu-period=30000 \
               --cpu-quota=15000 \
               -e APP_ENV=staging \
@@ -106,6 +106,11 @@ jobs:
               -e REDIS_PORT="${{ secrets.REDIS_PORT }}" \
               -e TG_ANNOUNCER_CHAT_ID="${{ secrets.TG_ANNOUNCER_CHAT_ID }}" \
               -e TG_ANNOUNCER_TOKEN="${{ secrets.TG_ANNOUNCER_TOKEN }}" \
-              --volume=ishabanov_staging_storage:/app/storage/app/public \
+              -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+              -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+              -e AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
+              -e AWS_BUCKET=${{ secrets.AWS_BUCKET }} \
+              -e AWS_URL=${{ secrets.AWS_URL }} \
+              -e AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }} \
               --memory-reservation=32MB \
               --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging

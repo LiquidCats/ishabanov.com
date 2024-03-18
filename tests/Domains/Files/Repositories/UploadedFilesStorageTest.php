@@ -14,7 +14,7 @@ class UploadedFilesStorageTest extends TestCase
 {
     public function test_upload_returns_true_on_success(): void
     {
-        $storage = Storage::fake('public');
+        $storage = Storage::fake();
 
         /** @var UploadedFilesStorageContract $repo */
         $repo = $this->app->make(UploadedFilesStorageContract::class);
@@ -23,7 +23,7 @@ class UploadedFilesStorageTest extends TestCase
 
         $result = $repo->upload($file);
 
-        $files = $storage->files(UploadedFilesStorageContract::PATH);
+        $files = $storage->files('ishabanov/testing/media');
 
         $this->assertTrue($result);
         $this->assertNotEmpty($files);
@@ -32,19 +32,19 @@ class UploadedFilesStorageTest extends TestCase
 
     public function test_drop_returns_true_on_success(): void
     {
-        $storage = Storage::fake('public');
+        $storage = Storage::fake();
 
         /** @var UploadedFilesStorageContract $repo */
         $repo = $this->app->make(UploadedFilesStorageContract::class);
 
         $file = UploadedFile::fake()->image('test.jpg');
-        $storage->put(UploadedFilesStorageContract::PATH, $file);
+        $storage->put('media', $file);
 
         $dto = new FileModel();
         $dto->path = $file->hashName();
-        $result = $repo->drop($dto);
+        $result = $repo->drop($dto->path);
 
-        $files = $storage->files(UploadedFilesStorageContract::PATH);
+        $files = $storage->files('ishabanov/testing/media');
 
         $this->assertTrue($result);
         $this->assertEmpty($files);

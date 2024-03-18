@@ -11,10 +11,12 @@ use App\Domains\Files\ValueObjects\FileId;
 use Carbon\Carbon;
 use Database\Factories\FileFactory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use function asset;
@@ -29,6 +31,8 @@ use function sha1_file;
  * @property int $file_size
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ *
+ * @mixin Builder
  */
 class FileModel extends Model implements FileRepositoryContract
 {
@@ -51,9 +55,7 @@ class FileModel extends Model implements FileRepositoryContract
 
     public function getFileUrl(): string
     {
-        return Str::startsWith($this->path, UploadedFilesStorageContract::PATH)
-            ? asset('storage/'.$this->path)
-            : asset('storage/media/'.$this->path);
+        return app(UploadedFilesStorageContract::class)->url($this->path);
     }
 
     protected static function newFactory(): FileFactory
@@ -77,10 +79,9 @@ class FileModel extends Model implements FileRepositoryContract
         return $model;
     }
 
-    public function findById(FileId $fileId): FileModel
+    public function findById(FileId $fileId): self
     {
-        return $this->newQuery()
-            ->findOrFail($fileId);
+        return static::query()->findOrFail($fileId);
     }
 
     public function removeById(FileId $fileId): bool
