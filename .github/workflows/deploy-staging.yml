@@ -85,7 +85,7 @@ jobs:
               --network ishabanov_staging \
               --publish=8090:80 \
               --restart=always \
-              --health-cmd="curl -X GET --fail 'http://0.0.0.0/api/healthz'" \
+              --health-cmd="curl--fail \"http://0.0.0.0/api/healthz\"" \
               --health-interval=60s \
               --health-retries=3 \
               --health-start-period=20s \
