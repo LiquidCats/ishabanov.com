@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-
+use function env;
 use function fake;
 use function route;
 
@@ -58,7 +58,7 @@ class FileApiV1Test extends TestCase
 
     public function test_should_store_file(): void
     {
-        $disk = Storage::fake('public');
+        $disk = Storage::fake();
 
         $data = [
             'list' => [
@@ -96,7 +96,7 @@ class FileApiV1Test extends TestCase
             'hash' => $response->json('data.1.hash'),
         ]);
 
-        $this->assertCount(2, $disk->files(UploadedFilesStorageContract::PATH));
+        $this->assertCount(2, $disk->files('ishabanov/testing/media'));
     }
 
     public function test_should_delete_file(): void

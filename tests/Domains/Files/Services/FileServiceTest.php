@@ -33,14 +33,14 @@ class FileServiceTest extends TestCase
      */
     public function testCanStoreSingleFile(array $data): void
     {
-        $disk = Storage::fake('public');
+        $disk = Storage::fake();
 
         /** @var FileService $service */
         $service = $this->app->make(FileService::class);
 
         $service->storeMany($data);
 
-        $this->assertCount(count($data), $disk->files('media'));
+        $this->assertCount(count($data), $disk->files('ishabanov/testing/media'));
 
         $this->assertDatabaseCount('files', count($data));
         foreach ($data as $item) {
@@ -57,7 +57,7 @@ class FileServiceTest extends TestCase
     {
         $this->expectException(ValueError::class);
 
-        $disk = Storage::fake('public');
+        $disk = Storage::fake();
 
         /** @var FileService $service */
         $service = $this->app->make(FileService::class);
@@ -74,7 +74,7 @@ class FileServiceTest extends TestCase
      */
     public function testCanDropFile(): void
     {
-        $disk = Storage::fake('public');
+        $disk = Storage::fake();
 
         /** @var FileService $service */
         $service = $this->app->make(FileService::class);
@@ -89,7 +89,7 @@ class FileServiceTest extends TestCase
         $service->drop($fileId);
 
         $this->assertDatabaseCount('files', 0);
-        $this->assertCount(0, $disk->files('media'));
+        $this->assertCount(0, $disk->files('ishabanov/testing/media'));
     }
 
     /**
@@ -99,7 +99,7 @@ class FileServiceTest extends TestCase
      */
     public function testCanListFiles(array $data): void
     {
-        $disk = Storage::fake('public');
+        $disk = Storage::fake();
 
         /** @var FileService $service */
         $service = $this->app->make(FileService::class);
