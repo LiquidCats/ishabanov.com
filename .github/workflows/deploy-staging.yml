@@ -86,10 +86,10 @@ jobs:
               --publish=8090:80 \
               --restart=always \
               --health-cmd="curl --fail --location http://0.0.0.0/api/healthz" \
-              --health-interval=60s \
+              --health-interval=300s \
               --health-retries=3 \
-              --health-start-period=20s \
-              --health-timeout=10s \
+              --health-start-period=60s \
+              --health-timeout=120s \
               --cpu-period=30000 \
               --cpu-quota=15000 \
               -e APP_ENV=staging \
