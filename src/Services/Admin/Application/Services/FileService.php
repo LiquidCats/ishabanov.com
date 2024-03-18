@@ -49,7 +49,7 @@ readonly class FileService implements FileServiceContract
         $file = $this->fileRepository->findById($fileId);
 
         if ($this->fileRepository->removeById($fileId)) {
-            $this->storageRepository->drop($file);
+            $this->storageRepository->drop($file->path);
         }
 
         return $file;

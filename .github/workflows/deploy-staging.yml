@@ -65,8 +65,8 @@ jobs:
               -e DB_PORT="${{ secrets.DB_PORT }}" \
               -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
               -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-              --memory-reservation=32MB \
-              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
+              --memory-reservation=8MB \
+              --memory=16MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
               php artisan migrate
 
       - name: Deploy
@@ -106,6 +106,13 @@ jobs:
               -e REDIS_PORT="${{ secrets.REDIS_PORT }}" \
               -e TG_ANNOUNCER_CHAT_ID="${{ secrets.TG_ANNOUNCER_CHAT_ID }}" \
               -e TG_ANNOUNCER_TOKEN="${{ secrets.TG_ANNOUNCER_TOKEN }}" \
+              -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+              -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+              -e AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
+              -e AWS_BUCKET=${{ secrets.AWS_BUCKET }} \
+              -e AWS_URL=${{ secrets.AWS_URL }} \
+              -e AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }} \
+              -e AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }} \
               --volume=ishabanov_staging_storage:/app/storage/app/public \
-              --memory-reservation=32MB \
-              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+              --memory-reservation=16MB \
+              --memory=32MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
