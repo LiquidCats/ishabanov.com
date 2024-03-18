@@ -114,5 +114,5 @@ jobs:
               -e AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }} \
               -e AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }} \
               --volume=ishabanov_staging_storage:/app/storage/app/public \
-              --memory-reservation=16MB \
-              --memory=32MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+              --memory-reservation=32MB \
+              --memory=64MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
