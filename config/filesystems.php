@@ -16,6 +16,7 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+    'upload_path' => env('FILESYSTEM_UPLOAD_PATH', 'media'),
 
     /*
     |--------------------------------------------------------------------------
