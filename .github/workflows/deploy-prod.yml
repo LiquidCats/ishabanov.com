@@ -65,8 +65,8 @@ jobs:
               -e DB_PORT="${{ secrets.DB_PORT }}" \
               -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
               -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-              --memory-reservation=8MB \
-              --memory=16MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production \
+              --memory-reservation=16MB \
+              --memory=32MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production \
               php artisan migrate --force
 
       - name: Deploy
