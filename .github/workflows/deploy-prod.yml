@@ -85,7 +85,7 @@ jobs:
               --network ishabanov_prod \
               --publish=8080:80 \
               --restart=always \
-              --health-cmd="curl --fail http://0.0.0.0/api/heathz || exit 1" \
+              --health-cmd="curl -X GET --fail 'http://0.0.0.0/api/healthz'" \
               --health-interval=60s \
               --health-retries=3 \
               --health-start-period=20s \
@@ -110,9 +110,7 @@ jobs:
               -e AWS_BUCKET=${{ secrets.AWS_BUCKET }} \
               -e AWS_URL=${{ secrets.AWS_URL }} \
               -e AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }} \
-              -e AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }} \
               -e TG_ANNOUNCER_CHAT_ID="${{ secrets.TG_ANNOUNCER_CHAT_ID }}" \
               -e TG_ANNOUNCER_TOKEN="${{ secrets.TG_ANNOUNCER_TOKEN }}" \
-              --volume=ishabanov_storage:/app/storage/app/public \
               --memory-reservation=32MB \
               --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production
