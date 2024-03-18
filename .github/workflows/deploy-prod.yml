@@ -114,5 +114,5 @@ jobs:
               -e TG_ANNOUNCER_CHAT_ID="${{ secrets.TG_ANNOUNCER_CHAT_ID }}" \
               -e TG_ANNOUNCER_TOKEN="${{ secrets.TG_ANNOUNCER_TOKEN }}" \
               --volume=ishabanov_storage:/app/storage/app/public \
-              --memory-reservation=8MB \
-              --memory=64MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production
+              --memory-reservation=32MB \
+              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:production
