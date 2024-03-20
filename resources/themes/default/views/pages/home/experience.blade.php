@@ -1,6 +1,6 @@
 @php /** @var Illuminate\Support\Collection<int, App\Data\Database\Eloquent\Models\ExperienceModel> $experiences */ @endphp
 <section id="experience" class="max-w-6xl mx-auto">
-    <ol class="group/list relative space-y-3">
+    <ul class="group/list relative space-y-3 list-none">
         @foreach($experiences as $experience)
 
             <li class="rounded-xl relative z-[3]">
@@ -52,7 +52,7 @@
             </li>
         @endforeach
 
-    </ol>
+    </ul>
 
 
 </section>
