@@ -1,11 +1,11 @@
 import {mande} from "mande";
 import {baseUrl} from "../utils/baseUrl";
-import {options} from "./options";
+import {jsonOptions} from "./options";
 import {setCsrf} from "./csrf";
 import {Api} from "../types/api";
 import {Tag} from "../types/data";
 
-const tags = mande(baseUrl('admin', 'api', 'v1', 'tags'), options)
+const tags = mande(baseUrl('admin', 'api', 'v1', 'tags'), jsonOptions)
 
 export async function list(q: string = '') {
     setCsrf(tags)

@@ -106,15 +106,6 @@ const openModal = ref(false)
             <FormCheckbox id="post-is-draft"
                           name="is_draft"
                           v-model="post.is_draft">Draft</FormCheckbox>
-<!--            <div class="flex gap-1 items-end">-->
-<!--                <input class="block"-->
-<!--                       name="is_draft"-->
-<!--                       type="checkbox"-->
-<!--                       :class="{'is-invalid': errors.hasOwnProperty('is_draft')}"-->
-<!--                       id="post-is-draft"-->
-<!--                       v-model="post.is_draft">-->
-<!--                <FormLabel for="post-is-draft">Draft</FormLabel>-->
-<!--            </div>-->
             <Error name="is_draft" :errors="errors"/>
         </div>
 

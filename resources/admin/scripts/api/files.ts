@@ -1,6 +1,6 @@
 import {mande, defaults} from "mande";
 import {baseUrl} from "../utils/baseUrl";
-import {options} from "./options";
+import {jsonOptions, options} from "./options";
 import {setCsrf} from "./csrf";
 import {Api} from "../types/api";
 import {File} from "../types/data";
@@ -15,7 +15,8 @@ export async function getFilesList(page: number = 1, type?: string) {
     setCsrf(files)
 
     return files.get<FileResponse>({
-        query: {page, type}
+        ...jsonOptions,
+        query: {page, type},
     })
 }
 export async function getImages() {
@@ -43,5 +44,5 @@ export async function upload(filesToUpload: FileToUpload[]) {
 export async function remove(hash: string) {
     setCsrf(files)
 
-    return files.delete<FileResponse>(hash)
+    return files.delete<FileResponse>(hash, jsonOptions)
 }
