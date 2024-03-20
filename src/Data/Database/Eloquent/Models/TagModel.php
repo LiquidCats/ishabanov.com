@@ -111,7 +111,6 @@ class TagModel extends Model implements TagRepositoryContract
     {
         if ($name === '') {
             return $this->newQuery()
-                ->take(15)
                 ->get();
         }
 
@@ -119,7 +118,7 @@ class TagModel extends Model implements TagRepositoryContract
             ->where(fn (Builder $q) => $q
                 ->where('name', 'like', $name.'%')
                 ->orWhere('slug', 'like', $slug->value.'%')
-            )->take(15)
+            )
             ->get();
 
     }

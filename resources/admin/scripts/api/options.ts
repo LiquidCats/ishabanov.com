@@ -6,3 +6,10 @@ export const options: OptionsRaw = {
     redirect: "error",
     referrerPolicy: "origin",
 }
+
+export const jsonOptions: OptionsRaw = {
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+}

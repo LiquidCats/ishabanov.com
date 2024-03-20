@@ -7,10 +7,8 @@ import type {Tag as TagType} from "../../types/data";
 import {Colors} from "../../types/colors";
 //
 import useTagsState from "../../states/tags";
-import useNotificationState from "../../states/notfications";
 //
 import debounce from "../../utils/debounce";
-import * as tags from "../../api/tags";
 //
 import Tag from "../../components/atoms/Tag.vue";
 import PageHeader from "../../components/molecules/PageHeader.vue";
@@ -18,88 +16,55 @@ import Btn from "../../components/atoms/Btn.vue";
 
 import FormField from "../../components/atoms/Form/FormField.vue";
 import FormLabel from "../../components/atoms/Form/FormLabel.vue";
+import {SubscriptionCallback} from "pinia";
 
 const tagsState = useTagsState()
-const notificationState = useNotificationState()
 
 onMounted(async () => {
     await tagsState.search()
 })
 
-const tagId = ref<number|null>(null)
-const tagName = ref<string>('')
-const tagSlug = ref<string>('')
 const showSlugField = ref<boolean>(false)
-const tagSaving = ref<boolean>(false)
-const tagDeleting = ref<number[]>([])
 
-watch(tagName, debounce(async (value: string, oldValue: string) => {
-    if (oldValue !== value) {
-        await tagsState.search(value)
+tagsState.$subscribe(debounce<SubscriptionCallback>(async (state) => {
+    if (state.events?.key === 'name') {
+        if (state.events?.oldValue !== state.events?.newValue) {
+            await tagsState.search(state.events?.newValue, true)
+        }
     }
-}, 300))
-
-async function handleDelete(tagId: number) {
-    tagDeleting.value = [...tagDeleting.value, tagId]
-
-    try {
-        await tags.removeById(tagId)
-        await tagsState.search(tagName.value)
-    } catch (e) {
-        notificationState.pushError(e as Error)
-    } finally {
-        tagDeleting.value = tagDeleting.value.filter(id => id !== tagId)
-    }
-}
+}), {detached: true, deep: true})
 
 function handleEdit(tag: TagType) {
-    tagId.value = tag.id
-    tagName.value = tag.name
-    tagSlug.value = tag.slug
+    tagsState.item.id = tag.id
+    tagsState.item.name = tag.name
+    tagsState.item.slug = tag.slug
+}
+
+async function handleDelete(tagId: number) {
+    await tagsState.remove(tagId)
 }
 
 async function handleSave() {
-    tagSaving.value = true
-    try {
-        if (tagId.value) {
-            await tags.update(tagId.value, {
-                name: tagName.value,
-                slug: tagSlug.value,
-            })
-        } else {
-            const {data} = await tags.create({
-                name: tagName.value,
-                slug: tagSlug.value,
-            })
-
-            tagId.value = data.id
-        }
-
-        await tagsState.search(tagName.value, true)
-    } catch (e) {
-        notificationState.pushError(e as Error)
-    } finally {
-        tagSaving.value = false
-    }
+    await tagsState.save()
 }
 
 </script>
 
 <template>
-    <PageHeader class="mb-3">Tags ({{ tagId ? 'edit' : 'create' }})</PageHeader>
+    <PageHeader class="mb-3">Tags ({{ tagsState.item.id ? 'edit' : 'create' }})</PageHeader>
     <div class="flex flex-col gap-2 items-stretch mb-3">
         <div>
             <FormLabel for="tag-search" class="text-sm">Name</FormLabel>
-            <FormField v-model.trim="tagName"
-                       :disabled="tagSaving"
+            <FormField v-model.trim="tagsState.item.name"
+                       :disabled="tagsState.status.tagSaving"
                        id="tag-search"
                        placeholder="Search"/>
         </div>
 
         <div v-if="showSlugField">
             <FormLabel for="tag-slug" class="text-sm">Slug</FormLabel>
-            <FormField v-model.trim="tagSlug"
-                       :disabled="tagSaving"
+            <FormField v-model.trim="tagsState.item.slug"
+                       :disabled="tagsState.status.tagSaving"
                        id="tag-slug"
                        placeholder="Slug"/>
         </div>
@@ -111,7 +76,7 @@ async function handleSave() {
                 Slug
             </Btn>
             <Btn :type="Colors.danger" class="text-sm"
-                 @click="tagId = null; tagName = ''; tagSlug = ''">
+                 @click="tagsState.item.id = null; tagsState.item.name = ''; tagsState.item.slug = ''">
                 <XMarkIcon class="size-4"/>
                 Clean
             </Btn>
@@ -138,7 +103,7 @@ async function handleSave() {
                 </div>
                 <div>
                     <Btn :type="Colors.danger"
-                         :disabled="tagDeleting.includes(tag.id)"
+                         :disabled="tagsState.status.tagDeleting.includes(tag.id)"
                          @click="handleDelete(tag.id)">
                         <TrashIcon class="size-3" />
                     </Btn>
