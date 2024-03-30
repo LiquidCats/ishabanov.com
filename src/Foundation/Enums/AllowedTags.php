@@ -25,7 +25,7 @@ enum AllowedTags: string
     case TAG_SUP = 'sup';
     case TAG_CODE = 'code';
     case TAG_SPUN = 'span';
-    case TAG_S = 'S';
+    case TAG_S = 's';
     // LISTS
     case TAG_UL = 'ul';
     case TAG_OL = 'ol';
