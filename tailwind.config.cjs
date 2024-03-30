@@ -2,6 +2,7 @@
 module.exports = {
     // purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     content: [
+        "./src/**/*Style.php",
         "./resources/**/*.blade.php",
         "./database/**/*.php",
         "./resources/**/*.scss",
