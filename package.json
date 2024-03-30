@@ -21,6 +21,7 @@
         "@popperjs/core": "^2.11.8",
         "@tinymce/tinymce-vue": "^5.1.1",
         "dayjs": "^1.11.10",
+        "highlight.js": "^11.9.0",
         "mande": "^2.0.8",
         "motion": "^10.17.0",
         "pinia": "^2.1.7",
