@@ -6,24 +6,25 @@ import ModalBody from "../atoms/Modal/ModalBody.vue";
 import DropZone from "../molecules/DropZone.vue";
 import Modal from "../atoms/Modal/Modal.vue";
 import useFilesState from "../../states/files";
+import useModalsState, {ModalName} from "../../states/modals";
 import {computed, onMounted} from "vue";
 import useImagesState from "../../states/images";
 import Btn from "../atoms/Btn.vue";
 import {Colors} from "../../types/colors";
+import {File} from "../../types/data";
 
+const modalsState = useModalsState()
 const filesState = useFilesState()
 const imagesState = useImagesState()
 
 interface Props {
-    type: 'images'|'files',
-    isOpen: boolean
+    type: ModalName,
 }
 const props = withDefaults(defineProps<Props>(), {
     type: 'images',
-    isOpen: false,
 })
 
-defineEmits(['modal:close', 'file:click'])
+const emit = defineEmits(['modal:close', 'file:click'])
 
 const files = computed(() => {
     if (props.type === 'images') {
@@ -31,6 +32,15 @@ const files = computed(() => {
     }
     if (props.type === 'files') {
         return filesState.items
+    }
+})
+
+const isOpen = computed(() => {
+    if (props.type === 'images') {
+        return modalsState.images
+    }
+    if (props.type === 'files') {
+        return modalsState.files
     }
 })
 
@@ -43,11 +53,23 @@ onMounted(async () => {
     }
 })
 
+function closeModal(event: PointerEvent) {
+    modalsState.close(props.type)
+    emit('modal:close', event)
+}
+
+function checkFile(event: PointerEvent, file: File) {
+
+    modalsState.close(props.type)
+    emit('file:click', file)
+    emit('modal:close', event)
+}
+
 </script>
 
 <template>
     <Modal :is-open="isOpen">
-        <ModalHeader with-close @modal:close="$emit('modal:close', $event)">Preview Image</ModalHeader>
+        <ModalHeader with-close @modal:close="closeModal">Preview Image</ModalHeader>
         <ModalBody>
             <div class="mb-3">
                 <DropZone @files="filesState.createFilePreviews"/>
@@ -71,7 +93,7 @@ onMounted(async () => {
             </div>
             <div class="grid grid-cols-3 gap-2 max-h-min">
                 <button v-for="file in files"
-                        @click="$emit('file:click', file)"
+                        @click="checkFile($event, file)"
                         class="outline hover:outline-4 duration-300 outline-blue-100 hover:outline-blue-400 ease-in-out rounded overflow-hidden">
                     <img :src="file.path" :alt="file.name" />
                 </button>
