@@ -56,7 +56,7 @@ onMounted(async () => {
                 <Btn :type="Colors.primary" class="w-full"
                      @click="filesState.upload()"
                      :disabled="filesState.status.filesUploading.length > 0">
-                    <ArrowUpOnSquareIcon class="size-5"/> Upload
+                    <ArrowUpOnSquareIcon class="size-6"/> Upload
                 </Btn>
             </div>
             <div class="mb-6 grid grid-cols-6 gap-2" v-if="filesState.previews.length > 0">
