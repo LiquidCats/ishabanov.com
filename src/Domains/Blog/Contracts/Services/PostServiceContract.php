@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace App\Domains\Blog\Contracts\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
+use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 interface PostServiceContract
 {
-    public function createPost(array $data): PostModel;
+    public function createPost(PostDto $dto): PostModel;
 
     /**
      * @param  PostId<int>  $postId
      */
-    public function updatePost(PostId $postId, array $data = []): PostModel;
+    public function updatePost(PostId $postId, PostDto $dto): PostModel;
 
     /**
      * @param  PostId<int>  $postId
