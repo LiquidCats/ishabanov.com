@@ -11,6 +11,8 @@ use App\Domains\Blocks\Enums\HeadingTag;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Webmozart\Assert\Assert;
+use function strip_tags;
+use function trim;
 
 readonly class HeadingRenderer extends AbstractRenderer
 {
@@ -53,7 +55,7 @@ readonly class HeadingRenderer extends AbstractRenderer
         return new static(
             $type,
             HeadingTag::from($data['tag']),
-            $data['content'] ?? '',
+            trim(strip_tags($data['content'] ?? '')),
             $styles,
         );
     }

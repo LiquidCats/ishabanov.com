@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Blocks\Renderers;
 
 use App\Domains\Blocks\Enums\BlockType;
+use App\Foundation\Enums\AllowedTags;
 
 readonly class RawRenderer extends AbstractRenderer
 {
@@ -26,7 +27,7 @@ readonly class RawRenderer extends AbstractRenderer
     {
         return new static(
             $type,
-            $data['content'] ?? '',
+            AllowedTags::sanitize($data['content'] ?? ''),
         );
     }
 }

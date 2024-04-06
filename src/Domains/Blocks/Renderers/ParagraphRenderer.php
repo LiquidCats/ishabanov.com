@@ -7,6 +7,7 @@ namespace App\Domains\Blocks\Renderers;
 use App\Domains\Blocks\Contracts\Enums\StyleEnum;
 use App\Domains\Blocks\Enums\BlockStyle;
 use App\Domains\Blocks\Enums\BlockType;
+use App\Foundation\Enums\AllowedTags;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Webmozart\Assert\Assert;
@@ -46,7 +47,7 @@ readonly class ParagraphRenderer extends AbstractRenderer
 
         return new static(
             $type,
-            $data['content'] ?? '',
+            AllowedTags::sanitize($data['content'] ?? ''),
             $styles,
         );
     }

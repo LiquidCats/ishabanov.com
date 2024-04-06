@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domains\Blocks\Renderers;
 
 use App\Domains\Blocks\Enums\BlockType;
+use App\Domains\Blocks\Enums\CodeLanguage;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 
 readonly class CodeRenderer extends AbstractRenderer
@@ -12,6 +14,7 @@ readonly class CodeRenderer extends AbstractRenderer
     public function __construct(
         public BlockType $type,
         public string $content,
+        public Collection $styles,
     ) {
     }
 
@@ -27,8 +30,17 @@ readonly class CodeRenderer extends AbstractRenderer
         BlockType $type,
         #[ArrayShape([
             'content' => 'string',
+            'styles' => ['string'],
         ])] array $data,
     ): self {
-        return new static($type, $data['content'] ?? '');
+        $styles = Collection::make($data['styles'] ?? [])
+            ->map(CodeLanguage::tryFrom(...))
+            ->filter();
+
+        return new static(
+            $type,
+            $data['content'] ?? '',
+            $styles
+        );
     }
 }

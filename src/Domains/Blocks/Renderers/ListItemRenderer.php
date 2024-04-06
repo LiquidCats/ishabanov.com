@@ -10,6 +10,8 @@ use App\Domains\Blocks\Enums\BlockType;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Webmozart\Assert\Assert;
+use function strip_tags;
+use function trim;
 
 readonly class ListItemRenderer extends AbstractRenderer
 {
@@ -46,7 +48,7 @@ readonly class ListItemRenderer extends AbstractRenderer
 
         return new static(
             $type,
-            $data['content'] ?? '',
+            trim(strip_tags($data['content'] ?? '')),
             $styles,
         );
     }

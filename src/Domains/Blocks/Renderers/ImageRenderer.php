@@ -12,6 +12,8 @@ use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\ObjectShape;
 use stdClass;
 use Webmozart\Assert\Assert;
+use function strip_tags;
+use function trim;
 
 readonly class ImageRenderer extends AbstractRenderer
 {
@@ -40,9 +42,9 @@ readonly class ImageRenderer extends AbstractRenderer
         Assert::false(empty($data), 'cant parse incoming data');
 
         $content = new stdClass();
-        $content->src = $data['content']['src'] ?? '';
-        $content->alt = $data['content']['alt'] ?? '';
-        $content->caption = $data['content']['caption'] ?? '';
+        $content->src = trim(strip_tags($data['content']['src'] ?? ''));
+        $content->alt = trim(strip_tags($data['content']['alt'] ?? ''));
+        $content->caption = trim(strip_tags($data['content']['caption'] ?? ''));
 
         $styles = Collection::make($data['styles'] ?? [])
             ->map(BlockStyle::tryFrom(...))
