@@ -3,7 +3,7 @@
     import Btn from "./Btn.vue";
 
     interface Props {
-        type: Colors,
+        type: keyof typeof Colors,
         to: string,
     }
 

@@ -3,7 +3,7 @@
     import {computed} from "vue";
 
     interface Props {
-        type: Colors
+        type: keyof typeof Colors
     }
 
     const props = defineProps<Props>()
