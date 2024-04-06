@@ -40,8 +40,10 @@
 
             @endif
 
-            {!! $post->preview !!}
-            {!! $post->content !!}
+            @foreach($blocks as $block)
+                {{ $block->render() }}
+            @endforeach
+
             <footer class="mt-6 mb-3">
                 @include('pages.post.similar')
             </footer>
