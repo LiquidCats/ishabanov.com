@@ -5,6 +5,6 @@
 <figure class="my-3">
     <img src="{{ $content->src }}" alt="{{ $content->alt }}" @class(['rounded-md', 'mx-auto', 'w-full', 'h-auto'])>
     @if($content->caption)
-        <figcaption class="text-gray-500 max-w-screen-lg text-center mx-auto mt-2 leading-tight">{{ $content->caption }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa fugiat id laborum nesciunt, numquam perferendis sit soluta! Est incidunt libero, perferendis quae qui tempore. Adipisci aperiam aspernatur atque cumque dolor error, et exercitationem explicabo fugiat, illum iure labore laborum minima numquam officia quis quo quod sint sit temporibus? Et.</figcaption>
+        <figcaption @class(['text-gray-500', 'max-w-screen-lg', 'text-center', 'mx-auto mt-2', 'leading-tight', ...$styles->map?->toStyle()])>{{ $content->caption }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa fugiat id laborum nesciunt, numquam perferendis sit soluta! Est incidunt libero, perferendis quae qui tempore. Adipisci aperiam aspernatur atque cumque dolor error, et exercitationem explicabo fugiat, illum iure labore laborum minima numquam officia quis quo quod sint sit temporibus? Et.</figcaption>
     @endif
 </figure>
