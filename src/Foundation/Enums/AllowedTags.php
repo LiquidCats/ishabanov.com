@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Foundation\Enums;
 
 use function array_map;
+use function strip_tags;
+use function trim;
 
 enum AllowedTags: string
 {
@@ -51,5 +53,12 @@ enum AllowedTags: string
     public static function toArray(): array
     {
         return array_map(callback: static fn (AllowedTags $a) => $a->value, array: self::cases());
+    }
+
+    public static function sanitize(string $s): string
+    {
+        $allowedTags = self::toArray();
+
+        return trim(strip_tags($s, $allowedTags));
     }
 }

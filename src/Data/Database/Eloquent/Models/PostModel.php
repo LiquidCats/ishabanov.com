@@ -2,7 +2,9 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Domains\Blocks\Renderers\AbstractRenderer;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
+use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\User\ValueObjets\UserId;
@@ -10,6 +12,7 @@ use Carbon\Carbon;
 use Database\Factories\PostFactory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,18 +27,19 @@ use function str_word_count;
 use function strip_tags;
 
 /**
- * @property string                    $title
- * @property string                    $preview
- * @property PostPreviewType           $preview_image_type
- * @property string                    $preview_image_id
- * @property string                    $content
- * @property int                       $author_id
- * @property bool                      $is_draft
- * @property Carbon|null               $published_at
- * @property int                       $reading_time
- * @property UserModel|null            $author
+ * @property string $title
+ * @property string $preview
+ * @property PostPreviewType $preview_image_type
+ * @property string $preview_image_id
+ * @property string $content - deprecated
+ * @property Collection<int, AbstractRenderer> $blocks
+ * @property int $author_id
+ * @property bool $is_draft
+ * @property Carbon|null $published_at
+ * @property int $reading_time
+ * @property UserModel|null $author
  * @property Collection<int, TagModel> $tags
- * @property FileModel|null            $previewImage
+ * @property FileModel|null $previewImage
  */
 class PostModel extends Model implements PostRepositoryContract
 {
@@ -46,19 +50,22 @@ class PostModel extends Model implements PostRepositoryContract
     protected $casts = [
         'title' => 'string',
         'preview' => 'string',
-        'content' => 'string',
         'author_id' => 'int',
         'is_draft' => 'boolean',
         'published_at' => 'datetime',
         'preview_image_type' => PostPreviewType::class,
         'preview_image_id' => 'string',
+        'blocks' => AsCollection::class,
     ];
 
     protected $fillable = [
         'title',
-        'content',
+        'preview',
+        'blocks',
         'is_draft',
         'published_at',
+        'preview_image_type',
+        'preview_image_id',
     ];
 
     protected function readingTime(): Attribute
@@ -66,7 +73,7 @@ class PostModel extends Model implements PostRepositoryContract
         return Attribute::make(
             get: static function (mixed $value, array $attributes): int {
                 $wordsCount = str_word_count(strip_tags($attributes['preview']));
-                $wordsCount += str_word_count(strip_tags($attributes['content']));
+                $wordsCount += str_word_count(strip_tags($attributes['blocks']));
 
                 $averageReadingSpeed = 200; // You can adjust this value
 
@@ -121,7 +128,7 @@ class PostModel extends Model implements PostRepositoryContract
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
     {
         return PostModel::query()
-            ->select(['id', 'content', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
+            ->select(['id', 'blocks', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
             ->with('tags')
             ->with('previewImage')
             ->where('published_at', '<=', now())
@@ -138,27 +145,32 @@ class PostModel extends Model implements PostRepositoryContract
     /**
      * @param  UserId<int>  $userId
      */
-    public function create(UserId $userId, PostModel $post): PostModel
+    public function create(UserId $userId, PostDto $dto): PostModel
     {
-        $post->save();
-
-        return $post;
+        return (new self())->saveFromDto($dto);
     }
 
     /**
      * @param  PostId<int>  $id
      */
-    public function updateById(PostId $id, PostModel $post): PostModel
+    public function updateById(PostId $id, PostDto $dto): PostModel
     {
-        $model = $this->findById($id);
+        return $this->findById($id)->saveFromDto($dto);
+    }
 
-        foreach ($post->getAttributes() as $key => $value) {
-            $model->setAttribute($key, $value);
-        }
+    private function saveFromDto(PostDto $dto): static
+    {
+        $this->title = $dto->title;
+        $this->preview = $dto->preview;
+        $this->published_at = $dto->publishedAt;
+        $this->is_draft = $dto->isDraft;
+        $this->blocks = $dto->blocks;
+        $this->preview_image_id = $dto->previewImageId;
+        $this->preview_image_type = $dto->previewImageType;
 
-        $model->save();
+        $this->save();
 
-        return $model;
+        return $this;
     }
 
     public function deleteById(PostId $id): bool
