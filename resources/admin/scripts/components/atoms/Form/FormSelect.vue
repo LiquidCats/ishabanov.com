@@ -9,7 +9,7 @@
 
     const props = withDefaults(defineProps<Props>(), {
         deselectable: true,
-        values: [],
+        values: () => [],
         modelValue: undefined,
     })
     const emit = defineEmits(['update:modelValue'])
