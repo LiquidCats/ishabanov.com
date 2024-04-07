@@ -28,7 +28,7 @@ readonly class ListItemRenderer extends AbstractRenderer
             'type' => $this->type->value,
             'content' => $this->content,
             'styles' => $this->styles
-                ->map(fn (StyleEnum $e) => $e->toStyle())
+                ->map(fn (StyleEnum $e) => $e->value)
                 ->toArray(),
         ];
     }

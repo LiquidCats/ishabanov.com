@@ -63,7 +63,7 @@ readonly class ImageRenderer extends AbstractRenderer
                 'caption' => $this->content->caption,
             ],
             'styles' => $this->styles
-                ->map(fn (StyleEnum $e) => $e->toStyle())
+                ->map(fn (StyleEnum $e) => $e->value)
                 ->toArray(),
         ];
     }

@@ -23,6 +23,9 @@ readonly class CodeRenderer extends AbstractRenderer
         return [
             'type' => $this->type->value,
             'content' => $this->content,
+            'styles' => $this->styles
+                ->map(fn (CodeLanguage $style) => $style->value)
+                ->toArray(),
         ];
     }
 

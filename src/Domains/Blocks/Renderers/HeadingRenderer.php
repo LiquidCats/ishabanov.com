@@ -31,7 +31,7 @@ readonly class HeadingRenderer extends AbstractRenderer
             'tag' => $this->tag->value,
             'content' => $this->content,
             'styles' => $this->styles
-                ->map(fn (StyleEnum $e) => $e->toStyle())
+                ->map(fn (StyleEnum $e) => $e->value)
                 ->toArray(),
         ];
     }
