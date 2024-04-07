@@ -7,7 +7,7 @@ namespace App\Domains\Blocks\Contracts\Renderers;
 use App\Domains\Blocks\Collections\BlocksCollection;
 use Illuminate\Support\Collection;
 
-interface BlocksRendererContract
+interface BlocksParserContract
 {
     public function parse(Collection $blocks): BlocksCollection;
 }

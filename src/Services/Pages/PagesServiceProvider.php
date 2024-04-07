@@ -2,14 +2,14 @@
 
 namespace App\Pages;
 
-use App\Domains\Blocks\Contracts\Renderers\BlocksRendererContract;
+use App\Domains\Blocks\Contracts\Renderers\BlocksParserContract;
 use App\Domains\Pages\Composers\PagesComposer;
 use App\Domains\Pages\Contracts\Services\SitePagesServiceContract;
 use App\Pages\Application\Services\SitePagesService;
 use App\Pages\Presentation\Http\Views\Components\Footer;
 use App\Pages\Presentation\Http\Views\Components\Header;
 use App\Pages\Presentation\Http\Views\Components\Tag;
-use App\Pages\Presentation\Http\Views\Renderers\Blocks\HtmlBlocksRenderer;
+use App\Pages\Presentation\Http\Views\Renderers\Blocks\JsonBlocksParser;
 use App\Pages\Provides\RouteServiceProvider;
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Contracts\Container\Container;
@@ -27,7 +27,7 @@ class PagesServiceProvider extends ServiceProvider
             return $c->make(SitePagesService::class, ['composer' => $composer]);
         });
 
-        $this->app->singleton(BlocksRendererContract::class, HtmlBlocksRenderer::class);
+        $this->app->singleton(BlocksParserContract::class, JsonBlocksParser::class);
     }
 
     public function boot(): void

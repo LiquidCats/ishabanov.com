@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pages\Application\Services;
 
-use App\Domains\Blocks\Contracts\Renderers\BlocksRendererContract;
+use App\Domains\Blocks\Contracts\Renderers\BlocksParserContract;
 use App\Domains\Blog\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\ValueObjects\PostId;
@@ -24,12 +24,12 @@ use function now;
 readonly class SitePagesService implements SitePagesServiceContract
 {
     public function __construct(
-        private Repository $config,
-        private ComposerContract $composer,
-        private PostRepositoryContract $postRepository,
+        private Repository                   $config,
+        private ComposerContract             $composer,
+        private PostRepositoryContract       $postRepository,
         private ExperienceRepositoryContract $experienceRepository,
-        private BlocksRendererContract $blocksRenderer,
-        Factory $factory,
+        private BlocksParserContract         $blocksRenderer,
+        Factory                              $factory,
     ) {
     }
 
