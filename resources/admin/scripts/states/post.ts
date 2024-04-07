@@ -6,7 +6,7 @@ import {Post} from "../types/data";
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
 import {Api, ApiError, ValidationErrors} from "../types/api";
-import {Block, BlockType} from "../types/blocks";
+import {Block, BlockType, emptyBlocks} from "../types/blocks";
 
 interface State {
     id: number|null
@@ -59,10 +59,10 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
     }),
     actions: {
         blockAdd(type: BlockType): void {
-            this.item.blocks = [...this.item.blocks, {type}]
+            this.item.blocks = [...this.item.blocks, emptyBlocks[type]]
         },
         blockRemove(block: Block): void {
-            this.item.blocks = this.item.blocks.filter(b => b !== block)
+            this.item.blocks = this.item.blocks.filter((b: Block) => b !== block)
         },
         async save() {
             let response:Api<Post>
@@ -73,9 +73,9 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
 
 
                 if (this.id) {
-                    response = await posts.updateById(this.id, this.item as Post)
+                    response = await posts.updateById(this.id, this.item) as Api<Post>
                 } else {
-                    response = await posts.create(this.item as Post)
+                    response = await posts.create(this.item) as Api<Post>
                 }
 
                 this.id = response.data.id

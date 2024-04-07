@@ -19,16 +19,6 @@ export enum BlockType {
     RAW = 'raw',
 }
 
-export const blockTypes = [
-    BlockType.HEADING,
-    BlockType.IMAGE,
-    BlockType.LIST,
-    BlockType.PARAGRAPH,
-    BlockType.CODE,
-    BlockType.RAW,
-    BlockType.REMARK,
-]
-
 export const blockRenderers = {
     [BlockType.HEADING]: Heading,
     [BlockType.PARAGRAPH]: Paragraph,
@@ -39,6 +29,47 @@ export const blockRenderers = {
     [BlockType.REMARK]: Remark,
 }
 
+export const emptyBlocks = {
+    [BlockType.HEADING]: {
+        type: BlockType.HEADING,
+        tag: 'h1',
+        content: '',
+        styles: [],
+    },
+    [BlockType.PARAGRAPH]: {
+        type: BlockType.PARAGRAPH,
+        content: '',
+        styles: [],
+    },
+    [BlockType.LIST]: {
+        type: BlockType.LIST,
+        tag: 'ul',
+        content: [],
+        styles: [],
+    },
+    [BlockType.IMAGE]: {
+        type: BlockType.IMAGE,
+        content: {
+            alt: '',
+            src: '',
+            caption: '',
+        },
+        styles: [],
+    },
+    [BlockType.RAW]: {
+        type: BlockType.RAW,
+        content: '',
+    },
+    [BlockType.CODE]: {
+        type: BlockType.CODE,
+        content: '',
+        styles: [],
+    },
+    [BlockType.REMARK]: {
+        type: BlockType.REMARK,
+        content: [],
+    },
+}
 export const blocks = [
     {
         type: BlockType.HEADING,

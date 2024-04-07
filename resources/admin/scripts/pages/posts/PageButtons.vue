@@ -58,16 +58,16 @@ const shouldDisable = computed(() =>
         </div>
 
         <div>
-            <Btn :type="postState.item.is_draft ? 'warning' : 'success'"  @click.prevent="changeState" :disabled="shouldDisable" v-if="postId">
+            <Btn :type="postState.item.is_draft?'success':'warning'" @click.prevent="changeState" :disabled="shouldDisable" v-if="postId">
                 <span class="flex flex-row items-center justify-center gap-1"
                       v-if="postState.item.is_draft">
-                    <EyeSlashIcon class="size-6" />
-                    <span class="hidden md:inline">Hide</span>
+                    <EyeIcon class="size-6" />
+                    <span class="hidden md:inline">Publish</span>
                 </span>
                 <span class="flex flex-row items-center justify-center gap-1"
                       v-else>
-                    <EyeIcon class="size-6" />
-                    <span class="hidden md:inline">Publish</span>
+                    <EyeSlashIcon class="size-6" />
+                    <span class="hidden md:inline">Hide</span>
                 </span>
             </Btn>
         </div>

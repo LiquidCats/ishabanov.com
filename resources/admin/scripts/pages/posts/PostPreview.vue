@@ -17,12 +17,12 @@ const modalsState = useModalsState()
         <a href="#" class="absolute -inset-1 bg-transparent hover:bg-bg-stone-700/[.9]" @click.prevent="modalsState.open('images')"/>
         <PlusIcon class="size-12" v-if="!postState.item?.previewImage?.path"/>
         <div class="flex gap-1 absolute bottom-0 left-0 right-0 justify-center p-1 bg-stone-900/[.5]" v-if="postState.item?.previewImage?.path">
-            <Btn type="secondary"
+            <Btn :type="postState.item.preview_image_type === PreviewTypes.LEFT_SIDE ? 'primary' : 'light' "
                  @click="postState.item.preview_image_type = PreviewTypes.LEFT_SIDE">
                 <Bars3BottomLeftIcon class="size-3"/>
             </Btn>
-            <Btn type="secondary"
-                 @click="postState.item.preview_image_type = PreviewTypes.LEFT_SIDE">
+            <Btn :type="postState.item.preview_image_type === PreviewTypes.FILL ? 'primary' : 'light' "
+                 @click="postState.item.preview_image_type = PreviewTypes.FILL">
                 <ArrowsPointingOutIcon class="size-3"/>
             </Btn>
             <Btn type="danger"

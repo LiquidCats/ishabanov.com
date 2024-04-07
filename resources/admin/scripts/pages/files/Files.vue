@@ -29,15 +29,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PageHeader class="mb-3">Files</PageHeader>
-    <FileUploader class="mb-3"/>
-    <div class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+    <PageHeader class="mb-3 mx-3">Files</PageHeader>
+    <FileUploader class="mb-3 mx-3"/>
+    <div class="mb-3 mx-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         <FileRow v-for="file in filesState.items"
                  :file="file"
                  :is-deleting="filesState.status.filesDeleting.includes(file.hash)"
                  @file:remove="filesState.remove($event.hash)"/>
     </div>
-    <Pagination :links="filesState.pagination"/>
+    <Pagination class="mx-3" :links="filesState.pagination"/>
 </template>
 
 <style scoped lang="scss">
