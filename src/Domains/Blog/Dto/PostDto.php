@@ -9,6 +9,7 @@ use App\Admin\Presentation\Http\Requests\PostUpdateRequest;
 use App\Domains\Blog\Enums\PostPreviewType;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use JetBrains\PhpStorm\ArrayShape;
 
 readonly class PostDto
 {
@@ -18,10 +19,33 @@ readonly class PostDto
         public Carbon $publishedAt,
         public bool $isDraft,
         public Collection $blocks,
-        public string $previewImageId,
-        public PostPreviewType $previewImageType,
+        public ?string $previewImageId,
+        public ?PostPreviewType $previewImageType,
         public Collection $tags,
     ) {
+    }
+
+    public static function fromArray(#[ArrayShape([
+        'title' => 'string',
+        'preview' => 'string',
+        'published_at' => 'string',
+        'is_draft' => 'bool',
+        'blocks' => 'array',
+        'preview_image_id' => 'string',
+        'preview_image_type' => 'string',
+        'tags' => 'array',
+    ])] array $data): self
+    {
+        return new static(
+            $data['title'] ?? '',
+            $data['preview'] ?? '',
+            Carbon::parse($data['published_at']),
+            (bool) $data['is_draft'],
+            Collection::make($data['blocks'] ?? []),
+            $data['preview_image_id'],
+            PostPreviewType::tryFrom($data['preview_image_type'] ?? ''),
+            Collection::make($data['tags']),
+        );
     }
 
     public static function fromRequest(PostUpdateRequest|PostStoreRequest $request): self

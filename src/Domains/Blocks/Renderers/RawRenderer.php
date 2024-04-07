@@ -6,6 +6,7 @@ namespace App\Domains\Blocks\Renderers;
 
 use App\Domains\Blocks\Enums\BlockType;
 use App\Foundation\Enums\AllowedTags;
+use JetBrains\PhpStorm\ArrayShape;
 
 readonly class RawRenderer extends AbstractRenderer
 {
@@ -23,8 +24,12 @@ readonly class RawRenderer extends AbstractRenderer
         ];
     }
 
-    public static function createAs(BlockType $type, array $data): self
-    {
+    public static function createAs(
+        BlockType $type,
+        #[ArrayShape([
+            'content' => 'string',
+        ])] array $data
+    ): self {
         return new static(
             $type,
             AllowedTags::sanitize($data['content'] ?? ''),

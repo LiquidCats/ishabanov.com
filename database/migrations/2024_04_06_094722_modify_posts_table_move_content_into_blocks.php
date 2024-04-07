@@ -43,7 +43,7 @@ return new class extends Migration
                 /** @var RawRenderer $block */
                 $block = $post->blocks->first();
 
-                $post->content = $block->content;
+                $post->content = $block['content'];
 
                 $post->save();
             }

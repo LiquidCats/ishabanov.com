@@ -57,7 +57,7 @@ class PostsApiV1Test extends TestCase
                     'preview',
                     'preview_image_type',
                     'preview_image_id',
-                    'content',
+                    'blocks',
                     'is_draft',
                     'published_at',
                     'reading_time',
@@ -95,7 +95,7 @@ class PostsApiV1Test extends TestCase
                 'preview',
                 'preview_image_type',
                 'preview_image_id',
-                'content',
+                'blocks',
                 'is_draft',
                 'published_at',
                 'reading_time',
@@ -134,7 +134,7 @@ class PostsApiV1Test extends TestCase
                 'preview',
                 'preview_image_type',
                 'preview_image_id',
-                'content',
+                'blocks',
                 'is_draft',
                 'published_at',
                 'reading_time',
@@ -167,7 +167,6 @@ class PostsApiV1Test extends TestCase
             'preview' => $data['preview'],
             'preview_image_type' => $data['preview_image_type'],
             'preview_image_id' => $data['preview_image_id'],
-            'content' => $data['content'],
             'is_draft' => $data['is_draft'],
         ]);
 
@@ -204,7 +203,7 @@ class PostsApiV1Test extends TestCase
                 'preview',
                 'preview_image_type',
                 'preview_image_id',
-                'content',
+                'blocks',
                 'is_draft',
                 'published_at',
                 'reading_time',
@@ -235,7 +234,6 @@ class PostsApiV1Test extends TestCase
             'preview' => $data['preview'],
             'preview_image_type' => $data['preview_image_type'],
             'preview_image_id' => $data['preview_image_id'],
-            'content' => $data['content'],
             'is_draft' => $data['is_draft'],
         ]);
 

@@ -45,7 +45,7 @@ class TagApiV1Test extends TestCase
 
         $data = $response->json('data', []);
 
-        $this->assertCount(15, $data);
+        $this->assertCount(50, $data);
     }
 
     public function test_should_store_tag(): void

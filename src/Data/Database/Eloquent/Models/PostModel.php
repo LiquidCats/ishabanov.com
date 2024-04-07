@@ -162,7 +162,7 @@ class PostModel extends Model implements PostRepositoryContract
     {
         $this->title = $dto->title;
         $this->preview = $dto->preview;
-        $this->published_at = $dto->publishedAt;
+        $this->published_at = $dto->publishedAt->startOfMinute();
         $this->is_draft = $dto->isDraft;
         $this->blocks = $dto->blocks;
         $this->preview_image_id = $dto->previewImageId;
