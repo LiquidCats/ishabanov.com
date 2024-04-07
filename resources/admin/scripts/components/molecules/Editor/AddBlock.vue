@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
+import {computed} from "vue";
 import Draggable from "vuedraggable";
 
 import Btn from "../../atoms/Btn.vue";
 import {SquaresPlusIcon} from "@heroicons/vue/24/outline";
-import {Block} from "../../../types/blocks";
-import {computed} from "vue";
+import {Block, BlockType, emptyBlocks} from "../../../types/blocks";
 
 interface Props {
     list?: Block[]
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    list: [],
+    list: () => [],
     group: 'content',
 })
 defineEmits(['add:block'])
@@ -23,6 +23,10 @@ const groupOptions = computed(() => ({
     pull: 'clone',
     put: false
 }))
+
+function cloneBlock({type}: {type: BlockType}) {
+    return emptyBlocks[type]
+}
 
 </script>
 
@@ -36,6 +40,7 @@ const groupOptions = computed(() => ({
             <Draggable
                 item-key="type"
                 :list="list"
+                :clone="cloneBlock"
                 :group="groupOptions"
                 class="grid grid-cols-3 flex-row gap-1 text-gray-50 bg-stone-800 border-stone-500 p-3 rounded-md z-10 shadow-lg">
                 <template #item="{ element, index }">

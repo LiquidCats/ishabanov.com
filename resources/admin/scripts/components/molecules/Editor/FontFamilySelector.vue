@@ -8,7 +8,7 @@ interface Props {
     modelValue: Array<BlockStyle>,
 }
 const props = withDefaults(defineProps<Props>(), {
-    modelValue: []
+    modelValue: () => []
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -17,13 +17,12 @@ const selected = ref<string>(
     || BlockStyle.FONT_FAMILY_SANS
 )
 
-
-watch(selected, debounce((v, o) => {
+watch(selected, (v, o) => {
     emit('update:modelValue',  [
         ...props.modelValue?.filter(s => s !== o),
         v,
-    ])
-}, 300))
+    ].filter(Boolean))
+})
 
 const map = {
     [BlockStyle.FONT_FAMILY_SANS]: 'font-sans',
@@ -39,7 +38,7 @@ const map = {
                 :key="`font-family-${fontFamilyStyle}`"
                 class="bg-stone-700 hover:bg-stone-600 duration-300 ease-in-out px-4 py-1 uppercase text-sm"
                 :class="{
-                    'bg-stone-500': selected === fontFamilyStyle,
+                    'bg-stone-800': selected === fontFamilyStyle,
                     [map[fontFamilyStyle]]: true,
                 }"
                 @click="selected = fontFamilyStyle">{{ fontFamilyStyle[0] }}</button>

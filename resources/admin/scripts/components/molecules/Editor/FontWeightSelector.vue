@@ -10,18 +10,18 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    modelValue: []
+    modelValue: () => []
 })
 const emit = defineEmits(['update:modelValue'])
 
 const selected = ref<string>(props.modelValue?.find((v) => fontWeightStyles?.includes(v)))
 
-watch(selected, debounce((v, o) => {
+watch(selected, (v, o) => {
     emit('update:modelValue',  [
         ...props.modelValue.filter(s => s !== o),
         v,
-    ])
-}, 300))
+    ].filter(Boolean))
+})
 
 </script>
 
