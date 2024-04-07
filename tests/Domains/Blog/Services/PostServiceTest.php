@@ -14,11 +14,9 @@ use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
-use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\CoversFunction;
 use Tests\TestCase;
 
 use function fake;

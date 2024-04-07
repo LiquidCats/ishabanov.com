@@ -28,8 +28,9 @@ class JsonBlocksParser implements BlocksParserContract
 
     private function parseBlock(#[ArrayShape([
         'type' => 'string',
-        'content' => 'string|array'
-    ])]  array $block): ?BlockRendererContract {
+        'content' => 'string|array',
+    ])] array $block): ?BlockRendererContract
+    {
         $type = BlockType::tryFrom($block['type'] ?? '');
         if ($type === null) {
             return null;

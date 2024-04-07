@@ -24,12 +24,12 @@ use function now;
 readonly class SitePagesService implements SitePagesServiceContract
 {
     public function __construct(
-        private Repository                   $config,
-        private ComposerContract             $composer,
-        private PostRepositoryContract       $postRepository,
+        private Repository $config,
+        private ComposerContract $composer,
+        private PostRepositoryContract $postRepository,
         private ExperienceRepositoryContract $experienceRepository,
-        private BlocksParserContract         $blocksRenderer,
-        Factory                              $factory,
+        private BlocksParserContract $blocksRenderer,
+        Factory $factory,
     ) {
     }
 

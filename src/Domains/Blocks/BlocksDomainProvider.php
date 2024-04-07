@@ -8,5 +8,4 @@ use Illuminate\Support\ServiceProvider;
 
 class BlocksDomainProvider extends ServiceProvider
 {
-
 }

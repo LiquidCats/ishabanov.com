@@ -12,6 +12,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\ObjectShape;
 use stdClass;
 use Webmozart\Assert\Assert;
+
 use function strip_tags;
 use function trim;
 

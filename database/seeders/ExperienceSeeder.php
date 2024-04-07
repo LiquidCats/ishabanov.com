@@ -10,7 +10,6 @@ use Illuminate\Database\Seeder;
 
 class ExperienceSeeder extends Seeder
 {
-
     protected static array $values = [
         [
             'id' => 6,

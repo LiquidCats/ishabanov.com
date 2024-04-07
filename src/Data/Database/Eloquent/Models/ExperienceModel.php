@@ -16,14 +16,14 @@ use Illuminate\Support\Collection;
 /**
  * Class Experience.
  *
- * @property int                        $id
- * @property string                     $company_name
- * @property string                     $company_url
- * @property string                     $company_logo
- * @property string                     $position
- * @property string                     $description
- * @property Carbon                     $started_at
- * @property Carbon|null                $ended_at
+ * @property int $id
+ * @property string $company_name
+ * @property string $company_url
+ * @property string $company_logo
+ * @property string $position
+ * @property string $description
+ * @property Carbon $started_at
+ * @property Carbon|null $ended_at
  * @property Collection<int, ToolModel> $tools
  */
 class ExperienceModel extends Model implements ExperienceRepositoryContract

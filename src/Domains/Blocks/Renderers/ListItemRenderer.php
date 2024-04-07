@@ -10,6 +10,7 @@ use App\Domains\Blocks\Enums\BlockType;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Webmozart\Assert\Assert;
+
 use function strip_tags;
 use function trim;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Renderers;
 
-use App\Domains\Blocks\Contracts\Enums\StyleEnum;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Domains\Blocks\Enums\ListTag;
 use Illuminate\Support\Collection;

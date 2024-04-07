@@ -9,6 +9,7 @@ use App\Domains\Blocks\Enums\BlockType;
 use App\Domains\Blocks\Renderers\RawRenderer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
+
 use function fake;
 use function now;
 
