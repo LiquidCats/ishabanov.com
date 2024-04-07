@@ -11,7 +11,7 @@
 
                     <div class="col-span-6 bg-night rounded-xl p-6 z-[3] block">
                         <div class="mb-3">
-                            <h3 class="text-gray-50 text-2xl font-bold leading-snug">
+                            <h3 class="text-gray-50 text-4xl font-bold leading-snug">
                                 <a href="{{ $experience->company_url }}"
                                    target="_blank"
                                    class="font-bold inline-flex gap-1 items-baseline leading-tight hover:text-blue-500 focus-visible:text-blue-500 group/link">
@@ -20,7 +20,7 @@
                                         {{ $experience->position }} ·
                                         <span class="whitespace-nowrap">
                                             {{$experience->company_name}}
-                                            <x-heroicon-o-arrow-up-right class="inline-block size-5 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"/>
+                                            <x-heroicon-o-arrow-up-right class="inline-block size-8 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"/>
                                         </span>
                                     </span>
 
