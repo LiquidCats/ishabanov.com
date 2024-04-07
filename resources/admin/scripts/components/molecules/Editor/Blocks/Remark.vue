@@ -4,14 +4,14 @@ import {computed} from "vue";
 import EditorBlock from "../EditorBlock.vue";
 import Draggable from "vuedraggable";
 //
-import {Block, blockRenderers, blocks, BlockType} from "../../../../types/blocks";
+import {Block, blockRenderers, blocks, BlockType, emptyBlocks} from "../../../../types/blocks";
 import AddBlock from "../AddBlock.vue";
 
 interface Props {
-    block: Block<string, Array<Block>>
+    block: Block<Block[]>
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 defineEmits(['remove:block'])
 
 const dragOptions = computed(() => ({
@@ -21,7 +21,11 @@ const dragOptions = computed(() => ({
     ghostClass: "ghost"
 }))
 
-const remarkBlocks = blocks.filter(b => b.type !== BlockType.REMARK)
+const remarkBlocks: any[] = blocks.filter(b => b.type !== BlockType.REMARK)
+
+function addBlock(type: BlockType) {
+    props.block.content = [...props.block.content, emptyBlocks[type]]
+}
 
 </script>
 
@@ -29,7 +33,7 @@ const remarkBlocks = blocks.filter(b => b.type !== BlockType.REMARK)
     <EditorBlock v-if="BlockType.REMARK === block.type" @remove:block="$emit('remove:block', block)">
         <template #title>Remark</template>
         <template #header>
-            <AddBlock group="remark" :list="remarkBlocks"/>
+            <AddBlock group="remark" :list="remarkBlocks" @add:block="addBlock"/>
         </template>
         <Draggable v-bind="dragOptions" handle=".block-editor-handle" tag="ul" v-model="block.content" item-key="index,type">
             <template #item="{element}">

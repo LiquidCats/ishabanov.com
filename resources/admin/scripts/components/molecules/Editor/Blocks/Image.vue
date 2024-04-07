@@ -45,7 +45,7 @@ const caption = computed({
         <template #header>
             <Btn type="primary" @click="openModal = true" class="flex gap-1 !py-1">
                 <PhotoIcon class="size-6"/>
-                Select Image
+                <span class="hidden md:inline">Select Image</span>
             </Btn>
             <FontFamilySelector v-model="block.styles"/>
             <FontWeightSelector v-model="block.styles"/>
