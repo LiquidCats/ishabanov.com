@@ -10,6 +10,11 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
+        fontFamily: {
+            sans: ['"Montserrat"', 'sans-serif'],
+            serif: ['"Lora"', 'serif', 'ui-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+        },
         extend: {
             colors: {
                 night: "#22212A"
