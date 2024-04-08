@@ -19,11 +19,16 @@ return new class extends Migration
             $posts = PostModel::all();
 
             foreach ($posts as $post) {
-                $block = RawRenderer::createAs(BlockType::RAW, [
+                $preview = RawRenderer::createAs(BlockType::RAW, [
+                    'content' => $post->preview,
+                ]);
+                $content = RawRenderer::createAs(BlockType::RAW, [
                     'content' => $post->content,
                 ]);
 
-                $post->blocks = Collection::make()->push($block);
+                $post->blocks = Collection::make()
+                    ->push($preview)
+                    ->push($content);
 
                 $post->save();
             }
