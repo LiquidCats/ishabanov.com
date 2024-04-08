@@ -16,7 +16,7 @@
             @if($post->preview_image_id !== null)
                 <header class="h-96 rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center"
                      style="background-image: url('{{ $post->previewImage?->getFileUrl() }}')">
-                    <div class="h-full flex flex-col justify-end p-3 bg-gradient-to-t from-night from-20% to-transparent">
+                    <div class="h-full flex flex-col justify-end p-6 bg-gradient-to-t from-night from-20% to-transparent">
                         <h1 class="mb-3 text-6xl font-serif font-bold">{{ $post->title }}</h1>
                         <small class="block mb-3">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
                         <div class="flex flex-wrap gap-1">

@@ -26,13 +26,13 @@ onMounted(async () => {
 
 const showSlugField = ref<boolean>(false)
 
-tagsState.$subscribe(debounce<SubscriptionCallback>(async (state) => {
+tagsState.$subscribe(debounce<SubscriptionCallback<any>>(async (state: any) => {
     if (state.events?.key === 'name') {
         if (state.events?.oldValue !== state.events?.newValue) {
             await tagsState.search(state.events?.newValue, true)
         }
     }
-}), {detached: true, deep: true})
+}, 10), {detached: true, deep: true})
 
 function handleEdit(tag: TagType) {
     tagsState.item.id = tag.id
@@ -51,8 +51,8 @@ async function handleSave() {
 </script>
 
 <template>
-    <PageHeader class="mb-3">Tags ({{ tagsState.item.id ? 'edit' : 'create' }})</PageHeader>
-    <div class="flex flex-col gap-2 items-stretch mb-3">
+    <PageHeader class="mb-3 mx-3">Tags ({{ tagsState.item.id ? 'edit' : 'create' }})</PageHeader>
+    <div class="flex flex-col gap-2 items-stretch mb-3 mx-3">
         <div>
             <FormLabel for="tag-search" class="text-sm">Name</FormLabel>
             <FormField v-model.trim="tagsState.item.name"
@@ -71,41 +71,45 @@ async function handleSave() {
         <div class="flex justify-end gap-2">
             <Btn :type="Colors.dark" class="text-sm mr-auto"
                  @click="showSlugField = !showSlugField">
-                <ChevronUpIcon class="size-4" v-if="showSlugField"/>
-                <ChevronDownIcon class="size-4" v-if="!showSlugField"/>
+                <ChevronUpIcon class="size-6" v-if="showSlugField"/>
+                <ChevronDownIcon class="size-6" v-if="!showSlugField"/>
                 Slug
             </Btn>
             <Btn :type="Colors.danger" class="text-sm"
                  @click="tagsState.item.id = null; tagsState.item.name = ''; tagsState.item.slug = ''">
-                <XMarkIcon class="size-4"/>
+                <XMarkIcon class="size-6"/>
                 Clean
             </Btn>
             <Btn :type="Colors.primary" class="text-sm"
                  @click="handleSave()">
-                <ArrowDownOnSquareIcon class="size-4"/>
+                <ArrowDownOnSquareIcon class="size-6"/>
                 Save
             </Btn>
         </div>
     </div>
-    <div class="flex flex-wrap gap-2">
+    <div class="grid grid-cols-1 md:grid-cols-2  gap-2 mx-3">
         <div class="bg-stone-800 border border-stone-700 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
-            <div>
-                <h4 class="text-white"><Tag :type="Colors.dark">ID: {{ tag.id }}</Tag> {{ tag.name}}</h4>
-                <div class="text-sm text-gray-300">{{ tag.slug }}</div>
+            <div class="grow">
+                <Tag :type="Colors.dark">ID: {{ tag.id }}</Tag>
+                <h4 class="text-white mb-0">Name: {{ tag.name}}</h4>
+                <small class="text-sm text-gray-300">Slug: {{ tag.slug }}</small>
             </div>
 
-            <div class="flex flex-nowrap gap-1 justify-end">
+
+            <div class="flex flex-col flex-nowrap gap-1 justify-start">
                 <div>
                     <Btn :type="Colors.primary"
+                         class="!p-1.5"
                          @click="handleEdit(tag)">
-                        <PencilSquareIcon class="size-3"/>
+                        <PencilSquareIcon class="size-5"/>
                     </Btn>
                 </div>
                 <div>
                     <Btn :type="Colors.danger"
+                         class="!p-1.5"
                          :disabled="tagsState.status.tagDeleting.includes(tag.id)"
                          @click="handleDelete(tag.id)">
-                        <TrashIcon class="size-3" />
+                        <TrashIcon class="size-5" />
                     </Btn>
                 </div>
             </div>

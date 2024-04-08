@@ -24,16 +24,17 @@ function onFiles(e: Event | DragEvent) {
 </script>
 
 <template>
-    <div class="block border px-4 py-8 rounded-md text-center duration-300 cursor-pointer"
+    <div class="block border-dashed border-4 px-4 py-8 rounded-xl text-center duration-300 bg-stone-800 cursor-pointer"
          :class="{
-             'border-gray-400': !dropZoneActive,
-             'border-green-500': dropZoneActive,
+             'border-stone-600': !dropZoneActive,
+             'border-green-700': dropZoneActive,
          }"
          @click="openFileSelector"
          @dragover.prevent="dropZoneActive = true"
          @dragleave.prevent="dropZoneActive = false"
          @drop.prevent="onFiles($event)">
-        <span class="text-xl fw-medium text-gray-400">Drop files here or click to upload</span>
+        <div class="text-xl fw-medium text-neutral-300">Drop files here or click to upload</div>
+        <div class="text-sm fw-medium text-neutral-300">or click to browse files</div>
         <input ref="filesFieldRef" type="file" class="hidden" @change="onFiles($event)" multiple>
     </div>
 </template>
