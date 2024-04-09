@@ -108,7 +108,7 @@ const useFilesState = defineStore<string, State, any, Actions>('files', {
                 const notifications = useNotificationState()
                 notifications.pushError(e as Error)
             } finally {
-                this.status.filesLoading = true
+                this.status.filesLoading = false
             }
         },
         async remove(hash: string): Promise<void> {
