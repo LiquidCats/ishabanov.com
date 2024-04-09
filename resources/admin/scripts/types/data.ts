@@ -1,4 +1,4 @@
-import {Blocks} from "./blocks";
+import {Block} from "./blocks";
 
 export interface Post {
     id: number;
@@ -12,7 +12,7 @@ export interface Post {
     reading_time: number;
     tags: Tag[];
     previewImage: File|null;
-    blocks: Blocks
+    blocks: Array<Block>
 }
 
 export interface Tag {
