@@ -27,7 +27,7 @@ async function upload(fileToUpload?: FileToUpload) {
                  class="w-full"
                  :disabled="filesState.status.filesUploading.length"
                  @click.prevent="upload()">
-                <ArrowUpOnSquareIcon class="size-5"/> Upload All
+                <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
         </div>
         <div class="relative grid grid-cols-2 gap-2" v-if="filesState.previews.length">
@@ -42,7 +42,7 @@ async function upload(fileToUpload?: FileToUpload) {
                  class="w-full"
                  :disabled="filesState.status.filesUploading.length"
                  @click.prevent="upload()">
-                <ArrowUpOnSquareIcon class="size-5"/> Upload All
+                <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
         </div>
     </div>

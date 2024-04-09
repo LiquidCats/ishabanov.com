@@ -1,3 +1,5 @@
+import {Blocks} from "./blocks";
+
 export interface Post {
     id: number;
     title: string;
@@ -10,6 +12,7 @@ export interface Post {
     reading_time: number;
     tags: Tag[];
     previewImage: File|null;
+    blocks: Blocks
 }
 
 export interface Tag {
@@ -27,4 +30,9 @@ export interface File {
     file_size: number;
     created_at: string;
     updated_at: string;
+}
+
+export enum PreviewTypes {
+    LEFT_SIDE = "left_side",
+    FILL = "fill",
 }

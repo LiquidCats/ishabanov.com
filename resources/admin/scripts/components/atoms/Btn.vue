@@ -1,10 +1,11 @@
 <script setup lang="ts">
     import {Colors} from "../../types/colors";
-    import {computed} from "vue";
     interface Props {
-        type: Colors,
+        type: keyof typeof Colors,
     }
-    const props = defineProps<Props>()
+    const props = withDefaults(defineProps<Props>(), {
+        type: 'default'
+    })
 
     const types = {
         [Colors.primary]: 'bg-blue-600 hover:bg-blue-500 text-white',
@@ -20,8 +21,7 @@
 <template>
     <button type="button"
             class="flex gap-1 justify-center items-center px-3 py-2 rounded-md duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed"
-            :class="`${types[type] ?? types.default}`"
-            @mouseover="isHovered = true">
+            :class="`${types[type] ?? types.default}`">
         <slot></slot>
     </button>
 </template>

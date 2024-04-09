@@ -73,8 +73,8 @@ class ExperienceToolSeeder extends Seeder
         ExperienceToolModel::query()->truncate();
 
         /**
-         * @var int             $experienceId
-         * @var string          $toolId
+         * @var int $experienceId
+         * @var string $toolId
          * @var ExperienceLevel $level
          */
         foreach (self::$values as [$experienceId, $toolId, $level]) {

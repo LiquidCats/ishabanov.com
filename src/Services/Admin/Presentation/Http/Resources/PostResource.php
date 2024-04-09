@@ -24,7 +24,7 @@ class PostResource extends JsonResource
             'preview' => $this->resource->preview,
             'preview_image_type' => $this->resource->preview_image_type,
             'preview_image_id' => $this->resource->preview_image_id,
-            'content' => $this->resource->content,
+            'blocks' => $this->resource->blocks?->toArray() ?? [],
             'is_draft' => $this->resource->is_draft,
             'published_at' => $this->resource->published_at->toDateTimeString('minute'),
             'reading_time' => $this->resource->reading_time,

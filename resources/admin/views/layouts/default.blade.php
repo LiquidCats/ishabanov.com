@@ -13,13 +13,13 @@
 
     @include('views.includes.styles')
 </head>
-<body class="bg-neutral-900">
-<div class="container mx-auto">
-    <div class="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-6 gap-4">
-        <x-admin-sidebar/>
-        <main class="lg:col-span-5 md:col-span-3 col-span-5" id="app"></main>
+<body class="bg-stone-900">
+    <div class="flex flex-nowrap items-stretch">
+        <aside class="bg-neutral-800 p-3 min-h-screen lg:min-w-60">
+            <x-admin-sidebar/>
+        </aside>
+        <main class="grow min-h-screen" id="app"></main>
     </div>
-</div>
 @include('views.components.footer')
 
 @include('views.includes.scripts')

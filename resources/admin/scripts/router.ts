@@ -12,8 +12,7 @@ const router =  createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/admin',
-            alias: '/admin/dashboard',
+            path: '/admin/dashboard',
             component: Dashboard,
             name: RouteNames.DASHBOARD,
             children: [],
@@ -22,7 +21,8 @@ const router =  createRouter({
             }
         },
         {
-            path: '/admin/posts',
+            path: '/admin',
+            alias: '/admin/posts',
             component: PostList,
             name: RouteNames.POST_LIST,
             children: [],

@@ -4,6 +4,7 @@ namespace App\Domains\Blog\Contracts\Repositories;
 
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Data\Database\Eloquent\Models\TagModel;
+use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Blog\ValueObjects\TagSlug;
 use App\Domains\User\ValueObjets\UserId;
@@ -32,12 +33,12 @@ interface PostRepositoryContract
     /**
      * @param  UserId<int>  $userId
      */
-    public function create(UserId $userId, PostModel $post): PostModel;
+    public function create(UserId $userId, PostDto $dto): PostModel;
 
     /**
      * @param  PostId<int>  $id
      */
-    public function updateById(PostId $id, PostModel $post): PostModel;
+    public function updateById(PostId $id, PostDto $dto): PostModel;
 
     /**
      * @param  PostId<int>  $id

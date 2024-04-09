@@ -26,7 +26,7 @@ const types = {
     <div class="alert flex justify-between drop-shadow-lg overflow-hidden rounded p-4 border" :class="`${types[type] ?? types.default}`" role="alert">
         <span class="text-wrap text-break">{{ message }}</span>
         <button type="button" class="opacity-30 hover:opacity-40 duration-300" aria-label="Close" @click="$emit('close')">
-            <XMarkIcon class="size-5" />
+            <XMarkIcon class="size-6" />
         </button>
     </div>
 </template>

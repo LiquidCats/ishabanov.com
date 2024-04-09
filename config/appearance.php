@@ -45,11 +45,11 @@ return [
     'admin' => [
         'links' => [
             'menu' => [
-                [
-                    'link' => '/admin/dashboard',
-                    'text' => 'Dashboard',
-                    'icon' => 'computer-desktop',
-                ],
+                // [
+                //     'link' => '/admin/dashboard',
+                //     'text' => 'Dashboard',
+                //     'icon' => 'computer-desktop',
+                // ],
                 [
                     'link' => '/admin/posts',
                     'text' => 'Posts',
@@ -68,13 +68,13 @@ return [
                 // [
                 //     'link' => '/admin/users',
                 //     'text' => 'Users',
-                //     'icon' => 'people-fill',
+                //     'icon' => 'users',
                 // ],
                 // [],
                 // [
                 //     'link' => '/admin/settings',
                 //     'text' => 'Settings',
-                //     'icon' => 'sliders',
+                //     'icon' => 'cog-6-tooth',
                 // ],
             ],
         ],

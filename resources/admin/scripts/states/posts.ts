@@ -74,7 +74,7 @@ const usePostListState = defineStore<string, State, any, Actions>('posts', {
 
                 const response = await changeState(id)
                 const post = response.data
-                const index = this.items.findIndex((p: Post) => p.id = post.id)
+                const index = this.items.findIndex((p: Post) => p.id === post.id)
 
                 this.items[index] = post
             } catch (e) {

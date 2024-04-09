@@ -6,8 +6,7 @@ import {Post} from "../types/data";
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
 import {Api, ApiError, ValidationErrors} from "../types/api";
-import {Router} from "vue-router";
-import RouteNames from "../enums/RouteNames";
+import {Block, BlockType, emptyBlocks} from "../types/blocks";
 
 interface State {
     id: number|null
@@ -23,7 +22,10 @@ interface State {
 }
 interface Actions {
     load(id: number): Promise<void>
-    save(router: Router): Promise<void>
+    save(): Promise<void>
+    changeState(): Promise<void>
+    blockAdd(type: BlockType): void
+    blockRemove(block: Block): void
 }
 
 const usePostState = defineStore<string, State, any, Actions>('post', {
@@ -41,11 +43,12 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
             preview_image_type: null,
             preview_image_id: null,
             content: '',
+            blocks: [],
             is_draft: false,
             tags: [],
             published_at: dayjs().format('YYYY-MM-DD HH:mm'),
             reading_time: 0,
-            previewImage: null
+            previewImage: null,
         },
         status: {
             postLoading: false,
@@ -55,7 +58,13 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
         }
     }),
     actions: {
-        async save(router: Router) {
+        blockAdd(type: BlockType): void {
+            this.item.blocks = [...this.item.blocks, emptyBlocks[type]]
+        },
+        blockRemove(block: Block): void {
+            this.item.blocks = this.item.blocks.filter((b: Block) => b !== block)
+        },
+        async save() {
             let response:Api<Post>
 
             try {
@@ -64,21 +73,13 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
 
 
                 if (this.id) {
-                    response = await posts.updateById(this.id, this.item as Post)
+                    response = await posts.updateById(this.id, this.item) as Api<Post>
                 } else {
-                    response = await posts.create(this.item as Post)
+                    response = await posts.create(this.item) as Api<Post>
                 }
 
+                this.id = response.data.id
                 this.item = {...this.item, ...response.data}
-
-                if (this.id === null && response.data.id) {
-                    this.id = response.data.id
-
-                    await router.replace({
-                        name: RouteNames.POST_EDIT,
-                        params: {post_id: this.id}
-                    })
-                }
 
                 this.status.postSaved = true
             } catch (e: any) {
@@ -114,6 +115,10 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
             } finally {
                 this.status.postLoading = false
             }
+        },
+        async changeState() {
+            this.item.is_draft = !this.item.is_draft
+            await this.save();
         }
     }
 })

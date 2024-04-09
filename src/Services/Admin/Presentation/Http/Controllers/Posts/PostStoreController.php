@@ -7,6 +7,7 @@ namespace App\Admin\Presentation\Http\Controllers\Posts;
 use App\Admin\Presentation\Http\Requests\PostStoreRequest;
 use App\Admin\Presentation\Http\Resources\PostResource;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
+use App\Domains\Blog\Dto\PostDto;
 use Illuminate\Routing\Controller;
 
 class PostStoreController extends Controller
@@ -17,7 +18,7 @@ class PostStoreController extends Controller
 
     public function __invoke(PostStoreRequest $request): PostResource
     {
-        $model = $this->service->createPost($request->validated());
+        $model = $this->service->createPost(PostDto::fromRequest($request));
 
         return PostResource::make($model);
     }

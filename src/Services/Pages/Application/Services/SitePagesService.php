@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pages\Application\Services;
 
+use App\Domains\Blocks\Contracts\Renderers\BlocksParserContract;
 use App\Domains\Blog\Contracts\Repositories\ExperienceRepositoryContract;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\ValueObjects\PostId;
@@ -27,6 +28,7 @@ readonly class SitePagesService implements SitePagesServiceContract
         private ComposerContract $composer,
         private PostRepositoryContract $postRepository,
         private ExperienceRepositoryContract $experienceRepository,
+        private BlocksParserContract $blocksRenderer,
         Factory $factory,
     ) {
     }
@@ -52,11 +54,14 @@ readonly class SitePagesService implements SitePagesServiceContract
         $next = $this->postRepository->getNext($postId);
         $similar = $this->postRepository->getSimilarByTag($postId, $post->tags);
 
+        $blocks = $this->blocksRenderer->parse($post->blocks);
+
         return $this->composer->compose('post.article', [
             'prev' => $prev,
             'next' => $next,
             'similar' => $similar,
             'post' => $post,
+            'blocks' => $blocks,
         ]);
     }
 

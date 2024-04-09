@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * @property int             $experience_id
- * @property string          $tool_id
+ * @property int $experience_id
+ * @property string $tool_id
  * @property ExperienceLevel $level_id
  */
 class ExperienceToolModel extends Pivot

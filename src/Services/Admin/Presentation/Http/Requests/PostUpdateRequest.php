@@ -16,7 +16,7 @@ class PostUpdateRequest extends FormRequest
         return [
             'title' => ['string', 'min:5', 'max:250'],
             'preview' => ['string', 'min:5'],
-            'content' => ['string', 'min:5'],
+            'blocks' => ['array'],
             'is_draft' => ['boolean'],
             'published_at' => ['date'],
             'preview_image_id' => [

@@ -17,12 +17,12 @@ defineProps<Props>()
         <Btn v-if="links.prev"
              :type="Colors.primary"
              @click="$emit('click:prev', links.current_page-1)">
-            <ChevronLeftIcon class="size-5"/> Prev
+            <ChevronLeftIcon class="size-6"/> Prev
         </Btn>
         <Btn v-if="links.next"
              :type="Colors.primary"
              @click="$emit('click:next', links.current_page+1)">
-            Next <ChevronRightIcon class="size-5"/>
+            Next <ChevronRightIcon class="size-6"/>
         </Btn>
     </div>
 </template>
