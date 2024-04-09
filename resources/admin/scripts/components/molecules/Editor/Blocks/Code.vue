@@ -4,7 +4,8 @@ import {computed} from "vue";
 import EditorBlock from "../EditorBlock.vue";
 import FormText from "../../../atoms/Form/FormText.vue";
 import FormSelect from "../../../atoms/Form/FormSelect.vue";
-import {Block, BlockType, codeLanguages} from "../../../../types/blocks";
+import {Block, BlockType} from "../../../../types/blocks";
+import {codeLanguages} from "../../../../types/code";
 
 interface Props {
     block: Block

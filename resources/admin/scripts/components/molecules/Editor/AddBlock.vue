@@ -5,16 +5,21 @@ import Draggable from "vuedraggable";
 
 import Btn from "../../atoms/Btn.vue";
 import {SquaresPlusIcon} from "@heroicons/vue/24/outline";
-import {Block, BlockType, emptyBlocks} from "../../../types/blocks";
+import {Block, BlockPreview, BlockType, emptyBlocks} from "../../../types/blocks";
+import {idMapper} from "../../../utils/idMapper";
 
 interface Props {
-    list?: Block[]
+    list?: Array<BlockPreview>
     group?: string
+    disabled?: boolean,
+    lastIndex?: number,
 }
 
 const props = withDefaults(defineProps<Props>(), {
     list: () => [],
     group: 'content',
+    disabled: false,
+    lastIndex: 1000,
 })
 defineEmits(['add:block'])
 
@@ -24,15 +29,15 @@ const groupOptions = computed(() => ({
     put: false
 }))
 
-function cloneBlock({type}: {type: BlockType}) {
-    return emptyBlocks[type]
+function cloneBlock({type}: {type: BlockType}): Block {
+    return idMapper(emptyBlocks[type], props.lastIndex)
 }
 
 </script>
 
 <template>
     <Popper>
-        <Btn type="light">
+        <Btn type="light" :disabled="disabled">
             <SquaresPlusIcon class="size-6"/>
             <span class="hidden md:inline">Add Block</span>
         </Btn>
@@ -42,7 +47,7 @@ function cloneBlock({type}: {type: BlockType}) {
                 :list="list"
                 :clone="cloneBlock"
                 :group="groupOptions"
-                class="grid grid-cols-3 flex-row gap-1 text-gray-50 bg-stone-800 border-stone-500 p-3 rounded-md z-10 shadow-lg">
+                class="grid grid-cols-3 flex-row gap-1 text-gray-50 bg-stone-800 border border-stone-700 p-3 rounded-md z-10 shadow-lg">
                 <template #item="{ element, index }">
                     <div class="rounded-md px-3 py-1 border bg-stone-600 border-stone-500 hover:border-stone-400 hover:bg-stone-500 duration-300 relative flex flex-col items-center justify-center gap-1 h-24">
                         <a href="#" @click.prevent="$emit('add:block', element.type)" class="absolute -inset-1" />

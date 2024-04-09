@@ -33,12 +33,12 @@ const map = {
 </script>
 
 <template>
-    <div class="flex rounded-md overflow-clip border border-stone-500 divide-stone-300 divide-x">
+    <div class="flex rounded-md overflow-clip border border-stone-500 divide-stone-700 divide-x">
         <button v-for="fontFamilyStyle in fontFamilyStyles"
                 :key="`font-family-${fontFamilyStyle}`"
-                class="bg-stone-700 hover:bg-stone-600 duration-300 ease-in-out px-4 py-1 uppercase text-sm"
+                class="bg-stone-600 hover:bg-stone-700 duration-300 ease-in-out px-4 py-1 uppercase text-sm"
                 :class="{
-                    'bg-stone-800': selected === fontFamilyStyle,
+                    'bg-stone-700': selected === fontFamilyStyle,
                     [map[fontFamilyStyle]]: true,
                 }"
                 @click="selected = fontFamilyStyle">{{ fontFamilyStyle[0] }}</button>
