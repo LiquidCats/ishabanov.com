@@ -88,6 +88,7 @@ async function handleSave() {
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2  gap-2 mx-3">
+        <div class="md:col-span-2 text-white text-center text-5xl" v-if="tagsState.status.tagsLoading">Loading...</div>
         <div class="bg-stone-800 border border-stone-700 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
             <div class="grow">
                 <Tag :type="Colors.dark">ID: {{ tag.id }}</Tag>
