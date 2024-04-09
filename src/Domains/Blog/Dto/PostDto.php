@@ -57,7 +57,7 @@ readonly class PostDto
             (bool) $request->validated('is_draft', true),
             Collection::make($request->validated('blocks', [])),
             $request->validated('preview_image_id'),
-            PostPreviewType::tryFrom($request->validated('preview_image_type', '')),
+            PostPreviewType::tryFrom($request->validated('preview_image_type') ?: ''),
             Collection::make($request->validated('tags', []))
         );
     }
