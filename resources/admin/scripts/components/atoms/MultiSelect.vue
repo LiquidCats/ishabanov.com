@@ -21,7 +21,7 @@ const emit = defineEmits(['select', 'input', 'update:modelValue'])
 const inputRef = ref<null|HTMLInputElement>(null)
 const itemsRef = ref<HTMLDivElement[]>([])
 const shouldAutoScroll = ref(true)
-const focusedItemIndex = ref<number|string>(-1)
+const focusedItemIndex = ref<number>(-1)
 
 const selectedItems = computed<Item[]>(() => props.modelValue?.map(mapItem))
 const allItems = computed<Item[]>(() => props.items?.map(mapItem))
@@ -72,7 +72,7 @@ function removeItem(item: Item) {
     emit('update:modelValue', values.filter(i => mapItem(i).value !== item.value))
 }
 
-function selectItem(e: Event, index: number|string) {
+function selectItem(e: Event, index: number) {
     if (index < 0) {
         return;
     }
@@ -98,7 +98,6 @@ function selectItem(e: Event, index: number|string) {
 
 <template>
     <Popper offsetDistance="5 0"
-            @click="inputRef?.focus()"
             placement="auto-start"
             class="relative w-full">
         <div class="flex flex-wrap gap-1 border text-lg rounded-md w-full p-1.5 bg-stone-600 border-stone-500 placeholder-gray-400 text-white focus:ring-stone-300 focus:border-stone-300 outline-none duration-300">
@@ -123,19 +122,19 @@ function selectItem(e: Event, index: number|string) {
         </div>
 
         <template #content>
-            <div class="bg-gray-50">
+            <div class="bg-stone-800 border border-stone-700 rounded-md p-1 cursor-pointer max-h-32 overflow-auto mr-3 w-full shadow-2xl">
                 <div ref="itemsRef"
                      :id="`mselect-item-${index}`"
-                     class="p-1"
+                     class="py-1 pl-3 duration-300 pr-5 rounded-md text-gray-50"
                      @mouseover="focusedItemIndex = index; shouldAutoScroll = false"
                      @mouseleave="shouldAutoScroll = true"
                      @click="selectItem($event, index)"
                      :class="{
-                                    'font-bold': selectedItems?.some(i => i.value === item.value),
-                                    'bg-gray-700/[.1]': focusedItemIndex === index
-                             }"
+                         'font-bold': selectedItems?.some(i => i.value === item.value),
+                         'bg-stone-600': focusedItemIndex === index
+                     }"
                      v-for="(item, index) in allItems">{{ item.text }}</div>
-                <div v-if="allItems.length === 0" class="p-2 text-center">
+                <div v-if="allItems.length === 0" class="p-2 text-center text-gray-50">
                     <slot name="nothing">nothing found</slot>
                 </div>
             </div>
@@ -145,9 +144,6 @@ function selectItem(e: Event, index: number|string) {
 
 <style scoped lang="scss">
     :deep(.popper) {
-        border-radius: .25rem;
-        max-height: 10rem;
-        overflow: auto;
         width: 100%;
     }
 </style>

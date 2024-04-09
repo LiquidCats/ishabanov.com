@@ -58,7 +58,7 @@ function closeModal(event: PointerEvent) {
     emit('modal:close', event)
 }
 
-function checkFile(event: PointerEvent, file: File) {
+function checkFile(event: PointerEvent|MouseEvent, file: File) {
 
     modalsState.close(props.type)
     emit('file:click', file)
