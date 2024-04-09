@@ -54,7 +54,7 @@ const shouldDisable = computed(() =>
         </div>
 
         <div class="ml-auto">
-            <slot></slot>
+            <slot :disabled="shouldDisable"></slot>
         </div>
 
         <div>
