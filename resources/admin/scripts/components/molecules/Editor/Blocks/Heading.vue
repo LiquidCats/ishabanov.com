@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-import {Block, BlockType, HeadingTag, headingTags} from "../../../../types/blocks";
+import {Block, BlockType, } from "../../../../types/blocks";
+import {HeadingTag, headingTags} from "../../../../types/tags";
 import EditorBlock from "../EditorBlock.vue";
 import FormField from "../../../atoms/Form/FormField.vue";
 import FontSizeSelector from "../FontSizeSelector.vue";

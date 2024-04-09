@@ -1,12 +1,21 @@
 import {BlockStyle} from "./style";
-import {CodeBracketSquareIcon, Bars3Icon, Bars2Icon, PhotoIcon, ListBulletIcon, CodeBracketIcon, ChatBubbleBottomCenterTextIcon} from "@heroicons/vue/24/outline";
+import {
+    CodeBracketSquareIcon,
+    Bars3Icon,
+    Bars2Icon,
+    PhotoIcon,
+    ListBulletIcon,
+    CodeBracketIcon,
+    ChatBubbleBottomCenterTextIcon
+} from "@heroicons/vue/24/outline";
 import Heading from "../components/molecules/Editor/Blocks/Heading.vue";
 import Paragraph from "../components/molecules/Editor/Blocks/Paragraph.vue";
 import List from "../components/molecules/Editor/Blocks/List.vue";
 import Image from "../components/molecules/Editor/Blocks/Image.vue";
-import Raw from "../components/molecules/Editor/Blocks/Raw.vue";
 import Code from "../components/molecules/Editor/Blocks/Code.vue";
+import Raw from "../components/molecules/Editor/Blocks/Raw.vue";
 import Remark from "../components/molecules/Editor/Blocks/Remark.vue";
+import {FunctionalComponent, HTMLAttributes, VNodeProps} from "vue";
 
 export enum BlockType {
     HEADING = 'heading',
@@ -29,7 +38,30 @@ export const blockRenderers = {
     [BlockType.REMARK]: Remark,
 }
 
-export const emptyBlocks = {
+export interface Block<C = string, T = undefined> {
+    type: BlockType
+    content: C
+    tag: T
+    styles: Array<keyof typeof BlockStyle>
+}
+
+export interface BlockPreview {
+    type: BlockType
+    name: string
+    icon: FunctionalComponent<HTMLAttributes & VNodeProps>
+}
+
+export type WithId<T = number> = {id: T}
+
+export type BlockWithId<C = string, T = undefined> = Block<C, T> & WithId
+
+export type ImageContent = {
+    src: string,
+    alt: string,
+    caption: string,
+}
+
+export const emptyBlocks: {[k in BlockType]: Block<any, any>} = {
     [BlockType.HEADING]: {
         type: BlockType.HEADING,
         tag: 'h1',
@@ -38,8 +70,9 @@ export const emptyBlocks = {
     },
     [BlockType.PARAGRAPH]: {
         type: BlockType.PARAGRAPH,
+        tag: undefined,
         content: '',
-        styles: [],
+        styles: [] as any[],
     },
     [BlockType.LIST]: {
         type: BlockType.LIST,
@@ -47,8 +80,15 @@ export const emptyBlocks = {
         content: [],
         styles: [],
     },
+    [BlockType.LIST_ITEM]: {
+        type: BlockType.LIST_ITEM,
+        tag: undefined,
+        content: '',
+        styles: [],
+    },
     [BlockType.IMAGE]: {
         type: BlockType.IMAGE,
+        tag: undefined,
         content: {
             alt: '',
             src: '',
@@ -58,19 +98,25 @@ export const emptyBlocks = {
     },
     [BlockType.RAW]: {
         type: BlockType.RAW,
+        tag: undefined,
         content: '',
+        styles: undefined
     },
     [BlockType.CODE]: {
         type: BlockType.CODE,
+        tag: undefined,
         content: '',
         styles: [],
     },
     [BlockType.REMARK]: {
         type: BlockType.REMARK,
+        tag: undefined,
         content: [],
+        styles: undefined
     },
 }
-export const blocks = [
+
+export const blockPreviews: Array<BlockPreview> = [
     {
         type: BlockType.HEADING,
         name: 'Heading',
@@ -107,57 +153,3 @@ export const blocks = [
         icon: CodeBracketIcon
     },
 ];
-
-export enum ListTag {
-    UL = "ul",
-    OL = "ol",
-}
-
-export enum HeadingTag {
-    H1 = "h1",
-    H2 = "h2",
-    H3 = "h3",
-    H4 = "h4",
-    H5 = "h5",
-    H6 = "h6",
-}
-
-export enum CodeLanguage {
-    JAVASCRIPT = 'javascript',
-    BASH = 'bash',
-    CSS = 'css',
-    DOCKERFILE = 'dockerfile',
-    GO = 'go',
-    GRAPHQL = 'graphql',
-    JSON = 'json',
-    MARKDOWN = 'markdown',
-    NGINX = 'nginx',
-    PHP = 'php',
-    PLAINTEXT = 'plaintext',
-    SCSS = 'scss',
-    SQL = 'sql',
-    TYPESCRIPT = 'typescript',
-    XML = 'xml',
-    YAML = 'yaml',
-}
-
-export const codeLanguages: CodeLanguage[] = Object.values(CodeLanguage)
-
-export type Blocks = Block[]
-
-export interface Block<C = string, T = undefined> {
-    type: BlockType
-    content: C
-    tag: T
-    styles: Array<BlockStyle>
-}
-
-export type ImageContent = {
-    src: string,
-    alt: string,
-    caption: string,
-}
-export const listTags: ListTag[] = Object.values(ListTag);
-export const headingTags: HeadingTag[] = Object.values(HeadingTag)
-
-

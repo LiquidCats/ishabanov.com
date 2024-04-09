@@ -1,14 +1,16 @@
 <script setup lang="ts">
 
-import {Block, Blocks, BlockType, ListTag, listTags} from "../../../../types/blocks";
+import {Block, BlockType, BlockWithId, emptyBlocks} from "../../../../types/blocks";
+import {ListTag, listTags} from "../../../../types/tags";
 import EditorBlock from "../EditorBlock.vue";
 import TagSelector from "../TagSelector.vue";
 import ListItem from "./ListItem.vue";
 import {PlusIcon} from "@heroicons/vue/20/solid";
 import Btn from "../../../atoms/Btn.vue";
+import {idMapper} from "../../../../utils/idMapper";
 
 interface Props {
-    block: Block<Blocks, ListTag>
+    block: BlockWithId<Array<BlockWithId>, ListTag>
 }
 
 const props = defineProps<Props>()
@@ -18,7 +20,7 @@ function removeBlock(block: Block) {
     props.block.content = props.block.content.filter(b => b !== block)
 }
 function addBlock() {
-    props.block.content = [...props.block.content, {type: BlockType.LIST_ITEM} as Block]
+    props.block.content = [...props.block.content, idMapper<Block>(emptyBlocks[BlockType.LIST_ITEM], props.block.content.length)]
 }
 
 </script>

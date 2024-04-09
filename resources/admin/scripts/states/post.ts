@@ -1,12 +1,14 @@
-import {defineStore} from "pinia";
+import {_GettersTree, defineStore, PiniaCustomProperties} from "pinia";
 import dayjs from "dayjs";
 //
-import {Post} from "../types/data";
+import {File, Post} from "../types/data";
 //
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
 import {Api, ApiError, ValidationErrors} from "../types/api";
 import {Block, BlockType, emptyBlocks} from "../types/blocks";
+import {idMapper} from "../utils/idMapper";
+import {UnwrapRef} from "vue";
 
 interface State {
     id: number|null
@@ -24,11 +26,17 @@ interface Actions {
     load(id: number): Promise<void>
     save(): Promise<void>
     changeState(): Promise<void>
+    previewAdd(file: File): void
+    previewRemove(): void
     blockAdd(type: BlockType): void
     blockRemove(block: Block): void
 }
 
-const usePostState = defineStore<string, State, any, Actions>('post', {
+interface Getters <S> extends _GettersTree<S> {
+    hasPreview: (state: UnwrapRef<S> & PiniaCustomProperties) => boolean
+}
+
+const usePostState = defineStore<string, State, Getters<State>, Actions>('post', {
     state: () => ({
         id: null,
         previewTypes: [
@@ -57,9 +65,21 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
             postSaved: false,
         }
     }),
+    getters: {
+        hasPreview: state => !!state.item?.previewImage?.path
+    },
     actions: {
+        previewAdd(file: File) {
+            this.item.previewImage = file
+            this.item.preview_image_id = file.hash
+        },
+        previewRemove() {
+            this.item.preview_image_id = null;
+            this.item.preview_image_type = null;
+            this.item.previewImage = null
+        },
         blockAdd(type: BlockType): void {
-            this.item.blocks = [...this.item.blocks, emptyBlocks[type]]
+            this.item.blocks = [...this.item.blocks, idMapper(emptyBlocks[type], this.item.blocks.length)]
         },
         blockRemove(block: Block): void {
             this.item.blocks = this.item.blocks.filter((b: Block) => b !== block)
@@ -79,7 +99,9 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
                 }
 
                 this.id = response.data.id
-                this.item = {...this.item, ...response.data}
+
+                const blocks = response.data.blocks.map<Block>(idMapper)
+                this.item = {...this.item, ...response.data, blocks}
 
                 this.status.postSaved = true
             } catch (e: any) {
@@ -105,7 +127,8 @@ const usePostState = defineStore<string, State, any, Actions>('post', {
 
                 const {data} = await posts.getById(id)
 
-                this.item = data
+                const blocks = data.blocks.map(idMapper)
+                this.item = {...data, blocks}
 
                 this.status.postLoaded = true
             } catch (e) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import Draggable from "vuedraggable";
 //
 import usePostState from "../../states/post";
@@ -19,21 +19,22 @@ const dragOptions = computed(() => ({
 </script>
 
 <template>
-    <div class="mb-3">
-        <Draggable v-model="postState.item.blocks"
-                   class="grid grid-cols-1 gap-1.5 text-gray-50 mb-1.5"
-                   item-key="type"
-                   handle=".block-editor-handle"
-                   tag="ul"
-                   v-bind="dragOptions">
-            <template #item="{ element, index }">
-                <li>
-                    <component :is="blockRenderers[element.type]" :block="element" @remove:block="postState.blockRemove"/>
-                </li>
-            </template>>
-        </Draggable>
-        <Error name="content" :errors="postState.errors"/>
-    </div>
+    <Draggable :list="postState.item.blocks"
+               class="grid grid-cols-1 gap-1.5 text-gray-50 mb-1.5"
+               handle=".block-editor-handle"
+               item-key="id"
+               tag="ul"
+               v-bind="dragOptions">
+        <template #item="{ element, index }">
+            <li :key="`${element.type}-${index}`">
+                <component :is="blockRenderers[element.type]"
+                           :key="`${element.type}-${index}`"
+                           :block="element"
+                           @remove:block="postState.blockRemove"/>
+            </li>
+        </template>>
+    </Draggable>
+    <Error name="blocks" :errors="postState.errors"/>
 </template>
 
 
