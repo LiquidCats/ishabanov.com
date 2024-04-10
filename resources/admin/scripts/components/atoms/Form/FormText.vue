@@ -1,24 +1,43 @@
 <script setup lang="ts">
 
 
+import {onMounted, onUpdated, ref} from "vue";
+
 interface Props {
     modelValue?: string
     failed?: boolean
 }
 
-const emit = defineEmits(['update:modelValue'])
+const emits = defineEmits<{
+    'update:modelValue': [value: string],
+}>()
 
 withDefaults(defineProps<Props>(), {
     modelValue: '',
     failed: false
 })
 
+const textArea = ref<HTMLTextAreaElement>(null)
+
+function handleInput() {
+    emits('update:modelValue', textArea?.value?.value)
+}
+
+function resize() {
+    textArea.value.style.height = '6.25rem'
+    textArea.value.style.height = `${textArea.value.scrollHeight}px`
+}
+
+onMounted(resize)
+onUpdated(resize)
+
 </script>
 
 <template>
-    <textarea class="border text-md rounded-md block w-full min-h-48 p-1.5 bg-stone-600 border-stone-500 placeholder-gray-400 text-white focus:ring-stone-300 focus:border-stone-300 outline-none duration-300"
+    <textarea ref="textArea"
+              class="border overflow-hidden resize-none text-md rounded-md block w-full min-h-24 p-1.5 bg-stone-600 border-stone-500 placeholder-gray-400 text-white hover:border-stone-400 focus:ring-stone-300 focus:border-stone-300 outline-none transition-colors duration-300 ease-in-out"
               :class="{'border-red-500': failed}"
-              @input="$emit('update:modelValue', $event?.target?.value)"
+              @input="handleInput"
               :value="modelValue"/>
 </template>
 

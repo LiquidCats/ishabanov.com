@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ChevronUpDownIcon} from "@heroicons/vue/24/outline";
 import Popper from "vue3-popper";
+import {ref} from "vue";
 
 interface Props {
     modelValue: string|undefined,
@@ -16,13 +17,21 @@ withDefaults(defineProps<Props>(), {
 
 defineEmits(['update:modelValue'])
 
+const active = ref<boolean>(false)
+
 </script>
 
 <template>
     <Popper offsetDistance="5 0"
             placement="bottom-start"
+            @open:popper="active = true;"
+            @close:popper="active = false;"
             class="relative w-full">
-        <div class="cursor-pointer border text-sm inline-flex flex-row flex-nowrap rounded-md bg-stone-600 border-stone-500 text-gray-50 items-center py-1 px-2 gap-3 relative overflow-clip">
+        <div class="cursor-pointer border text-sm inline-flex flex-row flex-nowrap rounded-md bg-stone-600 border-stone-500 text-gray-50 items-center py-1 px-2 gap-3 transition-colors ease-in-out duration-300 relative overflow-clip"
+             :class="{
+                'border-stone-300': active,
+                'hover:border-stone-400': !active,
+             }">
             {{ modelValue ?? 'None' }}
             <ChevronUpDownIcon class="size-6"></ChevronUpDownIcon>
         </div>
