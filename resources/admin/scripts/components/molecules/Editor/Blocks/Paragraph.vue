@@ -18,7 +18,8 @@ defineEmits(['remove:block'])
 
 <template>
     <EditorBlock v-if="BlockType.PARAGRAPH === block.type"
-                 @remove:block="$emit('remove:block', block)">
+                 @clone:block="$emit('clone:block', block)"
+@remove:block="$emit('remove:block', block)">
         <template #title>Paragraph</template>
         <template #header>
             <FontFamilySelector v-model="block.styles"/>

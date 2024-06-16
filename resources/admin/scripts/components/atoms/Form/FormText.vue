@@ -35,7 +35,7 @@ onUpdated(resize)
 
 <template>
     <textarea ref="textArea"
-              class="border overflow-hidden resize-none text-md rounded-md block w-full min-h-24 p-1.5 bg-stone-600 border-stone-500 placeholder-gray-400 text-white hover:border-stone-400 focus:ring-stone-300 focus:border-stone-300 outline-none transition-colors duration-300 ease-in-out"
+              class="border overflow-hidden resize-none text-md rounded-md block w-full min-h-24 p-1.5 dark:bg-stone-600 border-stone-500 placeholder-gray-400 dark:text-gray-50 hover:border-stone-400 focus:ring-stone-300 focus:border-stone-300 outline-none transition-colors duration-300 ease-in-out"
               :class="{'border-red-500': failed}"
               @input="handleInput"
               :value="modelValue"/>

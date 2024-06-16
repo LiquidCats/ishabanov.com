@@ -10,7 +10,6 @@ import Btn from "../../components/atoms/Btn.vue";
 import PostListItem from "./PostListItem.vue";
 import {Colors} from "../../types/colors";
 import Pagination from "../../components/molecules/Pagination.vue";
-import post from "../../states/post";
 
 const state = usePostListState()
 
@@ -25,9 +24,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex items-center mb-3 justify-between bg-neutral-800 p-3 sticky top-0">
+    <div class="flex items-center mb-3 justify-between bg-neutral-100 dark:bg-neutral-800 p-3 sticky top-0">
         <BtnLink type="light" to="/admin/posts/create">
-            <PlusIcon class="size-6"/>Add
+            <PlusIcon class="size-5"/>Add
         </BtnLink>
         <Pagination :links="state.pagination"
                     @click:next="state.paginate"

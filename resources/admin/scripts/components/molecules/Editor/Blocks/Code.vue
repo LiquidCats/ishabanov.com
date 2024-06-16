@@ -12,7 +12,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['remove:block', 'clone:block'])
 
 const language = computed({
     get: () => {
@@ -28,6 +28,7 @@ const language = computed({
 
 <template>
     <EditorBlock v-if="BlockType.CODE === block.type"
+                 @clone:block="$emit('clone:block', block)"
                  @remove:block="$emit('remove:block', block)">
         <template #title>Code</template>
         <template #header>

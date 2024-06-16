@@ -14,9 +14,9 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="border rounded-md p-3 border-stone-700 bg-stone-800" :key="post.id">
+    <div class="border rounded-md p-3 dark:border-stone-700 border-stone-300 dark:bg-stone-800" :key="post.id">
         <Tag :type="Colors.dark">ID: {{ post.id}}</Tag>
-        <h2 class="text-3xl text-white font-bold">
+        <h2 class="text-3xl dark:text-gray-50 font-bold">
             <router-link :to="{name: RouteNames.POST_EDIT, params: {post_id: post.id}}">{{ post.title }}</router-link>
         </h2>
         <div class="mb-3 text-gray-400 text-sm">Published At: {{ post.published_at}}</div>
