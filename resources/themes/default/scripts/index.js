@@ -1,5 +1,5 @@
-// import "./hero"
-// import "./experience"
+import "./hero"
+import "./experience"
 
 import 'highlight.js/styles/tokyo-night-dark.css';
 //

@@ -1,8 +1,8 @@
 <section id="hero" class="container relative max-w-6xl mx-auto min-h-screen grid grid-cols-1 gap-3 mb-3 overflow-x-clip">
-    <div class="absolute t-0 l-0 z-[1] hidden md:block mt-6">
-        <span class="text-gray-500 text-[12rem] font-black leading-[8rem] uppercase">Software <br/>Engineer</span>
+    <div id="position" class="absolute t-0 l-0 z-[1] hidden md:block mt-6">
+        <span class="text-gray-500 text-[12rem] font-black leading-[8rem] uppercase transform translate-y-1">Software <br/>Engineer</span>
     </div>
-    <div class="z-10 md:mt-64 grid grid-cols-3 md:grid-cols-6 md:grid-rows-6 gap-3">
+    <div id="grid-blocks" class="z-10 md:mt-64 grid grid-cols-3 md:grid-cols-6 md:grid-rows-6 gap-3">
         <div class="col-span-3 md:row-span-4 p-5 bg-night flex flex-col justify-end items-center gap-3 rounded-xl">
             <img src="{{ asset('images/hero/computer.png') }}" alt="computer" class="w-full h-auto max-w-48">
             <div class="text-white text-xl">
