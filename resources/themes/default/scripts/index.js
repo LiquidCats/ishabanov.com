@@ -44,5 +44,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
     hljs.highlightElement(el);
   });
 });
-
-console.log(1111)
