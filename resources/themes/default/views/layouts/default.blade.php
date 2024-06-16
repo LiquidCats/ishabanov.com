@@ -12,7 +12,7 @@
 
     @include('includes.styles')
 </head>
-<body class="bg-zinc-900">
+<body class="bg-zinc-900 ">
 <x-header/>
 
 <main class="px-3">

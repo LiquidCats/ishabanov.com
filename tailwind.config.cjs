@@ -8,6 +8,7 @@ module.exports = {
         "./resources/**/*.scss",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./resources/themes/default/views/vendor/cookie-consent/dialogContents.blade.php",
     ],
     theme: {
         fontFamily: {
