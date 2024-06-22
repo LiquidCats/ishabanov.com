@@ -1,6 +1,9 @@
 import {stagger, timeline} from "motion";
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname !== "/") {
+        return;
+    }
     if (window.innerWidth <= 768) {
         return;
     }
