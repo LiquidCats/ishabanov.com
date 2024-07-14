@@ -18,7 +18,7 @@
         <aside class="bg-neutral-800 p-3 min-h-screen lg:min-w-60">
             <x-admin-sidebar/>
         </aside>
-        <main class="grow min-h-screen" id="app"></main>
+        <main class="grow min-h-screen" id="app-admin"></main>
     </div>
 @include('views.components.footer')
 

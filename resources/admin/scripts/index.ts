@@ -17,7 +17,7 @@ app.component('Draggable', Draggable)
 app.use(pinia)
 app.use(router)
 
-app.mount('#app')
+app.mount('#app-admin')
 
 navigation(router)
 
