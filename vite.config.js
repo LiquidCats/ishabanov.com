@@ -4,20 +4,21 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd(), '')
+    const theme = env.VITE_APPEARANCE_SITE_THEME ?? 'default'
     return {
         plugins: [
             laravel({
                 buildDirectory: "static",
                 input: [
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/styles/styles.scss`,
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/scripts/index.js`,
+                    `resources/themes/${theme}/styles/styles.scss`,
+                    `resources/themes/${theme}/scripts/index.js`,
                     //
                     'resources/admin/styles/styles.scss',
                     'resources/admin/scripts/index.ts',
                 ],
                 refresh: [
                     'lang/**',
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/views/**`,
+                    `resources/themes/${theme}/views/**`,
                     `resources/admin/views/**`,
                 ],
             }),
