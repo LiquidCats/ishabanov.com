@@ -11,7 +11,7 @@
 
     <title>iShabanov - Admin</title>
 
-    @include('views.includes.styles')
+    @include('includes.admin.styles')
 </head>
 <body class="bg-stone-900">
     <div class="flex flex-nowrap items-stretch">
@@ -20,8 +20,8 @@
         </aside>
         <main class="grow min-h-screen" id="app-admin"></main>
     </div>
-@include('views.components.footer')
+@include('components.admin.footer')
 
-@include('views.includes.scripts')
+@include('includes.admin.scripts')
 </body>
 </html>

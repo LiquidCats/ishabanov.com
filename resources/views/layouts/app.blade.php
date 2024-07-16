@@ -12,10 +12,10 @@
     <title>Ilya Shabanov - Software Engineer</title>
     <meta name="title" content="Ilya Shabanov - Software Engineer">
 
-    @include('includes.styles')
+    @include('includes.app.styles')
 </head>
-<body id="app-home" class="bg-stone-950 z-0 w-screen h-screen overflow-x-clip overflow-y-auto">
+<body id="app-home" class="bg-zinc-900 z-0 w-screen h-screen overflow-x-clip overflow-y-auto">
 
-@include('includes.scripts')
+@include('includes.app.scripts')
 </body>
 </html>
