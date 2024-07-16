@@ -18,8 +18,6 @@ export default defineConfig(({mode}) => {
                 ],
                 refresh: [
                     'lang/**',
-                    `resources/themes/${theme}/views/**`,
-                    `resources/admin/views/**`,
                 ],
             }),
             vue({
