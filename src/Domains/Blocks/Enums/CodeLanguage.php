@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Enums;
 
-use App\Domains\Blocks\Contracts\Enums\StyleEnum;
+use App\Domains\Blocks\Contracts\StyleEnum;
 
 enum CodeLanguage: string implements StyleEnum
 {

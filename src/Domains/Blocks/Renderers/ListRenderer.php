@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Renderers;
 
+use App\Domains\Blocks\Contracts\StyleEnum;
+use App\Domains\Blocks\Enums\BlockStyle;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Domains\Blocks\Enums\ListTag;
 use Illuminate\Support\Collection;
@@ -19,6 +21,7 @@ readonly class ListRenderer extends AbstractRenderer
         public BlockType $type,
         public ListTag $tag,
         public Collection $content,
+        public Collection $styles,
     ) {
     }
 
@@ -28,6 +31,9 @@ readonly class ListRenderer extends AbstractRenderer
             'type' => $this->type->value,
             'tag' => $this->tag->value,
             'content' => $this->content->toArray(),
+            'style' => $this->styles
+                ->map(fn (StyleEnum $e) => $e->value)
+                ->toArray(),
         ];
     }
 
@@ -35,6 +41,7 @@ readonly class ListRenderer extends AbstractRenderer
         BlockType $type,
         #[ArrayShape([
             'tag' => 'string',
+            'styles' => ['string'],
             'content' => [
                 [
                     'content' => Collection::class,
@@ -45,10 +52,15 @@ readonly class ListRenderer extends AbstractRenderer
     ): self {
         Assert::false(empty($data), 'heading Dto cant parse incoming data');
 
+        $styles = Collection::make($data['styles'] ?? [])
+            ->map(BlockStyle::tryFrom(...))
+            ->filter();
+
         return new static(
             $type,
             ListTag::from($data['tag']),
             $data['content'] ?? [],
+            $styles,
         );
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Renderers;
 
-use App\Domains\Blocks\Contracts\Enums\StyleEnum;
+use App\Domains\Blocks\Contracts\StyleEnum;
 use App\Domains\Blocks\Enums\BlockStyle;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Foundation\Enums\AllowedTags;
