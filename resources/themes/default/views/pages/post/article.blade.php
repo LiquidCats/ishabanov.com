@@ -30,7 +30,7 @@
             @if($post->preview_image_id === null)
                 <header>
                     <h1 class="mb-3 text-6xl font-serif font-bold">{{ $post->title }}</h1>
-                    <small class="block mb-3">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }}</small>
+                    <small class="block mb-3">{{ $post->published_at->diffForHumans() }} | reading time {{ $post->reading_time }} min</small>
                     <div class="my-3">
                         @foreach ($post->tags as $tag)
                             <x-tag>{{ $tag->name }}</x-tag>
