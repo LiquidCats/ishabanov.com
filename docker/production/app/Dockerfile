@@ -15,7 +15,7 @@ ADD . /app
 
 RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs --no-dev
 
-FROM webdevops/php-nginx:8.2-alpine
+FROM webdevops/php-nginx:8.3-alpine
 
 WORKDIR /app
 
