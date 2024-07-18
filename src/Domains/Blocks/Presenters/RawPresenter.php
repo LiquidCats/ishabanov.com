@@ -2,16 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Blocks\Renderers;
+namespace App\Domains\Blocks\Presenters;
 
+use App\Domains\Blocks\Contracts\PresenterContract;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Foundation\Enums\AllowedTags;
+use Illuminate\Contracts\Support\Arrayable;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\Uid\AbstractUid;
+use Symfony\Component\Uid\Uuid;
 
-readonly class RawRenderer extends AbstractRenderer
+readonly class RawPresenter implements Arrayable, PresenterContract
 {
     public function __construct(
         public BlockType $type,
+        public AbstractUid $key,
         public string $content,
     ) {
     }
@@ -20,6 +25,7 @@ readonly class RawRenderer extends AbstractRenderer
     {
         return [
             'type' => $this->type->value,
+            'key' => $this->key->toRfc4122(),
             'content' => $this->content,
         ];
     }
@@ -27,12 +33,18 @@ readonly class RawRenderer extends AbstractRenderer
     public static function createAs(
         BlockType $type,
         #[ArrayShape([
+            'key' => 'string',
             'content' => 'string',
         ])] array $data
     ): self {
+        $key = Uuid::isValid($data['key'])
+           ? Uuid::fromString($data['key'])
+           : Uuid::v7();
+
         return new static(
-            $type,
-            AllowedTags::sanitize($data['content'] ?? ''),
+            type: $type,
+            key: $key,
+            content: AllowedTags::sanitize($data['content'] ?? ''),
         );
     }
 }

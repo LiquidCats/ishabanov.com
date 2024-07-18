@@ -2,17 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Blocks\Renderers;
+namespace App\Domains\Blocks\Presenters;
 
+use App\Domains\Blocks\Contracts\PresenterContract;
+use App\Domains\Blocks\Contracts\StyleValueContainer;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Enums\CodeLanguage;
+use App\Domains\Blocks\Styles\CodeLanguage;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\Uid\AbstractUid;
+use Symfony\Component\Uid\Uuid;
 
-readonly class CodeRenderer extends AbstractRenderer
+readonly class CodePresenter implements Arrayable, PresenterContract
 {
     public function __construct(
         public BlockType $type,
+        public AbstractUid $key,
         public string $content,
         public Collection $styles,
     ) {
@@ -22,9 +28,10 @@ readonly class CodeRenderer extends AbstractRenderer
     {
         return [
             'type' => $this->type->value,
+            'key' => $this->key->toRfc4122(),
             'content' => $this->content,
             'styles' => $this->styles
-                ->map(fn (CodeLanguage $style) => $style->value)
+                ->map(fn (StyleValueContainer $style): string => $style->value)
                 ->toArray(),
         ];
     }
@@ -32,6 +39,7 @@ readonly class CodeRenderer extends AbstractRenderer
     public static function createAs(
         BlockType $type,
         #[ArrayShape([
+            'key' => 'string',
             'content' => 'string',
             'styles' => ['string'],
         ])] array $data,
@@ -40,10 +48,15 @@ readonly class CodeRenderer extends AbstractRenderer
             ->map(CodeLanguage::tryFrom(...))
             ->filter();
 
+        $key = $data['key']
+            ? Uuid::fromString($data['key'])
+            : Uuid::v7();
+
         return new static(
-            $type,
-            $data['content'] ?? '',
-            $styles
+            type: $type,
+            key: $key,
+            content: $data['content'] ?? '',
+            styles: $styles
         );
     }
 }

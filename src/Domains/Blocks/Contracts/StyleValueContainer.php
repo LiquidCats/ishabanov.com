@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Contracts;
 
-interface StyleEnum
+/**
+ * @property-read string $value
+ */
+interface StyleValueContainer
 {
-    public function toStyle(): string;
 }

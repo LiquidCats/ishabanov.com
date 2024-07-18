@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Blocks\Enums;
+namespace App\Domains\Blocks\Styles;
 
-use App\Domains\Blocks\Contracts\StyleEnum;
+use App\Domains\Blocks\Contracts\StyleValueContainer;
 
-enum CodeLanguage: string implements StyleEnum
+enum CodeLanguage: string implements StyleValueContainer
 {
     case JAVASCRIPT = 'javascript';
     case BASH = 'bash';
@@ -24,9 +24,4 @@ enum CodeLanguage: string implements StyleEnum
     case TYPESCRIPT = 'typescript';
     case XML = 'xml';
     case YAML = 'yaml';
-
-    public function toStyle(): string
-    {
-        return "language-{$this->value}";
-    }
 }
