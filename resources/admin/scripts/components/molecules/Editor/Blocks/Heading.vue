@@ -14,12 +14,13 @@ interface Props {
 }
 
 defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['remove:block', 'clone:block'])
 
 </script>
 
 <template>
     <EditorBlock v-if="BlockType.HEADING === block.type"
+                 @clone:block="$emit('clone:block', block)"
                  @remove:block="$emit('remove:block', block)">
         <template #title>Heading</template>
         <template #header>

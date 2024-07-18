@@ -23,7 +23,7 @@ const types = {
 
 <template>
     <button type="button"
-            class="flex gap-1 justify-center items-center px-3 py-2 rounded-md duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed"
+            class="flex gap-1 justify-center items-center px-3 py-1.5 rounded-md duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed"
             :class="`${types[type] ?? types.default}`">
         <slot></slot>
     </button>

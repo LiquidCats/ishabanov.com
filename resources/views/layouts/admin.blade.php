@@ -13,14 +13,9 @@
 
     @include('includes.admin.styles')
 </head>
-<body class="bg-stone-900">
-    <div class="flex flex-nowrap items-stretch">
-        <aside class="bg-neutral-800 p-3 min-h-screen lg:min-w-60">
-            <x-admin-sidebar/>
-        </aside>
-        <main class="grow min-h-screen" id="app-admin"></main>
-    </div>
-@include('components.admin.footer')
+<body id="app">
+    @include('views.includes.scripts')
+<body class="bg-stone-900" id="app-admin">
 
 @include('includes.admin.scripts')
 </body>

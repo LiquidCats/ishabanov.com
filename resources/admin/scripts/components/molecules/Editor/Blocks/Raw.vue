@@ -9,12 +9,14 @@ interface Props {
 }
 
 defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['clone:block', 'remove:block'])
 
 </script>
 
 <template>
-    <EditorBlock v-if="BlockType.RAW === block.type" @remove:block="$emit('remove:block', block)">
+    <EditorBlock v-if="BlockType.RAW === block.type"
+                 @clone:block="$emit('clone:block', block)"
+                 @remove:block="$emit('remove:block', block)">
         <template #title>Raw</template>
         <FormText v-model="block.content" />
     </EditorBlock>

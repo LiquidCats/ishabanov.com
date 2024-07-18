@@ -20,16 +20,17 @@ const dragOptions = computed(() => ({
 
 <template>
     <Draggable :list="postState.item.blocks"
-               class="grid grid-cols-1 gap-1.5 text-gray-50 mb-1.5"
+               class="grid grid-cols-1 gap-3 dark:text-gray-50 mb-1.5"
                handle=".block-editor-handle"
                item-key="id"
                tag="ul"
                v-bind="dragOptions">
         <template #item="{ element, index }">
-            <li :key="`${element.type}-${index}`">
+            <li :key="`${element.type}-${index}`" class="border-b-2 border-dashed border-gray-200 pb-3">
                 <component :is="blockRenderers[element.type]"
                            :key="`${element.type}-${index}`"
                            :block="element"
+                           @clone:block="postState.cloneBlock"
                            @remove:block="postState.blockRemove"/>
             </li>
         </template>>
