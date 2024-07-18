@@ -22,7 +22,6 @@ class ExperienceSeeder extends Seeder
         }
     }
 
-
     protected function createModel(array $experience): void
     {
         $model = new ExperienceModel();
