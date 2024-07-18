@@ -18,7 +18,7 @@ const tabSelector: (t: string) => void = inject('tabSelector')
                 :class="{
                     'bg-neutral-50': name === currentTab,
                     'font-bold': name === currentTab,
-                    'text-white': name !== currentTab,
+                    'dark:text-white': name !== currentTab,
                 }"
                 type="button"
                 role="tab"

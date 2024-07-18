@@ -24,7 +24,7 @@ provide<(tabLabel: string) => void>('tabSelector', selectTab)
 
 <template>
     <div>
-        <ul class="rounded-lg bg-neutral-50/[.2] p-1.5 flex gap-1 mb-3 mx-3" id="post-form-tabs" role="tablist">
+        <ul class="rounded-lg bg-neutral-100 dark:bg-neutral-50/[.2] p-1.5 flex gap-1 mb-3 mx-3" id="post-form-tabs" role="tablist">
             <slot name="labels" :tabSelector="selectTab"></slot>
         </ul>
         <slot name="panels"></slot>

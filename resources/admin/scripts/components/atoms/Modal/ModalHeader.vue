@@ -13,9 +13,9 @@ defineProps({
 
 <template>
     <header class="flex items-center justify-between mb-3">
-        <div class="text-white text-xl font-bold"><slot></slot></div>
+        <div class="dark:text-gray-50 text-xl font-bold"><slot></slot></div>
         <div v-if="withClose">
-            <button class="text-white opacity-30 hover:opacity-50 duration-300 cursor-pointer" @click="$emit('modal:close')">
+            <button class="dark:text-gray-50 opacity-30 hover:opacity-50 duration-300 cursor-pointer" @click="$emit('modal:close')">
                 <XMarkIcon class="h-6 w-6"/>
             </button>
         </div>

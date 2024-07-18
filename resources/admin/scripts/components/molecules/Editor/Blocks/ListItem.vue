@@ -15,12 +15,14 @@ interface Props {
 }
 
 defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['clone:block', 'remove:block'])
 
 </script>
 
 <template>
-    <EditorBlock v-if="BlockType.LIST_ITEM === block.type" tag="li" @remove:block="$emit('remove:block', block)">
+    <EditorBlock v-if="BlockType.LIST_ITEM === block.type" tag="li"
+                 @clone:block="$emit('clone:block', block)"
+                 @remove:block="$emit('remove:block', block)">
         <template #header>
             <FontFamilySelector v-model="block.styles"/>
             <FontWeightSelector v-model="block.styles"/>

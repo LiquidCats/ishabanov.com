@@ -19,7 +19,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="border border-stone-700 bg-stone-800 p-3 rounded">
+    <div class="border dark:border-stone-700 border-stone-300 dark:bg-stone-800 p-3 rounded">
         <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
              :style="`background-image: url('${file.preview}')`"/>
         <div>

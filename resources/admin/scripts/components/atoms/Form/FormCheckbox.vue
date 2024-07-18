@@ -28,7 +28,7 @@ const value = computed({
 </script>
 
 <template>
-    <label class="inline-flex gap-2 items-center border border-neutral-500 rounded-md p-2 py-1 text-white duration-300 bg-stone-700 hover:bg-neutral-600 disabled:bg-slate-300">
+    <label class="inline-flex gap-2 items-center border border-neutral-500 rounded-md p-2 py-1 dark:text-gray-50 duration-300 dark:bg-stone-700 dark:hover:bg-neutral-600 hover:bg-neutral-300 disabled:bg-slate-300">
         <CheckCircleIcon class="size-4 rounded-full border border-stone-500" v-if="value"/>
         <span class=" block size-4 rounded-full border border-stone-500" v-if="!value"/>
         <span><slot></slot></span>

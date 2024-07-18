@@ -14,7 +14,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-defineEmits(['remove:block'])
+defineEmits(['clone:block', 'remove:block'])
 
 const dragOptions = computed(() => ({
     animation: 200,
@@ -37,7 +37,9 @@ function handleRemoveBlock(block: Block) {
 </script>
 
 <template>
-    <EditorBlock v-if="BlockType.REMARK === block.type" @remove:block="$emit('remove:block', block)">
+    <EditorBlock v-if="BlockType.REMARK === block.type"
+                 @clone:block="$emit('clone:block', block)"
+                 @remove:block="$emit('remove:block', block)">
         <template #title>Remark</template>
         <template #header>
             <AddBlock group="remark"
@@ -48,7 +50,7 @@ function handleRemoveBlock(block: Block) {
         <Draggable v-bind="dragOptions"
                    handle=".block-editor-handle"
                    tag="ul"
-                   class="space-y-1"
+                   class="space-y-1 border border-stone-500 rounded-md p-1"
                    v-model="block.content"
                    item-key="id">
             <template #item="{element}">

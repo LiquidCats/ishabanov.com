@@ -36,9 +36,9 @@ const map = {
     <div class="flex rounded-md overflow-clip border border-stone-500 divide-stone-700 divide-x hover:border-stone-400 ease-in-out transition-colors">
         <button v-for="fontFamilyStyle in fontFamilyStyles"
                 :key="`font-family-${fontFamilyStyle}`"
-                class="bg-stone-600 hover:bg-stone-700 duration-300 ease-in-out transition-colors px-4 py-1 uppercase text-sm"
+                class="dark:bg-stone-600 darl:hover:bg-stone-700 hover:bg-stone-200 duration-300 ease-in-out transition-colors px-4 py-1 uppercase text-sm"
                 :class="{
-                    'bg-stone-700': selected === fontFamilyStyle,
+                    'bg-stone-200 dark:bg-stone-700': selected === fontFamilyStyle,
                     [map[fontFamilyStyle]]: true,
                 }"
                 :disabled="selected === fontFamilyStyle"

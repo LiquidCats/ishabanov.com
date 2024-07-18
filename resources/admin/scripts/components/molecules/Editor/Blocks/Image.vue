@@ -19,7 +19,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['remove:block', 'clone:block'])
 
 const openModal = ref<boolean>(false)
 
@@ -40,7 +40,9 @@ const caption = computed({
 </script>
 
 <template>
-    <EditorBlock v-if="block.type === BlockType.IMAGE"  @remove:block="$emit('remove:block', block)">
+    <EditorBlock v-if="block.type === BlockType.IMAGE"
+                 @clone:block="$emit('clone:block', block)"
+                 @remove:block="$emit('remove:block', block)">
         <template #title>Image</template>
         <template #header>
             <Btn type="primary" @click="openModal = true" class="flex gap-1 !py-1">
