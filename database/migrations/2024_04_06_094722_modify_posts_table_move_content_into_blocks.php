@@ -2,7 +2,7 @@
 
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Renderers\RawRenderer;
+use App\Domains\Blocks\Presenters\RawPresenter;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +19,10 @@ return new class extends Migration
             $posts = PostModel::all();
 
             foreach ($posts as $post) {
-                $preview = RawRenderer::createAs(BlockType::RAW, [
+                $preview = RawPresenter::createAs(BlockType::RAW, [
                     'content' => $post->preview,
                 ]);
-                $content = RawRenderer::createAs(BlockType::RAW, [
+                $content = RawPresenter::createAs(BlockType::RAW, [
                     'content' => $post->content,
                 ]);
 
@@ -45,7 +45,7 @@ return new class extends Migration
             $posts = PostModel::all();
 
             foreach ($posts as $post) {
-                /** @var RawRenderer $block */
+                /** @var RawPresenter $block */
                 $block = $post->blocks->first();
 
                 $post->content = $block['content'];
