@@ -9,7 +9,7 @@ use App\Data\Database\Eloquent\Models\PostModel;
 use App\Data\Database\Eloquent\Models\TagModel;
 use App\Data\Database\Eloquent\Models\UserModel;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Renderers\RawRenderer;
+use App\Domains\Blocks\Renderers\RawContainer;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
@@ -82,7 +82,7 @@ class PostServiceTest extends TestCase
             'title' => fake()->words(4, true),
             'preview' => fake()->text(),
             'blocks' => Collection::make()
-                ->push(RawRenderer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
+                ->push(RawContainer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
                 ->toArray(),
             'published_at' => now()->toDateTimeString(),
             'is_draft' => fake()->boolean,
@@ -130,7 +130,7 @@ class PostServiceTest extends TestCase
             'title' => fake()->words(4, true),
             'preview' => fake()->text(),
             'blocks' => Collection::make()
-                ->push(RawRenderer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
+                ->push(RawContainer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
                 ->toArray(),
             'published_at' => now()->toDateTimeString(),
             'is_draft' => fake()->boolean,

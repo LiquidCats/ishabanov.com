@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Admin\Application\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
-use App\Domains\Blocks\Contracts\Renderers\BlocksParserContract;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\Dto\PostDto;
@@ -21,7 +20,6 @@ readonly class PostService implements PostServiceContract
 {
     public function __construct(
         private PostRepositoryContract $postRepository,
-        private BlocksParserContract $blocksRenderer
     ) {
     }
 

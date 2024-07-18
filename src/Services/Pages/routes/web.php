@@ -9,17 +9,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{frontend?}', static fn () => view('layouts.app'))
     ->where('frontend', '.*')
     ->name('app.home');
-
-// Route::get('/', HomepageController::class)->name('pages.home');
-// Route::get('/about', AboutController::class)->name('pages.about');
-//
-// Route::prefix('blog')
-//     ->group(static function () {
-//         Route::get('/', PostsController::class)->name('pages.blog');
-//         Route::get('{post_id}', PostController::class)->name('pages.blog.post');
-//     });
-// Route::prefix('posts')
-//     ->group(static function () {
-//         Route::get('/', PostsController::class)->name('pages.blog');
-//         Route::get('{post_id}', PostController::class)->name('pages.blog.post');
-//     });
