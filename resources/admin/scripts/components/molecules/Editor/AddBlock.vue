@@ -7,6 +7,7 @@ import Btn from "../../atoms/Btn.vue";
 import {SquaresPlusIcon} from "@heroicons/vue/24/outline";
 import {Block, BlockPreview, BlockType, emptyBlocks} from "../../../types/blocks";
 import {idMapper} from "../../../utils/idMapper";
+import AddBlockItem from "./AddBlockItem.vue";
 
 interface Props {
     list?: Array<BlockPreview>
@@ -30,7 +31,7 @@ const groupOptions = computed(() => ({
 }))
 
 function cloneBlock({type}: {type: BlockType}): Block {
-    return idMapper(emptyBlocks[type], props.lastIndex)
+    return idMapper<Block>(emptyBlocks[type], props.lastIndex)
 }
 
 </script>
@@ -43,17 +44,16 @@ function cloneBlock({type}: {type: BlockType}): Block {
         </Btn>
         <template #content>
             <Draggable
-                item-key="type"
+                item-key="key"
                 :list="list"
                 :clone="cloneBlock"
                 :group="groupOptions"
-                class="grid grid-cols-3 flex-row gap-1 dark:text-gray-50 dark:bg-stone-800 bg-stone-50 border dark:border-stone-700 border-stone-200 p-3 rounded-md z-10 shadow-lg">
-                <template #item="{ element, index }">
-                    <div class="rounded-md px-3 py-1 border dark:bg-stone-600 bg-stone-200 dark:border-stone-500 border-stone-100 hover:border-stone-400 dark:hover:bg-stone-500 hover:bg-stone-300 duration-300 relative flex flex-col items-center justify-center gap-1 h-24">
-                        <a href="#" @click.prevent="$emit('add:block', element.type)" class="absolute -inset-1" />
-                        <div><component :is="element.icon" class="size-6"/></div>
-                        <div>{{ element.name }}</div>
-                    </div>
+                class="grid grid-cols-3 flex-row gap-1 dark:text-gray-50 dark:bg-zinc-800 bg-stone-50 border dark:border-stone-700 border-stone-200 p-3 rounded-md z-10 shadow-lg">
+                <template #item="{ element }">
+                    <AddBlockItem @click="$emit('add:block', $event)"
+                                  :icon="element.icon"
+                                  :name="element.name"
+                                  :type="element.type" />
                 </template>
 
             </Draggable>

@@ -51,8 +51,8 @@ function handleRemoveBlock(block: Block) {
                    handle=".block-editor-handle"
                    tag="ul"
                    class="space-y-1 border border-stone-500 rounded-md p-1"
-                   v-model="block.content"
-                   item-key="id">
+                   :list="block.content"
+                   item-key="key">
             <template #item="{element}">
                 <li>
                     <component :is="blockRenderers[element.type]"
