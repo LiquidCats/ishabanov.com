@@ -13,9 +13,7 @@
 
     @include('includes.admin.styles')
 </head>
-<body id="app">
-    @include('views.includes.scripts')
-<body class="bg-stone-900" id="app-admin">
+<body class="bg-neutral-50 dark:bg-zinc-900" id="app-admin">
 
 @include('includes.admin.scripts')
 </body>
