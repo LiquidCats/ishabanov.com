@@ -122,7 +122,7 @@ class PostModel extends Model implements PostRepositoryContract
             ->with('tags')
             ->with('previewImage')
             ->latest('id')
-            ->paginate(perPage: 5);
+            ->paginate(perPage: 10);
     }
 
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
