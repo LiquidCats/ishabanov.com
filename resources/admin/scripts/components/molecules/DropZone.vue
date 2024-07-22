@@ -24,7 +24,7 @@ function onFiles(e: Event | DragEvent) {
 </script>
 
 <template>
-    <div class="block border-dashed border-4 px-4 py-8 rounded-xl text-center duration-300 dark:bg-stone-800 bg-stone-100 cursor-pointer"
+    <div class="block border-dashed border-4 px-4 py-8 rounded-xl text-center duration-300 dark:bg-zinc-800 bg-stone-100 cursor-pointer"
          :class="{
              'border-stone-300 dark:border-stone-600': !dropZoneActive,
              'border-green-400 dark:border-green-700': dropZoneActive,

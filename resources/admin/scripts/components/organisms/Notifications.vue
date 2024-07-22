@@ -10,18 +10,15 @@ const notificationsState = useNotificationState()
 </script>
 
 <template>
-    <Teleport to="body">
-        <TransitionGroup tag="div"
-                         name="fade"
-                         class="fixed z-50 bottom-0 end-0 flex flex-col gap-1 px-3 overflow-hidden w-full md:w-1/2 lg:w-1/3">
-            <Notification v-for="n in notificationsState.items"
-                          :key="`n-${hashCode(n.message)}`"
-                          @close="notificationsState.close(n)"
-                          :message="n.message"
-                          :type="n.type"/>
-        </TransitionGroup>
-    </Teleport>
-
+    <TransitionGroup tag="div"
+                     name="fade"
+                     class="fixed z-50 bottom-0 end-0 flex flex-col gap-1 px-3 overflow-hidden w-full md:w-1/2 lg:w-1/3">
+        <Notification v-for="n in notificationsState.items"
+                      :key="`n-${hashCode(n.message)}`"
+                      @close="notificationsState.close(n)"
+                      :message="n.message"
+                      :type="n.type"/>
+    </TransitionGroup>
 </template>
 
 <style scoped lang="scss">

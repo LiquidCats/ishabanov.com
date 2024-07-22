@@ -3,7 +3,7 @@
 import {ArrowUpOnSquareIcon} from "@heroicons/vue/20/solid";
 import DropZone from "../molecules/DropZone.vue";
 import {Colors} from "../../types/colors";
-import FilePreview from "../../pages/files/FilePreview.vue";
+import FilePreview from "../molecules/File/FilePreview.vue";
 import Btn from "../atoms/Btn.vue";
 import type {FileToUpload} from "../../types/internals";
 import useFilesState from "../../states/files";
@@ -25,12 +25,13 @@ async function upload(fileToUpload?: FileToUpload) {
         <div v-if="filesState.previews.length">
             <Btn :type="Colors.primary"
                  class="w-full"
-                 :disabled="filesState.status.filesUploading.length"
+                 :disabled="filesState.status.filesUploading.length === 0"
                  @click.prevent="upload()">
                 <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
         </div>
-        <div class="relative grid grid-cols-2 gap-2" v-if="filesState.previews.length">
+        <div class="relative grid grid-cols-2 gap-2"
+             v-if="filesState.previews.length">
             <FilePreview v-for="fileToUpload in filesState.previews"
                          :file="fileToUpload"
                          :is-uploading="filesState.status.filesUploading.includes(fileToUpload)"
@@ -40,7 +41,7 @@ async function upload(fileToUpload?: FileToUpload) {
         <div v-if="filesState.previews.length">
             <Btn :type="Colors.primary"
                  class="w-full"
-                 :disabled="filesState.status.filesUploading.length"
+                 :disabled="filesState.status.filesUploading.length === 0"
                  @click.prevent="upload()">
                 <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
