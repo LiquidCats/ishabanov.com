@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Application\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
+use App\Domains\Blocks\Parsers\RawCollectionParser;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\Dto\PostDto;
@@ -20,6 +21,7 @@ readonly class PostService implements PostServiceContract
 {
     public function __construct(
         private PostRepositoryContract $postRepository,
+        private RawCollectionParser $blockParser,
     ) {
     }
 
@@ -30,7 +32,9 @@ readonly class PostService implements PostServiceContract
 
     public function getPost(PostId $postId): PostModel
     {
-        return $this->postRepository->findById($postId);
+        $post = $this->postRepository->findById($postId);
+        $post->blocks = $this->blockParser->parse($post->blocks);
+        return $post;
     }
 
     public function createPost(PostDto $dto): PostModel
@@ -96,7 +100,7 @@ readonly class PostService implements PostServiceContract
             $dto->preview,
             $dto->publishedAt,
             $dto->isDraft,
-            $this->blocksRenderer->parse($dto->blocks),
+            $this->blockParser->parse($dto->blocks),
             $dto->previewImageId,
             $dto->previewImageType,
             $dto->tags,
