@@ -12,7 +12,7 @@ const currentTab: Ref<string> = inject('currentTab')
 </script>
 
 <template>
-    <div class="mx-3" role="tabpanel" v-show="$props.for === currentTab">
+    <div class="bg-neutral-200 dark:bg-zinc-800 p-3 rounded-md" role="tabpanel" v-show="$props.for === currentTab">
         <slot></slot>
     </div>
 </template>

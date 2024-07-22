@@ -16,7 +16,7 @@ const types = {
     [Colors.success]: 'bg-emerald-700 hover:bg-emerald-600 text-white',
     [Colors.warning]: 'bg-yellow-500 hover:bg-yellow-400 text-black',
     [Colors.dark]: 'bg-neutral-700 hover:bg-neutral-600 text-white',
-    [Colors.light]: 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800',
+    [Colors.light]: 'bg-neutral-300 hover:bg-neutral-400 text-neutral-800',
     default: 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800',
 }
 </script>

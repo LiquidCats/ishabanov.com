@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <main class="mb-3">
+    <main v-bind="$attrs" class="mb-3">
         <slot></slot>
     </main>
 </template>

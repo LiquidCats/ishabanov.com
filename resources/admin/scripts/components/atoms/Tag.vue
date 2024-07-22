@@ -11,19 +11,19 @@
 
     const styles = computed(() => {
         if (props.type === Colors.primary) {
-            return 'bg-blue-600 text-white'
+            return 'bg-blue-600 text-gray-50'
         }
         if (props.type === Colors.danger) {
-            return 'bg-rose-700 text-white'
+            return 'bg-rose-700 text-gray-50'
         }
         if (props.type === Colors.success) {
-            return 'bg-emerald-700 text-white'
+            return 'bg-emerald-700 text-gray-50'
         }
         if (props.type === Colors.warning) {
             return 'bg-yellow-500 text-black'
         }
         if (props.type === Colors.dark) {
-            return 'bg-neutral-700 text-white'
+            return 'bg-neutral-800 text-gray-50'
         }
 
         return ''
@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <span :class="`px-2 py-1 rounded ${styles} font-bold`"><slot></slot></span>
+    <span :class="`text-xs px-2 py-1 rounded ${styles}`" v-bind="$attrs"><slot></slot></span>
 </template>
 
 <style scoped lang="scss">

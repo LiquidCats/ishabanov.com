@@ -13,7 +13,7 @@ defineProps<Props>()
     <Teleport to="body">
         <Transition name="modal">
             <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-start z-40 py-2 overflow-auto" v-if="isOpen">
-                <div class="dark:bg-stone-800 bg-gray-50 p-4 rounded-md shadow-lg min-w-sm max-w-screen-md w-full">
+                <div class="dark:bg-zinc-800 bg-gray-50 p-4 rounded-md shadow-lg min-w-sm max-w-screen-md w-full">
                     <slot></slot>
                 </div>
             </div>

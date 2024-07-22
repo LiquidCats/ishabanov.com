@@ -4,7 +4,7 @@
 
     interface Props {
         type: keyof typeof Colors,
-        to: string,
+        to: string|object,
     }
 
     defineProps<Props>()
