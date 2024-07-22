@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <label class="inline-block dark:text-gray-300 text-gray-400">
+    <label class="inline-block dark:text-gray-300 text-gray-400 text-xs">
         <slot></slot>
     </label>
 </template>
