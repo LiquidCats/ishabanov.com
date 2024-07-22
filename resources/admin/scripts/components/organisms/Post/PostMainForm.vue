@@ -1,15 +1,15 @@
 <script setup lang="ts">
 
 import dayjs from "dayjs";
-import Error from "../../components/atoms/Error.vue";
-import FormText from "../../components/atoms/Form/FormText.vue";
-import FormLabel from "../../components/atoms/Form/FormLabel.vue";
-import FormField from "../../components/atoms/Form/FormField.vue";
-import FormCheckbox from "../../components/atoms/Form/FormCheckbox.vue";
-import MultiSelect from "../../components/atoms/MultiSelect.vue";
-import usePostState from "../../states/post";
-import useTagsState from "../../states/tags";
-import debounce from "../../utils/debounce";
+import Error from "../../atoms/Error.vue";
+import FormText from "../../atoms/Form/FormText.vue";
+import FormLabel from "../../atoms/Form/FormLabel.vue";
+import FormField from "../../atoms/Form/FormField.vue";
+import FormCheckbox from "../../atoms/Form/FormCheckbox.vue";
+import MultiSelect from "../../atoms/MultiSelect.vue";
+import usePostState from "../../../states/post";
+import useTagsState from "../../../states/tags";
+import debounce from "../../../utils/debounce";
 
 const postState = usePostState()
 const tagsState = useTagsState()

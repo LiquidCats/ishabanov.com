@@ -2,10 +2,10 @@
 import {computed} from "vue";
 import Draggable from "vuedraggable";
 //
-import usePostState from "../../states/post";
+import usePostState from "../../../states/post";
 //
-import Error from "../../components/atoms/Error.vue";
-import {blockRenderers} from "../../types/blocks";
+import Error from "../../atoms/Error.vue";
+import {blockRenderers} from "../../../types/blocks";
 
 const postState = usePostState()
 
@@ -19,16 +19,15 @@ const dragOptions = computed(() => ({
 </script>
 
 <template>
-    <Draggable :list="postState.item.blocks"
+    <Draggable :list="postState?.item?.blocks ?? []"
                class="grid grid-cols-1 gap-3 dark:text-gray-50 mb-1.5"
                handle=".block-editor-handle"
-               item-key="id"
+               item-key="key"
                tag="ul"
                v-bind="dragOptions">
-        <template #item="{ element, index }">
-            <li :key="`${element.type}-${index}`" class="border-b-2 border-dashed border-gray-200 pb-3">
+        <template #item="{ element }">
+            <li class="border-b-2 border-dashed dark:border-gray-200 border-gray-400 pb-3">
                 <component :is="blockRenderers[element.type]"
-                           :key="`${element.type}-${index}`"
                            :block="element"
                            @clone:block="postState.cloneBlock"
                            @remove:block="postState.blockRemove"/>

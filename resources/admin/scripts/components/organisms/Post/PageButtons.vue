@@ -3,12 +3,13 @@ import {computed} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {ArrowDownOnSquareIcon, ArrowLeftIcon, EyeIcon, EyeSlashIcon} from "@heroicons/vue/20/solid";
 //
-import Btn from "../../components/atoms/Btn.vue";
+import Btn from "../../atoms/Btn.vue";
 //
-import RouteNames from "../../enums/RouteNames";
-import usePostState from "../../states/post";
-import useImagesState from "../../states/images";
-import useTagsState from "../../states/tags";
+import RouteNames from "../../../enums/RouteNames";
+import usePostState from "../../../states/post";
+import useImagesState from "../../../states/images";
+import useTagsState from "../../../states/tags";
+import FloatingPanel from "../../molecules/FloatingPanel.vue";
 
 const postState = usePostState()
 const imagesState = useImagesState()
@@ -46,7 +47,7 @@ const shouldDisable = computed(() =>
 </script>
 
 <template>
-    <div class="flex flex-row gap-1.5 sticky top-0 bg-neutral-100 dark:bg-neutral-800 z-[1] w-full p-3">
+    <FloatingPanel class="my-3">
         <div>
             <Btn type="light" @click="router.back()">
                 <ArrowLeftIcon class="size-6"/> Back
@@ -78,7 +79,7 @@ const shouldDisable = computed(() =>
             </Btn>
         </div>
 
-    </div>
+    </FloatingPanel>
 </template>
 
 <style scoped lang="scss">
