@@ -48,7 +48,7 @@ readonly class CodePresenter implements Arrayable, PresenterContract
             ->map(CodeLanguage::tryFrom(...))
             ->filter();
 
-        $key = $data['key']
+        $key = Uuid::isValid($data['key'] ?? '')
             ? Uuid::fromString($data['key'])
             : Uuid::v7();
 

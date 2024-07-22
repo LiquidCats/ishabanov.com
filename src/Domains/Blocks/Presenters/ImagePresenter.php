@@ -57,7 +57,7 @@ readonly class ImagePresenter implements Arrayable, PresenterContract
             ->map(BlockStyleEnum::tryFrom(...))
             ->filter();
 
-        $key = Uuid::isValid($data['key'])
+        $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
            : Uuid::v7();
 

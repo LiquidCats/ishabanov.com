@@ -37,7 +37,7 @@ readonly class RawPresenter implements Arrayable, PresenterContract
             'content' => 'string',
         ])] array $data
     ): self {
-        $key = Uuid::isValid($data['key'])
+        $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
            : Uuid::v7();
 

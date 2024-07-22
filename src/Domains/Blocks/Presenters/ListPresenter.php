@@ -44,6 +44,7 @@ readonly class ListPresenter implements Arrayable, PresenterContract
         BlockType $type,
         #[ArrayShape([
             'tag' => 'string',
+            'key' => 'string',
             'styles' => ['string'],
             'content' => [
                 [
@@ -59,7 +60,7 @@ readonly class ListPresenter implements Arrayable, PresenterContract
             ->map(BlockStyleEnum::tryFrom(...))
             ->filter();
 
-        $key = Uuid::isValid($data['key'])
+        $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
            : Uuid::v7();
 

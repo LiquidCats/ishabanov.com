@@ -56,7 +56,7 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
             ->map(BlockStyleEnum::tryFrom(...))
             ->filter();
 
-        $key = $data['key']
+        $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
            : Uuid::v7();
 
@@ -64,7 +64,7 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
             type: $type,
             key: $key,
             tag: HeadingTag::from($data['tag']),
-            content: AllowedTags::sanitize($data['content']),
+            content: AllowedTags::sanitize($data['content'] ?? ''),
             styles: $styles,
         );
     }

@@ -37,7 +37,7 @@ readonly class RemarkPresenter implements Arrayable, PresenterContract
             'content' => Collection::class,
         ])] array $data,
     ): self {
-        $key = Uuid::isValid($data['key'])
+        $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
            : Uuid::v7();
 
