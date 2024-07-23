@@ -10,16 +10,21 @@ import MultiSelect from "../../atoms/MultiSelect.vue";
 import usePostState from "../../../states/post";
 import useTagsState from "../../../states/tags";
 import debounce from "../../../utils/debounce";
+import Btn from "../../atoms/Btn.vue";
 
 const postState = usePostState()
 const tagsState = useTagsState()
-
-const tagsMapperFn = (v: any) => ({value: v.id, text: v.name})
 
 async function handleTagSearch(e: Event) {
     const searchString: string = e?.target?.value ?? '';
 
     await tagsState.search(searchString)
+}
+
+async function handleTagFastSave() {
+    await tagsState.fastSave()
+    const last = tagsState.items.at(-1)
+    postState.item.tags = [...postState.item.tags, last]
 }
 
 const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
@@ -42,15 +47,18 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
     <div class="mb-3">
         <FormLabel class="mb-1">Tags</FormLabel>
         <MultiSelect :items="tagsState.items"
+                     value-key="id"
+                     text-key="name"
                      @input="debouncedHandleTagSearch($event)"
-                     :mapper="tagsMapperFn"
                      v-model="postState.item.tags">
-            <!--                    <template #nothing>-->
-            <!--                        <div class="d-flex justify-content-center mb-2">-->
-            <!--                            <span>Nothing Found</span>-->
-            <!--                        </div>-->
-            <!--                        <Btn type="primary" class="btn-sm"><i class="bi bi-plus-lg"></i> Create</Btn>-->
-            <!--                    </template>-->
+            <template #nothing>
+                <div class="flex flex-col justify-center gap-1.5 mb-2">
+                    <div>Nothing Found</div>
+                    <div>
+                        <Btn @click="handleTagFastSave" type="primary" class="mx-auto !py-1 !text-sm">Create</Btn>
+                    </div>
+                </div>
+            </template>
         </MultiSelect>
         <Error name="tags" :errors="postState.errors"/>
     </div>

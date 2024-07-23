@@ -5,7 +5,7 @@ import Draggable from "vuedraggable";
 import usePostState from "../../../states/post";
 //
 import Error from "../../atoms/Error.vue";
-import {blockRenderers} from "../../../types/blocks";
+import {blockRenderers} from "../../../utils/blocks/getters";
 
 const postState = usePostState()
 
