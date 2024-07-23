@@ -18,7 +18,7 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="flex flex-col border rounded-md p-3 dark:border-stone-700 border-stone-300 bg-neutral-100 dark:bg-zinc-700" :key="postId">
+    <div class="flex flex-col rounded-md p-3 bg-neutral-50 dark:bg-zinc-700" :key="postId">
         <div class="relative">
             <Tag :type="Colors.dark">ID: {{ postId }}</Tag>
             <h2 class="text-3xl dark:text-gray-50 font-bold">

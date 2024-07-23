@@ -22,7 +22,7 @@ const fileSizeInBytes = computed(() => formatBytes(props.file.file_size))
 </script>
 
 <template>
-    <div class="border bg-neutral-100 dark:bg-zinc-700 dark:border-stone-700 border-stone-300 rounded-md p-3">
+    <div class="bg-neutral-50 dark:bg-zinc-700 rounded-md p-3">
         <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
              :style="{backgroundImage: file.path}"/>
         <div>

@@ -5,8 +5,10 @@ import LinkToRoute from "./LinkToRoute.vue";
 import {ArrowUturnLeftIcon} from "@heroicons/vue/20/solid";
 import {useRouter} from "vue-router";
 
-const routes = useRouter().getRoutes().filter(r => r!.meta?.isPrimary)
-
+const routes = useRouter()
+    .getRoutes()
+    .filter(r => r!.meta?.isPrimary)
+    .filter(r => !r.aliasOf);
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {inject, Ref} from "vue";
+import Backdrop from "../Backdrop.vue";
 
 interface Props {
     for: string
@@ -12,9 +13,9 @@ const currentTab: Ref<string> = inject('currentTab')
 </script>
 
 <template>
-    <div class="bg-neutral-200 dark:bg-zinc-800 p-3 rounded-md" role="tabpanel" v-show="$props.for === currentTab">
+    <Backdrop role="tabpanel" v-show="$props.for === currentTab">
         <slot></slot>
-    </div>
+    </Backdrop>
 </template>
 
 <style scoped lang="scss">

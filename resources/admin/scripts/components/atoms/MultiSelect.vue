@@ -11,10 +11,16 @@ interface Item {
 interface Props {
     items?: any[]
     modelValue?: any[]
-    mapper?: (v: any) => Item
+    valueKey?: string
+    textKey?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+    items: [],
+    modelValue: [],
+    valueKey: "value",
+    textKey: "text",
+})
 
 const emit = defineEmits(['select', 'input', 'update:modelValue'])
 
@@ -60,11 +66,10 @@ watch(focusedItemIndex, (newValue, oldValue) => {
 })
 
 function mapItem(v: any): Item {
-    if (!props.mapper) {
-        return v
+    return {
+        value: v[props.valueKey],
+        text: v[props.textKey],
     }
-
-    return props.mapper(v)
 }
 
 function removeItem(item: Item) {

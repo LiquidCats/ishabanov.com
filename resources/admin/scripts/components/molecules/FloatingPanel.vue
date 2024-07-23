@@ -1,11 +1,12 @@
 <script setup lang="ts">
 
+import Backdrop from "../atoms/Backdrop.vue";
 </script>
 
 <template>
-    <div class="flex flex-row justify-between gap-1.5 sticky top-1 z-10 bg-neutral-200 rounded-md dark:bg-zinc-800 w-full p-3">
+    <Backdrop class="flex flex-row justify-between gap-1.5 sticky top-1 z-10 w-full">
         <slot></slot>
-    </div>
+    </Backdrop>
 </template>
 
 <style scoped lang="scss">
