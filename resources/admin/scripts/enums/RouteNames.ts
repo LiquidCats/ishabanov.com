@@ -7,6 +7,8 @@ enum RouteNames {
     TAG_LIST = 'admin.tag.list',
     FILES_LIST = 'admin.files.list',
     USERS_LIST = 'admin.users.list',
+    USERS_CREATE = 'admin.users.create',
+    USERS_EDIT = 'admin.users.edi',
 }
 
 export default RouteNames

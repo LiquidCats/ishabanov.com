@@ -1,41 +1,58 @@
 import {nextTick} from "vue";
 import {createRouter, createWebHistory} from "vue-router";
 //
-import {ChatBubbleLeftRightIcon, TagIcon, ArchiveBoxIcon} from "@heroicons/vue/20/solid";
+import {
+    ChatBubbleLeftRightIcon,
+    TagIcon,
+    ArchiveBoxIcon,
+    PresentationChartBarIcon,
+    UsersIcon,
+} from "@heroicons/vue/20/solid";
 //
-import PostList from "./pages/posts/PostList.vue";
-import PostEdit from "./pages/posts/PostEditor.vue";
+import PostList from "./components/pages/PostList.vue";
+import PostEdit from "./components/pages/PostEditor.vue";
 import RouteNames from "./enums/RouteNames";
-import Tags from "./pages/tags/Tags.vue";
-import Files from "./pages/files/Files.vue";
-import Dashboard from "./pages/dashboard/Dashboard.vue";
-
+import Tags from "./components/pages/Tags.vue";
+import Files from "./components/pages/Files.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
+import Users from "./components/pages/Users.vue";
+import UserEditor from "./components/pages/UserEditor.vue";
 
 const router =  createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/admin',
-            alias: '/admin/dashboard',
+            path: '/admin/dashboard',
+            alias: '/admin',
             component: Dashboard,
             name: RouteNames.DASHBOARD,
             children: [],
             meta: {
+                isPrimary: true,
                 title: 'Dashboard',
+                icon: PresentationChartBarIcon
             }
         },
         {
             path: '/admin/posts',
             component: PostList,
             name: RouteNames.POST_LIST,
-            children: [],
             meta: {
                 title: 'Posts',
                 isPrimary: true,
                 icon: ChatBubbleLeftRightIcon
-            }
+            },
+            children: [
+                {
+                    path: ':page(\\d+)',
+                    component: PostList,
+                    name: RouteNames.POST_LIST_PAGE,
+                    meta: {
+                        title: 'Posts',
+                    }
+                },
+            ],
         },
-
         {
             path: '/admin/posts/create',
             component: PostEdit,
@@ -78,10 +95,31 @@ const router =  createRouter({
         },
         {
             path: '/admin/users',
-            component: null,
+            component: Users,
+            name: RouteNames.USERS_LIST,
             children: [],
             meta: {
                 title: 'Users',
+                isPrimary: true,
+                icon: UsersIcon,
+            }
+        },
+        {
+            path: '/admin/users/create',
+            component: UserEditor,
+            name: RouteNames.USERS_CREATE,
+            children: [],
+            meta: {
+                title: 'Create User',
+            }
+        },
+        {
+            path: '/admin/users/:userId(\\d+)/edit',
+            component: UserEditor,
+            name: RouteNames.USERS_EDIT,
+            children: [],
+            meta: {
+                title: 'Edit User',
             }
         },
         {
