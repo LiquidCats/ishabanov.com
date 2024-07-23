@@ -2,17 +2,18 @@
 import {onMounted, onUnmounted} from "vue";
 import {PlusIcon} from "@heroicons/vue/20/solid";
 //
-import usePostListState from "../states/posts";
+import usePostListState from "../../states/posts";
 //
-import PageHeader from "../components/molecules/PageHeader.vue";
-import BtnLink from "../components/atoms/BtnLink.vue";
-import Btn from "../components/atoms/Btn.vue";
-import PostListItem from "../components/molecules/Post/PostListItem.vue";
-import {Colors} from "../types/colors";
-import Pagination from "../components/molecules/Pagination.vue";
+import PageHeader from "../molecules/PageHeader.vue";
+import BtnLink from "../atoms/BtnLink.vue";
+import Btn from "../atoms/Btn.vue";
+import PostListItem from "../molecules/Post/PostListItem.vue";
+import {Colors} from "../../types/colors";
+import Pagination from "../molecules/Pagination.vue";
 import {useRouter} from "vue-router";
-import RouteNames from "../enums/RouteNames";
-import FloatingPanel from "../components/molecules/FloatingPanel.vue";
+import RouteNames from "../../enums/RouteNames";
+import FloatingPanel from "../molecules/FloatingPanel.vue";
+import Backdrop from "../atoms/Backdrop.vue";
 
 const state = usePostListState()
 const router = useRouter()
@@ -33,7 +34,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <FloatingPanel class="flex items-center my-3 justify-between  rounded-md bg-neutral-200 dark:bg-zinc-800 p-3 sticky top-1 z-10">
+    <FloatingPanel class="flex items-center my-3 justify-between sticky top-1 z-10">
         <BtnLink type="light" :to="{name: RouteNames.POST_CREATE}">
             <PlusIcon class="size-5"/>Add
         </BtnLink>
@@ -42,7 +43,7 @@ onUnmounted(() => {
                     @click:prev="paginate"/>
     </FloatingPanel>
     <PageHeader>Posts</PageHeader>
-    <div class="bg-neutral-200 dark:bg-zinc-800 p-3 rounded-md">
+    <Backdrop class="bg-neutral-100 dark:bg-zinc-800 p-3 rounded-md">
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
             <div class="md:col-span-2 text-white text-center text-5xl" v-if="state.status.listLoading">Loading...</div>
@@ -69,7 +70,7 @@ onUnmounted(() => {
                 </Btn>
             </PostListItem>
         </div>
-    </div>
+    </Backdrop>
 </template>
 
 <style scoped lang="scss">

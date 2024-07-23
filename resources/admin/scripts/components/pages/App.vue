@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import Notifications from "../components/organisms/Notifications.vue";
-import Nav from "../components/molecules/Sidebar/Nav.vue";
+import Notifications from "../organisms/Notifications.vue";
+import Nav from "../molecules/Sidebar/Nav.vue";
 
 </script>
 

@@ -2,11 +2,12 @@
 
 import {onBeforeUnmount, onMounted, onUnmounted} from "vue";
 //
-import PageHeader from "../components/molecules/PageHeader.vue";
-import Pagination from "../components/molecules/Pagination.vue";
-import useFilesState from "../states/files";
-import FileRow from "../components/molecules/File/FileRow.vue";
-import FileUploader from "../components/organisms/FileUploader.vue";
+import PageHeader from "../molecules/PageHeader.vue";
+import Pagination from "../molecules/Pagination.vue";
+import useFilesState from "../../states/files";
+import FileRow from "../molecules/File/FileRow.vue";
+import FileUploader from "../organisms/FileUploader.vue";
+import Backdrop from "../atoms/Backdrop.vue";
 
 const filesState = useFilesState()
 
@@ -29,16 +30,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <PageHeader>Files</PageHeader>
+    <PageHeader class="mt-3">Files</PageHeader>
     <FileUploader class="mb-3"/>
 
-    <div class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 bg-neutral-200 dark:bg-zinc-800 p-3 rounded-md">
+    <Backdrop class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <div class="md:col-span-2 lg:col-span-3 text-white text-center text-5xl" v-if="filesState.status.filesLoading">Loading...</div>
         <FileRow v-for="file in filesState.items"
                  :file="file"
                  :is-deleting="filesState.status.filesDeleting.includes(file.hash)"
                  @file:remove="filesState.remove($event.hash)"/>
-    </div>
+    </Backdrop>
     <Pagination class="mx-3" :links="filesState.pagination"/>
 </template>
 

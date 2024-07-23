@@ -3,20 +3,21 @@
 import {onMounted, ref, watch} from "vue";
 import {ChevronUpIcon, ChevronDownIcon, XMarkIcon, ArrowDownOnSquareIcon, TrashIcon, PencilSquareIcon} from "@heroicons/vue/20/solid";
 //
-import type {Tag as TagType} from "../types/data";
-import {Colors} from "../types/colors";
+import type {Tag as TagType} from "../../types/data";
+import {Colors} from "../../types/colors";
 //
-import useTagsState from "../states/tags";
+import useTagsState from "../../states/tags";
 //
-import debounce from "../utils/debounce";
+import debounce from "../../utils/debounce";
 //
-import Tag from "../components/atoms/Tag.vue";
-import PageHeader from "../components/molecules/PageHeader.vue";
-import Btn from "../components/atoms/Btn.vue";
+import Tag from "../atoms/Tag.vue";
+import PageHeader from "../molecules/PageHeader.vue";
+import Btn from "../atoms/Btn.vue";
 
-import FormField from "../components/atoms/Form/FormField.vue";
-import FormLabel from "../components/atoms/Form/FormLabel.vue";
+import FormField from "../atoms/Form/FormField.vue";
+import FormLabel from "../atoms/Form/FormLabel.vue";
 import {SubscriptionCallback} from "pinia";
+import Backdrop from "../atoms/Backdrop.vue";
 
 const tagsState = useTagsState()
 
@@ -51,8 +52,8 @@ async function handleSave() {
 </script>
 
 <template>
-    <PageHeader>Tags ({{ tagsState.item.id ? 'edit' : 'create' }})</PageHeader>
-    <div class="flex flex-col gap-2 items-stretch mb-3 bg-neutral-200 dark:bg-zinc-800 p-3 rounded-md">
+    <PageHeader class="mt-3">Tags ({{ tagsState.item.id ? 'edit' : 'create' }})</PageHeader>
+    <Backdrop class="flex flex-col gap-2 items-stretch mb-3">
         <div>
             <FormLabel for="tag-search" class="text-sm">Name</FormLabel>
             <FormField v-model.trim="tagsState.item.name"
@@ -86,10 +87,10 @@ async function handleSave() {
                 Save
             </Btn>
         </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 p-3 bg-neutral-200 dark:bg-zinc-800 rounded-md">
+    </Backdrop>
+    <Backdrop class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div class="md:col-span-2 text-white text-center text-5xl" v-if="tagsState.status.tagsLoading">Loading...</div>
-        <div class="bg-stone-100 dark:bg-zinc-600 border dark:border-stone-700 border-stone-300 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
+        <div class="bg-stone-50 dark:bg-zinc-700 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
             <div class="grow">
                 <Tag :type="Colors.dark">ID: {{ tag.id }}</Tag>
                 <h4 class="dark:text-gray-50 mb-0">Name: {{ tag.name}}</h4>
@@ -115,7 +116,7 @@ async function handleSave() {
                 </div>
             </div>
         </div>
-    </div>
+    </Backdrop>
 </template>
 
 <style scoped lang="scss">

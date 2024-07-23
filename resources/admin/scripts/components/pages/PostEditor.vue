@@ -3,21 +3,23 @@
 import {onMounted, onBeforeUnmount, ref} from "vue";
 import {useRoute} from "vue-router";
 //
-import usePostState from "../states/post";
-import useImagesState from "../states/images";
-import useTagsState from "../states/tags";
-import RouteNames from "../enums/RouteNames";
-import PageButtons from "../components/organisms/Post/PageButtons.vue";
-import FilesModal from "../components/organisms/FilesModal.vue";
-import PostMainForm from "../components/organisms/Post/PostMainForm.vue";
-import TabGroup from "../components/atoms/Tabs/TabGroup.vue";
-import TabLabel from "../components/atoms/Tabs/TabLabel.vue";
-import PostContentForm from "../components/organisms/Post/PostContentForm.vue";
-import AddBlock from "../components/molecules/Editor/AddBlock.vue";
-import {blockPreviews} from "../types/blocks";
-import TabPanel from "../components/atoms/Tabs/TabPanel.vue";
-import PostTitle from "../components/organisms/Post/PostTitle.vue";
-import useModalsState from "../states/modals";
+import PageButtons from "../organisms/Post/PageButtons.vue";
+import FilesModal from "../organisms/FilesModal.vue";
+import PostMainForm from "../organisms/Post/PostMainForm.vue";
+import TabGroup from "../atoms/Tabs/TabGroup.vue";
+import TabLabel from "../atoms/Tabs/TabLabel.vue";
+import PostContentForm from "../organisms/Post/PostContentForm.vue";
+import AddBlock from "../molecules/Editor/AddBlock.vue";
+import TabPanel from "../atoms/Tabs/TabPanel.vue";
+import PostTitle from "../organisms/Post/PostTitle.vue";
+//
+import RouteNames from "../../enums/RouteNames";
+import usePostState from "../../states/post";
+import useImagesState from "../../states/images";
+import useTagsState from "../../states/tags";
+import useModalsState from "../../states/modals";
+import {blockPreviews} from "../../utils/blocks/getters";
+
 
 const postState = usePostState()
 const imagesState = useImagesState()
