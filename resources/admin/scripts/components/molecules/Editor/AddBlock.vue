@@ -5,9 +5,10 @@ import Draggable from "vuedraggable";
 
 import Btn from "../../atoms/Btn.vue";
 import {SquaresPlusIcon} from "@heroicons/vue/24/outline";
-import {Block, BlockPreview, BlockType, emptyBlocks} from "../../../types/blocks";
+import {Block, BlockPreview, BlockType} from "../../../types/blocks";
 import {idMapper} from "../../../utils/idMapper";
 import AddBlockItem from "./AddBlockItem.vue";
+import {emptyBlocks} from "../../../utils/blocks/getters";
 
 interface Props {
     list?: Array<BlockPreview>

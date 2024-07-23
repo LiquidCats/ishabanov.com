@@ -4,7 +4,7 @@ export interface Post {
     id: number;
     title: string;
     preview: string;
-    preview_image_type: null|string;
+    preview_image_type: null|PreviewTypes;
     preview_image_id: null|string;
     content: string;
     is_draft: boolean;

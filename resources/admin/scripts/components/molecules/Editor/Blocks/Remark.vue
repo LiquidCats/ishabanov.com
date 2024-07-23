@@ -4,9 +4,10 @@ import {computed} from "vue";
 import EditorBlock from "../EditorBlock.vue";
 import Draggable from "vuedraggable";
 //
-import {Block, blockRenderers, blockPreviews, BlockType, emptyBlocks} from "../../../../types/blocks";
+import {Block, BlockType} from "../../../../types/blocks";
 import AddBlock from "../AddBlock.vue";
 import {idMapper} from "../../../../utils/idMapper";
+import {blockRenderers, emptyBlocks} from "../../../../utils/blocks/getters";
 
 interface Props {
     block: Block<Block[]>
@@ -23,12 +24,12 @@ const dragOptions = computed(() => ({
     ghostClass: "ghost"
 }))
 
-const remarkBlocks: any[] = blockPreviews.filter(b => b.type !== BlockType.REMARK)
+const remarkBlocks: any[] = emptyBlocks.filter(b => b.type !== BlockType.REMARK)
 
 function handleAddBlock(type: BlockType) {
     props.block.content = [
         ...props.block.content,
-        idMapper(emptyBlocks[type], props.block.content.length)
+        idMapper(emptyBlocks[type]),
     ]
 }
 function handleRemoveBlock(block: Block) {
