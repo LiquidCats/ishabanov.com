@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Data\Database\Eloquent\Models\ExperienceModel;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use function json_encode;
 
 class ExperienceSeeder extends Seeder
 {
@@ -31,7 +32,7 @@ class ExperienceSeeder extends Seeder
         $model->company_url = $experience['company_url'];
         $model->company_logo = $experience['company_logo'];
         $model->position = $experience['position'];
-        $model->description = $experience['description'];
+        $model->description = json_encode($experience['description']);
         $model->started_at = Carbon::parse($experience['started_at']);
         if ($experience['ended_at'] !== null) {
             $model->ended_at = Carbon::parse($experience['ended_at']);
