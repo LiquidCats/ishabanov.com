@@ -17,6 +17,7 @@ interface State {
 interface Actions {
     search(v?: string, force?: boolean): Promise<void>
     remove(tagId: number): Promise<void>
+    fastSave(): Promise<void>
     save(): Promise<void>
 }
 
@@ -71,6 +72,19 @@ const useTagsState = defineStore<string, State, any, Actions>('tags', {
             } finally {
                 this.status.tagDeleting = this.status.tagDeleting.filter(id => id !== tagId)
             }
+        },
+        async fastSave() {
+            this.status.tagSaving = true
+
+            try {
+                const {data} = await tags.create({name: this.q})
+                this.items = [...this.items, data]
+            } catch (e) {
+                notificationState.pushError(e as Error)
+            } finally {
+                this.status.tagSaving = false
+            }
+
         },
         async save() {
             const notificationState = useNotificationState()

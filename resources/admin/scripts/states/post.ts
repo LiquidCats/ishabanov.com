@@ -1,14 +1,15 @@
 import {_GettersTree, defineStore, PiniaCustomProperties} from "pinia";
 import dayjs from "dayjs";
 //
-import {File, Post} from "../types/data";
+import {File, Post, PreviewTypes} from "../types/data";
 //
 import * as posts from "../api/posts";
 import useNotificationState from "./notfications";
 import {Api, ApiError, ValidationErrors} from "../types/api";
-import {Block, BlockType, emptyBlocks} from "../types/blocks";
+import {Block, BlockType} from "../types/blocks";
 import {idMapper} from "../utils/idMapper";
 import {UnwrapRef} from "vue";
+import {emptyBlocks} from "../utils/blocks/getters";
 
 interface State {
     id: number|null
@@ -73,6 +74,7 @@ const usePostState = defineStore<string, State, Getters<State>, Actions>('post',
         previewAdd(file: File) {
             this.item.previewImage = file
             this.item.preview_image_id = file.hash
+            this.item.preview_image_type = PreviewTypes.LEFT_SIDE
         },
         previewRemove() {
             this.item.preview_image_id = null;
@@ -80,7 +82,7 @@ const usePostState = defineStore<string, State, Getters<State>, Actions>('post',
             this.item.previewImage = null
         },
         blockAdd(type: BlockType): void {
-            this.item.blocks = [...this.item.blocks, idMapper(emptyBlocks[type], this.item.blocks.length)]
+            this.item.blocks = [...this.item.blocks, idMapper(emptyBlocks[type])]
         },
         cloneBlock(block: Block): void {
             const blocks = this.item.blocks as Array<Block>
@@ -88,7 +90,7 @@ const usePostState = defineStore<string, State, Getters<State>, Actions>('post',
 
             this.item.blocks = [
                 ...blocks.slice(0, index+1),
-                idMapper({...block, content: emptyBlocks[block.type].content}, this.item.blocks.length),
+                idMapper({...block, content: emptyBlocks[block.type].content}),
                 ...blocks.slice(index+1),
             ].map(idMapper)
         },

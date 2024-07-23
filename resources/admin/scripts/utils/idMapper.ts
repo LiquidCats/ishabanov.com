@@ -1,3 +1,3 @@
-import {WithId} from "../types/blocks";
+import {v7 as uuid} from "uuid";
 
-export const idMapper = <B>(b: B, i: number): B &WithId => ({...b, id: i})
+export const idMapper = <B extends object>(b: B): B => ({...b, key: uuid() })
