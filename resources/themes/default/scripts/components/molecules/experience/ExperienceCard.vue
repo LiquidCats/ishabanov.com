@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import {ArrowUpRightIcon, ChevronRightIcon} from "@heroicons/vue/24/outline"
-import {ExperienceItem} from "../../../domain/types/experience";
-import Link from "../../atoms/Link.vue";
+import {ExperienceResource} from "../../../domain/types/api";
 import dayjs from "dayjs";
 import Heading from "../../atoms/typography/Heading.vue";
 import {TextSize, TextWeight} from "../../../domain/types/text";
 import Text from "../../atoms/typography/Text.vue";
 import List from "../../atoms/lists/List.vue";
 import ListItem from "../../atoms/lists/ListItem.vue";
+import AppLink from "../../atoms/AppLink.vue";
+import {computed} from "vue";
 
 interface Props {
-    experience: ExperienceItem
+    experience: ExperienceResource
 }
 // Define
-defineProps<Props>()
+const props = defineProps<Props>()
+// compute
+const startedYear = computed(() => props.experience?.started_at ? dayjs(props.experience?.started_at).year() : dayjs().year())
+const endedYear = computed(() => props.experience?.ended_at ? dayjs(props.experience?.ended_at).year() : 'now')
 </script>
 
 <template>
@@ -27,9 +31,8 @@ defineProps<Props>()
                          :size="TextSize.xl4"
                          :weight="TextWeight.bold"
                          class="leading-snug">
-                    <Link :href="experience.company_url"
-                          target="_blank"
-                          class="inline-flex gap-1 items-baseline leading-tight hover:text-blue-500 focus-visible:text-blue-500 group/link">
+                    <AppLink :to="experience.company_url"
+                          class="inline-flex gap-1 items-baseline leading-tight hover:!text-blue-500 focus-visible:!text-blue-500 group/link">
                         <div class="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" />
                         <Text as="span">
                             {{ experience.position }} ·
@@ -39,7 +42,7 @@ defineProps<Props>()
                             </Text>
                         </Text>
 
-                    </Link>
+                    </AppLink>
                 </Heading>
             </div>
             <Text :size="TextSize.sm" class="text-gray-400 mb-1">Stack:</Text>
@@ -56,15 +59,15 @@ defineProps<Props>()
                 <List unlisted class="space-y-2">
                     <ListItem v-for="item in experience.description" class="flex gap-1">
                         <span class="py-1.5"><ChevronRightIcon class="text-gray-400 size-3.5"/></span>
-                        <Text :size="TextSize.lg" class="text-gray-50" as="span">{{ item }}</Text>
+                        <Text :size="TextSize.md" class="text-gray-50" as="span">{{ item }}</Text>
                     </ListItem>
                 </List>
             </div>
         </div>
 
         <header class="col-span-2 text-2xl font-black text-gray-100 md:p-6 hidden md:block uppercase"
-                :aria-label="`${ experience?.started_at?.year() ?? dayjs().year() } to ${ experience?.ended_at?.year() ?? 'now' }`">
-            <div>{{ experience?.started_at?.year() ?? dayjs().year() }} - {{ experience?.ended_at?.year() ?? 'Now' }}</div>
+                :aria-label="`${ startedYear } to ${ endedYear }`">
+            <div>{{ startedYear }} - {{ endedYear }}</div>
         </header>
     </div>
 </template>
