@@ -3,9 +3,14 @@ import {createApp} from "vue";
 import router from "./router";
 //
 import App from "./components/pages/App.vue";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 const pinia = createPinia()
 const app = createApp(App)
+
+dayjs.locale('en')
+dayjs.extend(relativeTime);
 
 app.use(pinia)
 app.use(router)
