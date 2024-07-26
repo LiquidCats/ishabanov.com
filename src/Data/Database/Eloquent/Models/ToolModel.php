@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Tool.
  *
- * @property int $id
+ * @property string $id
  * @property string $name
  * @property ToolType|null $type
  * @property ExperienceLevel|null $level

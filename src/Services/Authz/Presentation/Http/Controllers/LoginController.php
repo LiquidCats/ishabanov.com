@@ -17,11 +17,11 @@ class LoginController extends Controller
 {
     public function __invoke(): View|RedirectResponse
     {
-        //Auth::loginUsingId(1);
+        Auth::loginUsingId(1);
         if (Auth::check()) {
             return redirect(route('admin.dashboard'));
         }
 
-        return view('pages.login.index');
+        return view('layouts.admin');
     }
 }
