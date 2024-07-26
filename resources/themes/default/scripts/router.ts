@@ -1,6 +1,9 @@
 import {nextTick} from "vue";
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "./components/pages/Home.vue";
+import Posts from "./components/pages/Posts.vue";
+import Article from "./components/pages/Article.vue";
+import {RouteNames} from "./domain/enums/routes";
 
 const router =  createRouter({
     history: createWebHistory(),
@@ -8,7 +11,7 @@ const router =  createRouter({
         {
             path: '/',
             component: Home,
-            name: "home",
+            name: RouteNames.HOMEPAGE,
             children: [],
             meta: {
                 title: 'Home',
@@ -16,16 +19,17 @@ const router =  createRouter({
         },
         {
             path: '/posts',
-            name: 'posts',
-            component: null,
+            alias: '/blog',
+            name: RouteNames.POST_LIST,
+            component: Posts,
             meta: {
                 title: 'Posts',
             },
             children: [
                 {
                     path: 'page/:page(\\d+)',
-                    name: 'post.page',
-                    component: null,
+                    name: RouteNames.POST_LIST_PAGE,
+                    component: Posts,
                     meta: {
                         title: 'Posts',
                     }
@@ -34,8 +38,8 @@ const router =  createRouter({
         },
         {
             path: '/posts/:postId(\\d+)',
-            name: 'post.article',
-            component: null,
+            name: RouteNames.POST_ARTICLE,
+            component: Article,
             meta: {
                 title: 'Article',
             },

@@ -5,32 +5,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    h1 {
-        @apply my-3 text-3xl;
-    }
-    h2 {
-        @apply my-3 text-2xl;
-    }
-    h3 {
-        @apply my-3 text-lg;
-    }
-    h4 {
-        @apply my-2 text-base;
-    }
-    h5 {
-        @apply my-1 text-sm;
-    }
-    h6 {
-        @apply my-1 text-xs;
-    }
-    ul {
-        @apply list-inside list-disc my-3;
-    }
-    ol {
-        @apply list-inside list-decimal my-3;
-    }
-    p {
-        @apply my-3;
-    }
-}
