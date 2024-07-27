@@ -25,10 +25,10 @@ Route::prefix('posts')
     ->group(static function () {
         Route::get('/', PostListController::class)->name('list');
         Route::post('/', PostStoreController::class)->name('store');
-        Route::get(PostId::AS_ROUTE_PARAMETER, PostController::class)->name('show');
-        Route::put(PostId::AS_ROUTE_PARAMETER, PostUpdateController::class)->name('update');
-        Route::patch('/state/'.PostId::AS_ROUTE_PARAMETER, PostChangeStateController::class)->name('state');
-        Route::delete(PostId::AS_ROUTE_PARAMETER, PostDeleteController::class)->name('delete');
+        Route::get(PostId::asRouteParameter(), PostController::class)->name('show');
+        Route::put(PostId::asRouteParameter(), PostUpdateController::class)->name('update');
+        Route::patch('/state/'.PostId::asRouteParameter(), PostChangeStateController::class)->name('state');
+        Route::delete(PostId::asRouteParameter(), PostDeleteController::class)->name('delete');
     });
 
 Route::prefix('files')
@@ -36,7 +36,7 @@ Route::prefix('files')
     ->group(static function () {
         Route::get('/', FilesListController::class)->name('list');
         Route::post('/', FilesStoreController::class)->name('store');
-        Route::delete(FileId::AS_ROUTE_PARAMETER, FilesDeleteController::class)->name('delete');
+        Route::delete(FileId::asRouteParameter(), FilesDeleteController::class)->name('delete');
     });
 
 Route::prefix('tags')
@@ -44,6 +44,6 @@ Route::prefix('tags')
     ->group(static function () {
         Route::get('/', TagListController::class)->name('list');
         Route::post('/', TagStoreController::class)->name('store');
-        Route::put(TagId::AS_ROUTE_PARAMTER, TagUpdateController::class)->name('update');
-        Route::delete(TagId::AS_ROUTE_PARAMTER, TagDeleteController::class)->name('delete');
+        Route::put(TagId::asRouteParameter(), TagUpdateController::class)->name('update');
+        Route::delete(TagId::asRouteParameter(), TagDeleteController::class)->name('delete');
     });

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Application\Services;
+namespace App\Domains\Blog\Services;
 
 use App\Data\Database\Eloquent\Models\TagModel;
 use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;

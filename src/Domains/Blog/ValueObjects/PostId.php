@@ -3,13 +3,17 @@
 namespace App\Domains\Blog\ValueObjects;
 
 use App\Foundation\ValueObjects\AbstractValueObject;
-use App\Foundation\ValueObjects\Resolvable;
+use App\Foundation\ValueObjects\WithValidation;
 
-readonly class PostId extends AbstractValueObject
+readonly class PostId extends AbstractValueObject implements WithValidation
 {
-    use Resolvable;
+    public static function asKey(): string
+    {
+        return static::makeKeyFromClass(__CLASS__);
+    }
 
-    public const AS_KEY = 'post_id';
-
-    public const AS_ROUTE_PARAMETER = '{post_id}';
+    public function valid(): bool
+    {
+        return (int) (string) $this->value === $this->value;
+    }
 }

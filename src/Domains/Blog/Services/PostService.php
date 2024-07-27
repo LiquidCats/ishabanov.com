@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Application\Services;
+namespace App\Domains\Blog\Services;
 
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blocks\Parsers\RawCollectionParser;
@@ -34,6 +34,7 @@ readonly class PostService implements PostServiceContract
     {
         $post = $this->postRepository->findById($postId);
         $post->blocks = $this->blockParser->parse($post->blocks);
+
         return $post;
     }
 

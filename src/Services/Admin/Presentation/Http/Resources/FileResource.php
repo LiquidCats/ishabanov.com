@@ -19,7 +19,7 @@ class FileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'hash' => $this->resource->hash,
+            'hash' => $this->resource->hash->value,
             'type' => $this->resource->type,
             'path' => $this->resource?->getFileUrl(),
             'extension' => $this->resource->extension,

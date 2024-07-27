@@ -3,13 +3,17 @@
 namespace App\Domains\Blog\ValueObjects;
 
 use App\Foundation\ValueObjects\AbstractValueObject;
-use App\Foundation\ValueObjects\Resolvable;
+use App\Foundation\ValueObjects\WithValidation;
 
-readonly class TagId extends AbstractValueObject
+readonly class TagId extends AbstractValueObject implements WithValidation
 {
-    use Resolvable;
+    public static function asKey(): string
+    {
+        return static::makeKeyFromClass(__CLASS__);
+    }
 
-    public const AS_KEY = 'tag_id';
-
-    public const AS_ROUTE_PARAMTER = '{tag_id}';
+    public function valid(): bool
+    {
+        return (int) (string) $this->value === $this->value;
+    }
 }

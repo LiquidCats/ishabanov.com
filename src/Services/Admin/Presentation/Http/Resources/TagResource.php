@@ -19,9 +19,9 @@ class TagResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->getKey(),
+            'id' => $this->resource->id->value,
             'name' => $this->resource->name,
-            'slug' => $this->resource->slug,
+            'slug' => $this->resource->slug->value,
             'posts_count' => $this->whenCounted('posts'),
             'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];

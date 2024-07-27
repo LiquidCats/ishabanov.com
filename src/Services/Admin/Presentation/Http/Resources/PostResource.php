@@ -19,14 +19,18 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->resource->getKey(),
+            'id' => $this->resource->id->value,
             'title' => $this->resource->title,
             'preview' => $this->resource->preview,
             'is_draft' => $this->resource->is_draft,
-            'published_at' => $this->resource->published_at->toDateTimeString('minute'),
+            'published_at' => $this->resource->published_at?->toDateTimeString('minute'),
             'reading_time' => $this->resource->reading_time,
-            'preview_image_type' => $this->resource->preview_image_type,
-            'preview_image_id' => $this->resource->preview_image_id,
+            'preview_image_type' => $this->resource->preview_image_type?->value,
+            'preview_image_id' => $this->resource->preview_image_id?->value,
+            'created_at' => $this->resource->created_at?->toIso8601String(),
+            'updated_at' => $this->resource->updated_at?->toIso8601String(),
+            'created_by' => $this->resource->created_by?->value,
+            'updated_by' => $this->resource->updated_by?->value,
             'blocks' => $this->resource->blocks?->toArray() ?? [],
             //
             'tags' => TagResource::collection($this->whenLoaded('tags')),

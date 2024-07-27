@@ -21,7 +21,7 @@ class FileStoreRequest extends FormRequest
             'list.*.file' => [
                 'required',
                 'mimes:png,svg,jpg,jpeg,bmp',
-                'max:1024',
+                'max:4096',
                 new IsNotUploaded($fileRepository),
             ],
             'list.*.name' => ['required', 'string', 'max:250'],
