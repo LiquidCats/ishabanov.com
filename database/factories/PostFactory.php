@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Domains\Blocks\Presenters\RawPresenter;
+use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
 
@@ -23,9 +24,10 @@ class PostFactory extends Factory
             'title' => fake()->words(asText: true),
             'preview' => fake()->paragraphs(5, true),
             'blocks' => Collection::make()->push(RawPresenter::createAs(BlockType::RAW, ['content' => fake()->paragraphs(5, true)]))->toArray(),
-            'author_id' => 1,
             'is_draft' => false,
             'published_at' => now()->subDay(),
+            'created_by' => new UserId(1),
+            'updated_by' => new UserId(1),
         ];
     }
 }

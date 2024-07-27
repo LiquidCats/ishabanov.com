@@ -25,7 +25,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Admin',
+            'name' => 'Ilya Shabanov',
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
