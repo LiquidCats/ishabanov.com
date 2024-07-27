@@ -5,13 +5,18 @@ declare(strict_types=1);
 namespace App\Domains\Files\ValueObjects;
 
 use App\Foundation\ValueObjects\AbstractValueObject;
-use App\Foundation\ValueObjects\Resolvable;
+use App\Foundation\ValueObjects\WithValidation;
+use function is_string;
 
-readonly class FileId extends AbstractValueObject
+readonly class FileId extends AbstractValueObject implements WithValidation
 {
-    use Resolvable;
+    public static function asKey(): string
+    {
+        return static::makeKeyFromClass(__CLASS__);
+    }
 
-    public const AS_KEY = 'file_id';
-
-    public const AS_ROUTE_PARAMETER = '{file_id}';
+    public function valid(): bool
+    {
+        return is_string($this->value);
+    }
 }

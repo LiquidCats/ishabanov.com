@@ -2,9 +2,13 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Data\Database\Eloquent\Casts\TagIdCast;
+use App\Data\Database\Eloquent\Casts\TagSlugCast;
+use App\Data\Database\Eloquent\Casts\UserIdCast;
 use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Blog\ValueObjects\TagSlug;
+use App\Domains\User\ValueObjets\UserId;
 use Carbon\Carbon;
 use Database\Factories\TagFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,12 +16,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
+ * @property TagId $id
  * @property string $name
- * @property string $slug
+ * @property TagSlug $slug
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property UserId $created_by
+ * @property UserId $updated_by
  * @property Collection $posts
  */
 class TagModel extends Model implements TagRepositoryContract
@@ -26,13 +34,17 @@ class TagModel extends Model implements TagRepositoryContract
 
     protected $table = 'tags';
 
+    protected $keyType = TagIdCast::class;
+
     protected $fillable = [
         'name',
     ];
 
     protected $casts = [
         'name' => 'string',
-        'slug' => 'string',
+        'slug' => TagSlugCast::class,
+        'created_by' => UserIdCast::class,
+        'updated_by' => UserIdCast::class,
     ];
 
     public function posts(): BelongsToMany
@@ -60,6 +72,8 @@ class TagModel extends Model implements TagRepositoryContract
 
         $model->name = $name;
         $model->slug = $slug;
+        $model->created_by = new UserId(Auth::id());
+        $model->updated_by = new UserId(Auth::id());
 
         $model->save();
 
@@ -83,6 +97,7 @@ class TagModel extends Model implements TagRepositoryContract
 
         $model->name = $name;
         $model->slug = $slug;
+        $model->updated_by = new UserId(Auth::id());
 
         return $model;
     }

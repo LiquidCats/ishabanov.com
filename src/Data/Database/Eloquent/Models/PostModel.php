@@ -2,11 +2,15 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
-use App\Domains\Blocks\Renderers\AbstractRenderer;
+use App\Data\Database\Eloquent\Casts\FileIdCast;
+use App\Data\Database\Eloquent\Casts\PostIdCast;
+use App\Data\Database\Eloquent\Casts\UserIdCast;
+use App\Domains\Blocks\Contracts\PresenterContract;
 use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
+use App\Domains\Files\ValueObjects\FileId;
 use App\Domains\User\ValueObjets\UserId;
 use Carbon\Carbon;
 use Database\Factories\PostFactory;
@@ -20,21 +24,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Facades\Auth;
 use function ceil;
 use function now;
 use function str_word_count;
 use function strip_tags;
 
 /**
+ * @property PostId $id
  * @property string $title
  * @property string $preview
  * @property PostPreviewType $preview_image_type
- * @property string $preview_image_id
+ * @property FileId $preview_image_id
  * @property string $content - deprecated
- * @property Collection<int, AbstractRenderer> $blocks
- * @property int $author_id
+ * @property Collection<int, PresenterContract> $blocks
+ * @property UserId $created_by
+ * @property UserId $updated_by
  * @property bool $is_draft
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property Carbon|null $published_at
  * @property int $reading_time
  * @property UserModel|null $author
@@ -47,14 +55,17 @@ class PostModel extends Model implements PostRepositoryContract
 
     protected $table = 'posts';
 
+    protected $keyType = PostIdCast::class;
+
     protected $casts = [
         'title' => 'string',
         'preview' => 'string',
-        'author_id' => 'int',
+        'created_by' => UserIdCast::class,
+        'updated_by' => UserIdCast::class,
         'is_draft' => 'boolean',
         'published_at' => 'datetime',
         'preview_image_type' => PostPreviewType::class,
-        'preview_image_id' => 'string',
+        'preview_image_id' => FileIdCast::class,
         'blocks' => AsCollection::class,
     ];
 
@@ -165,8 +176,14 @@ class PostModel extends Model implements PostRepositoryContract
         $this->published_at = $dto->publishedAt->startOfMinute();
         $this->is_draft = $dto->isDraft;
         $this->blocks = $dto->blocks;
-        $this->preview_image_id = $dto->previewImageId;
+        $this->preview_image_id = new FileId($dto->previewImageId);
         $this->preview_image_type = $dto->previewImageType;
+
+        if ($this->id->value === null) {
+            $this->created_by = new UserId(Auth::id());
+        }
+
+        $this->updated_by = new UserId(Auth::id());
 
         $this->save();
 

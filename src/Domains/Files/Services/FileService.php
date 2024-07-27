@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Application\Services;
+namespace App\Domains\Files\Services;
 
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
@@ -55,7 +55,7 @@ readonly class FileService implements FileServiceContract
         return $file;
     }
 
-    public function list(?FilterTypes $type = null): LengthAwarePaginator|Collection
+    public function list(FilterTypes $type = null): LengthAwarePaginator|Collection
     {
         return match ($type) {
             FilterTypes::IMAGES => $this->fileRepository->getAllImages(),

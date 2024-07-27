@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domains\Files;
 
-use const DIRECTORY_SEPARATOR;
-
-use App\Admin\Application\Services\FileService;
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Data\Filesystem\Storage\Options;
 use App\Data\Filesystem\Storage\Repositories\UploadedFilesStorage;
 use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
+use App\Domains\Files\Services\FileService;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use const DIRECTORY_SEPARATOR;
 
 class FileDomainProvider extends ServiceProvider
 {

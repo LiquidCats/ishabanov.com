@@ -11,6 +11,6 @@ class UserDomainProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Route::pattern('user_id', '[0-9]+');
+        Route::pattern('user_id', '[0-9]{1,32}');
     }
 }

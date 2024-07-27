@@ -2,8 +2,8 @@
 
 namespace App\Data\Database\Eloquent\Models;
 
+use App\Data\Database\Eloquent\Casts\UserIdCast;
 use App\Domains\User\Contracts\Repositories\UserRepository;
-use App\Domains\User\Dto\UserDto;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -28,6 +28,8 @@ class UserModel extends User implements UserRepository
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
+
+    protected $keyType = UserIdCast::class;
 
     protected $fillable = [
         'name',
@@ -71,28 +73,5 @@ class UserModel extends User implements UserRepository
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
-    }
-
-    /**
-     * @throws IncompatibleWithGoogleAuthenticatorException
-     * @throws SecretKeyTooShortException
-     * @throws InvalidCharactersException
-     */
-    public function create(UserDto $userDto): UserModel
-    {
-        $model = new UserModel();
-
-        $model->name = $userDto->name;
-        $model->email = $userDto->email;
-        $model->password = encrypt($userDto->password);
-
-        /** @var Google2FA $google2fa */
-        $google2fa = app('pragmarx.google2fa');
-
-        $model->g2fa_secret = $google2fa->generateSecretKey();
-
-        $model->save();
-
-        return $model;
     }
 }

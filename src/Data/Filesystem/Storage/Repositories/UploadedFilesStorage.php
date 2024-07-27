@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Data\Filesystem\Storage\Repositories;
 
+use function dump;
 use const DIRECTORY_SEPARATOR;
 
 use App\Data\Filesystem\Storage\Options;
@@ -32,7 +33,8 @@ readonly class UploadedFilesStorage implements UploadedFilesStorageContract
      */
     public function upload(UploadedFile $file): bool
     {
-        return (bool) $this->filesystem->put($this->options->prepend.DIRECTORY_SEPARATOR.$this->options->path, $file);
+        return (bool) $this->filesystem
+            ->put($this->options->prepend.DIRECTORY_SEPARATOR.$this->options->path, $file);
     }
 
     public function drop(string $file): bool

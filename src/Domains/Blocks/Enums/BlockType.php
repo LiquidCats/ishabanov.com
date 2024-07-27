@@ -26,7 +26,7 @@ enum BlockType: string
     case REMARK = 'remark';
     case RAW = 'raw';
 
-    public function toPresenter(array $data): PresenterContract & Arrayable
+    public function toPresenter(array $data): PresenterContract&Arrayable
     {
         return match ($this) {
             self::HEADING => HeadingPresenter::createAs($this, $data),

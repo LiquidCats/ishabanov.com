@@ -17,9 +17,9 @@ class BlogDomainProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Route::pattern('post_id', '[0-9]+');
-        Route::pattern('tag_id', '[0-9]+');
-        Route::pattern('tag_slug', '[a-z0-9\-]+');
+        Route::pattern('post_id', '[0-9]{1,32}');
+        Route::pattern('tag_id', '[0-9]{1,32}');
+        Route::pattern('tag_slug', '[a-z0-9\-]{1,255}');
     }
 
     public function register(): void
