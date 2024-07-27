@@ -12,7 +12,7 @@ import {Colors} from "../../../types/colors";
 
 interface Props {
     file: File
-    isDeleting: boolean
+    isDisabled: boolean
 }
 
 const props = defineProps<Props>()
@@ -24,7 +24,7 @@ const fileSizeInBytes = computed(() => formatBytes(props.file.file_size))
 <template>
     <div class="bg-neutral-50 dark:bg-zinc-700 rounded-md p-3">
         <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
-             :style="{backgroundImage: file.path}"/>
+             :style="`background-image: url(${file.path})`"/>
         <div>
             <div class="flex gap-2 mb-2 dark:text-gray-50 text-lg">
                 <Tag :type="Colors.primary">{{ file.extension }}</Tag>
@@ -37,7 +37,7 @@ const fileSizeInBytes = computed(() => formatBytes(props.file.file_size))
             <div class="flex justify-end items-center">
                 <Btn :type="Colors.danger"
                      class="flex items-center justify-center"
-                     :disabled="isDeleting"
+                     :disabled="isDisabled"
                      @click="$emit('file:remove', file)">
                     <TrashIcon class="size-4"/>
                     Delete

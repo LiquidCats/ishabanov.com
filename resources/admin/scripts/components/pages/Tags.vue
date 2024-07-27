@@ -18,6 +18,8 @@ import FormField from "../atoms/Form/FormField.vue";
 import FormLabel from "../atoms/Form/FormLabel.vue";
 import {SubscriptionCallback} from "pinia";
 import Backdrop from "../atoms/Backdrop.vue";
+import LoadingPlaceholder from "../atoms/LoadingPlaceholder.vue";
+import NothingFound from "../atoms/NothingFound.vue";
 
 const tagsState = useTagsState()
 
@@ -89,7 +91,8 @@ async function handleSave() {
         </div>
     </Backdrop>
     <Backdrop class="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <div class="md:col-span-2 text-white text-center text-5xl" v-if="tagsState.status.tagsLoading">Loading...</div>
+        <LoadingPlaceholder class="md:col-span-2" v-if="tagsState.status.tagsLoading" />
+        <NothingFound class="md:col-span-2" v-else-if="tagsState.items.length === 0"/>
         <div class="bg-stone-50 dark:bg-zinc-700 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
             <div class="grow">
                 <Tag :type="Colors.dark">ID: {{ tag.id }}</Tag>

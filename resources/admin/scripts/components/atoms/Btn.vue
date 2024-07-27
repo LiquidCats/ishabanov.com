@@ -4,11 +4,18 @@ import {ButtonHTMLAttributes} from "vue";
 
 interface Props extends /* @vue-ignore */ Partial<Omit<ButtonHTMLAttributes, "type">> {
     type?: keyof typeof Colors | 'default',
+    size?: keyof typeof sizes | 'base',
 }
 
 withDefaults(defineProps<Props>(), {
-    type: 'default'
+    type: 'default',
+    size: 'base',
 })
+
+const sizes = {
+    base: 'py-1.5',
+    small: 'py-0.5 text-sm',
+}
 
 const types = {
     [Colors.primary]: 'bg-blue-600 hover:bg-blue-500 text-white',
@@ -24,7 +31,7 @@ const types = {
 <template>
     <button type="button"
             class="flex gap-1 justify-center items-center px-3 py-1.5 rounded-md duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed"
-            :class="`${types[type] ?? types.default}`">
+            :class="`${types[type] ?? types.default} ${sizes[size] ?? sizes.base}`">
         <slot></slot>
     </button>
 </template>

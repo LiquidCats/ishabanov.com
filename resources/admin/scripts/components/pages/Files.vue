@@ -8,6 +8,8 @@ import useFilesState from "../../states/files";
 import FileRow from "../molecules/File/FileRow.vue";
 import FileUploader from "../organisms/FileUploader.vue";
 import Backdrop from "../atoms/Backdrop.vue";
+import LoadingPlaceholder from "../atoms/LoadingPlaceholder.vue";
+import NothingFound from "../atoms/NothingFound.vue";
 
 const filesState = useFilesState()
 
@@ -34,10 +36,11 @@ onUnmounted(() => {
     <FileUploader class="mb-3"/>
 
     <Backdrop class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <div class="md:col-span-2 lg:col-span-3 text-white text-center text-5xl" v-if="filesState.status.filesLoading">Loading...</div>
+        <LoadingPlaceholder class="md:col-span-2 lg:col-span-3" v-if="filesState.status.filesLoading" />
+        <NothingFound class="md:col-span-2 lg:col-span-3" v-else-if="filesState.items.length === 0"/>
         <FileRow v-for="file in filesState.items"
                  :file="file"
-                 :is-deleting="filesState.status.filesDeleting.includes(file.hash)"
+                 :is-disabled="filesState.status.filesDeleting.includes(file.hash)"
                  @file:remove="filesState.remove($event.hash)"/>
     </Backdrop>
     <Pagination class="mx-3" :links="filesState.pagination"/>

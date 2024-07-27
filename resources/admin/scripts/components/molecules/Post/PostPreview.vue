@@ -17,7 +17,7 @@ defineProps<Props>()
 
 <template>
     <div :style="`background-image: url('${previewPath}')`"
-         class="relative overflow-hidden w-48 h-32 bg-stone-700 hover:bg-neutral-600 duration-300 rounded-xl text-gray-300 flex items-center justify-center bg-no-repeat bg-clip-border bg-cover bg-center">
+         class="relative overflow-hidden w-32 h-24 md:w-48 md:h-32 bg-stone-700 hover:bg-neutral-600 duration-300 rounded-xl text-gray-300 flex items-center justify-center bg-no-repeat bg-clip-border bg-cover bg-center">
         <a href="#" class="absolute -inset-1 bg-transparent hover:bg-bg-stone-700/[.9]" @click.prevent="$emit('click:image', $event)"/>
         <div class="flex gap-1 absolute bottom-0 left-0 right-0 justify-center p-1 bg-stone-900/[.5]" v-if="hasPreview">
             <Btn :type="previewType === PreviewTypes.LEFT_SIDE ? 'primary' : 'light' "

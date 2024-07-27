@@ -25,7 +25,7 @@ async function upload(fileToUpload?: FileToUpload) {
         <div v-if="filesState.previews.length">
             <Btn :type="Colors.primary"
                  class="w-full"
-                 :disabled="filesState.status.filesUploading.length === 0"
+                 :disabled="filesState.status.filesUploading.length > 0"
                  @click.prevent="upload()">
                 <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
@@ -41,7 +41,7 @@ async function upload(fileToUpload?: FileToUpload) {
         <div v-if="filesState.previews.length">
             <Btn :type="Colors.primary"
                  class="w-full"
-                 :disabled="filesState.status.filesUploading.length === 0"
+                 :disabled="filesState.status.filesUploading.length > 0"
                  @click.prevent="upload()">
                 <ArrowUpOnSquareIcon class="size-6"/> Upload All
             </Btn>
