@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Data\Database\Eloquent\Models\ExperienceModel;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+
 use function json_encode;
 
 class ExperienceSeeder extends Seeder
