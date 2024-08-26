@@ -1,4 +1,6 @@
 export enum TextSize {
+    base = 'text-base',
+    xs = 'text-xs',
     sm = 'text-sm',
     md = 'text-md',
     lg = 'text-lg',
@@ -10,6 +12,7 @@ export enum TextSize {
     xl6 = 'text-6xl',
     xl7 = 'text-7xl',
     xl8 = 'text-8xl',
+    xl9 = 'text-9xl',
 }
 
 export enum TextWeight {

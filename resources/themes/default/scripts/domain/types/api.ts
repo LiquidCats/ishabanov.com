@@ -1,6 +1,7 @@
 import {ResponseMetaLink} from "../../../../../admin/scripts/types/api";
 import {PreviewTypeEnum} from "../enums/preview";
 import {ToolLevel, ToolType} from "../enums/tool";
+import {BlockTypes, BlockFontFamily, BlockFontWeight, BlockFontSize} from "../enums/blocks";
 
 export interface ExperienceResource {
     id: number,
@@ -36,9 +37,17 @@ export interface PostResource {
     readonly reading_time: number
     readonly preview_image_type: PreviewTypeEnum
     readonly preview_image_id: number
-    readonly blocks: []
+    readonly blocks: any[]
     readonly tags: Array<TagResource>
     readonly previewImage: FileResource
+}
+
+export interface PostBlockResource<C extends any, T = undefined> {
+    readonly key: string,
+    readonly tag?: T,
+    readonly type: BlockTypes
+    readonly styles: Array<keyof typeof BlockFontFamily & BlockFontWeight & BlockFontSize>,
+    readonly content: C
 }
 
 export interface FileResource {
