@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <span :class="`text-xs px-2 py-1 rounded ${styles}`" v-bind="$attrs"><slot></slot></span>
+    <span :class="`text-xs px-2 py-1 rounded text-nowrap ${styles}`" v-bind="$attrs"><slot></slot></span>
 </template>
 
 <style scoped lang="scss">

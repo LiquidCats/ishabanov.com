@@ -7,7 +7,7 @@ import Draggable from "vuedraggable";
 import {Block, BlockType} from "../../../../types/blocks";
 import AddBlock from "../AddBlock.vue";
 import {idMapper} from "../../../../utils/idMapper";
-import {blockRenderers, emptyBlocks} from "../../../../utils/blocks/getters";
+import {blockPreviews, blockRenderers, emptyBlocks} from "../../../../utils/blocks/getters";
 
 interface Props {
     block: Block<Block[]>
@@ -24,7 +24,14 @@ const dragOptions = computed(() => ({
     ghostClass: "ghost"
 }))
 
-const remarkBlocks: any[] = emptyBlocks.filter(b => b.type !== BlockType.REMARK)
+const remarkBlocks: any[] = []
+for (const blockPreview of blockPreviews) {
+    if (blockPreview.type === BlockType.REMARK) {
+        continue
+    }
+    remarkBlocks.push(blockPreview)
+}
+
 
 function handleAddBlock(type: BlockType) {
     props.block.content = [
@@ -57,6 +64,7 @@ function handleRemoveBlock(block: Block) {
             <template #item="{element}">
                 <li>
                     <component :is="blockRenderers[element.type]"
+                               :key="element.key"
                                :block="element"
                                @remove:block="handleRemoveBlock"/>
                 </li>

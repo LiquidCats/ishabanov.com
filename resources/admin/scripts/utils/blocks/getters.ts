@@ -14,6 +14,7 @@ import Raw from "../../components/molecules/Editor/Blocks/Raw.vue";
 import Paragraph from "../../components/molecules/Editor/Blocks/Paragraph.vue";
 import Heading from "../../components/molecules/Editor/Blocks/Heading.vue";
 import List from "../../components/molecules/Editor/Blocks/List.vue";
+import Image from "../../components/molecules/Editor/Blocks/Image.vue";
 
 export const emptyBlocks: {[k in BlockType]: Block<any, any>} = {
     [BlockType.HEADING]: {

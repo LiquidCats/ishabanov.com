@@ -35,9 +35,11 @@ function addBlock() {
             <TagSelector v-model="block.tag" :values="listTags"/>
         </template>
         <ul class="grid grid-cols-1 gap-1 mb-1.5 border border-stone-500 rounded-md p-1">
+            <li class="text-center" v-if="block.content.length === 0">no items</li>
             <ListItem v-for="(listItem, i) in block.content"
                       :block="listItem"
-                      :key="`list-item-${i}`" @remove:block="removeBlock(listItem)"/>
+                      :key="`${block.key}-list-item-${i}`"
+                      @remove:block="removeBlock(listItem)"/>
         </ul>
         <Btn type="dark" class=" ml-auto" @click="addBlock"><PlusIcon class="size-6" /> Add</Btn>
     </EditorBlock>

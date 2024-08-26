@@ -55,7 +55,7 @@ const caption = computed({
         </template>
         <div class="grid md:grid-cols-3 grid-cols-1 gap-1">
             <div>
-                <img v-if="block?.content?.src" :src="block.content.src" :alt="block.content.name"
+                <img v-if="block?.content?.src" :src="block.content.src" :alt="block.content?.name"
                      class="rounded-md w-full h-auto">
             </div>
             <div class="md:col-span-2">

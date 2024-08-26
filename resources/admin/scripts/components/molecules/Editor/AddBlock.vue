@@ -32,7 +32,7 @@ const groupOptions = computed(() => ({
 }))
 
 function cloneBlock({type}: {type: BlockType}): Block {
-    return idMapper<Block>(emptyBlocks[type], props.lastIndex)
+    return idMapper<Block>(emptyBlocks[type])
 }
 
 </script>

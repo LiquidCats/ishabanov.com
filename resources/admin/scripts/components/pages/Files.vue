@@ -33,9 +33,10 @@ onUnmounted(() => {
 
 <template>
     <PageHeader class="mt-3">Files</PageHeader>
-    <FileUploader class="mb-3"/>
 
     <Backdrop class="mb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <FileUploader class="md:col-span-2 lg:col-span-3 mb-3"/>
+
         <LoadingPlaceholder class="md:col-span-2 lg:col-span-3" v-if="filesState.status.filesLoading" />
         <NothingFound class="md:col-span-2 lg:col-span-3" v-else-if="filesState.items.length === 0"/>
         <FileRow v-for="file in filesState.items"

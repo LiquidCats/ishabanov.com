@@ -90,32 +90,31 @@ async function handleSave() {
             </Btn>
         </div>
     </Backdrop>
-    <Backdrop class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <Backdrop class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         <LoadingPlaceholder class="md:col-span-2" v-if="tagsState.status.tagsLoading" />
         <NothingFound class="md:col-span-2" v-else-if="tagsState.items.length === 0"/>
-        <div class="bg-stone-50 dark:bg-zinc-700 rounded-md p-3 flex gap-4" v-for="tag in tagsState.items">
-            <div class="grow">
-                <Tag :type="Colors.dark">ID: {{ tag.id }}</Tag>
-                <h4 class="dark:text-gray-50 mb-0">Name: {{ tag.name}}</h4>
-                <small class="text-sm dark:text-gray-300">Slug: {{ tag.slug }}</small>
+        <div class="bg-stone-50 dark:bg-zinc-700 rounded-md p-3 flex gap-3" v-for="tag in tagsState.items">
+
+            <div><Tag :type="Colors.dark">ID: {{ tag.id }}</Tag></div>
+            <div>
+                <h2 class="dark:text-gray-50 m-0 text-base line-clamp-1">Name: {{ tag.name}}</h2>
+                <small class="text-xs dark:text-gray-300 m-0 line-clamp-1">Slug: {{ tag.slug }}</small>
             </div>
 
 
-            <div class="flex flex-col flex-nowrap gap-1 justify-start">
+            <div class="flex gap-1 ml-auto">
                 <div>
                     <Btn :type="Colors.primary"
-                         class="!p-1.5"
-                         @click="handleEdit(tag)">
-                        <PencilSquareIcon class="size-5"/>
-                    </Btn>
+                     @click="handleEdit(tag)">
+                    <PencilSquareIcon class="size-4"/>
+                </Btn>
                 </div>
                 <div>
                     <Btn :type="Colors.danger"
-                         class="!p-1.5"
-                         :disabled="tagsState.status.tagDeleting.includes(tag.id)"
-                         @click="handleDelete(tag.id)">
-                        <TrashIcon class="size-5" />
-                    </Btn>
+                     :disabled="tagsState.status.tagDeleting.includes(tag.id)"
+                     @click="handleDelete(tag.id)">
+                    <TrashIcon class="size-4" />
+                </Btn>
                 </div>
             </div>
         </div>

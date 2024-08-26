@@ -24,7 +24,7 @@ function onFiles(e: Event | DragEvent) {
 </script>
 
 <template>
-    <div class="block border-dashed border-4 px-4 py-8 rounded-xl text-center duration-300 dark:bg-zinc-800 bg-stone-100 cursor-pointer"
+    <div class="block border-dashed border-2 px-4 py-8 rounded-md text-center duration-300 dark:bg-zinc-800 bg-stone-100 cursor-pointer"
          :class="{
              'border-stone-300 dark:border-stone-600': !dropZoneActive,
              'border-green-400 dark:border-green-700': dropZoneActive,
@@ -33,8 +33,8 @@ function onFiles(e: Event | DragEvent) {
          @dragover.prevent="dropZoneActive = true"
          @dragleave.prevent="dropZoneActive = false"
          @drop.prevent="onFiles($event)">
-        <div class="text-xl fw-medium dark:text-neutral-300 text-neutral-600">Drop files here or click to upload</div>
-        <div class="text-sm fw-medium dark:text-neutral-300 text-neutral-600">or click to browse files</div>
+        <div class="text-xl fw-medium dark:text-neutral-300 text-neutral-600">Drop files here</div>
+        <div class="text-xs fw-medium dark:text-neutral-300 text-neutral-600">or click to browse files</div>
         <input ref="filesFieldRef" type="file" class="hidden" @change="onFiles($event)" multiple>
     </div>
 </template>
