@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {TextWeight} from "../../../domain/types/text";
+import {TextWeight} from "../../../domain/enums/text";
 import Text from "../../atoms/typography/Text.vue";
 </script>
 

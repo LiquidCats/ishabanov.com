@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import Heading from "../../atoms/typography/Heading.vue";
-import Small from "../../atoms/typography/Small.vue";
-import {TextFamily, TextSize, TextWeight} from "../../../domain/types/text";
+import SmallText from "../../atoms/typography/SmallText.vue";
+import {TextFamily, TextSize, TextWeight} from "../../../domain/enums/text";
 import dayjs from "dayjs";
 import {computed} from "vue";
 
@@ -27,7 +27,7 @@ const humanizedPublishedAt = computed(() => dayjs(props.publishedAt).fromNow())
              class="text-gray-50 mb-1">
             <slot></slot>
         </Heading>
-        <Small class="block">{{ humanizedPublishedAt }} | reading time {{ readingTime }} min</Small>
+        <SmallText class="block">{{ humanizedPublishedAt }} | reading time {{ readingTime }} min</SmallText>
     </header>
 </template>
 

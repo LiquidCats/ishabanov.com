@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ComputerPng from "../../../assets/images/hero/computer.png"
-import {TextSize} from "../../../domain/types/text";
+import {TextSize} from "../../../domain/enums/text";
 import Text from "../../atoms/typography/Text.vue";
 import Image from "../../atoms/illustration/Image.vue";
 </script>

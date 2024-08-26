@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {TextFamily, TextSize, TextWeight} from "../../../domain/types/text";
+import {TextFamily, TextSize, TextWeight} from "../../../domain/enums/text";
 import {computed} from "vue";
 
 interface Props {

@@ -3,7 +3,7 @@ import {ArrowUpRightIcon, ChevronRightIcon} from "@heroicons/vue/24/outline"
 import {ExperienceResource} from "../../../domain/types/api";
 import dayjs from "dayjs";
 import Heading from "../../atoms/typography/Heading.vue";
-import {TextSize, TextWeight} from "../../../domain/types/text";
+import {TextSize, TextWeight} from "../../../domain/enums/text";
 import Text from "../../atoms/typography/Text.vue";
 import List from "../../atoms/lists/List.vue";
 import ListItem from "../../atoms/lists/ListItem.vue";

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {TextSize} from "../../../domain/types/text";
+import {TextSize} from "../../../domain/enums/text";
 import AppLink from "../../atoms/AppLink.vue";
 import {ArrowUpRightIcon} from "@heroicons/vue/24/outline";
 import Text from "../../atoms/typography/Text.vue";

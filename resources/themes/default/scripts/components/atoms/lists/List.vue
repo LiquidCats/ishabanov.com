@@ -12,5 +12,9 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <component :is="ordered ? 'ol' : 'ul'" :class="{'list-none': unlisted}" v-bind="$attrs"><slot></slot></component>
+    <component :is="ordered ? 'ol' : 'ul'" class="list-inside" :class="{
+        'list-disc': !ordered && !unlisted,
+        'list-decimal': ordered && !unlisted,
+        'list-none': unlisted
+    }" v-bind="$attrs"><slot /></component>
 </template>
