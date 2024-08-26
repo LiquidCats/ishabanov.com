@@ -1,10 +1,13 @@
 import {createPinia} from "pinia";
 import {createApp} from "vue";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+//
+import "./highlight";
 import router from "./router";
 //
 import App from "./components/pages/App.vue";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+
 
 const pinia = createPinia()
 const app = createApp(App)
