@@ -21,7 +21,11 @@ const humanDate = computed(() => dayjs(props.publishedAt).fromNow())
 </script>
 
 <template>
-    <header class="h-96 rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center" :style="`background-image: url('${imageUrl}')`">
+    <header class="rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center"
+            :class="{
+                'h-96': !!imageUrl
+            }"
+            :style="`background-image: url('${imageUrl}')`">
         <div class="h-full flex flex-col justify-end p-6 bg-gradient-to-t from-night from-20% to-transparent">
             <Heading :level="1"
                      :size="TextSize.xl6"

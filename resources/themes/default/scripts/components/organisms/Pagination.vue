@@ -24,7 +24,7 @@ defineEmits(['click:first', 'click:last', 'click:prev', 'click:next'])
         <Btn v-if="withFirst" aria-label="first" @click="$emit('click:first', $event)">
             <ChevronDoubleLeftIcon class="size-6"/>
         </Btn>
-        <Btn v-if="pagination?.current_page !== 1" aria-label="previous" @click="$emit('click:first', $event)">
+        <Btn v-if="pagination?.current_page !== 1" aria-label="previous" @click="$emit('click:prev', $event)">
             <ChevronLeftIcon class="size-6"/>
         </Btn>
         <Btn class="!rounded-full" disabled> {{ pagination?.current_page ?? 1 }} </Btn>

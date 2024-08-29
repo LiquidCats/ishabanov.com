@@ -36,9 +36,3 @@ hljs.registerLanguage('typescript', _typescript)
 hljs.registerLanguage('sql', _sql as any)
 hljs.registerLanguage('bash', _bash as any)
 hljs.registerLanguage('plaintext', _plaintext as any)
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelectorAll('pre code').forEach((el) => {
-    hljs.highlightElement(el as HTMLElement);
-  });
-});

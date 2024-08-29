@@ -56,10 +56,11 @@ const endedYear = computed(() => props.experience?.ended_at ? dayjs(props.experi
             </div>
             <div>
                 <Heading :level="3" :size="TextSize.sm" class="text-gray-400">Personal Achievements:</Heading>
-                <List unlisted class="space-y-2">
-                    <ListItem v-for="item in experience.description" class="flex gap-1">
-                        <span class="py-1.5"><ChevronRightIcon class="text-gray-400 size-3.5"/></span>
-                        <Text :size="TextSize.md" class="text-gray-50" as="span">{{ item }}</Text>
+                <List>
+                    <ListItem v-for="item in experience.description"
+                              :size="TextSize.md"
+                              class="text-gray-50">
+                        {{ item }}
                     </ListItem>
                 </List>
             </div>

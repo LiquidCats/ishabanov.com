@@ -9,7 +9,9 @@ import Pagination from "../organisms/Pagination.vue";
 import {PreviewTypeEnum} from "../../domain/enums/preview";
 import usePostsState from "../../states/posts";
 import {onMounted, onUnmounted, ref} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {RouteNames} from "../../domain/enums/routes";
+import Preloader from "../molecules/posts/items/Preloader.vue";
 
 // Static
 const postPreviewMap = {
@@ -20,12 +22,29 @@ const postPreviewMap = {
 
 // State
 const route = useRoute()
+const router = useRouter()
 const postsState = usePostsState()
-const page = ref<number>(route.params?.page || 1)
+
+// Actions
+async function nextPage() {
+    const currentPage = Number(route.params?.page) || 1
+    await router.push({name: RouteNames.POST_LIST_PAGE, params:{page: currentPage+1}})
+    await postsState.paginate(currentPage+1)
+}
+
+async function prevPage() {
+    let currentPage = Number(route.params?.page) || 1
+    if (currentPage <= 0) {
+        currentPage = 1
+    }
+    await router.push({name: RouteNames.POST_LIST_PAGE, params:{page: currentPage-1}})
+    await postsState.paginate(currentPage-1)
+}
 
 // hooks
 onMounted(() => {
-    postsState.paginate(page.value)
+    const currentPage = Number(route.params?.page) || 1
+    postsState.paginate(currentPage)
 })
 onUnmounted(() => {
     postsState.$reset()
@@ -35,10 +54,10 @@ onUnmounted(() => {
 
 <template>
     <section id="posts" class="grid grid-cols-1 gap-3 mb-3">
-        <div v-if="postsState.status.loading" class="accent-gray-50 text-5xl">Loading...</div>
+        <Preloader v-if="postsState.status.loading" v-for="i in 6" />
         <component v-if="postsState.status.loaded"
                    v-for="post in postsState.items"
-                   :preview-image-url="post.previewImage.path"
+                   :preview-image-url="post.previewImage?.path"
                    :post-id="post.id"
                    :is="postPreviewMap[post.preview_image_type] ?? postPreviewMap.default">
              <PostHeader :reading-time="post.reading_time"
@@ -48,8 +67,8 @@ onUnmounted(() => {
         </component>
     </section>
     <section class="mb-3">
-        <Pagination :pagination="postsState.pagination"
-                    @click:next="postsState.paginate(page-1)"
-                    @click:prev="postsState.paginate(page+1)"/>
+        <Pagination v-if="postsState.pagination.total > postsState.pagination.per_page" :pagination="postsState.pagination"
+                    @click:next="nextPage"
+                    @click:prev="prevPage"/>
     </section>
 </template>

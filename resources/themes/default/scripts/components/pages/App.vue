@@ -5,7 +5,7 @@ import AppHeader from "../organisms/AppHeader.vue";
 </script>
 
 <template>
-    <div class="container mx-auto max-w-6xl px-3">
+    <div class="container mx-auto max-w-5xl px-3">
         <AppHeader id="header"/>
         <main class="relative">
             <RouterView/>
