@@ -20,8 +20,9 @@ class PostChangeStateController extends Controller
 
     public function __invoke(string $postId): PostResource
     {
-        $postId = $this->context->resolve(PostId::class);
-        $model = $this->service->changeState($postId);
+        $model = $this->service->changeState(
+            $this->context->resolve(PostId::class)
+        );
 
         return PostResource::make($model);
     }

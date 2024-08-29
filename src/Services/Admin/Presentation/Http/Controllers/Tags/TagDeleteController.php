@@ -20,10 +20,11 @@ class TagDeleteController extends Controller
     ) {
     }
 
-    public function __invoke(Request $request): AnonymousResourceCollection
+    public function __invoke(): AnonymousResourceCollection
     {
-        $tagId = $this->context->resolve(TagId::class);
-        $models = $this->tagService->delete($tagId);
+        $models = $this->tagService->delete(
+            $this->context->resolve(TagId::class)
+        );
 
         return TagResource::collection($models);
     }

@@ -20,10 +20,12 @@ class PostUpdateController extends Controller
     ) {
     }
 
-    public function __invoke(PostUpdateRequest $request, string $postId): PostResource
+    public function __invoke(PostUpdateRequest $request): PostResource
     {
-        $postId = $this->context->resolve(PostId::class);
-        $model = $this->service->updatePost($postId, PostDto::fromRequest($request));
+        $model = $this->service->updatePost(
+            $this->context->resolve(PostId::class),
+            PostDto::fromRequest($request),
+        );
 
         return PostResource::make($model);
     }

@@ -18,10 +18,11 @@ class PostController extends Controller
     ) {
     }
 
-    public function __invoke(string $postId): PostResource
+    public function __invoke(): PostResource
     {
-        $postId = $this->context->resolve(PostId::class);
-        $post = $this->service->getPost($postId);
+        $post = $this->service->getPost(
+            $this->context->resolve(PostId::class)
+        );
 
         return PostResource::make($post);
     }

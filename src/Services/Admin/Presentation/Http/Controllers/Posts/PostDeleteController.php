@@ -19,10 +19,11 @@ class PostDeleteController extends Controller
     ) {
     }
 
-    public function __invoke(string $postId): AnonymousResourceCollection
+    public function __invoke(): AnonymousResourceCollection
     {
-        $postId = $this->context->resolve(PostId::class);
-        $touchedPosts = $this->service->deletePost($postId);
+        $touchedPosts = $this->service->deletePost(
+            $this->context->resolve(PostId::class)
+        );
 
         return PostResource::collection($touchedPosts);
     }

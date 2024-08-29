@@ -19,11 +19,10 @@ class TagUpdateController extends Controller
     ) {
     }
 
-    public function __invoke(TagUpdateRequest $request, string $tagId): TagResource
+    public function __invoke(TagUpdateRequest $request): TagResource
     {
-        $tagId = $this->context->resolve(TagId::class);
         $model = $this->tagService->update(
-            $tagId,
+            $this->context->resolve(TagId::class),
             $request->validated('name'),
             $request->validated('slug'),
         );

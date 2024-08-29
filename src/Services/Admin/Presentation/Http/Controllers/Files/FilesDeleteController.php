@@ -18,10 +18,11 @@ class FilesDeleteController extends Controller
     ) {
     }
 
-    public function __invoke(string $fileId): FileResource
+    public function __invoke(): FileResource
     {
-        $fileId = $this->context->resolve(FileId::class);
-        $file = $this->fileService->drop($fileId);
+        $file = $this->fileService->drop(
+            $this->context->resolve(FileId::class)
+        );
 
         return FileResource::make($file);
     }
