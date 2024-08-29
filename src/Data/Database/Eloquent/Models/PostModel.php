@@ -84,7 +84,7 @@ class PostModel extends Model implements PostRepositoryContract
         return Attribute::make(
             get: static function (mixed $value, array $attributes): int {
                 $wordsCount = str_word_count(strip_tags($attributes['preview']));
-                $wordsCount += str_word_count(strip_tags($attributes['blocks']));
+                $wordsCount += str_word_count(strip_tags($attributes['blocks'] ?? ''));
 
                 $averageReadingSpeed = 200; // You can adjust this value
 
@@ -130,6 +130,7 @@ class PostModel extends Model implements PostRepositoryContract
     public function getLatest(): LengthAwarePaginator
     {
         return $this->newQuery()
+            ->select(['id', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
             ->with('tags')
             ->with('previewImage')
             ->latest('id')
@@ -139,7 +140,7 @@ class PostModel extends Model implements PostRepositoryContract
     public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
     {
         return PostModel::query()
-            ->select(['id', 'blocks', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
+            ->select(['id', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
             ->with('tags')
             ->with('previewImage')
             ->where('published_at', '<=', now())
