@@ -23,7 +23,7 @@ class TagIdCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): array
     {
-        if ($value instanceof TagId) {
+        if (($value instanceof TagId) && $value->valid()) {
             return [$key => $value->value];
         }
 

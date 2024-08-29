@@ -23,7 +23,7 @@ class FileIdCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): array
     {
-        if ($value instanceof FileId) {
+        if (($value instanceof FileId) && $value->valid()) {
             return [$key => $value->value];
         }
 

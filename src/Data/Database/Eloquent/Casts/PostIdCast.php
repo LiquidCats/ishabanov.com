@@ -7,6 +7,8 @@ namespace App\Data\Database\Eloquent\Casts;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use function dump;
+use function func_get_args;
 
 class PostIdCast implements CastsAttributes
 {
@@ -23,7 +25,7 @@ class PostIdCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): array
     {
-        if ($value instanceof PostId) {
+        if (($value instanceof PostId) && $value->valid()) {
             return [$key => $value->value];
         }
 
