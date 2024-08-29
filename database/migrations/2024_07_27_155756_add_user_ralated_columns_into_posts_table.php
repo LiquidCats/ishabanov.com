@@ -14,10 +14,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
-            $table->renameColumn('author_id', 'created_by');
+            $table->dropColumn('author_id');
+
+            $table->unsignedBigInteger('created_by')->nullable()->index();
             $table->unsignedBigInteger('updated_by')->nullable()->index();
 
-            $table->index('created_by');
             $table->index('preview_image_id');
 
             $table->foreign('created_by')
@@ -37,14 +38,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
-            $table->dropIndex('created_by');
-            $table->dropIndex('updated_by');
-            $table->dropIndex('preview_image_id');
-
-            $table->dropForeign('created_by');
-            $table->dropForeign('updated_by');
-
-            $table->renameColumn('created_by', 'author_id');
+            $table->dropColumn('created_by');
+        });
+        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+            $table->dropColumn('updated_by');
+        });
+        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+            $table->unsignedBigInteger('author_id')->index()->nullable();
 
             $table->foreign('author_id')
                 ->references('id')

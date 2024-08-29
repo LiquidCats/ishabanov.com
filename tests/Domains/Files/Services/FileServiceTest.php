@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Domains\Files\Services;
 
-use App\Admin\Application\Services\FileService;
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Enums\FilterTypes;
+use App\Domains\Files\Services\FileService;
 use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Testing\File;
@@ -16,13 +16,12 @@ use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use Tests\TestCase;
 use ValueError;
-
 use function count;
 use function fake;
 use function sha1_file;
 
 /**
- * @coversDefaultClass \App\Admin\Application\Services\FileService
+ * @coversDefaultClass \App\Domains\Files\Services\FileService
  */
 class FileServiceTest extends TestCase
 {

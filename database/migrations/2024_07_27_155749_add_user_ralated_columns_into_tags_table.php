@@ -39,10 +39,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table((new TagModel())->getTable(), function (Blueprint $table) {
-            $table->dropForeign('created_by');
-            $table->dropForeign('updated_by');
+            // $table->dropForeign('created_by');
+            // $table->dropForeign('updated_by');
 
             $table->dropColumn('created_by');
+        });
+        Schema::table((new TagModel())->getTable(), function (Blueprint $table) {
+            // $table->dropForeign('created_by');
+            // $table->dropForeign('updated_by');
+
             $table->dropColumn('updated_by');
         });
     }

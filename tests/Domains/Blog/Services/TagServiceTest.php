@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Domains\Blog\Services;
 
-use App\Admin\Application\Services\TagService;
 use App\Data\Database\Eloquent\Models\TagModel;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
+use App\Domains\Blog\Services\PostService;
+use App\Domains\Blog\Services\TagService;
 use App\Domains\Blog\ValueObjects\TagId;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
-
 use function fake;
 
-/**
- * @coversDefaultClass \App\Admin\Application\Services\TagService
- */
+#[CoversClass(PostService::class)]
 class TagServiceTest extends TestCase
 {
     protected function setUp(): void

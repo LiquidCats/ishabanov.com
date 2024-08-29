@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace Tests\Domains\Blog\Services;
 
-use App\Admin\Application\Services\PostService;
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Data\Database\Eloquent\Models\TagModel;
 use App\Data\Database\Eloquent\Models\UserModel;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Renderers\RawContainer;
+use App\Domains\Blocks\Presenters\RawPresenter;
 use App\Domains\Blog\Contracts\Services\PostServiceContract;
 use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
+use App\Domains\Blog\Services\PostService;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
-
 use function fake;
 use function now;
 
+/**
+ * @coversDefaultClass \App\Domains\Blog\Services\PostService
+ */
 #[CoversClass(PostService::class)]
 class PostServiceTest extends TestCase
 {
@@ -34,6 +36,10 @@ class PostServiceTest extends TestCase
         TagModel::factory(5)->create();
     }
 
+    /**
+     * @covers ::paginate()
+     * @return void
+     */
     public function test_can_get_paginated_list_of_posts(): void
     {
         /** @var PostServiceContract $service */
@@ -66,7 +72,7 @@ class PostServiceTest extends TestCase
 
         $result = $service->getPost($postId);
 
-        $this->assertEquals($postId->value, $result->getKey());
+        $this->assertEquals($postId, $result->getKey());
         $this->assertTrue($result->relationLoaded('tags'));
         $this->assertTrue($result->relationLoaded('previewImage'));
     }
@@ -82,7 +88,7 @@ class PostServiceTest extends TestCase
             'title' => fake()->words(4, true),
             'preview' => fake()->text(),
             'blocks' => Collection::make()
-                ->push(RawContainer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
+                ->push(RawPresenter::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
                 ->toArray(),
             'published_at' => now()->toDateTimeString(),
             'is_draft' => fake()->boolean,
@@ -130,7 +136,7 @@ class PostServiceTest extends TestCase
             'title' => fake()->words(4, true),
             'preview' => fake()->text(),
             'blocks' => Collection::make()
-                ->push(RawContainer::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
+                ->push(RawPresenter::createAs(BlockType::RAW, ['content' => fake()->text(1000)]))
                 ->toArray(),
             'published_at' => now()->toDateTimeString(),
             'is_draft' => fake()->boolean,

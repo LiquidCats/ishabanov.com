@@ -104,7 +104,7 @@ class FileApiV1Test extends TestCase
         $file = $this->files->random();
 
         $response = $this->deleteJson(route('admin.api.files.delete', [
-            FileId::AS_KEY => $file->getKey(),
+            FileId::asKey() => $file->getKey(),
         ]));
 
         $response->assertSuccessful();
