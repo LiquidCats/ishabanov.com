@@ -12,7 +12,6 @@ interface State {
 
 const useSettingsState = defineStore<string, State, any, any>('app.settings', {
     state: () => ({
-        years: dayjs().diff(dayjs('2015-11-25 00:00:00'), "years"),
         socials: [
             {
                 icon: SparklesIcon,
