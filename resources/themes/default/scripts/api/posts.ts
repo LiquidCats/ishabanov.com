@@ -4,7 +4,7 @@ import {jsonOptions} from "./api";
 import {setCsrf} from "./csrf";
 import {APIResponse, PostResource} from "../domain/types/api";
 
-const posts = mande(baseUrl('api', 'v1', 'posts'), jsonOptions)
+const posts = mande(baseUrl('app', 'api', 'v1', 'posts'), jsonOptions)
 
 async function paginate(page: number = 1) {
     setCsrf(posts)
