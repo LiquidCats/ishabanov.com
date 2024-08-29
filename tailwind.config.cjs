@@ -7,6 +7,7 @@ module.exports = {
         "./database/**/*.php",
         "./resources/**/*.scss",
         "./resources/**/*.js",
+        "./resources/**/*.ts",
         "./resources/**/*.vue",
         "./resources/**/*.blade.php",
     ],
