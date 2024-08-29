@@ -28,6 +28,11 @@ export interface TagResource {
     readonly slug: string
 }
 
+export interface HomepageResource {
+    readonly experiences: ExperienceResource[]
+    readonly years: number
+}
+
 export interface PostResource {
     readonly id: number
     readonly title: string
