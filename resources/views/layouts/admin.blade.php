@@ -9,16 +9,12 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="follow">
 
-    <title>Ilya Shabanov - Software Engineer - @yield("title")</title>
+    <title>iShabanov - Admin</title>
 
-    @include('includes.styles')
+    @include('includes.admin.styles')
 </head>
-<body class="bg-neutral-900">
-<main>
-    @yield("content")
-</main>
+<body class="bg-neutral-50 dark:bg-zinc-900" id="app-admin">
 
-@include("includes.scripts")
+@include('includes.admin.scripts')
 </body>
-
 </html>
