@@ -4,6 +4,9 @@
     <testsuite name="Domains">
       <directory suffix="Test.php">./tests/Domains</directory>
     </testsuite>
+    <testsuite name="Features">
+      <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
   </testsuites>
   <coverage/>
   <php>
