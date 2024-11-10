@@ -57,7 +57,7 @@ return [
             'bucket' => DockerSecret::fromEnv('AWS_BUCKET')->getValue(),
             'url' => DockerSecret::fromEnv('AWS_URL')->getValue(),
             'endpoint' => DockerSecret::fromEnv('AWS_ENDPOINT')->getValue(),
-            'use_path_style_endpoint' => DockerSecret::fromEnv('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'use_path_style_endpoint' => DockerSecret::fromEnv('AWS_USE_PATH_STYLE_ENDPOINT', false)->getValue(),
             'throw' => false,
         ],
 
