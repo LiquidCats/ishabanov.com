@@ -17,9 +17,9 @@ class DockerSecret
 {
     private const PREFIX = '/run/secrets/';
 
-    public static function fromEnv(string $env): SensitiveParameterValue
+    public static function fromEnv(string $env, $default = null): SensitiveParameterValue
     {
-        $value = env($env);
+        $value = env($env, $default);
 
         if (is_string($value) && str_starts_with($value, self::PREFIX) && file_exists($value)) {
             return new SensitiveParameterValue(
