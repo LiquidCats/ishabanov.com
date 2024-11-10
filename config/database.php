@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Foundation\Secrets\DockerSecret;
+use Illuminate\Support\Str;
 
 return [
 
@@ -88,15 +89,15 @@ return [
 
     'redis' => [
 
-        'client' => DockerSecret::fromEnv('REDIS_CLIENT')->getValue(),
+        'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [
-            'cluster' => DockerSecret::fromEnv('REDIS_CLUSTER')->getValue(),
-            'prefix' => DockerSecret::fromEnv('REDIS_PREFIX')->getValue(),
+            'cluster' => env('REDIS_CLUSTER', 'redis'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
         ],
 
         'default' => [
-            'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
+            //'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
             'host' => DockerSecret::fromEnv('REDIS_HOST')->getValue(),
             'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
             'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),
@@ -105,7 +106,7 @@ return [
         ],
 
         'cache' => [
-            'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
+            //'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
             'host' => DockerSecret::fromEnv('REDIS_HOST')->getValue(),
             'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
             'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),

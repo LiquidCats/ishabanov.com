@@ -6,6 +6,9 @@
 .phpunit.cache
 node_modules
 vendor
+docker
+.github
+bootstrap/cache/**
 storage/framework/cache/**
 storage/framework/sessions/**
 storage/framework/views/**
