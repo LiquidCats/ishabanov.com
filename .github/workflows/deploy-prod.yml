@@ -46,5 +46,5 @@ jobs:
             BUILD_VERION=${{ github.ref_name }} \
               docker stack deploy \
                 --with-registry-auth \
-                --compose-file ~/deploy/ishabanov/docker-compose.stage.yml \
+                --compose-file ~/deploy/ishabanov/docker-compose.prod.yml \
                 ishabanov_prod
