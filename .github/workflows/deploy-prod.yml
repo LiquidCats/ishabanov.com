@@ -32,7 +32,8 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: docker pull ghcr.io/liqduicats/ishabanov.com:latest
+          script: docker pull ghcr.io/liqduicats/ishabanov.com:${{ github.ref_name }}
+
       - name: Update Image
         uses: appleboy/ssh-action@master
         with:

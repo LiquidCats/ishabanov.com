@@ -34,6 +34,7 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: docker pull ghcr.io/liqduicats/ishabanov.com:latest
+
       - name: Update Service
         uses: appleboy/ssh-action@master
         with:
