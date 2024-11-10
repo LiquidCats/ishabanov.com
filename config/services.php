@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Foundation\Secrets\DockerSecret;
+
 return [
 
     /*
@@ -18,8 +20,8 @@ return [
     'telegram' => [
         'api' => 'https://api.telegram.org/bot',
         'announcer' => [
-            'token' => env('TG_ANNOUNCER_TOKEN'),
-            'chat_id' => env('TG_ANNOUNCER_CHAT_ID'),
+            'token' => DockerSecret::fromEnv('TG_ANNOUNCER_TOKEN'),
+            'chat_id' => DockerSecret::fromEnv('TG_ANNOUNCER_CHAT_ID'),
         ],
 
     ],

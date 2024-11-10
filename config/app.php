@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Foundation\Secrets\DockerSecret;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -123,7 +124,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => DockerSecret::fromEnv('APP_KEY')->getValue(),
 
     'cipher' => 'AES-256-CBC',
 

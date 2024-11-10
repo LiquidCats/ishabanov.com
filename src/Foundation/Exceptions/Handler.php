@@ -51,7 +51,7 @@ class Handler extends BaseExceptionHandler
 
         $this->renderable(static function (Throwable $e, Request $request) {
             if ($request->is('*/api/*')) {
-                $response = new JsonResponse();
+                $response = new JsonResponse;
 
                 $data = [
                     'status' => Status::FAIL,
