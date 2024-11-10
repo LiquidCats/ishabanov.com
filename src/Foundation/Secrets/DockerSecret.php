@@ -11,6 +11,7 @@ use function file_exists;
 use function file_get_contents;
 use function is_string;
 use function str_starts_with;
+use function trim;
 
 class DockerSecret
 {
@@ -22,7 +23,7 @@ class DockerSecret
 
         if (is_string($value) && str_starts_with($value, self::PREFIX) && file_exists($value)) {
             return new SensitiveParameterValue(
-                file_get_contents($value)
+                trim(file_get_contents($value))
             );
         }
 
