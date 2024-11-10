@@ -1,6 +1,8 @@
 import {nextTick} from "vue";
 import {createRouter, createWebHistory} from "vue-router";
 //
+import {ChatBubbleLeftRightIcon, TagIcon, ArchiveBoxIcon} from "@heroicons/vue/20/solid";
+//
 import PostList from "./pages/posts/PostList.vue";
 import PostEdit from "./pages/posts/PostEditor.vue";
 import RouteNames from "./enums/RouteNames";
@@ -8,11 +10,13 @@ import Tags from "./pages/tags/Tags.vue";
 import Files from "./pages/files/Files.vue";
 import Dashboard from "./pages/dashboard/Dashboard.vue";
 
+
 const router =  createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/admin/dashboard',
+            path: '/admin',
+            alias: '/admin/dashboard',
             component: Dashboard,
             name: RouteNames.DASHBOARD,
             children: [],
@@ -21,13 +25,14 @@ const router =  createRouter({
             }
         },
         {
-            path: '/admin',
-            alias: '/admin/posts',
+            path: '/admin/posts',
             component: PostList,
             name: RouteNames.POST_LIST,
             children: [],
             meta: {
                 title: 'Posts',
+                isPrimary: true,
+                icon: ChatBubbleLeftRightIcon
             }
         },
 
@@ -56,6 +61,8 @@ const router =  createRouter({
             children: [],
             meta: {
                 title: 'Tags',
+                isPrimary: true,
+                icon: TagIcon
             }
         },
         {
@@ -65,6 +72,8 @@ const router =  createRouter({
             children: [],
             meta: {
                 title: 'Files',
+                isPrimary: true,
+                icon: ArchiveBoxIcon
             }
         },
         {

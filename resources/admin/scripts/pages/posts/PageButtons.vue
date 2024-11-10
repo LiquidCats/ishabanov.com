@@ -46,7 +46,7 @@ const shouldDisable = computed(() =>
 </script>
 
 <template>
-    <div class="flex flex-row gap-1.5 sticky top-0 bg-neutral-800 z-[1] w-full p-2">
+    <div class="flex flex-row gap-1.5 sticky top-0 bg-neutral-100 dark:bg-neutral-800 z-[1] w-full p-3">
         <div>
             <Btn type="light" @click="router.back()">
                 <ArrowLeftIcon class="size-6"/> Back

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {TrashIcon, Squares2X2Icon} from "@heroicons/vue/20/solid";
+import {DocumentDuplicateIcon, Bars4Icon, XMarkIcon} from "@heroicons/vue/20/solid";
 import Btn from "../../atoms/Btn.vue";
 
 interface Props {
@@ -17,22 +17,25 @@ withDefaults(defineProps<Props>(), {
     tag: 'div'
 })
 defineSlots<Slots>()
-defineEmits(['remove:block'])
+defineEmits(['remove:block', "clone:block"])
 
 </script>
 
 <template>
-    <component :is="tag" class="rounded-md bg-stone-800 p-3 border border-stone-700">
+    <component :is="tag">
         <div class="flex flex-row mb-3 gap-3" v-if="$slots?.title">
             <div>
-                <Btn type="light" class="cursor-move block-editor-handle">
-                    <Squares2X2Icon class="size-4"/>
+                <Btn type="light" class="cursor-move block-editor-handle !p-1">
+                    <Bars4Icon class="size-4"/>
                 </Btn>
             </div>
             <div class="text-lg font-bold grow"><slot name="title"></slot></div>
-            <div>
-                <Btn type="danger" @click.prevent="$emit('remove:block')">
-                    <TrashIcon class="size-4"/>
+            <div class="inline-flex gap-1" v-if="$slots?.title">
+                <Btn type="light" class="!p-1" @click.prevent="$emit('clone:block')">
+                    <DocumentDuplicateIcon class="size-4"/>
+                </Btn>
+                <Btn type="danger" class="!p-1" @click.prevent="$emit('remove:block')">
+                    <XMarkIcon class="size-4"/>
                 </Btn>
             </div>
         </div>

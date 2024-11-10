@@ -14,7 +14,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-defineEmits(['remove:block'])
+defineEmits(['clone:block','remove:block'])
 
 function removeBlock(block: Block) {
     props.block.content = props.block.content.filter(b => b !== block)
@@ -27,19 +27,18 @@ function addBlock() {
 
 <template>
     <EditorBlock v-if="BlockType.LIST === block.type"
+                 @clone:block="$emit('clone:block', block)"
                  @remove:block="$emit('remove:block', block)">
         <template #title>List</template>
         <template #header>
             <TagSelector v-model="block.tag" :values="listTags"/>
         </template>
-        <ul class="grid grid-cols-1 gap-1 mb-1.5">
+        <ul class="grid grid-cols-1 gap-1 mb-1.5 border border-stone-500 rounded-md p-1">
             <ListItem v-for="(listItem, i) in block.content"
                       :block="listItem"
                       :key="`list-item-${i}`" @remove:block="removeBlock(listItem)"/>
         </ul>
-        <div>
-            <Btn type="dark" class=" ml-auto" @click="addBlock"><PlusIcon class="size-6" /> Add</Btn>
-        </div>
+        <Btn type="dark" class=" ml-auto" @click="addBlock"><PlusIcon class="size-6" /> Add</Btn>
     </EditorBlock>
 </template>
 

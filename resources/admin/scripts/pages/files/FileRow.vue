@@ -19,16 +19,16 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="border bg-stone-800 border-stone-700 rounded-md p-3">
+    <div class="border dark:bg-stone-800 dark:border-stone-700 border-stone-300 rounded-md p-3">
         <div class="size-64 bg-center bg-cover bg-no-repeat mb-3 w-full rounded"
              :style="`background-image: url('${file.path}')`"/>
         <div>
-            <div class="flex gap-2 mb-2 text-white text-lg">
+            <div class="flex gap-2 mb-2 dark:text-gray-50 text-lg">
                 <Tag :type="Colors.primary">{{ file.extension }}</Tag>
                 <Tag :type="Colors.dark" class="truncate">ID: {{ file.hash }}</Tag>
             </div>
-            <div class="text-white text-2xl mb-2"> {{ formatBytes(file.file_size) }} </div>
-            <div class="text-white text-wrap mb-2">{{ file.name }}</div>
+            <div class="dark:text-gray-50 text-2xl mb-2"> {{ formatBytes(file.file_size) }} </div>
+            <div class="dark:text-gray-50 text-wrap mb-2">{{ file.name }}</div>
 
             <hr class="opacity-30 mb-3">
             <div class="flex justify-end items-center">

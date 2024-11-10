@@ -100,7 +100,7 @@ function selectItem(e: Event, index: number) {
     <Popper offsetDistance="5 0"
             placement="auto-start"
             class="relative w-full">
-        <div class="flex flex-wrap gap-1 border text-lg rounded-md w-full p-1.5 bg-stone-600 border-stone-500 placeholder-gray-400 text-white focus:ring-stone-300 focus:border-stone-300 outline-none duration-300">
+        <div class="flex flex-wrap gap-1 border text-lg rounded-md w-full p-1.5 dark:bg-stone-600 border-stone-500 placeholder-gray-400 text-white focus:ring-stone-300 focus:border-stone-300 outline-none duration-300">
             <div class="flex gap-1 items-center">
                 <Tag class="flex gap-1 items-center text-sm font-normal" v-for="selectedItem in selectedItems" type="primary">
                     {{ selectedItem?.text }}
@@ -122,19 +122,19 @@ function selectItem(e: Event, index: number) {
         </div>
 
         <template #content>
-            <div class="bg-stone-800 border border-stone-700 rounded-md p-1 cursor-pointer max-h-32 overflow-auto mr-3 w-full shadow-2xl">
+            <div class="dark:bg-stone-800 bg-stone-100 border border-stone-700 rounded-md p-1 cursor-pointer max-h-32 overflow-auto mr-3 w-full shadow-2xl">
                 <div ref="itemsRef"
                      :id="`mselect-item-${index}`"
-                     class="py-1 pl-3 duration-300 pr-5 rounded-md text-gray-50"
+                     class="py-1 pl-3 duration-300 pr-5 rounded-md dark:text-gray-50"
                      @mouseover="focusedItemIndex = index; shouldAutoScroll = false"
                      @mouseleave="shouldAutoScroll = true"
                      @click="selectItem($event, index)"
                      :class="{
                          'font-bold': selectedItems?.some(i => i.value === item.value),
-                         'bg-stone-600': focusedItemIndex === index
+                         'bg-stone-300 dark:bg-stone-600': focusedItemIndex === index
                      }"
                      v-for="(item, index) in allItems">{{ item.text }}</div>
-                <div v-if="allItems.length === 0" class="p-2 text-center text-gray-50">
+                <div v-if="allItems.length === 0" class="p-2 text-center dark:text-gray-50">
                     <slot name="nothing">nothing found</slot>
                 </div>
             </div>

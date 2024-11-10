@@ -51,19 +51,28 @@ return [
                 //     'icon' => 'computer-desktop',
                 // ],
                 [
+                    'link' => '/',
+                    'text' => 'To Site',
+                    'icon' => 'arrow-uturn-left',
+                    'type' => 'link',
+                ],
+                [
                     'link' => '/admin/posts',
                     'text' => 'Posts',
                     'icon' => 'chat-bubble-left-right',
+                    'type' => 'route',
                 ],
                 [
                     'link' => '/admin/tags',
                     'text' => 'Tags',
                     'icon' => 'tag',
+                    'type' => 'route',
                 ],
                 [
                     'link' => '/admin/files',
                     'text' => 'Files',
                     'icon' => 'archive-box',
+                    'type' => 'route',
                 ],
                 // [
                 //     'link' => '/admin/users',

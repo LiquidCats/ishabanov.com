@@ -46,7 +46,7 @@ const selectedTab = ref<string>('main')
 </script>
 
 <template>
-    <PageButtons class="mb-3 px-3" v-slot="pageButtonsProps">
+    <PageButtons v-slot="pageButtonsProps">
         <AddBlock v-if="selectedTab === 'content'"
                   :disabled="pageButtonsProps.disabled"
                   :list="blockPreviews"
@@ -56,7 +56,7 @@ const selectedTab = ref<string>('main')
 
     <PageHeader class="mb-3 mt-6 mx-3 flex items-start gap-3 ">
         <PostPreview />
-        <div class="flex flex-col w-full justify-start">
+        <div class="flex flex-col w-full justify-start gap-0.5">
             <div v-if="postState?.item?.id > 0"><Tag class="blog text-3xl text-nowrap" type="dark">ID: {{ postId }}</Tag></div>
             <div v-else><Tag class="blog text-3xl text-nowrap" type="dark">Post:</Tag></div>
             <span>{{ postState.item.title }}</span>

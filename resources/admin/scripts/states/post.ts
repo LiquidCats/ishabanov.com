@@ -29,6 +29,7 @@ interface Actions {
     previewAdd(file: File): void
     previewRemove(): void
     blockAdd(type: BlockType): void
+    cloneBlock(block: Block): void
     blockRemove(block: Block): void
 }
 
@@ -80,6 +81,16 @@ const usePostState = defineStore<string, State, Getters<State>, Actions>('post',
         },
         blockAdd(type: BlockType): void {
             this.item.blocks = [...this.item.blocks, idMapper(emptyBlocks[type], this.item.blocks.length)]
+        },
+        cloneBlock(block: Block): void {
+            const blocks = this.item.blocks as Array<Block>
+            const index = blocks.findIndex(b => b === block)
+
+            this.item.blocks = [
+                ...blocks.slice(0, index+1),
+                idMapper({...block, content: emptyBlocks[block.type].content}, this.item.blocks.length),
+                ...blocks.slice(index+1),
+            ].map(idMapper)
         },
         blockRemove(block: Block): void {
             this.item.blocks = this.item.blocks.filter((b: Block) => b !== block)
