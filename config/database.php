@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Foundation\Secrets\DockerSecret;
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -45,12 +48,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => DockerSecret::fromEnv('DATABASE_URL')->getValue(),
+            'host' => DockerSecret::fromEnv('DB_HOST')->getValue(),
+            'port' => DockerSecret::fromEnv('DB_PORT')->getValue(),
+            'database' => DockerSecret::fromEnv('DB_DATABASE')->getValue(),
+            'username' => DockerSecret::fromEnv('DB_USERNAME')->getValue(),
+            'password' => DockerSecret::fromEnv('DB_PASSWORD')->getValue(),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
@@ -90,25 +93,25 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', 'ishabanov'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
         ],
 
         'default' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_DB', '0'),
+            //'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
+            'host' => DockerSecret::fromEnv('REDIS_HOST')->getValue(),
+            'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
+            'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),
+            'port' => DockerSecret::fromEnv('REDIS_PORT')->getValue(),
+            'database' => DockerSecret::fromEnv('REDIS_DB')->getValue(),
         ],
 
         'cache' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_CACHE_DB', '1'),
+            //'url' => DockerSecret::fromEnv('REDIS_URL')->getValue(),
+            'host' => DockerSecret::fromEnv('REDIS_HOST')->getValue(),
+            'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
+            'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),
+            'port' => DockerSecret::fromEnv('REDIS_PORT')->getValue(),
+            'database' => DockerSecret::fromEnv('REDIS_CACHE_DB')->getValue(),
         ],
 
     ],

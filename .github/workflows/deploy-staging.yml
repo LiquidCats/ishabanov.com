@@ -13,8 +13,7 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
-      envFile: ".env.staging"
-      tag: "staging"
+      tag: latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -26,12 +25,6 @@ jobs:
       - build
 
     steps:
-      - name: Lowercase Repository Name
-        id: repository
-        uses: Entepotenz/change-string-case-action-min-dependencies@v1
-        with:
-          string: ${{ github.repository }}
-
       - name: Update Image
         uses: appleboy/ssh-action@master
         with:
@@ -40,9 +33,9 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
-          script: docker pull ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+          script: docker pull ghcr.io/liquidcats/ishabanov.com:latest
 
-      - name: Migration
+      - name: Update Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -51,66 +44,8 @@ jobs:
           fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
           port: 22
           script: |
-            docker stop ishabanov_staging_migrator || true
-            docker rm ishabanov_staging_migrator || true
-            docker run -i \
-              --name ishabanov_staging_migrator \
-              --network ishabanov_staging \
-              -e APP_ENV=staging \
-              -e APP_KEY="${{ secrets.APP_KEY }}" \
-              -e DB_CONNECTION="${{ secrets.DB_CONNECTION }}" \
-              -e DB_DATABASE="${{ secrets.DB_DATABASE }}" \
-              -e DB_HOST="${{ secrets.DB_HOST }}" \
-              -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-              -e DB_PORT="${{ secrets.DB_PORT }}" \
-              -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
-              -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-              --memory-reservation=16MB \
-              --memory=32MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging \
-              php artisan migrate
-
-      - name: Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
-          script: |
-            docker stop ishabanov_staging || true
-            docker rm ishabanov_staging || true
-            docker run --detach \
-              --name ishabanov_staging \
-              --network ishabanov_staging \
-              --publish=8090:80 \
-              --restart=always \
-              --health-cmd="curl --fail --location http://0.0.0.0/api/healthz" \
-              --health-interval=300s \
-              --health-retries=3 \
-              --health-start-period=60s \
-              --health-timeout=120s \
-              --cpu-period=30000 \
-              --cpu-quota=15000 \
-              -e APP_ENV=staging \
-              -e APP_KEY="${{ secrets.APP_KEY }}" \
-              -e DB_CONNECTION="${{ secrets.DB_CONNECTION }}" \
-              -e DB_DATABASE="${{ secrets.DB_DATABASE }}" \
-              -e DB_HOST="${{ secrets.DB_HOST }}" \
-              -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-              -e DB_PORT="${{ secrets.DB_PORT }}" \
-              -e DB_PREFIX="${{ secrets.DB_PREFIX }}" \
-              -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-              -e REDIS_HOST="${{ secrets.REDIS_HOST }}" \
-              -e REDIS_PASSWORD="${{ secrets.REDIS_PASSWORD }}" \
-              -e REDIS_PORT="${{ secrets.REDIS_PORT }}" \
-              -e TG_ANNOUNCER_CHAT_ID="${{ secrets.TG_ANNOUNCER_CHAT_ID }}" \
-              -e TG_ANNOUNCER_TOKEN="${{ secrets.TG_ANNOUNCER_TOKEN }}" \
-              -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-              -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-              -e AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
-              -e AWS_BUCKET=${{ secrets.AWS_BUCKET }} \
-              -e AWS_URL=${{ secrets.AWS_URL }} \
-              -e AWS_ENDPOINT=${{ secrets.AWS_ENDPOINT }} \
-              --memory-reservation=32MB \
-              --memory=128MB ghcr.io/${{ steps.repository.outputs.lowercase }}:staging
+            BUILD_VERION=latest \
+              docker stack deploy \
+                --with-registry-auth \
+                --compose-file ~/deploy/ishabanov/docker-compose.stage.yml \
+                ishabanov_staging

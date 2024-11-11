@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Foundation\Secrets\DockerSecret;
+
 return [
 
     /*
@@ -49,13 +51,13 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => DockerSecret::fromEnv('AWS_ACCESS_KEY_ID')->getValue(),
+            'secret' => DockerSecret::fromEnv('AWS_SECRET_ACCESS_KEY')->getValue(),
+            'region' => DockerSecret::fromEnv('AWS_DEFAULT_REGION')->getValue(),
+            'bucket' => DockerSecret::fromEnv('AWS_BUCKET')->getValue(),
+            'url' => DockerSecret::fromEnv('AWS_URL')->getValue(),
+            'endpoint' => DockerSecret::fromEnv('AWS_ENDPOINT')->getValue(),
+            'use_path_style_endpoint' => DockerSecret::fromEnv('AWS_USE_PATH_STYLE_ENDPOINT', false)->getValue(),
             'throw' => false,
         ],
 
