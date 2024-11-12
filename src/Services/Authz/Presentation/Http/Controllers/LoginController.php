@@ -17,7 +17,6 @@ class LoginController extends Controller
 {
     public function __invoke(): View|RedirectResponse
     {
-        Auth::loginUsingId(1);
         if (Auth::check()) {
             return redirect(route('admin.dashboard'));
         }
