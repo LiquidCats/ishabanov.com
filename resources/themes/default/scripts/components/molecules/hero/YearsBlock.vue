@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-    years: number
+    years?: number
 }
 
 // Define

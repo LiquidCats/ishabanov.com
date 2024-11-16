@@ -9,8 +9,8 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="follow">
 
-    <title>Ilya Shabanov - Software Engineer</title>
-    <meta name="title" content="Ilya Shabanov - Software Engineer">
+    <title>{{ config('app.name') }}</title>
+    <meta name="title" content="{{ config('app.name') }}">
 
     @include('includes.app.styles')
 </head>

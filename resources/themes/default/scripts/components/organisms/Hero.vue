@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import NameBlock from "../molecules/hero/NameBlock.vue";
 import DescriptionBlock from "../molecules/hero/DescriptionBlock.vue";
 import PhotoBlock from "../molecules/hero/PhotoBlock.vue";
 import YearsBlock from "../molecules/hero/YearsBlock.vue";

@@ -5,7 +5,6 @@ import {SparklesIcon, CodeBracketIcon, EnvelopeIcon, HomeIcon, PencilSquareIcon}
 import {RouteNames} from "../domain/enums/routes";
 
 interface State {
-    years: number
     socials: Array<Link>
     menu: Array<Link>
 }

@@ -9,7 +9,7 @@
     <meta name="robots" content="noindex">
     <meta name="robots" content="follow">
 
-    <title>iShabanov - Admin</title>
+    <title>{{ config('app.name') }} - Admin</title>
 
     @include('includes.admin.styles')
 </head>

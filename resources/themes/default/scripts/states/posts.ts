@@ -1,8 +1,6 @@
 import {defineStore} from "pinia";
-import {PreviewTypeEnum} from "../domain/enums/preview";
-import {PostResource, ResponsePaginationMeta, TagResource} from "../domain/types/api";
+import {PostResource, ResponsePaginationMeta} from "../domain/types/api";
 import PostApi from "../api/posts";
-import db from "./database";
 
 interface State {
     items: Array<PostResource>,

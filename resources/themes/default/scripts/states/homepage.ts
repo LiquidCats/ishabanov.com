@@ -18,6 +18,7 @@ const homepageKey = 'homepage'
 
 const useHomepageState = defineStore<'app.homepage', State, any, Actions>('app.homepage', {
     state: () => ({
+        data: {} as HomepageResource,
         years: dayjs().diff(dayjs('2015-11-25 00:00:00'), "years"),
         experiences: [],
         status: {
