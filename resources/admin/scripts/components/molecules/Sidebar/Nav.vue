@@ -12,17 +12,17 @@ const routes = useRouter()
 </script>
 
 <template>
-    <ul class="list-none flex flex-row gap-1 md:flex-col justify-center">
+    <ul class="grid grid-cols-5 grid-rows-1 gap-1 md:grid-cols-1 md:grid-rows-5">
         <li aria-current="page" class="hidden md:block">
-            <Link class="p-3">
-                <ArrowUturnLeftIcon class="size-7 md:size-5"/>
-                <span class="hidden md:inline">To Site</span>
+            <Link class="p-2 block text-center">
+                <ArrowUturnLeftIcon class="size-5 mx-auto"/>
+                <span class="text-xs whitespace-nowrap text-gray-500">To Site</span>
             </Link>
         </li>
         <li v-for="r in routes" aria-current="page" :key="r.path">
-            <LinkToRoute :to="{name: r.name}" class="p-3">
-                <component :is="r.meta?.icon" class="size-7 md:size-5" />
-                <span class="hidden md:inline">{{ r.meta?.title }}</span>
+            <LinkToRoute :to="{name: r.name}" class="p-2 block text-center">
+                <component :is="r.meta?.icon" class="size-5 mx-auto" />
+                <span class="text-xs whitespace-nowrap text-gray-500">{{ r.meta?.title }}</span>
             </LinkToRoute>
         </li>
     </ul>

@@ -13,7 +13,6 @@ import AddBlock from "../molecules/Editor/AddBlock.vue";
 import TabPanel from "../atoms/Tabs/TabPanel.vue";
 import PostTitle from "../organisms/Post/PostTitle.vue";
 //
-import RouteNames from "../../enums/RouteNames";
 import usePostState from "../../states/post";
 import useImagesState from "../../states/images";
 import useTagsState from "../../states/tags";
@@ -33,13 +32,10 @@ const postId: number = parseInt(route?.params?.post_id?.toString())
 onMounted(async () => {
     await tagsState.search()
     await imagesState.load()
-    if (route.name === RouteNames.POST_EDIT) {
+
+    if (postState.id !== postId) {
         await postState.load(postId)
     }
-})
-
-onBeforeUnmount(() => {
-    postState.$reset()
 })
 
 const selectedTab = ref<string>('main')

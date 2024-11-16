@@ -106,14 +106,14 @@ async function handleSave() {
                 <div>
                     <Btn :type="Colors.primary"
                      @click="handleEdit(tag)">
-                    <PencilSquareIcon class="size-4"/>
+                    <PencilSquareIcon class="size-6 md:size-4"/>
                 </Btn>
                 </div>
                 <div>
                     <Btn :type="Colors.danger"
                      :disabled="tagsState.status.tagDeleting.includes(tag.id)"
                      @click="handleDelete(tag.id)">
-                    <TrashIcon class="size-4" />
+                    <TrashIcon class="size-6 md:size-4" />
                 </Btn>
                 </div>
             </div>
