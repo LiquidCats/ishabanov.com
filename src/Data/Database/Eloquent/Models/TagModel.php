@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Auth;
  * @property UserId $created_by
  * @property UserId $updated_by
  * @property Collection $posts
+ *
+ * @method TagId getKey()
  */
 class TagModel extends Model implements TagRepositoryContract
 {

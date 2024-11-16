@@ -49,6 +49,7 @@ use function strip_tags;
  * @property UserModel|null $author
  * @property Collection<int, TagModel> $tags
  * @property FileModel|null $previewImage
+ * @method PostId getKey()
  */
 class PostModel extends Model implements PostRepositoryContract
 {

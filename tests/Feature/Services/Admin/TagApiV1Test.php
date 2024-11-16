@@ -50,9 +50,14 @@ class TagApiV1Test extends TestCase
 
     public function test_should_store_tag(): void
     {
-        $data = TagModel::factory()->make()->toArray();
+        /** @var TagModel $data */
+        $data = TagModel::factory()->make();
 
-        $response = $this->postJson(route('admin.api.tags.store'), $data);
+
+        $response = $this->postJson(route('admin.api.tags.store'), [
+            'name' => $data->name,
+            'slug' => $data->slug->value,
+        ]);
 
         $response->assertSuccessful();
         $response->assertJsonStructure([
@@ -77,11 +82,14 @@ class TagApiV1Test extends TestCase
         /** @var TagModel $tag */
         $tag = $this->tags->random();
 
-        $data = TagModel::factory()->make()->toArray();
+        $data = TagModel::factory()->make();
 
         $response = $this->putJson(route('admin.api.tags.update', [
-            TagId::asKey() => $tag->getKey(),
-        ]), $data);
+            TagId::asKey() => $tag->getKey()->value,
+        ]), [
+            'name' => $data->name,
+            'slug' => $data->slug->value,
+        ]);
 
         $response->assertSuccessful();
 

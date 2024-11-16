@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-
+use function dump;
 use function fake;
 use function route;
 
@@ -88,10 +88,10 @@ class FileApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseMissing((new FileModel)->getTable(), [
+        $this->assertDatabaseHas((new FileModel)->getTable(), [
             'hash' => $response->json('data.0.hash'),
         ]);
-        $this->assertDatabaseMissing((new FileModel)->getTable(), [
+        $this->assertDatabaseHas((new FileModel)->getTable(), [
             'hash' => $response->json('data.1.hash'),
         ]);
 

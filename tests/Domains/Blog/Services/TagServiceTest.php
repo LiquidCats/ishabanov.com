@@ -46,7 +46,7 @@ class TagServiceTest extends TestCase
 
         $this->assertEquals($tagName, $tag->name);
         $this->assertNotEmpty($tag->slug);
-        $this->assertEquals(Str::of($tagName)->lower()->slug(), $tag->slug);
+        $this->assertEquals(Str::of($tagName)->lower()->slug(), $tag->slug->value);
         $this->assertDatabaseCount($tag->getTable(), 6);
     }
 
@@ -70,7 +70,7 @@ class TagServiceTest extends TestCase
 
         $this->assertEquals($tagName, $tag->name);
         $this->assertNotEmpty($tag->slug);
-        $this->assertEquals(Str::of($tagName)->lower()->slug(), $tag->slug);
+        $this->assertEquals(Str::of($tagName)->lower()->slug(), $tag->slug->value);
         $this->assertDatabaseCount($tag->getTable(), 5);
     }
 

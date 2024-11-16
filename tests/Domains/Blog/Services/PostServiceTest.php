@@ -14,6 +14,7 @@ use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\Services\PostService;
 use App\Domains\Blog\ValueObjects\PostId;
+use App\Domains\Blog\ValueObjects\TagId;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -82,7 +83,10 @@ class PostServiceTest extends TestCase
         /** @var PostServiceContract $service */
         $service = $this->app->make(PostService::class);
 
-        $tagsIds = TagModel::query()->inRandomOrder()->get();
+        $tagsIds = TagModel::query()
+            ->inRandomOrder()
+            ->get()
+            ->map(fn (TagModel $m) => ['id' => $m->getKey()->value]);
 
         $data = PostDto::fromArray([
             'title' => fake()->words(4, true),
@@ -118,8 +122,8 @@ class PostServiceTest extends TestCase
         $this->assertTrue($data->publishedAt->startOfMinute()->equalTo($result->published_at));
 
         $this->assertEquals(
-            $data->tags->pluck('id')->toArray(),
-            $result->tags()->pluck('id')->toArray()
+            $data->tags->map(fn (array $tag) => $tag['id'])->toArray(),
+            $result->tags()->pluck('id')->map->value->toArray()
         );
     }
 
@@ -130,7 +134,10 @@ class PostServiceTest extends TestCase
 
         /** @var PostModel $post */
         $post = PostModel::query()->inRandomOrder()->first();
-        $tagsIds = TagModel::query()->inRandomOrder()->get();
+        $tagsIds = TagModel::query()
+            ->inRandomOrder()
+            ->get()
+            ->map(fn (TagModel $m) => ['id' => $m->getKey()->value]);
 
         $data = PostDto::fromArray([
             'title' => fake()->words(4, true),
@@ -168,7 +175,7 @@ class PostServiceTest extends TestCase
 
         $this->assertEquals(
             $data->tags->pluck('id')->toArray(),
-            $result->tags()->pluck('id')->toArray()
+            $result->tags()->pluck('id')->map->value->toArray()
         );
     }
 
