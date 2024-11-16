@@ -11,7 +11,7 @@ export default defineConfig(({mode}) => {
                 buildDirectory: "static",
                 input: [
                     `resources/themes/${theme}/styles/styles.scss`,
-                    `resources/themes/${theme}/scripts/index.js`,
+                    `resources/themes/${theme}/scripts/index.ts`,
                     //
                     'resources/admin/styles/styles.scss',
                     'resources/admin/scripts/index.ts',
