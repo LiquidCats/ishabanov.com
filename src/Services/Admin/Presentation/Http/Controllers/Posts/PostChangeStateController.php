@@ -15,8 +15,7 @@ class PostChangeStateController extends Controller
     public function __construct(
         private readonly Context $context,
         private readonly PostServiceContract $service,
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $postId): PostResource
     {

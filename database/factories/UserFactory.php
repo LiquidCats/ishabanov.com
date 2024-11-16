@@ -8,6 +8,7 @@ use App\Data\Database\Eloquent\Models\UserModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use SensitiveParameterValue;
+
 use function bcrypt;
 
 /**

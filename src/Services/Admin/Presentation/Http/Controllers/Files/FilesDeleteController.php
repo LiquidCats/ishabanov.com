@@ -15,8 +15,7 @@ class FilesDeleteController extends Controller
     public function __construct(
         readonly private Context $context,
         readonly private FileServiceContract $fileService
-    ) {
-    }
+    ) {}
 
     public function __invoke(): FileResource
     {

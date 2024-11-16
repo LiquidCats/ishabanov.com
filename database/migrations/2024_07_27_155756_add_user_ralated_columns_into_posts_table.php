@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
             $table->dropColumn('author_id');
 
             $table->unsignedBigInteger('created_by')->nullable()->index();
@@ -23,11 +23,11 @@ return new class extends Migration
 
             $table->foreign('created_by')
                 ->references('id')
-                ->on((new UserModel())->getTable())
+                ->on((new UserModel)->getTable())
                 ->onDelete('set null');
             $table->foreign('updated_by')
                 ->references('id')
-                ->on((new UserModel())->getTable())
+                ->on((new UserModel)->getTable())
                 ->onDelete('set null');
         });
     }
@@ -37,18 +37,18 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
             $table->dropColumn('created_by');
         });
-        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
             $table->dropColumn('updated_by');
         });
-        Schema::table((new PostModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
             $table->unsignedBigInteger('author_id')->index()->nullable();
 
             $table->foreign('author_id')
                 ->references('id')
-                ->on((new UserModel())->getTable())
+                ->on((new UserModel)->getTable())
                 ->onDelete('set null');
         });
     }

@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table((new FileModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new FileModel)->getTable(), function (Blueprint $table) {
             $table->unsignedBigInteger('created_by')->nullable()->index();
 
             $table->foreign('created_by')
                 ->references('id')
-                ->on((new UserModel())->getTable())
+                ->on((new UserModel)->getTable())
                 ->onDelete('set null');
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table((new FileModel())->getTable(), function (Blueprint $table) {
+        Schema::table((new FileModel)->getTable(), function (Blueprint $table) {
             $table->dropColumn('created_by');
         });
     }

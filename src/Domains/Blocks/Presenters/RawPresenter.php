@@ -18,8 +18,7 @@ readonly class RawPresenter implements Arrayable, PresenterContract
         public BlockType $type,
         public AbstractUid $key,
         public string $content,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

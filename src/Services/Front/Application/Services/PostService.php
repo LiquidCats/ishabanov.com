@@ -16,8 +16,7 @@ readonly class PostService
     public function __construct(
         private PostRepositoryContract $postRepository,
         private ExperienceRepositoryContract $experienceRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @return LengthAwarePaginator<PostModel>

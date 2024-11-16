@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Data\Filesystem\Storage\Repositories;
 
-use function dump;
 use const DIRECTORY_SEPARATOR;
 
 use App\Data\Filesystem\Storage\Options;
@@ -15,9 +14,7 @@ use Illuminate\Support\Str;
 
 readonly class UploadedFilesStorage implements UploadedFilesStorageContract
 {
-    public function __construct(private Filesystem $filesystem, private Options $options)
-    {
-    }
+    public function __construct(private Filesystem $filesystem, private Options $options) {}
 
     public function url(string $file): string
     {

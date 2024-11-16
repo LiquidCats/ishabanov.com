@@ -14,8 +14,7 @@ class TelegramRepository implements TelegramRepositoryContract
     public function __construct(
         protected Token $token,
         protected string $apiLink = 'https://api.telegram.org/bot'
-    ) {
-    }
+    ) {}
 
     public function sendMessage(ChatId $chatId, string $message): bool
     {

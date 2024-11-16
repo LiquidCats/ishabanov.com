@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Files;
 
+use const DIRECTORY_SEPARATOR;
+
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Data\Filesystem\Storage\Options;
 use App\Data\Filesystem\Storage\Repositories\UploadedFilesStorage;
@@ -16,7 +18,6 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use const DIRECTORY_SEPARATOR;
 
 class FileDomainProvider extends ServiceProvider
 {

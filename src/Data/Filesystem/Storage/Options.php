@@ -9,6 +9,5 @@ readonly class Options
     public function __construct(
         public string $prepend,
         public string $path,
-    ) {
-    }
+    ) {}
 }

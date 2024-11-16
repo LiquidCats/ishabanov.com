@@ -23,8 +23,7 @@ readonly class ParagraphPresenter implements Arrayable, PresenterContract
         public AbstractUid $key,
         public string $content,
         public Collection $styles
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

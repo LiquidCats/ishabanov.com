@@ -40,7 +40,7 @@ class UploadedFilesStorageTest extends TestCase
         $file = UploadedFile::fake()->image('test.jpg');
         $storage->put('media', $file);
 
-        $dto = new FileModel();
+        $dto = new FileModel;
         $dto->path = $file->hashName();
         $result = $repo->drop($dto->path);
 

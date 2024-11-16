@@ -12,6 +12,7 @@ use App\Domains\Blog\ValueObjects\TagId;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
+
 use function fake;
 
 #[CoversClass(PostService::class)]

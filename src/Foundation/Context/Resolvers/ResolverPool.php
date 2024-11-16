@@ -26,6 +26,6 @@ readonly class ResolverPool implements ValueResolver
             }
         }
 
-        throw new ValueNotInContext();
+        throw new ValueNotInContext;
     }
 }

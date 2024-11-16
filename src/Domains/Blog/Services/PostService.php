@@ -22,8 +22,7 @@ readonly class PostService implements PostServiceContract
     public function __construct(
         private PostRepositoryContract $postRepository,
         private RawCollectionParser $blockParser,
-    ) {
-    }
+    ) {}
 
     public function paginate(): LengthAwarePaginator
     {

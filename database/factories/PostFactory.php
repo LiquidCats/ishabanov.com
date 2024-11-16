@@ -26,8 +26,8 @@ class PostFactory extends Factory
             'blocks' => Collection::make()->push(RawPresenter::createAs(BlockType::RAW, ['content' => fake()->paragraphs(5, true)]))->toArray(),
             'is_draft' => false,
             'published_at' => now()->subDay(),
-            'created_by' => new UserId(1),
-            'updated_by' => new UserId(1),
+            // 'created_by' => new UserId(1),
+            // 'updated_by' => new UserId(1),
         ];
     }
 }

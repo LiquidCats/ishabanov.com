@@ -26,7 +26,7 @@ class ExperienceSeeder extends Seeder
 
     protected function createModel(array $experience): void
     {
-        $model = new ExperienceModel();
+        $model = new ExperienceModel;
 
         $model->id = $experience['id'];
         $model->company_name = $experience['company_name'];

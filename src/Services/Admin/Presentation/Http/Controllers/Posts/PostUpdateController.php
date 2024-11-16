@@ -17,8 +17,7 @@ class PostUpdateController extends Controller
     public function __construct(
         private readonly Context $context,
         private readonly PostServiceContract $service,
-    ) {
-    }
+    ) {}
 
     public function __invoke(PostUpdateRequest $request): PostResource
     {

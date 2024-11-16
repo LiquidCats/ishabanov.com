@@ -8,7 +8,5 @@ use App\Domains\Blocks\Contracts\StyleValueContainer;
 
 readonly class BlockStyleString implements StyleValueContainer
 {
-    public function __construct(public string $value)
-    {
-    }
+    public function __construct(public string $value) {}
 }

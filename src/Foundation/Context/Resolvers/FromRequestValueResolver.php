@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 readonly class FromRequestValueResolver implements ValueResolver
 {
-    public function __construct(private Request $request)
-    {
-    }
+    public function __construct(private Request $request) {}
 
     /**
      * @param  WithKeyDefinition  $vo

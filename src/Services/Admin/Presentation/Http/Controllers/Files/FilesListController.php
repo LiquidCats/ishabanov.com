@@ -13,9 +13,7 @@ use Illuminate\Routing\Controller;
 
 class FilesListController extends Controller
 {
-    public function __construct(private readonly FileServiceContract $service)
-    {
-    }
+    public function __construct(private readonly FileServiceContract $service) {}
 
     public function __invoke(Request $request): AnonymousResourceCollection
     {

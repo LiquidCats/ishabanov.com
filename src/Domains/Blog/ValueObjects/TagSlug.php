@@ -5,6 +5,7 @@ namespace App\Domains\Blog\ValueObjects;
 use App\Foundation\ValueObjects\AbstractValueObject;
 use App\Foundation\ValueObjects\WithValidation;
 use Illuminate\Support\Str;
+
 use function is_string;
 
 readonly class TagSlug extends AbstractValueObject implements WithValidation

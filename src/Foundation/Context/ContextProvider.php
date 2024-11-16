@@ -10,9 +10,7 @@ use App\Foundation\ValueObjects\WithKeyDefinition;
 
 readonly class ContextProvider implements Context
 {
-    public function __construct(private ValueResolver $pool)
-    {
-    }
+    public function __construct(private ValueResolver $pool) {}
 
     /**
      * @template T

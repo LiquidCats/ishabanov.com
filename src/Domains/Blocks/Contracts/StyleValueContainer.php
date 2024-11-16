@@ -7,6 +7,4 @@ namespace App\Domains\Blocks\Contracts;
 /**
  * @property-read string $value
  */
-interface StyleValueContainer
-{
-}
+interface StyleValueContainer {}

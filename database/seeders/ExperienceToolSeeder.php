@@ -84,7 +84,7 @@ class ExperienceToolSeeder extends Seeder
 
     protected function createModel(int $experienceId, string $toolId, ExperienceLevel $level): void
     {
-        $model = new ExperienceToolModel();
+        $model = new ExperienceToolModel;
 
         $model->experience_id = $experienceId;
         $model->tool_id = $toolId;

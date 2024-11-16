@@ -7,7 +7,6 @@ namespace App\Data\Database\Eloquent\Casts;
 use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use function dump;
 
 class UserIdCast implements CastsAttributes
 {

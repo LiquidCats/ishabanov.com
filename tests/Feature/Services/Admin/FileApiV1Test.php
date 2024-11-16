@@ -88,10 +88,10 @@ class FileApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseMissing((new FileModel)->getTable(), [
             'hash' => $response->json('data.0.hash'),
         ]);
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseMissing((new FileModel)->getTable(), [
             'hash' => $response->json('data.1.hash'),
         ]);
 
@@ -109,7 +109,7 @@ class FileApiV1Test extends TestCase
 
         $response->assertSuccessful();
 
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseMissing((new FileModel)->getTable(), [
             'hash' => $file->getKey(),
         ]);
     }

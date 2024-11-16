@@ -68,7 +68,7 @@ class TagModel extends Model implements TagRepositoryContract
 
     public function create(string $name, TagSlug $slug): TagModel
     {
-        $model = new TagModel();
+        $model = new TagModel;
 
         $model->name = $name;
         $model->slug = $slug;

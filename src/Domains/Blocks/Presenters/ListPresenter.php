@@ -24,8 +24,7 @@ readonly class ListPresenter implements Arrayable, PresenterContract
         public ListTag $tag,
         public Collection $content,
         public Collection $styles,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

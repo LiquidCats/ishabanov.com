@@ -10,6 +10,4 @@ use Illuminate\Support\Collection;
 /**
  * @extends Collection<int, PresenterContract>
  */
-class BlocksCollection extends Collection
-{
-}
+class BlocksCollection extends Collection {}

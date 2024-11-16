@@ -12,9 +12,7 @@ class ChatId
     /**
      * @param  TValue  $value
      */
-    public function __construct(protected mixed $value)
-    {
-    }
+    public function __construct(protected mixed $value) {}
 
     /**
      * @return TValue

@@ -17,7 +17,7 @@ readonly class RawCollectionParser
 {
     public function parse(Collection $blocks): BlocksCollection
     {
-        $blocksCollection = new BlocksCollection();
+        $blocksCollection = new BlocksCollection;
 
         foreach ($blocks as $block) {
             $parsedBlock = $this->parseBlock($block);

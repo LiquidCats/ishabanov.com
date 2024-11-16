@@ -6,6 +6,4 @@ namespace App\Foundation\Exceptions\Context;
 
 use RuntimeException;
 
-class ValueNotInContext extends RuntimeException
-{
-}
+class ValueNotInContext extends RuntimeException {}

@@ -65,7 +65,7 @@ class TagApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new TagModel())->getTable(), [
+        $this->assertDatabaseHas((new TagModel)->getTable(), [
             'id' => $id,
             'name' => $data['name'],
             'slug' => $data['slug'],
@@ -87,7 +87,7 @@ class TagApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new TagModel())->getTable(), [
+        $this->assertDatabaseHas((new TagModel)->getTable(), [
             'id' => $id,
             'name' => $data['name'],
             'slug' => $data['slug'],
@@ -106,7 +106,7 @@ class TagApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseMissing((new TagModel())->getTable(), [
+        $this->assertDatabaseMissing((new TagModel)->getTable(), [
             'id' => $id,
         ]);
     }

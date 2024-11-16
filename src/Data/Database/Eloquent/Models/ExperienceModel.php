@@ -51,12 +51,12 @@ class ExperienceModel extends Model implements ExperienceRepositoryContract
     {
         return $this->belongsToMany(
             ToolModel::class,
-            (new ExperienceToolModel())->getTable(),
-            (new ExperienceToolModel())->qualifyColumn('experience_id'),
-            (new ExperienceToolModel())->qualifyColumn('tool_id'),
+            (new ExperienceToolModel)->getTable(),
+            (new ExperienceToolModel)->qualifyColumn('experience_id'),
+            (new ExperienceToolModel)->qualifyColumn('tool_id'),
         )
-            ->orderByDesc((new ToolModel())->qualifyColumn('level'))
-            ->orderBy((new ToolModel())->qualifyColumn('type'))
+            ->orderByDesc((new ToolModel)->qualifyColumn('level'))
+            ->orderBy((new ToolModel)->qualifyColumn('type'))
             ->using(ExperienceToolModel::class)
             ->withPivot(['level_id']);
     }

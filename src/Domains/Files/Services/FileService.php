@@ -19,8 +19,7 @@ readonly class FileService implements FileServiceContract
     public function __construct(
         private UploadedFilesStorageContract $storageRepository,
         private FileRepositoryContract $fileRepository,
-    ) {
-    }
+    ) {}
 
     public function storeMany(array $data = []): Collection
     {
@@ -55,7 +54,7 @@ readonly class FileService implements FileServiceContract
         return $file;
     }
 
-    public function list(FilterTypes $type = null): LengthAwarePaginator|Collection
+    public function list(?FilterTypes $type = null): LengthAwarePaginator|Collection
     {
         return match ($type) {
             FilterTypes::IMAGES => $this->fileRepository->getAllImages(),

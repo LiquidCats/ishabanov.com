@@ -157,11 +157,11 @@ class PostsApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseCount((new PostModel())->getTable(), 51);
+        $this->assertDatabaseCount((new PostModel)->getTable(), 51);
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $id,
             'title' => $data['title'],
             'preview' => $data['preview'],
@@ -228,7 +228,7 @@ class PostsApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $id,
             'title' => $data['title'],
             'preview' => $data['preview'],
@@ -257,7 +257,7 @@ class PostsApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseMissing((new PostModel())->getTable(), [
+        $this->assertDatabaseMissing((new PostModel)->getTable(), [
             'id' => $id,
         ]);
     }

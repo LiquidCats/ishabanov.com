@@ -15,8 +15,7 @@ class ArticleController extends Controller
     public function __construct(
         private readonly Context $context,
         private readonly PostService $service,
-    ) {
-    }
+    ) {}
 
     public function __invoke(): ArticleResource
     {

@@ -12,9 +12,7 @@ use Illuminate\Routing\Controller;
 
 class TagListController extends Controller
 {
-    public function __construct(private readonly TagServiceContract $service)
-    {
-    }
+    public function __construct(private readonly TagServiceContract $service) {}
 
     public function __invoke(Request $request): AnonymousResourceCollection
     {

@@ -24,8 +24,7 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
         public HeadingTag $tag,
         public string $content,
         public Collection $styles
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

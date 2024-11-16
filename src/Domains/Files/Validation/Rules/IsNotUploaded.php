@@ -9,9 +9,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 readonly class IsNotUploaded implements ValidationRule
 {
-    public function __construct(private FileRepositoryContract $fileRepository)
-    {
-    }
+    public function __construct(private FileRepositoryContract $fileRepository) {}
 
     /**
      * @param  UploadedFile  $value

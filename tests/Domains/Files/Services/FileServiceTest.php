@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use Tests\TestCase;
 use ValueError;
+
 use function count;
 use function fake;
 use function sha1_file;
@@ -83,7 +84,7 @@ class FileServiceTest extends TestCase
 
         $fileId = new FileId(sha1_file($image['file']->getRealPath()));
 
-        (new FileModel())->create($image['name'], $image['file']);
+        (new FileModel)->create($image['name'], $image['file']);
 
         $service->drop($fileId);
 
@@ -105,7 +106,7 @@ class FileServiceTest extends TestCase
 
         foreach ($data as $item) {
             $disk->put('media', $item['file']);
-            (new FileModel())->create($item['name'], $item['file']);
+            (new FileModel)->create($item['name'], $item['file']);
         }
 
         $list = $service->list();

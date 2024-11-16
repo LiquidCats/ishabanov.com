@@ -31,8 +31,7 @@ readonly class ImagePresenter implements Arrayable, PresenterContract
             'caption' => 'string',
         ])] public stdClass $content,
         public Collection $styles,
-    ) {
-    }
+    ) {}
 
     public static function createAs(
         BlockType $type,
@@ -48,7 +47,7 @@ readonly class ImagePresenter implements Arrayable, PresenterContract
     ): self {
         Assert::false(empty($data), 'cant parse incoming data');
 
-        $content = new stdClass();
+        $content = new stdClass;
         $content->src = trim(strip_tags($data['content']['src'] ?? ''));
         $content->alt = trim(strip_tags($data['content']['alt'] ?? ''));
         $content->caption = trim(strip_tags($data['content']['caption'] ?? ''));

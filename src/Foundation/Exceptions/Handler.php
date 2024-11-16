@@ -19,7 +19,6 @@ use Throwable;
 
 use function app;
 use function env;
-use function var_dump;
 
 class Handler extends BaseExceptionHandler
 {

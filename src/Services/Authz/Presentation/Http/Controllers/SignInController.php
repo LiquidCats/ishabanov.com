@@ -19,9 +19,7 @@ use function route;
 
 class SignInController extends Controller
 {
-    public function __construct(private readonly TOTP $authenticator)
-    {
-    }
+    public function __construct(private readonly TOTP $authenticator) {}
 
     /**
      * @throws G2FAException

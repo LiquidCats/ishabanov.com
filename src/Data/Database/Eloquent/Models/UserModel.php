@@ -27,7 +27,6 @@ use function encrypt;
  * @property string $password
  * @property string $remember_token
  * @property SensitiveParameterValue $g2fa_secret
- *
  * @property-read Collection<PostModel> $posts
  *
  * @method UserId getKey()

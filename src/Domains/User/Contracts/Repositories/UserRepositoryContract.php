@@ -11,5 +11,6 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 interface UserRepositoryContract
 {
     public function getLatest(int $perPage = 15): LengthAwarePaginator;
+
     public function getById(UserId $id): UserModel;
 }

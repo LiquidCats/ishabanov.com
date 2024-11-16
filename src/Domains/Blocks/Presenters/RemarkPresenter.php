@@ -18,8 +18,7 @@ readonly class RemarkPresenter implements Arrayable, PresenterContract
         public BlockType $type,
         public AbstractUid $key,
         public Collection $content,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

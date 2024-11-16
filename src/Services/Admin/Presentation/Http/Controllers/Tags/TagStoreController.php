@@ -11,9 +11,7 @@ use Illuminate\Routing\Controller;
 
 class TagStoreController extends Controller
 {
-    public function __construct(private readonly TagServiceContract $tagService)
-    {
-    }
+    public function __construct(private readonly TagServiceContract $tagService) {}
 
     public function __invoke(TagStoreRequest $request): TagResource
     {

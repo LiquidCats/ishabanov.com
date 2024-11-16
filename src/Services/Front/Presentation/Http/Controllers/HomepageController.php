@@ -13,12 +13,12 @@ class HomepageController extends Controller
 {
     public function __construct(
         private readonly PostService $service,
-    ) {
-    }
+    ) {}
 
     public function __invoke(): JsonResource
     {
         $experiences = $this->service->getExperiences();
+
         return new HomepageResource($experiences);
     }
 }

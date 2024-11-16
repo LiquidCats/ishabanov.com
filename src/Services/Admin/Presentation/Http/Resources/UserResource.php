@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Resources;
 
 use App\Data\Database\Eloquent\Models\UserModel;
-use chillerlan\QRCode\QRCode;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-
-use function config;
-use function sprintf;
 
 /**
  * @property-read UserModel $resource

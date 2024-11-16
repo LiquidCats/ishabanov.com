@@ -16,9 +16,7 @@ use Illuminate\Validation\ValidationException;
 
 readonly class TagService implements TagServiceContract
 {
-    public function __construct(private TagRepositoryContract $tagRepository)
-    {
-    }
+    public function __construct(private TagRepositoryContract $tagRepository) {}
 
     public function create(string $name, ?string $slug): TagModel
     {
@@ -36,7 +34,7 @@ readonly class TagService implements TagServiceContract
         $foundById = $this->tagRepository->findById($tagId);
 
         if ($foundBySlug !== null && $foundById->getKey() !== $foundBySlug->getKey()) {
-            $messages = new MessageBag();
+            $messages = new MessageBag;
             $messages->add('slug', 'The slug has already been taken.');
 
             throw ValidationException::withMessages($messages->toArray());

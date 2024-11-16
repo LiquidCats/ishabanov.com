@@ -6,6 +6,7 @@ namespace App\Domains\Files\ValueObjects;
 
 use App\Foundation\ValueObjects\AbstractValueObject;
 use App\Foundation\ValueObjects\WithValidation;
+
 use function is_string;
 
 readonly class FileId extends AbstractValueObject implements WithValidation

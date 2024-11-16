@@ -8,7 +8,5 @@ use Illuminate\Support\ServiceProvider;
 
 class BlocksDomainProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-    }
+    public function register(): void {}
 }

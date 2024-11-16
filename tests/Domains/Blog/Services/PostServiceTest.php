@@ -18,6 +18,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
+
 use function fake;
 use function now;
 
@@ -38,7 +39,6 @@ class PostServiceTest extends TestCase
 
     /**
      * @covers ::paginate()
-     * @return void
      */
     public function test_can_get_paginated_list_of_posts(): void
     {
@@ -100,7 +100,7 @@ class PostServiceTest extends TestCase
         $result = $service->createPost($data);
 
         $this->assertEquals(6, PostModel::query()->count());
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $result->getKey(),
             'title' => $data->title,
             'preview' => $data->preview,
@@ -148,7 +148,7 @@ class PostServiceTest extends TestCase
         $result = $service->updatePost(new PostId($post->getKey()), $data);
 
         $this->assertEquals(5, PostModel::query()->count());
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $result->getKey(),
             'title' => $data->title,
             'preview' => $data->preview,
@@ -182,7 +182,7 @@ class PostServiceTest extends TestCase
 
         $result = $service->changeState(new PostId($post->getKey()));
 
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'is_draft' => (int) $result->is_draft,
         ]);
 
@@ -202,7 +202,7 @@ class PostServiceTest extends TestCase
         $this->assertCount(1, $result);
 
         foreach ($result as $item) {
-            $this->assertDatabaseMissing((new PostModel())->getTable(), [
+            $this->assertDatabaseMissing((new PostModel)->getTable(), [
                 'id' => $item->getKey(),
             ]);
         }

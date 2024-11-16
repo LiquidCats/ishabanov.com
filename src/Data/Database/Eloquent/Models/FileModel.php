@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+
 use function sha1_file;
 
 /**
@@ -66,7 +67,7 @@ class FileModel extends Model implements FileRepositoryContract
 
     public function create(string $filename, UploadedFile $uploadedFile): FileModel
     {
-        $model = new FileModel();
+        $model = new FileModel;
 
         $model->hash = new FileId(sha1_file($uploadedFile->path()));
         $model->type = $uploadedFile->getMimeType();

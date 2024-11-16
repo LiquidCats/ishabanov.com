@@ -7,8 +7,6 @@ namespace App\Data\Database\Eloquent\Casts;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use function dump;
-use function func_get_args;
 
 class PostIdCast implements CastsAttributes
 {
