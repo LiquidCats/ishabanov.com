@@ -49,7 +49,7 @@ class SignInController extends Controller
         $user = $request->user();
         $code = $request->get('2fa_otp');
 
-        if (! $this->authenticator->verify(new SecretKey($user->g2fa_secret), $code)) {
+        if (! $this->authenticator->verify(new SecretKey($user->g2fa_secret->getValue()), $code)) {
             Auth::logout();
 
             return back()
