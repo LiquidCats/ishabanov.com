@@ -47,7 +47,7 @@ const router =  createRouter({
     ],
 })
 
-const DEFAULT_TITLE = 'Ilia Shabanov - Software Engineer'
+const DEFAULT_TITLE = document.title
 router.afterEach(async (to) => {
     await nextTick(() => {
         document.title = [DEFAULT_TITLE, to?.meta?.title].filter(Boolean).join(' - ')
