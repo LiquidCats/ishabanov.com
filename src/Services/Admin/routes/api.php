@@ -15,9 +15,12 @@ use App\Admin\Presentation\Http\Controllers\Tags\TagDeleteController;
 use App\Admin\Presentation\Http\Controllers\Tags\TagListController;
 use App\Admin\Presentation\Http\Controllers\Tags\TagStoreController;
 use App\Admin\Presentation\Http\Controllers\Tags\TagUpdateController;
+use App\Admin\Presentation\Http\Controllers\Users\UserController;
+use App\Admin\Presentation\Http\Controllers\Users\UserListController;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Files\ValueObjects\FileId;
+use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('posts')
@@ -29,6 +32,16 @@ Route::prefix('posts')
         Route::put(PostId::asRouteParameter(), PostUpdateController::class)->name('update');
         Route::patch('/state/'.PostId::asRouteParameter(), PostChangeStateController::class)->name('state');
         Route::delete(PostId::asRouteParameter(), PostDeleteController::class)->name('delete');
+    });
+
+Route::prefix('users')
+    ->name('users.')
+    ->group(static function () {
+        Route::get('/', UserListController::class)->name('list');
+        // Route::post('/', PostStoreController::class)->name('store');
+        Route::get(UserId::asRouteParameter(), UserController::class)->name('show');
+        // Route::put(UserId::asRouteParameter(), PostUpdateController::class)->name('update');
+        // Route::delete(UserId::asRouteParameter(), PostDeleteController::class)->name('delete');
     });
 
 Route::prefix('files')

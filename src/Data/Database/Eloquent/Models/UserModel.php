@@ -3,16 +3,20 @@
 namespace App\Data\Database\Eloquent\Models;
 
 use App\Data\Database\Eloquent\Casts\UserIdCast;
-use App\Domains\User\Contracts\Repositories\UserRepository;
+use App\Domains\User\Contracts\Repositories\UserRepositoryContract;
+use App\Domains\User\ValueObjets\UserId;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use SensitiveParameterValue;
 
+use function decrypt;
 use function encrypt;
 
 /**
@@ -21,9 +25,11 @@ use function encrypt;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string $remember_token
- * @property string|null $g2fa_secret
+ * @property SensitiveParameterValue $g2fa_secret
+ *
+ * @method UserId getKey()
  */
-class UserModel extends User implements UserRepository
+class UserModel extends User implements UserRepositoryContract
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -60,18 +66,38 @@ class UserModel extends User implements UserRepository
     protected function g2faSecret(): Attribute
     {
         return new Attribute(
-            get: fn (string $value) => decrypt($value),
-            set: fn (string $value) => encrypt($value),
+            get: fn (?string $value) => $value === null ? new SensitiveParameterValue(null) : new SensitiveParameterValue(decrypt($value)),
+            set: fn (SensitiveParameterValue $value) => encrypt($value->getValue()),
         );
     }
 
     public function posts(): HasMany
     {
-        return $this->hasMany(PostModel::class, 'author_id', 'id');
+        return $this->hasMany(PostModel::class, 'created_by', 'id');
     }
 
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
+    }
+
+    /**
+     * @return LengthAwarePaginator<self>
+     */
+    public function getLatest(int $perPage = 15): LengthAwarePaginator
+    {
+        return self::query()
+            ->select(['id', 'name', 'email', 'email_verified_at'])
+            ->withCount('posts')
+            ->latest()
+            ->paginate($perPage);
+    }
+
+    public function getById(UserId $id): UserModel
+    {
+        return self::query()
+            ->select(['id', 'name', 'email', 'email_verified_at', 'g2fa_secret'])
+            ->withCount('posts')
+            ->findOrFail($id->value);
     }
 }

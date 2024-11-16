@@ -17,13 +17,16 @@ abstract readonly class AbstractValueObject implements Stringable, WithKeyDefini
     /**
      * @param  T  $value
      */
-    public function __construct(public mixed $value)
-    {
-    }
+    public function __construct(public mixed $value) {}
 
     public function __toString(): string
     {
         return (string) $this->value;
+    }
+
+    public function equals(AbstractValueObject $vo): bool
+    {
+        return $this->value === $vo->value;
     }
 
     public static function asRouteParameter(): string
