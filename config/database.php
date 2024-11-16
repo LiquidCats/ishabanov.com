@@ -102,7 +102,7 @@ return [
             'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
             'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),
             'port' => DockerSecret::fromEnv('REDIS_PORT')->getValue(),
-            'database' => DockerSecret::fromEnv('REDIS_DB')->getValue(),
+            'database' => DockerSecret::fromEnv('REDIS_DB', 0)->getValue(),
         ],
 
         'cache' => [
@@ -111,7 +111,7 @@ return [
             'username' => DockerSecret::fromEnv('REDIS_USERNAME')->getValue(),
             'password' => DockerSecret::fromEnv('REDIS_PASSWORD')->getValue(),
             'port' => DockerSecret::fromEnv('REDIS_PORT')->getValue(),
-            'database' => DockerSecret::fromEnv('REDIS_CACHE_DB')->getValue(),
+            'database' => DockerSecret::fromEnv('REDIS_CACHE_DB', 1)->getValue(),
         ],
 
     ],
