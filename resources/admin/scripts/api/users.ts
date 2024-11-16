@@ -7,30 +7,34 @@ import {setCsrf} from "./csrf";
 
 const users = mande(baseUrl('admin', 'api', 'v1', 'users'), jsonOptions)
 
-async function paginate(page: number = 1) {
-    setCsrf(users)
-
-    return users.get<Api<UserResource[]>>({
-        query: {page}
-    })
-}
-
-async function get(userId: number) {
-    setCsrf(users)
-
-    return users.get<Api<UserResource>>(userId)
-}
-
-async function create(data: UserResource) {
-    setCsrf(users)
-
-    return users.post<Api<Post> | ApiError<ValidationErrors>>(data)
-}
-
 const UserApi = {
-    paginate,
-    get,
-    create,
+    paginate: async (page: number = 1) => {
+        setCsrf(users)
+
+        return users.get<Api<UserResource[]>>({
+            query: {page}
+        })
+    },
+    get: async (userId: number) => {
+        setCsrf(users)
+
+        return users.get<Api<UserResource>>(userId)
+    },
+    create: async (data: any) => {
+        setCsrf(users)
+
+        return users.post<Api<Post> | ApiError<ValidationErrors>>(data)
+    },
+    remove: async (userId: number) => {
+        setCsrf(users)
+
+        return users.delete<Api<UserResource>>(userId)
+    },
+    verify: async (userId: number) => {
+        setCsrf(users)
+
+        return users.post<Api<UserResource>>(`${userId}/verify`)
+    },
 }
 
 export default UserApi
