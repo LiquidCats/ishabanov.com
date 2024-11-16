@@ -114,7 +114,7 @@ const router =  createRouter({
             }
         },
         {
-            path: '/admin/users/:userId(\\d+)/edit',
+            path: '/admin/users/:user_id(\\d+)/edit',
             component: UserEditor,
             name: RouteNames.USERS_EDIT,
             children: [],

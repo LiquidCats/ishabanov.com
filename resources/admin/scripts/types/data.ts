@@ -36,3 +36,11 @@ export enum PreviewTypes {
     LEFT_SIDE = "left_side",
     FILL = "fill",
 }
+
+export interface UserResource {
+    readonly id: number
+    readonly name: string
+    readonly email: string
+    readonly is_current_user: boolean
+    readonly is_verified: boolean
+}
