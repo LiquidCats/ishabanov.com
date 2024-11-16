@@ -59,8 +59,6 @@ const styles = {
     [BlockFontSize.xl9]: TextSize.xl9,
 }
 
-
-
 const blockClasses = computed(() => props.block.styles?.map(s => styles[s] ?? s)?.filter(Boolean)?.join(" ") || "")
 
 </script>
@@ -68,10 +66,9 @@ const blockClasses = computed(() => props.block.styles?.map(s => styles[s] ?? s)
 <template>
     <component :is="renderers[block.type]"
                :key="block.key"
-               v-memo="[block]"
                v-bind="{
-                  tag: props.block?.tag,
+                  tag: block?.tag,
                   blockClasses: blockClasses,
-                  blockContent: props.block?.content,
+                  blockContent: block?.content,
               }"/>
 </template>
