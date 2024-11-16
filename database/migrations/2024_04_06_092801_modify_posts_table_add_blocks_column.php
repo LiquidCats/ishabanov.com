@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::table((new PostModel)->getTable(), static function (Blueprint $table) {
             $table->jsonb('blocks')
-                ->after('content')
                 ->default('[]');
         });
     }
@@ -24,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table((new PostModel)->getTable(), static function (Blueprint $table) {
-            $table->dropColumn('blocks');
-        });
+        // Schema::table((new PostModel)->getTable(), static function (Blueprint $table) {
+        //     $table->dropColumn('blocks');
+        // });
     }
 };

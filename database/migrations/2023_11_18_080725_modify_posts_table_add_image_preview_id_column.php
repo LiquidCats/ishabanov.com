@@ -22,8 +22,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('posts', static function (Blueprint $table) {
-            $table->dropColumn('preview_image_id');
-        });
+        // Schema::table('posts', static function (Blueprint $table) {
+        //     $table->dropColumn('preview_image_id');
+        // });
     }
 };

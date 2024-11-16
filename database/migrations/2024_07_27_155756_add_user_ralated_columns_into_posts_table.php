@@ -37,12 +37,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
-            $table->dropColumn('created_by');
-        });
-        Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
-            $table->dropColumn('updated_by');
-        });
+        // Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
+        //     $table->dropColumn('created_by');
+        // });
+        // Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
+        //     $table->dropColumn('updated_by');
+        // });
         Schema::table((new PostModel)->getTable(), function (Blueprint $table) {
             $table->unsignedBigInteger('author_id')->index()->nullable();
 

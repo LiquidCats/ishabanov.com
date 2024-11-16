@@ -10,15 +10,14 @@ return new class extends Migration
     {
         Schema::table('posts', static function (Blueprint $table) {
             $table->string('preview_image_type', 20)
-                ->nullable()
-                ->after('preview');
+                ->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::table('posts', static function (Blueprint $table) {
-            $table->dropColumn('preview_image_type');
-        });
+        // Schema::table('posts', static function (Blueprint $table) {
+        //     $table->dropColumn('preview_image_type');
+        // });
     }
 };

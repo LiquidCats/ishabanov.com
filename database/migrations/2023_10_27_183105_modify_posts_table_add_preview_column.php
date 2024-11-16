@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', static function (Blueprint $table) {
-            $table->text('preview')->after('title');
+            $table->text('preview');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', static function (Blueprint $table) {
-            $table->dropColumn('preview');
-        });
+        // Schema::table('posts', static function (Blueprint $table) {
+        //     $table->dropColumn('preview');
+        // });
     }
 };
