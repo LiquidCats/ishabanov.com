@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+
 use function ceil;
 use function now;
 use function str_word_count;
@@ -137,7 +138,7 @@ class PostModel extends Model implements PostRepositoryContract
             ->paginate(perPage: 10);
     }
 
-    public function getWithTags(Collection $tags = new Collection()): LengthAwarePaginator
+    public function getWithTags(Collection $tags = new Collection): LengthAwarePaginator
     {
         return PostModel::query()
             ->select(['id', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
@@ -159,7 +160,7 @@ class PostModel extends Model implements PostRepositoryContract
      */
     public function create(UserId $userId, PostDto $dto): PostModel
     {
-        return (new self())->saveFromDto($dto);
+        return (new self)->saveFromDto($dto);
     }
 
     /**
