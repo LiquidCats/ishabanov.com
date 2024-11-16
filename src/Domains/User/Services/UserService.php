@@ -9,6 +9,8 @@ use App\Domains\User\Contracts\Repositories\UserRepositoryContract;
 use App\Domains\User\Contracts\Services\UserServiceContract;
 use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 readonly class UserService implements UserServiceContract
 {
@@ -21,8 +23,10 @@ readonly class UserService implements UserServiceContract
 
     public function getUser(UserId $userId): UserModel
     {
-        return UserModel::query()
-            ->where('id', $userId)
-            ->firstOrFail();
+        if ($userId->equals(Auth::id())) {
+            return $this->userRepository->getById($userId);
+        }
+
+        throw new NotFoundHttpException('not found');
     }
 }

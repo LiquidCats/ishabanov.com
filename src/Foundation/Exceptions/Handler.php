@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 use function app;
@@ -78,7 +79,7 @@ class Handler extends BaseExceptionHandler
                     $response->setStatusCode(403);
                 }
 
-                if ($e instanceof ModelNotFoundException) {
+                if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
                     $response->setStatusCode(404);
                 }
 

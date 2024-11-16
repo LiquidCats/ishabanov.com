@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Admin\Presentation\Http\Resources;
 
 use App\Data\Database\Eloquent\Models\UserModel;
+use chillerlan\QRCode\QRCode;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+
+use function config;
+use function sprintf;
 
 /**
  * @property-read UserModel $resource
@@ -24,10 +28,11 @@ class UserResource extends JsonResource
             'name' => $this->resource->name,
             'email' => $this->resource->email,
             'is_current_user' => $user === null ? null : $this->resource->getKey()->equals($user->getKey()),
-            'is_verified' => $this->resource->email_verified_at !== null,
+            'is_verified' => $this->resource?->email_verified_at !== null,
             //
             'posts_count' => $this->resource->getAttribute('posts_count'),
-            'g2fa_secret' => $this->resource->g2fa_secret->getValue(),
+            //
+            'posts' => PostResource::collection($this->whenLoaded('posts')),
         ];
     }
 }

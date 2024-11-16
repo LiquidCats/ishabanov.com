@@ -26,7 +26,7 @@ abstract readonly class AbstractValueObject implements Stringable, WithKeyDefini
 
     public function equals(AbstractValueObject $vo): bool
     {
-        return $this->value === $vo->value;
+        return (string) $this->value === (string) $vo->value;
     }
 
     public static function asRouteParameter(): string

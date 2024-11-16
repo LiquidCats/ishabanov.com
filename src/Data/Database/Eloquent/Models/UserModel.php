@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 use SensitiveParameterValue;
 
@@ -26,6 +27,8 @@ use function encrypt;
  * @property string $password
  * @property string $remember_token
  * @property SensitiveParameterValue $g2fa_secret
+ *
+ * @property-read Collection<PostModel> $posts
  *
  * @method UserId getKey()
  */
@@ -95,9 +98,10 @@ class UserModel extends User implements UserRepositoryContract
 
     public function getById(UserId $id): UserModel
     {
-        return self::query()
+        return $this->newQuery()
             ->select(['id', 'name', 'email', 'email_verified_at', 'g2fa_secret'])
             ->withCount('posts')
+            ->with('posts', fn (HasMany $q) => $q->limit(3))
             ->findOrFail($id->value);
     }
 }
