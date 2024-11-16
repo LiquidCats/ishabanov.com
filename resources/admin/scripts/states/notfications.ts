@@ -3,7 +3,6 @@ import {MandeError} from "mande";
 import {NotificationMessage} from "../types/internals";
 import {Colors} from "../types/colors";
 import {ApiError} from "../types/api";
-import Timer from "../utils/Timer";
 
 interface State {
     items: NotificationMessage[],
@@ -16,7 +15,7 @@ interface Actions {
     close(message: NotificationMessage): void
 }
 
-const useNotificationState = defineStore<string, State, any, Actions>('notifications', {
+const useNotificationState = defineStore<'admin.notifications', State, any, Actions>('admin.notifications', {
     state: () => ({
         items: [],
     }),

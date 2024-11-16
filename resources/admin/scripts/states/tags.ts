@@ -21,9 +21,9 @@ interface Actions {
     save(): Promise<void>
 }
 
-const useTagsState = defineStore<string, State, any, Actions>('tags', {
+const useTagsState = defineStore<'admin.tags', State, any, Actions>('admin.tags', {
     state: () => ({
-        item: {},
+        item: {} as Tag,
         items: [],
         q: '',
         status: {
@@ -74,6 +74,7 @@ const useTagsState = defineStore<string, State, any, Actions>('tags', {
             }
         },
         async fastSave() {
+            const notificationState = useNotificationState()
             this.status.tagSaving = true
 
             try {

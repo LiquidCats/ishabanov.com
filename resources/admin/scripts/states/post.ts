@@ -38,7 +38,7 @@ interface Getters <S> extends _GettersTree<S> {
     hasPreview: (state: UnwrapRef<S> & PiniaCustomProperties) => boolean
 }
 
-const usePostState = defineStore<string, State, Getters<State>, Actions>('post', {
+const usePostState = defineStore<'admin.post', State, Getters<State>, Actions>('admin.post', {
     state: () => ({
         id: null,
         previewTypes: [

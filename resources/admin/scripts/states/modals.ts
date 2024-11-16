@@ -13,7 +13,7 @@ interface Actions {
     open: (name: ModalName) => void
 }
 
-const useModalsState = defineStore<"modals", State, {}, Actions>('modals', {
+const useModalsState = defineStore<"admin.modals", State, {}, Actions>('admin.modals', {
     state: () => ({
         images: false,
         files: false,

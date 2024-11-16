@@ -15,7 +15,7 @@ interface Action {
     load(): Promise<any>
 }
 
-const useImagesState = defineStore<string, State, any, Action>('images',{
+const useImagesState = defineStore<'admin.images', State, any, Action>('admin.images',{
     state: () => ({
         items: [],
         status: {

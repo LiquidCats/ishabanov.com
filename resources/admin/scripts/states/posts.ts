@@ -20,7 +20,7 @@ interface Actions {
     changeState(id: number): Promise<any>
 }
 
-const usePostListState = defineStore<string, State, any, Actions>('posts', {
+const usePostListState = defineStore<'admin.posts', State, any, Actions>('admin.posts', {
     state: () => ({
         items: [],
         pagination: {

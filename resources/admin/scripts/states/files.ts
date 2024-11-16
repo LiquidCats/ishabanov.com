@@ -42,7 +42,7 @@ interface Actions {
     remove(hash: string): Promise<void>
 }
 
-const useFilesState = defineStore<string, State, any, Actions>('files', {
+const useFilesState = defineStore<'admin.files', State, any, Actions>('admin.files', {
     state: () => ({
         items: [],
         previews: [],
