@@ -10,10 +10,14 @@ interface State {
     status: {
         listLoading: boolean
         listLoaded: boolean
+        userRemoving: Array<number>
+        userVerifying: Array<number>
     },
 }
 interface Actions {
     getUsers(page: number): Promise<void>
+    remove(userId: number): Promise<void>
+    verify(userId: number): Promise<void>
 }
 
 const useUsersState = defineStore<'admin.users', State, any, Actions>('admin.users', {
@@ -24,7 +28,9 @@ const useUsersState = defineStore<'admin.users', State, any, Actions>('admin.use
         },
         status: {
             listLoading: false,
-            listLoaded: false
+            listLoaded: false,
+            userRemoving: [],
+            userVerifying: []
         }
     }),
     actions: {
@@ -48,6 +54,30 @@ const useUsersState = defineStore<'admin.users', State, any, Actions>('admin.use
                 notifications.pushError(e as Error)
             } finally {
                 this.status.listLoading = false;
+            }
+        },
+        async remove(userId: number): Promise<void> {
+            try {
+                this.status.userRemoving = [...this.status.userRemoving, userId]
+                await UserApi.remove(userId)
+            } catch (e) {
+                const notifications = useNotificationState()
+
+                notifications.pushError(e as Error)
+            } finally {
+                this.status.userRemoving = this.status.userRemoving.filter(i => i != userId)
+            }
+        },
+        async verify(userId: number): Promise<void> {
+            try {
+                this.status.userRemoving = [...this.status.userRemoving, userId]
+                await UserApi.verify(userId)
+            } catch (e) {
+                const notifications = useNotificationState()
+
+                notifications.pushError(e as Error)
+            } finally {
+                this.status.userRemoving = this.status.userRemoving.filter(i => i != userId)
             }
         }
     }

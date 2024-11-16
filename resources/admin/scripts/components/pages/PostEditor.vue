@@ -18,6 +18,7 @@ import useImagesState from "../../states/images";
 import useTagsState from "../../states/tags";
 import useModalsState from "../../states/modals";
 import {blockPreviews} from "../../utils/blocks/getters";
+import RouteNames from "../../enums/RouteNames";
 
 
 const postState = usePostState()
@@ -32,7 +33,9 @@ const postId: number = parseInt(route?.params?.post_id?.toString())
 onMounted(async () => {
     await tagsState.search()
     await imagesState.load()
-
+    if (route.name !== RouteNames.POST_EDIT) {
+        return
+    }
     if (postState.id !== postId) {
         await postState.load(postId)
     }
