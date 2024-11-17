@@ -7,8 +7,8 @@ interface State {
     item: PostResource
     meta: {
         similar: PostResource[]
-        prev: any
-        next: any
+        prev: Partial<PostResource>
+        next: Partial<PostResource>
     }
     status: {
         loading: boolean
@@ -23,8 +23,12 @@ interface Actions {
 const useArticleState = defineStore<'app.article', State, any, Actions>('app.article', {
     state: () => ({
         id: 0,
-        item: {},
-        meta: {},
+        item: {} as PostResource,
+        meta: {
+            similar: [],
+            prev: {},
+            next: {},
+        },
         status: {
             loading: false,
             loaded: false,

@@ -50,7 +50,7 @@ onMounted(async () => {
             <TabPanel for="users" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <LoadingPlaceholder class="sm:col-span-2 lg:col-span-3" v-if="usersState.status.listLoading"/>
                 <NothingFound class="sm:col-span-2 lg:col-span-3" v-else-if="usersState.items.length === 0"/>
-                <UserListItem v-for="user in usersState.items"
+                <UserListItem v-if="!usersState.status.listLoading" v-for="user in usersState.items"
                               :cached-user-id="userState.id"
                               :user-id="user.id"
                               :name="user.name"

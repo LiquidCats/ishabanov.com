@@ -40,13 +40,13 @@ const useUserState = defineStore<string, State, any, Actions>('admin.user', {
 
             try {
                 this.id = id
-                this.status.postLoaded = false
-                this.status.postLoading = true
+                this.status.userLoaded = false
+                this.status.userLoading = true
 
                 const {data} = await UserApi.get(id)
                 this.item = data
 
-                this.status.postLoaded = true
+                this.status.userLoaded = true
             } catch (e) {
                 const notifications = useNotificationState()
 
@@ -54,8 +54,6 @@ const useUserState = defineStore<string, State, any, Actions>('admin.user', {
             } finally {
                 this.status.userLoading = false
             }
-
-
         }
     }
 })

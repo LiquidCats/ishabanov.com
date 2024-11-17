@@ -10,6 +10,8 @@ import usePostState from "../../../states/post";
 import useImagesState from "../../../states/images";
 import useTagsState from "../../../states/tags";
 import FloatingPanel from "../../molecules/FloatingPanel.vue";
+import BackButton from "../../molecules/Buttons/BackButton.vue";
+import SaveButton from "../../molecules/Buttons/SaveButton.vue";
 
 const postState = usePostState()
 const imagesState = useImagesState()
@@ -48,11 +50,7 @@ const shouldDisable = computed(() =>
 
 <template>
     <FloatingPanel class="my-3">
-        <div>
-            <Btn type="light" @click="router.back()">
-                <ArrowLeftIcon class="size-6"/> Back
-            </Btn>
-        </div>
+        <div><BackButton /></div>
 
         <div class="ml-auto">
             <slot :disabled="shouldDisable"></slot>
@@ -73,11 +71,7 @@ const shouldDisable = computed(() =>
             </Btn>
         </div>
 
-        <div>
-            <Btn type="primary" @click.prevent="savePost" :disabled="shouldDisable">
-                <ArrowDownOnSquareIcon class="size-6" /> Save
-            </Btn>
-        </div>
+        <div><SaveButton @click.prevent="savePost" :disabled="shouldDisable"/></div>
 
     </FloatingPanel>
 </template>

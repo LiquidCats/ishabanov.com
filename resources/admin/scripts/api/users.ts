@@ -1,6 +1,6 @@
 import {mande} from "mande";
 import {baseUrl} from "../utils/baseUrl";
-import {Post, UserResource} from "../types/data";
+import {CurrentUserRequest, Post, UserRequest, UserResource} from "../types/data";
 import {Api, ApiError, ValidationErrors} from "../types/api";
 import {jsonOptions} from "./options";
 import {setCsrf} from "./csrf";
@@ -20,7 +20,7 @@ const UserApi = {
 
         return users.get<Api<UserResource>>(userId)
     },
-    create: async (data: any) => {
+    create: async (data: UserRequest | CurrentUserRequest) => {
         setCsrf(users)
 
         return users.post<Api<Post> | ApiError<ValidationErrors>>(data)

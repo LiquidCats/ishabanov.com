@@ -21,7 +21,7 @@ defineProps<Props>()
     <div class="flex flex-col rounded-md p-3 bg-neutral-50 dark:bg-zinc-700"
          :class="{'border border-indigo-500 dark:border-indigo-300': isCurrentUser}"
          :key="userId">
-        <div class="relative">
+        <div class="relative border-b border-neutral-300 dark:border-neutral-500 mb-3 pb-3">
             <RouterLink v-if="isCurrentUser"
                         :to="{name: RouteNames.USERS_EDIT, params: {user_id: userId}}">
                 <span class="z-10 absolute -inset-1"></span>
@@ -32,8 +32,7 @@ defineProps<Props>()
                 <Tag v-if="isCurrentUser" type="primary">It's you</Tag>
             </div>
 
-            <div class="mb-3 pb-3 border-b border-neutral-300 dark:border-neutral-500">
-
+            <div>
                 <div class="font-bold text-xl dark:text-gray-50">{{ name }}</div>
                 <small class="text-sm text-gray-400">{{ email }}
                     <component :is="isVerified ? CheckCircleIcon : XCircleIcon"
@@ -43,7 +42,6 @@ defineProps<Props>()
                                         'bg-red-200 text-red-600': !isVerified,
                                     }"/>
                 </small>
-
             </div>
         </div>
 
