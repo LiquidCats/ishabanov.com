@@ -7,7 +7,7 @@ import {
     ArchiveBoxIcon,
     PresentationChartBarIcon,
     UsersIcon,
-} from "@heroicons/vue/20/solid";
+} from "@heroicons/vue/24/outline";
 //
 import PostList from "./components/pages/PostList.vue";
 import PostEdit from "./components/pages/PostEditor.vue";
@@ -15,8 +15,9 @@ import RouteNames from "./enums/RouteNames";
 import Tags from "./components/pages/Tags.vue";
 import Files from "./components/pages/Files.vue";
 import Dashboard from "./components/pages/Dashboard.vue";
-import Users from "./components/pages/Users.vue";
-import UserEditor from "./components/pages/UserEditor.vue";
+import Users from "./components/pages/UserList.vue";
+import UserCreator from "./components/pages/UserCreator.vue";
+import UserUpdater from "./components/pages/UserUpdater.vue";
 
 const router =  createRouter({
     history: createWebHistory(),
@@ -29,7 +30,7 @@ const router =  createRouter({
             children: [],
             meta: {
                 isPrimary: true,
-                title: 'Dashboard',
+                title: 'Home',
                 icon: PresentationChartBarIcon
             }
         },
@@ -106,7 +107,7 @@ const router =  createRouter({
         },
         {
             path: '/admin/users/create',
-            component: UserEditor,
+            component: UserCreator,
             name: RouteNames.USERS_CREATE,
             children: [],
             meta: {
@@ -115,7 +116,7 @@ const router =  createRouter({
         },
         {
             path: '/admin/users/:user_id(\\d+)/edit',
-            component: UserEditor,
+            component: UserUpdater,
             name: RouteNames.USERS_EDIT,
             children: [],
             meta: {

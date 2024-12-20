@@ -48,8 +48,8 @@ export interface UserResource {
 export interface UserRequest {
     name: string
     email: string
-    new_password: string
-    new_password_confirm: string
+    password: string
+    password_confirm: string
 }
 
 export interface CurrentUserRequest extends UserRequest{
