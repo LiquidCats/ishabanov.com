@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {CheckCircleIcon} from "@heroicons/vue/20/solid";
+import {CheckCircleIcon} from "@heroicons/vue/24/outline";
 import {computed} from "vue";
 
 interface Props {

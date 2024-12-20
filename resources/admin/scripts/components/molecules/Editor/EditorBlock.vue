@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {DocumentDuplicateIcon, Bars4Icon, XMarkIcon} from "@heroicons/vue/20/solid";
+import {DocumentDuplicateIcon, Bars4Icon, XMarkIcon} from "@heroicons/vue/24/outline";
 import Btn from "../../atoms/Btn.vue";
 
 interface Props {

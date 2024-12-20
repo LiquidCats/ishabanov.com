@@ -1,10 +1,17 @@
 <script setup lang="ts">
 
 import {RouterLink} from "vue-router"
+import usePostListState from "../../../states/posts";
+import Btn from "../../atoms/Btn.vue";
 import Tag from "../../atoms/Tag.vue";
 import {Colors} from "../../../types/colors";
 import RouteNames from "../../../enums/RouteNames";
 import type  {Tag as TagType} from "../../../types/data";
+import Paper from "../../atoms/Paper.vue";
+import DeleteButton from "../../molecules/Buttons/DeleteButton.vue";
+
+
+const postsState = usePostListState()
 
 interface Props {
     cachedPostId: number|null
@@ -13,6 +20,7 @@ interface Props {
     preview?: string
     description: string
     publishedAt: string
+    isDraft: boolean
     tags: Array<TagType>
 }
 
@@ -21,14 +29,22 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div class="flex flex-col rounded-md p-3 bg-neutral-50 dark:bg-zinc-700" :key="postId">
+    <Paper class="flex flex-col" :key="postId">
         <div class="flex mt-auto justify-end gap-2 mb-3">
             <div class="mr-auto">
-                <Tag v-if="cachedPostId === postId" :type="Colors.secondary">Cached</Tag>
+                <Tag v-if="cachedPostId === postId" class="mr-1" type="secondary">cached</Tag>
                 <Tag :type="Colors.dark">ID: {{ postId }}</Tag>
             </div>
 
-            <slot/>
+            <Btn :icon="isDraft ? 'EyeIcon' : 'EyeSlashIcon'"
+                 :type="isDraft ? 'success' : 'warning'"
+                 @click="postsState.changeState(postId)"
+                 :disabled="postsState.status.changingStateId.includes(postId)">
+                {{ isDraft ? 'Publish' : 'Hide' }}
+            </Btn>
+            <DeleteButton @click="postsState.delete(postId)" :disabled="postsState.status.deletingId.includes(postId)">
+                Delete
+            </DeleteButton>
         </div>
         <div class="relative flex flex-col md:flex-row gap-3">
             <div>
@@ -54,9 +70,5 @@ defineProps<Props>()
 
         </div>
 
-    </div>
+    </Paper>
 </template>
-
-<style scoped lang="scss">
-
-</style>

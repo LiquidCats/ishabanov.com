@@ -13,7 +13,7 @@ const messages = computed(() => props.errors[props.name] || [])
 </script>
 
 <template>
-    <div class="text-sm text-gray-50" role="alert" v-if="messages.length">
+    <div class="text-xs my-1 text-red-400 dark:text-red-300" role="alert" v-if="messages.length">
         <ul class="m-0">
             <li v-for="message in messages">{{ message }}</li>
         </ul>

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 //
 import {File, Post, PreviewTypes} from "../types/data";
 //
-import * as posts from "../api/posts";
+import PostApi from "../api/posts";
 import useNotificationState from "./notfications";
 import {Api, ApiError, ValidationErrors} from "../types/api";
 import {Block, BlockType} from "../types/blocks";
@@ -106,9 +106,9 @@ const usePostState = defineStore<'admin.post', State, Getters<State>, Actions>('
 
 
                 if (this.id) {
-                    response = await posts.updateById(this.id, this.item) as Api<Post>
+                    response = await PostApi.updateById(this.id, this.item) as Api<Post>
                 } else {
-                    response = await posts.create(this.item) as Api<Post>
+                    response = await PostApi.create(this.item) as Api<Post>
                 }
 
                 this.id = response.data.id
@@ -138,7 +138,7 @@ const usePostState = defineStore<'admin.post', State, Getters<State>, Actions>('
                 this.status.postLoaded = false
                 this.status.postLoading = true
 
-                const {data} = await posts.getById(id)
+                const {data} = await PostApi.getById(id)
 
                 const blocks = data.blocks.map(idMapper)
                 this.item = {...data, blocks}

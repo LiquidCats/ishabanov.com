@@ -2,15 +2,15 @@ import {defineStore} from "pinia";
 import {Post} from "../types/data";
 import {ResponseLinks} from "../types/api";
 import useNotificationState from "./notfications";
-import {changeState, paginate, removeById} from "../api/posts";
+import PostApi from "../api/posts";
 
 interface State {
     items: Post[],
     pagination: {current_page: number} & ResponseLinks
     status: {
         listLoading: boolean,
-        deletingId: null|number,
-        changingStateId: null|number,
+        deletingId: Array<number>,
+        changingStateId: Array<number>,
     }
 }
 
@@ -32,15 +32,15 @@ const usePostListState = defineStore<'admin.posts', State, any, Actions>('admin.
         },
         status: {
             listLoading: false,
-            deletingId: null,
-            changingStateId: null,
+            deletingId: [],
+            changingStateId: [],
         }
     }),
     actions: {
         async paginate(page: number = 1) {
             this.status.listLoading = true;
             try {
-                const {data, links, meta} = await paginate(page)
+                const {data, links, meta} = await PostApi.paginate(page)
                 this.items = data
                 this.pagination = {
                     current_page: meta.current_page,
@@ -56,8 +56,8 @@ const usePostListState = defineStore<'admin.posts', State, any, Actions>('admin.
         },
         async delete(id: number) {
             try {
-                this.status.deletingId = id
-                await removeById(id)
+                this.status.deletingId = [...this.status.deletingId, id]
+                await PostApi.removeById(id)
 
                 await this.paginate()
             } catch (e) {
@@ -65,14 +65,14 @@ const usePostListState = defineStore<'admin.posts', State, any, Actions>('admin.
 
                 notifications.pushError(e as Error)
             } finally {
-                this.status.deletingId = null
+                this.status.deletingId = this.status.deletingId.filter(i => i != id)
             }
         },
         async changeState(id: number) {
             try {
-                this.status.changingStateId = id
+                this.status.changingStateId = [...this.status.changingStateId, id]
 
-                const response = await changeState(id)
+                const response = await PostApi.changeState(id)
                 const post = response.data
                 const index = this.items.findIndex((p: Post) => p.id === post.id)
 
@@ -82,7 +82,7 @@ const usePostListState = defineStore<'admin.posts', State, any, Actions>('admin.
 
                 notifications.pushError(e as Error)
             } finally {
-                this.status.changingStateId = null
+                this.status.changingStateId = this.status.changingStateId.filter(i => i != id)
             }
         }
     }

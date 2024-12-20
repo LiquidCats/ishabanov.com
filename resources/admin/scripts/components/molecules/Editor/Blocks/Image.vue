@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {computed, ref} from "vue";
-import {PhotoIcon} from "@heroicons/vue/20/solid";
+import {PhotoIcon} from "@heroicons/vue/24/outline";
 
 import EditorBlock from "../EditorBlock.vue";
 import FilesModal from "../../../organisms/FilesModal.vue";

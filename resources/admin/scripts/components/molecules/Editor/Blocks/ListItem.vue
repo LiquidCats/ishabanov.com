@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {TrashIcon} from "@heroicons/vue/20/solid";
+import {TrashIcon} from "@heroicons/vue/24/outline";
 
 import {Block, BlockType} from "../../../../types/blocks";
 import FormField from "../../../atoms/Form/FormField.vue";

@@ -13,6 +13,9 @@
         if (props.type === Colors.primary) {
             return 'bg-blue-600 text-gray-50'
         }
+        if (props.type === Colors.secondary) {
+            return 'bg-indigo-500 text-gray-50'
+        }
         if (props.type === Colors.danger) {
             return 'bg-rose-700 text-gray-50'
         }

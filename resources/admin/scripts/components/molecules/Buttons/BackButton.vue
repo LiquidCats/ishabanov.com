@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Btn from "../../atoms/Btn.vue";
-import {ArrowLeftIcon} from "@heroicons/vue/20/solid";
+import {ArrowLeftIcon} from "@heroicons/vue/24/outline";
 import {useRouter} from "vue-router";
 
 const router = useRouter()
@@ -9,9 +9,7 @@ const router = useRouter()
 </script>
 
 <template>
-    <Btn type="light" @click="router.back()">
-        <ArrowLeftIcon class="size-6"/> Back
-    </Btn>
+    <Btn icon="ArrowLeftIcon" type="light" @click="router.back()">Back</Btn>
 </template>
 
 <style scoped lang="scss">

@@ -7,40 +7,39 @@ import {setCsrf} from "./csrf";
 
 const posts = mande(baseUrl('admin', 'api', 'v1', 'posts'), jsonOptions)
 
-export async function paginate(page: number = 1) {
-    setCsrf(posts)
+const PostApi = {
+    paginate: async  (page: number = 1) => {
+        setCsrf(posts)
 
-    return posts.get<Api<Post[]>>({
-        query: {page}
-    })
+        return posts.get<Api<Post[]>>({
+            query: {page}
+        })
+    },
+    getById: async (postId: number) => {
+        setCsrf(posts)
+
+        return posts.get<Api<Post>>(postId)
+    },
+    changeState: async (postId: number) => {
+        setCsrf(posts)
+
+        return posts.patch<Api<Post>>(`state/${postId}`)
+    },
+    removeById: async (postId: number) => {
+        setCsrf(posts)
+
+        return posts.delete<Api<Post>>(postId)
+    },
+    create: async (data: Post) => {
+        setCsrf(posts)
+
+        return posts.post<Api<Post> | ApiError<ValidationErrors>>(data)
+    },
+    updateById: async (postId: number, data: Post) => {
+        setCsrf(posts)
+
+        return posts.put<Api<Post> | ApiError<ValidationErrors>>(postId, data)
+    },
 }
 
-export async function getById(postId: number) {
-    setCsrf(posts)
-
-    return posts.get<Api<Post>>(postId)
-}
-
-export async function changeState(postId: number) {
-    setCsrf(posts)
-
-    return posts.patch<Api<Post>>(`state/${postId}`)
-}
-
-export async function removeById(postId: number) {
-    setCsrf(posts)
-
-    return posts.delete<Api<Post>>(postId)
-}
-
-export async function create(data: Post) {
-    setCsrf(posts)
-
-    return posts.post<Api<Post> | ApiError<ValidationErrors>>(data)
-}
-
-export async function updateById(postId: number, data: Post) {
-    setCsrf(posts)
-
-    return posts.put<Api<Post> | ApiError<ValidationErrors>>(postId, data)
-}
+export default PostApi

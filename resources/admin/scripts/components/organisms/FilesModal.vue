@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {ArrowUpOnSquareIcon, XMarkIcon} from "@heroicons/vue/20/solid"
+import {ArrowUpOnSquareIcon, XMarkIcon} from "@heroicons/vue/24/outline"
 import ModalHeader from "../atoms/Modal/ModalHeader.vue";
 import ModalBody from "../atoms/Modal/ModalBody.vue";
 import DropZone from "../molecules/DropZone.vue";

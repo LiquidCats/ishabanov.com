@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {ArrowDownOnSquareIcon, ArrowLeftIcon, EyeIcon, EyeSlashIcon} from "@heroicons/vue/20/solid";
+import {ArrowDownOnSquareIcon, ArrowLeftIcon, EyeIcon, EyeSlashIcon} from "@heroicons/vue/24/outline";
 //
 import Btn from "../../atoms/Btn.vue";
 //
@@ -52,27 +52,17 @@ const shouldDisable = computed(() =>
     <FloatingPanel class="my-3">
         <div><BackButton /></div>
 
-        <div class="ml-auto">
-            <slot :disabled="shouldDisable"></slot>
-        </div>
+        <slot :disabled="shouldDisable"></slot>
 
-        <div>
-            <Btn :type="postState.item.is_draft?'success':'warning'" @click.prevent="changeState" :disabled="shouldDisable" v-if="postId">
-                <span class="flex flex-row items-center justify-center gap-1"
-                      v-if="postState.item.is_draft">
-                    <EyeIcon class="size-6" />
-                    <span class="hidden md:inline">Publish</span>
-                </span>
-                <span class="flex flex-row items-center justify-center gap-1"
-                      v-else>
-                    <EyeSlashIcon class="size-6" />
-                    <span class="hidden md:inline">Hide</span>
-                </span>
-            </Btn>
-        </div>
-
-        <div><SaveButton @click.prevent="savePost" :disabled="shouldDisable"/></div>
-
+        <Btn :icon="postState.item.is_draft ? 'EyeIcon' : 'EyeSlashIcon'"
+             :type="postState.item.is_draft?'success':'warning'"
+             @click.prevent="changeState"
+             :disabled="shouldDisable"
+             class="ml-auto"
+             v-if="postId">
+            <span class="hidden md:inline">Hide</span>
+        </Btn>
+        <SaveButton @click.prevent="savePost" :disabled="shouldDisable"/>
     </FloatingPanel>
 </template>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {Colors} from "../../types/colors";
-import {XMarkIcon} from "@heroicons/vue/20/solid";
+import {XMarkIcon} from "@heroicons/vue/24/outline";
 
 interface Props {
     type?: Colors

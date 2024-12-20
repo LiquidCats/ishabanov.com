@@ -5,7 +5,7 @@ import {ListTag, listTags} from "../../../../types/tags";
 import EditorBlock from "../EditorBlock.vue";
 import TagSelector from "../TagSelector.vue";
 import ListItem from "./ListItem.vue";
-import {PlusIcon} from "@heroicons/vue/20/solid";
+import {PlusIcon} from "@heroicons/vue/24/outline";
 import Btn from "../../../atoms/Btn.vue";
 import {idMapper} from "../../../../utils/idMapper";
 import {emptyBlocks} from "../../../../utils/blocks/getters";

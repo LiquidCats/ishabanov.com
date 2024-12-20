@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid"
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/outline"
 import {ResponseLinks} from "../../types/api";
 import Btn from "../atoms/Btn.vue";
 import {Colors} from "../../types/colors";

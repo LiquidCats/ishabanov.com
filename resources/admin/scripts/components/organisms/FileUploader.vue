@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {ArrowUpOnSquareIcon} from "@heroicons/vue/20/solid";
+import {ArrowUpOnSquareIcon} from "@heroicons/vue/24/outline";
 import DropZone from "../molecules/DropZone.vue";
 import {Colors} from "../../types/colors";
 import FilePreview from "../molecules/File/FilePreview.vue";

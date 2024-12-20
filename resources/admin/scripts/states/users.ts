@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import UserApi from "../api/users";
-import {UserResource} from "../types/data";
+import {Post, UserResource} from "../types/data";
 import {ResponseLinks} from "../types/api";
 import useNotificationState from "./notfications";
 
@@ -60,6 +60,8 @@ const useUsersState = defineStore<'admin.users', State, any, Actions>('admin.use
             try {
                 this.status.userRemoving = [...this.status.userRemoving, userId]
                 await UserApi.remove(userId)
+
+                this.items = this.items.filter(u => u.id !== userId)
             } catch (e) {
                 const notifications = useNotificationState()
 
@@ -70,14 +72,18 @@ const useUsersState = defineStore<'admin.users', State, any, Actions>('admin.use
         },
         async verify(userId: number): Promise<void> {
             try {
-                this.status.userRemoving = [...this.status.userRemoving, userId]
-                await UserApi.verify(userId)
+                this.status.userVerifying = [...this.status.userVerifying, userId]
+                const {data: user} = await UserApi.verify(userId)
+
+                const index = this.items.findIndex((u: UserResource) => u.id === user.id)
+
+                this.items[index] = user
             } catch (e) {
                 const notifications = useNotificationState()
 
                 notifications.pushError(e as Error)
             } finally {
-                this.status.userRemoving = this.status.userRemoving.filter(i => i != userId)
+                this.status.userVerifying = this.status.userVerifying.filter(i => i != userId)
             }
         }
     }

@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import {Colors} from "../../types/colors";
 import {ButtonHTMLAttributes} from "vue";
+import {Icons} from "../../utils/icons";
 
 interface Props extends /* @vue-ignore */ Partial<Omit<ButtonHTMLAttributes, "type">> {
     type?: keyof typeof Colors | 'default',
     size?: keyof typeof sizes | 'base',
+    icon?: keyof typeof Icons,
 }
 
 withDefaults(defineProps<Props>(), {
     type: 'default',
     size: 'base',
+    icon: null
 })
 
 const sizes = {
-    base: 'py-1.5',
-    small: 'py-0.5 text-sm',
+    base: 'py-1.5 px-3',
+    small: 'py-1 px-2 text-sm',
 }
 
 const types = {
@@ -26,12 +29,14 @@ const types = {
     [Colors.light]: 'bg-neutral-300 hover:bg-neutral-400 text-neutral-800',
     default: 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800',
 }
+
 </script>
 
 <template>
     <button type="button"
-            class="flex gap-1 justify-center items-center px-3 py-1.5 rounded-md duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed"
+            class="inline-flex gap-1 justify-center items-center rounded-md duration-300 disabled:text-neutral-500 disabled:bg-slate-300 disabled:cursor-not-allowed"
             :class="`${types[type] ?? types.default} ${sizes[size] ?? sizes.base}`">
+        <component v-if="icon" :is="Icons[icon]"  class="size-4"/>
         <slot></slot>
     </button>
 </template>

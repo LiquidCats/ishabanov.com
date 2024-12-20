@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {onMounted, ref, watch} from "vue";
-import {ChevronUpIcon, ChevronDownIcon, XMarkIcon, ArrowDownOnSquareIcon, TrashIcon, PencilSquareIcon} from "@heroicons/vue/20/solid";
+import {ChevronUpIcon, ChevronDownIcon, XMarkIcon, ArrowDownOnSquareIcon, TrashIcon, PencilSquareIcon} from "@heroicons/vue/24/outline";
 //
 import type {Tag as TagType} from "../../types/data";
 import {Colors} from "../../types/colors";
@@ -20,6 +20,8 @@ import {SubscriptionCallback} from "pinia";
 import Backdrop from "../atoms/Backdrop.vue";
 import LoadingPlaceholder from "../atoms/LoadingPlaceholder.vue";
 import NothingFound from "../atoms/NothingFound.vue";
+import Paper from "../atoms/Paper.vue";
+import DeleteButton from "../molecules/Buttons/DeleteButton.vue";
 
 const tagsState = useTagsState()
 
@@ -72,20 +74,16 @@ async function handleSave() {
                        placeholder="Slug"/>
         </div>
         <div class="flex justify-end gap-2">
-            <Btn :type="Colors.dark" class="text-sm mr-auto"
+            <Btn :icon="showSlugField ? 'ChevronUpIcon': 'ChevronDownIcon'" type="dark"
                  @click="showSlugField = !showSlugField">
-                <ChevronUpIcon class="size-6" v-if="showSlugField"/>
-                <ChevronDownIcon class="size-6" v-if="!showSlugField"/>
                 Slug
             </Btn>
-            <Btn :type="Colors.danger" class="text-sm"
+            <Btn icon="XMarkIcon" type="danger"
                  @click="tagsState.item.id = null; tagsState.item.name = ''; tagsState.item.slug = ''">
-                <XMarkIcon class="size-6"/>
                 Clean
             </Btn>
-            <Btn :type="Colors.primary" class="text-sm"
+            <Btn icon="ArrowDownOnSquareIcon" type="primary" class="text-sm"
                  @click="handleSave()">
-                <ArrowDownOnSquareIcon class="size-6"/>
                 Save
             </Btn>
         </div>
@@ -93,7 +91,7 @@ async function handleSave() {
     <Backdrop class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         <LoadingPlaceholder class="md:col-span-2" v-if="tagsState.status.tagsLoading" />
         <NothingFound class="md:col-span-2" v-else-if="tagsState.items.length === 0"/>
-        <div class="bg-stone-50 dark:bg-zinc-700 rounded-md p-3 flex gap-3" v-for="tag in tagsState.items">
+        <Paper class="flex gap-3" v-for="tag in tagsState.items">
 
             <div><Tag :type="Colors.dark">ID: {{ tag.id }}</Tag></div>
             <div>
@@ -101,23 +99,13 @@ async function handleSave() {
                 <small class="text-xs dark:text-gray-300 m-0 line-clamp-1">Slug: {{ tag.slug }}</small>
             </div>
 
-
             <div class="flex gap-1 ml-auto">
-                <div>
-                    <Btn :type="Colors.primary"
-                     @click="handleEdit(tag)">
-                    <PencilSquareIcon class="size-6 md:size-4"/>
-                </Btn>
-                </div>
-                <div>
-                    <Btn :type="Colors.danger"
-                     :disabled="tagsState.status.tagDeleting.includes(tag.id)"
-                     @click="handleDelete(tag.id)">
-                    <TrashIcon class="size-6 md:size-4" />
-                </Btn>
-                </div>
+                <Btn icon="PencilSquareIcon" type="primary" @click="handleEdit(tag)"/>
+                <DeleteButton
+                    :disabled="tagsState.status.tagDeleting.includes(tag.id)"
+                    @click="handleDelete(tag.id)" />
             </div>
-        </div>
+        </Paper>
     </Backdrop>
 </template>
 

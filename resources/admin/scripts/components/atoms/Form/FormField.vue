@@ -1,26 +1,27 @@
 <script setup lang="ts">
 
 interface Props {
-    modelValue?: string
     failed?: boolean
+    success?: boolean
 }
 
-defineEmits(['update:modelValue'])
+const model = defineModel()
 
 withDefaults(defineProps<Props>(), {
-    modelValue: '',
-    failed: false
+    failed: false,
+    success: false,
 })
 
 </script>
 
 <template>
-    <input class="border text-md rounded-md block w-full p-1.5 bg-neutral-100 dark:bg-zinc-600 border-stone-500 placeholder-gray-400 hover:border-stone-400 dark:text-gray-50 focus:ring-stone-300 focus:border-stone-300 outline-none transition-colors ease-in-out duration-300"
+    <input class="border text-md rounded-md block w-full p-1.5 bg-neutral-100 dark:bg-zinc-600 placeholder-gray-400 dark:text-gray-50 outline-none transition-colors ease-in-out duration-300"
            :class="{
-                'border-red-500': failed
+                'border-red-500 hover:border-red-400 focus:ring-red-300 focus:border-red-300': failed,
+                'border-stone-500 hover:border-stone-400 focus:ring-stone-300 focus:border-stone-300': !failed && !success,
+                'border-green-500 hover:border-green-400 focus:ring-green-300 focus:border-green-300': success && !failed,
             }"
-           :value="modelValue"
-           @input="$emit('update:modelValue', $event?.target?.value)">
+           v-model="model" />
 </template>
 
 <style scoped lang="scss">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {TrashIcon, ArrowUpOnSquareIcon} from "@heroicons/vue/20/solid"
+import {TrashIcon, ArrowUpOnSquareIcon} from "@heroicons/vue/24/outline"
 import {Colors} from "../../../types/colors";
 import formatBytes from "../../../utils/fromBytes";
 import {FileToUpload} from "../../../types/internals";

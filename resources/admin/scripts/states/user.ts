@@ -6,7 +6,11 @@ import useNotificationState from "./notfications";
 
 interface State {
     id: number
-    item: UserResource
+    item: UserResource & {
+        password?: string
+        password_confirmation?: string
+        current_password?: string
+    }
     errors: ValidationErrors,
     status: {
         userLoading: boolean
@@ -18,12 +22,13 @@ interface State {
 
 interface Actions {
     getUser(id: number): Promise<void>
+    create(): Promise<void>
 }
 
 const useUserState = defineStore<string, State, any, Actions>('admin.user', {
     state: () => ({
         id: 0,
-        item: {} as UserResource,
+        item: {} as any,
         errors: {},
         status: {
             userLoading: false,
@@ -53,6 +58,25 @@ const useUserState = defineStore<string, State, any, Actions>('admin.user', {
                 notifications.pushError(e as Error)
             } finally {
                 this.status.userLoading = false
+            }
+        },
+        async create(): Promise<void> {
+            try {
+                this.errors = {}
+                this.status.userSaving = true
+                this.status.userSaved = false
+
+                const response = await UserApi.create(this.item)
+                this.id = response.data.id
+                this.item = response.data
+
+                this.status.userSaved = true
+            } catch (e) {
+                const notifications = useNotificationState()
+                this.errors = e.body.data
+                notifications.pushError(e as Error)
+            } finally {
+                this.status.userSaving = false
             }
         }
     }

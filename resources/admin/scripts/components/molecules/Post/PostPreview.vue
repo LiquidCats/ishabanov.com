@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {PreviewTypes} from "../../../types/data";
-import {PlusIcon, Bars3BottomLeftIcon, ArrowsPointingOutIcon, TrashIcon} from "@heroicons/vue/20/solid";
+import {PlusIcon, Bars3BottomLeftIcon, ArrowsPointingOutIcon, TrashIcon} from "@heroicons/vue/24/outline";
 import Btn from "../../atoms/Btn.vue";
 
 interface Props {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tag from "./Tag.vue";
-import {XMarkIcon} from "@heroicons/vue/20/solid";
+import {XMarkIcon} from "@heroicons/vue/24/outline";
 import {computed, ref, watch} from "vue";
 
 interface Item {

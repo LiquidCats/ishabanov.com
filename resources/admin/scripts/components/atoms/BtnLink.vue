@@ -1,10 +1,12 @@
 <script setup lang="ts">
     import type {Colors} from "../../types/colors";
     import Btn from "./Btn.vue";
+    import {Icons} from "../../utils/icons";
 
     interface Props {
         type: keyof typeof Colors,
         to: string|object,
+        icon?: keyof typeof Icons,
     }
 
     defineProps<Props>()
@@ -12,7 +14,7 @@
 
 <template>
     <router-link type="button" :to="to" :class="'btn btn-' + type">
-        <Btn :type="type"><slot></slot></Btn>
+        <Btn :icon="icon" :type="type"><slot></slot></Btn>
     </router-link>
 </template>
 
