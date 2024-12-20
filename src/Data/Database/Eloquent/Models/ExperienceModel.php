@@ -26,7 +26,7 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $ended_at
  * @property Collection<int, ToolModel> $tools
  */
-class ExperienceModel extends Model implements ExperienceRepositoryContract
+class ExperienceModel extends Model
 {
     use HasFactory;
 

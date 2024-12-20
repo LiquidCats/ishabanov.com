@@ -43,7 +43,6 @@ class FileDomainProvider extends ServiceProvider
 
             return new UploadedFilesStorage($f->disk($disk), $options);
         });
-        $this->app->singleton(FileRepositoryContract::class, FileModel::class);
         $this->app->singleton(FileServiceContract::class, FileService::class);
     }
 }

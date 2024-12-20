@@ -16,7 +16,10 @@ use App\Admin\Presentation\Http\Controllers\Tags\TagListController;
 use App\Admin\Presentation\Http\Controllers\Tags\TagStoreController;
 use App\Admin\Presentation\Http\Controllers\Tags\TagUpdateController;
 use App\Admin\Presentation\Http\Controllers\Users\UserController;
+use App\Admin\Presentation\Http\Controllers\Users\UserDeleteController;
 use App\Admin\Presentation\Http\Controllers\Users\UserListController;
+use App\Admin\Presentation\Http\Controllers\Users\UserStoreController;
+use App\Admin\Presentation\Http\Controllers\Users\UserVerifyController;
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Files\ValueObjects\FileId;
@@ -38,10 +41,18 @@ Route::prefix('users')
     ->name('users.')
     ->group(static function () {
         Route::get('/', UserListController::class)->name('list');
-        // Route::post('/', PostStoreController::class)->name('store');
+        Route::post('/', UserStoreController::class)->name('store');
         Route::get(UserId::asRouteParameter(), UserController::class)->name('show');
-        // Route::put(UserId::asRouteParameter(), PostUpdateController::class)->name('update');
-        // Route::delete(UserId::asRouteParameter(), PostDeleteController::class)->name('delete');
+        Route::put(UserId::asRouteParameter(), PostUpdateController::class)->name('update');
+        Route::delete(UserId::asRouteParameter(), UserDeleteController::class)->name('delete');
+
+        Route::post('/verify/'.UserId::asRouteParameter(), UserVerifyController::class)->name('verify');
+
+        Route::put('/password/'.UserId::asRouteParameter(), UserVerifyController::class)->name('password');
+
+
+        Route::get('/2fa/'.UserId::asRouteParameter(), UserVerifyController::class)->name('2fa.get');
+        Route::put('/2fa/'.UserId::asRouteParameter(), UserVerifyController::class)->name('2fa.reset');
     });
 
 Route::prefix('files')

@@ -5,22 +5,31 @@ declare(strict_types=1);
 namespace App\Domains\Blog\Services;
 
 use App\Data\Database\Eloquent\Models\TagModel;
-use App\Domains\Blog\Contracts\Repositories\TagRepositoryContract;
 use App\Domains\Blog\Contracts\Services\TagServiceContract;
 use App\Domains\Blog\ValueObjects\TagId;
 use App\Domains\Blog\ValueObjects\TagSlug;
+use App\Domains\User\ValueObjets\UserId;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 
 readonly class TagService implements TagServiceContract
 {
-    public function __construct(private TagRepositoryContract $tagRepository) {}
-
     public function create(string $name, ?string $slug): TagModel
     {
-        return $this->tagRepository->create($name, TagSlug::fromString($slug ?: $name));
+        $model = new TagModel;
+
+        $model->name = $name;
+        $model->slug = TagSlug::fromString($slug ?? $name);
+        $model->created_by = new UserId(Auth::id());
+        $model->updated_by = new UserId(Auth::id());
+
+        $model->save();
+
+        return $model;
     }
 
     /**
@@ -30,8 +39,11 @@ readonly class TagService implements TagServiceContract
     {
         $slugObject = TagSlug::fromString($slug ?: $name);
 
-        $foundBySlug = $this->tagRepository->findBySlug($slugObject);
-        $foundById = $this->tagRepository->findById($tagId);
+        $foundBySlug = TagModel::query()
+            ->where('slug', '=', $tagId->value)
+            ->first($slugObject);
+
+        $foundById = TagModel::query()->findOrFail($tagId);
 
         if ($foundBySlug !== null && $foundById->getKey() !== $foundBySlug->getKey()) {
             $messages = new MessageBag;
@@ -52,11 +64,11 @@ readonly class TagService implements TagServiceContract
 
     public function delete(TagId ...$tagId): Collection
     {
-        $models = $this->tagRepository->findManyById(...$tagId);
+        $models = TagModel::query()->findOrFail($tagId);
 
         DB::transaction(function () use ($models) {
             foreach ($models as $model) {
-                $this->tagRepository->removeById(new TagId($model->getKey()));
+                $model->delete();
             }
         });
 
@@ -65,7 +77,16 @@ readonly class TagService implements TagServiceContract
 
     public function search(string $query = ''): Collection
     {
-        return $this->tagRepository
-            ->searchByNameOrSlug($query, TagSlug::fromString($query));
+        if ($query === '') {
+            return TagModel::query()
+                ->get();
+        }
+
+        return TagModel::query()
+            ->where(fn (Builder $q) => $q
+                ->where('name', 'like', $query.'%')
+                ->orWhere('slug', 'like', TagSlug::fromString($query)->value.'%')
+            )
+            ->get();
     }
 }

@@ -6,7 +6,6 @@ use App\Data\Database\Eloquent\Casts\FileIdCast;
 use App\Data\Database\Eloquent\Casts\PostIdCast;
 use App\Data\Database\Eloquent\Casts\UserIdCast;
 use App\Domains\Blocks\Contracts\PresenterContract;
-use App\Domains\Blog\Contracts\Repositories\PostRepositoryContract;
 use App\Domains\Blog\Dto\PostDto;
 use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
@@ -14,7 +13,6 @@ use App\Domains\Files\ValueObjects\FileId;
 use App\Domains\User\ValueObjets\UserId;
 use Carbon\Carbon;
 use Database\Factories\PostFactory;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -49,9 +47,13 @@ use function strip_tags;
  * @property UserModel|null $author
  * @property Collection<int, TagModel> $tags
  * @property FileModel|null $previewImage
+ *
+ * @method static PostModel query()
  * @method PostId getKey()
+ *
+ * @mixin Builder
  */
-class PostModel extends Model implements PostRepositoryContract
+class PostModel extends Model
 {
     use HasFactory;
 
@@ -85,7 +87,7 @@ class PostModel extends Model implements PostRepositoryContract
     {
         return Attribute::make(
             get: static function (mixed $value, array $attributes): int {
-                $wordsCount = str_word_count(strip_tags($attributes['preview']));
+                $wordsCount = str_word_count(strip_tags($attributes['preview'] ?? ''));
                 $wordsCount += str_word_count(strip_tags($attributes['blocks'] ?? ''));
 
                 $averageReadingSpeed = 200; // You can adjust this value
@@ -120,46 +122,10 @@ class PostModel extends Model implements PostRepositoryContract
         return PostFactory::new();
     }
 
-    // Repository
-    public function findById(PostId $id): PostModel
-    {
-        return $this->newQuery()
-            ->with('tags')
-            ->with('previewImage')
-            ->findOrFail($id);
-    }
-
-    public function getLatest(): LengthAwarePaginator
-    {
-        return $this->newQuery()
-            ->select(['id', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
-            ->with('tags')
-            ->with('previewImage')
-            ->latest('id')
-            ->paginate(perPage: 10);
-    }
-
-    public function getWithTags(Collection $tags = new Collection): LengthAwarePaginator
-    {
-        return PostModel::query()
-            ->select(['id', 'preview', 'title', 'preview_image_type', 'preview_image_id', 'published_at'])
-            ->with('tags')
-            ->with('previewImage')
-            ->where('published_at', '<=', now())
-            ->where('is_draft', 0)
-            ->when($tags->isNotEmpty(), fn (Builder $q) => $q
-                ->whereHas('tags', fn (Builder $q) => $q
-                    ->whereIn('slug', $tags)
-                )
-            )
-            ->latest('id')
-            ->paginate(perPage: 6);
-    }
-
     /**
      * @param  UserId<int>  $userId
      */
-    public function create(UserId $userId, PostDto $dto): PostModel
+    public function create(PostDto $dto): PostModel
     {
         return (new self)->saveFromDto($dto);
     }
@@ -169,7 +135,7 @@ class PostModel extends Model implements PostRepositoryContract
      */
     public function updateById(PostId $id, PostDto $dto): PostModel
     {
-        return $this->findById($id)->saveFromDto($dto);
+        return $this->find($id)->saveFromDto($dto);
     }
 
     private function saveFromDto(PostDto $dto): static
@@ -191,62 +157,5 @@ class PostModel extends Model implements PostRepositoryContract
         $this->save();
 
         return $this;
-    }
-
-    public function deleteById(PostId $id): bool
-    {
-        return PostModel::destroy($id->value) === 1;
-    }
-
-    public function getPrevious(PostId $postId): ?PostModel
-    {
-        return $this->newQuery()
-            ->select(['title', 'id'])
-            ->where('id', '<', $postId->value)
-            ->latest('id')
-            ->where('is_draft', 0)
-            ->where('published_at', '<=', now())
-            ->first();
-    }
-
-    public function getNext(PostId $postId): ?PostModel
-    {
-        return $this->newQuery()
-            ->select(['title', 'id'])
-            ->where('id', '>', $postId)
-            ->oldest('id')
-            ->where('is_draft', 0)
-            ->where('published_at', '<=', now())
-            ->first();
-    }
-
-    /**
-     * @param  Collection<int, TagModel>  $tags
-     * @return Collection<int, PostModel>
-     */
-    public function getSimilarByTag(PostId $postId, Collection $tags): Collection
-    {
-        return $this->newQuery()
-            ->select(['title', 'preview', 'published_at', 'id'])
-            ->whereHas('tags', static function (Builder $builder) use ($tags) {
-                $builder->where(function (Builder $builder) use ($tags) {
-                    foreach ($tags as $tag) {
-                        $builder->orWhere('id', $tag->getKey());
-                    }
-                });
-            })
-            ->where('id', '!=', $postId)
-            ->where('is_draft', 0)
-            ->where('published_at', '<=', now())
-            ->latest('id')
-            ->limit(3)
-            ->get();
-    }
-
-    public function findManyById(PostId ...$id): Collection
-    {
-        return $this->newQuery()
-            ->whereIn($this->getKeyName(), $id)
-            ->get();
     }
 }

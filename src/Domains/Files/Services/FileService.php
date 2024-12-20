@@ -5,20 +5,23 @@ declare(strict_types=1);
 namespace App\Domains\Files\Services;
 
 use App\Data\Database\Eloquent\Models\FileModel;
-use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Contracts\Services\FileServiceContract;
+use App\Domains\Files\Enums\AllowedTypes;
 use App\Domains\Files\Enums\FilterTypes;
 use App\Domains\Files\ValueObjects\FileId;
+use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+
+use function sha1_file;
 
 readonly class FileService implements FileServiceContract
 {
     public function __construct(
         private UploadedFilesStorageContract $storageRepository,
-        private FileRepositoryContract $fileRepository,
     ) {}
 
     public function storeMany(array $data = []): Collection
@@ -31,11 +34,15 @@ readonly class FileService implements FileServiceContract
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $item['file'];
 
-            if ($this->fileRepository->isUploaded($uploadedFile)) {
+            if ($this->isUploaded($uploadedFile)) {
+                $file = FileModel::query()->findOrFail(new FileId(sha1_file($uploadedFile->path())));
+                $processedFiles->push($file);
+
                 continue;
             }
+
             if ($this->storageRepository->upload($item['file'])) {
-                $file = $this->fileRepository->create($item['name'], $item['file']);
+                $file = $this->create($item['name'], $item['file']);
                 $processedFiles->push($file);
             }
         }
@@ -45,9 +52,10 @@ readonly class FileService implements FileServiceContract
 
     public function drop(FileId $fileId): FileModel
     {
-        $file = $this->fileRepository->findById($fileId);
+        /** @var FileModel $file */
+        $file = FileModel::query()->findOrFail($fileId);
 
-        if ($this->fileRepository->removeById($fileId)) {
+        if ($file->delete()) {
             $this->storageRepository->drop($file->path);
         }
 
@@ -57,9 +65,37 @@ readonly class FileService implements FileServiceContract
     public function list(?FilterTypes $type = null): LengthAwarePaginator|Collection
     {
         return match ($type) {
-            FilterTypes::IMAGES => $this->fileRepository->getAllImages(),
-            default => $this->fileRepository->getAllPaginated(),
+            FilterTypes::IMAGES => FileModel::query()
+                ->whereIn('type', AllowedTypes::images())
+                ->get(),
+            default => FileModel::query()
+                ->paginate(),
         };
 
+    }
+
+    private function create(string $filename, UploadedFile $uploadedFile): FileModel
+    {
+        $model = new FileModel;
+
+        $model->hash = new FileId(sha1_file($uploadedFile->path()));
+        $model->type = $uploadedFile->getMimeType();
+        $model->path = $uploadedFile->hashName();
+        $model->file_size = $uploadedFile->getSize();
+        $model->extension = $uploadedFile->getClientOriginalExtension();
+        $model->name = $filename;
+        $model->created_by = new UserId(Auth::id());
+
+        $model->save();
+
+        return $model;
+    }
+
+
+    public function isUploaded(UploadedFile $uploadedFile): bool
+    {
+        return FileModel::query()
+            ->where('hash', sha1_file($uploadedFile->path()))
+            ->exists();
     }
 }

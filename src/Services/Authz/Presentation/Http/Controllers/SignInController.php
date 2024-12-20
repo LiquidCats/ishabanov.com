@@ -47,15 +47,18 @@ class SignInController extends Controller
         $user = $request->user();
         $code = $request->get('2fa_otp');
 
-        if (! $this->authenticator->verify(new SecretKey($user->g2fa_secret->getValue()), $code)) {
-            Auth::logout();
+        if ($user->g2fa_secret) {
+            if (! $this->authenticator->verify($user->g2fa_secret, $code)) {
+                Auth::logout();
 
-            return back()
-                ->withErrors([
-                    '2fa_otp' => 'Incorrect TOTP',
-                ])
-                ->onlyInput('email');
+                return back()
+                    ->withErrors([
+                        '2fa_otp' => 'Incorrect TOTP',
+                    ])
+                    ->onlyInput('email');
+            }
         }
+
 
         $request->session()->regenerate();
 

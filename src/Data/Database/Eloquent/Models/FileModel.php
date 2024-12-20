@@ -6,7 +6,6 @@ namespace App\Data\Database\Eloquent\Models;
 
 use App\Data\Database\Eloquent\Casts\FileIdCast;
 use App\Data\Database\Eloquent\Casts\UserIdCast;
-use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
 use App\Domains\Files\Contracts\Repositories\UploadedFilesStorageContract;
 use App\Domains\Files\Enums\AllowedTypes;
 use App\Domains\Files\ValueObjects\FileId;
@@ -36,7 +35,7 @@ use function sha1_file;
  *
  * @mixin Builder
  */
-class FileModel extends Model implements FileRepositoryContract
+class FileModel extends Model
 {
     use HasFactory;
 
@@ -63,52 +62,5 @@ class FileModel extends Model implements FileRepositoryContract
     protected static function newFactory(): FileFactory
     {
         return FileFactory::new();
-    }
-
-    public function create(string $filename, UploadedFile $uploadedFile): FileModel
-    {
-        $model = new FileModel;
-
-        $model->hash = new FileId(sha1_file($uploadedFile->path()));
-        $model->type = $uploadedFile->getMimeType();
-        $model->path = $uploadedFile->hashName();
-        $model->file_size = $uploadedFile->getSize();
-        $model->extension = $uploadedFile->getClientOriginalExtension();
-        $model->name = $filename;
-        $model->created_by = new UserId(Auth::id());
-
-        $model->save();
-
-        return $model;
-    }
-
-    public function findById(FileId $fileId): self
-    {
-        return static::query()->findOrFail($fileId);
-    }
-
-    public function removeById(FileId $fileId): bool
-    {
-        return self::destroy($fileId) > 0;
-    }
-
-    public function getAllPaginated(): LengthAwarePaginator
-    {
-        return $this->newQuery()
-            ->paginate();
-    }
-
-    public function getAllImages(): Collection
-    {
-        return $this->newQuery()
-            ->whereIn('type', AllowedTypes::images())
-            ->get();
-    }
-
-    public function isUploaded(UploadedFile $uploadedFile): bool
-    {
-        return $this->newQuery()
-            ->where('hash', sha1_file($uploadedFile->path()))
-            ->exists();
     }
 }

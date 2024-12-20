@@ -33,4 +33,7 @@ interface PostServiceContract
     public function paginate(): LengthAwarePaginator;
 
     public function getPost(PostId $postId): PostModel;
+
+    public function getArticle(PostId $postId): array;
+    public function getArticles(Collection $tags = new Collection): LengthAwarePaginator;
 }
