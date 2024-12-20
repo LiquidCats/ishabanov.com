@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             'email' => $this->resource->email,
             'is_current_user' => $user === null ? null : $this->resource->getKey()->equals($user->getKey()),
             'is_verified' => $this->resource?->email_verified_at !== null,
+            'has_2fa' => $this->resource?->g2fa_secret !== null,
             //
             'posts_count' => $this->resource->getAttribute('posts_count'),
             //
