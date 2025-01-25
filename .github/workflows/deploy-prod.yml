@@ -41,7 +41,7 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            BUILD_VERION=${{ github.ref_name }} \
+            BUILD_VERSION=${{ github.ref_name }} \
               docker stack deploy \
                 --with-registry-auth \
                 --compose-file ~/deploy/ishabanov/docker-compose.prod.yml \
