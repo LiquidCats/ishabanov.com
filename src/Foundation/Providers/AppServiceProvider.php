@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         Vite::useBuildDirectory('static');
-        if ($this->app->environment('production')) {
+        if ($this->app->environment('production', 'testing')) {
             URL::forceScheme('https');
         }
     }
