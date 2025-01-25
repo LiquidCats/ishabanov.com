@@ -30,8 +30,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
+          port: ${{ secrets.VPS_PORT }}
           script: docker pull ghcr.io/liquidcats/ishabanov.com:${{ github.ref_name }}
 
       - name: Update Image
@@ -40,8 +39,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.VPS_PRIVATE_FINGERPRINT }}
-          port: 22
+          port: ${{ secrets.VPS_PORT }}
           script: |
             BUILD_VERION=${{ github.ref_name }} \
               docker stack deploy \
