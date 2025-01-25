@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'stderr'],
+            'channels' => ['daily', 'stdout'],
             'ignore_exceptions' => false,
         ],
 
@@ -70,13 +70,13 @@ return [
             'days' => 3,
         ],
 
-        'stderr' => [
+        'stdout' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
-                'stream' => 'php://stderr',
+                'stream' => 'php://stdout',
             ],
         ],
 
