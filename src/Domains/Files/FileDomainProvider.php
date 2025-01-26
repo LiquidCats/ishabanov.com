@@ -37,8 +37,8 @@ class FileDomainProvider extends ServiceProvider
             $disk = $config->get('filesystems.default');
 
             $options = new Options(
-                prepend: 'ishabanov'.DIRECTORY_SEPARATOR.$app->environment(),
-                path: $config->get('filesystems.upload_path'),
+                prepend: (string) $config->get('filesystems.prepend_path'),
+                path: (string) $config->get('filesystems.upload_path'),
             );
 
             return new UploadedFilesStorage($f->disk($disk), $options);
