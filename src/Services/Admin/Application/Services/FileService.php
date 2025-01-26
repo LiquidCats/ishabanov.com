@@ -13,10 +13,12 @@ use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Psr\Log\LoggerInterface;
 
 readonly class FileService implements FileServiceContract
 {
     public function __construct(
+        private LoggerInterface $logger,
         private UploadedFilesStorageContract $storageRepository,
         private FileRepositoryContract $fileRepository,
     ) {
@@ -33,10 +35,13 @@ readonly class FileService implements FileServiceContract
             $uploadedFile = $item['file'];
 
             if ($this->fileRepository->isUploaded($uploadedFile)) {
+                $this->logger->info("file is already uploaded", ['file' => $item['name']]);
                 continue;
             }
-            if ($this->storageRepository->upload($item['file'])) {
-                $file = $this->fileRepository->create($item['name'], $item['file']);
+            if ($this->storageRepository->upload($uploadedFile)) {
+                $this->logger->info("file is uploaded", ['file' => $item['name']]);
+
+                $file = $this->fileRepository->create($item['name'], $uploadedFile);
                 $processedFiles->push($file);
             }
         }
