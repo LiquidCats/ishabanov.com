@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Blocks\Presenters;
 
 use App\Domains\Blocks\Contracts\PresenterContract;
-use App\Domains\Blocks\Contracts\StyleValueContainer;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Styles\BlockStyleEnum;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
@@ -52,9 +50,7 @@ readonly class ImagePresenter implements Arrayable, PresenterContract
         $content->alt = trim(strip_tags($data['content']['alt'] ?? ''));
         $content->caption = trim(strip_tags($data['content']['caption'] ?? ''));
 
-        $styles = Collection::make($data['styles'] ?? [])
-            ->map(BlockStyleEnum::tryFrom(...))
-            ->filter();
+        $styles = Collection::make($data['styles'] ?? []);
 
         $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
@@ -78,9 +74,7 @@ readonly class ImagePresenter implements Arrayable, PresenterContract
                 'alt' => $this->content->alt,
                 'caption' => $this->content->caption,
             ],
-            'styles' => $this->styles
-                ->map(fn (StyleValueContainer $e) => $e->value)
-                ->toArray(),
+            'styles' => $this->styles->toArray(),
         ];
     }
 }

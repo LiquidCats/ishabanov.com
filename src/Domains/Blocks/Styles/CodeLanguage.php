@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Styles;
 
-use App\Domains\Blocks\Contracts\StyleValueContainer;
 
-enum CodeLanguage: string implements StyleValueContainer
+enum CodeLanguage: string
 {
     case JAVASCRIPT = 'javascript';
     case BASH = 'bash';

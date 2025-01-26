@@ -8,10 +8,13 @@ use App\Domains\Blocks\Contracts\PresenterContract;
 use App\Domains\Blocks\Enums\BlockType;
 use App\Domains\Blocks\Enums\HeadingTag;
 use App\Domains\Blocks\Styles\BlockStyleEnum;
+use App\Domains\Blocks\Styles\HeadingStyleType;
 use App\Foundation\Enums\AllowedTags;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
+use stdClass;
 use Symfony\Component\Uid\AbstractUid;
 use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
@@ -21,7 +24,6 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
     public function __construct(
         public BlockType $type,
         public AbstractUid $key,
-        public HeadingTag $tag,
         public string $content,
         public Collection $styles
     ) {}
@@ -31,11 +33,8 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
         return [
             'type' => $this->type->value,
             'key' => $this->key->toRfc4122(),
-            'tag' => $this->tag->value,
             'content' => $this->content,
-            'styles' => $this->styles
-                ->map(fn ($e) => $e->value)
-                ->toArray(),
+            'styles' => $this->styles->toArray(),
         ];
     }
 
@@ -44,16 +43,19 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
         #[ArrayShape([
             'key' => 'string',
             'type' => 'string',
-            'tag' => 'string',
             'content' => 'string',
-            'styles' => ['string'],
+            'styles' => [
+                'type' => 'string',
+            ],
         ])] array $data,
     ): self {
         Assert::false(empty($data), 'cant parse incoming data');
 
-        $styles = Collection::make($data['styles'] ?? [])
-            ->map(BlockStyleEnum::tryFrom(...))
-            ->filter();
+        $rawStyleType = Arr::get($data, 'styles.type', HeadingStyleType::PRIMARY->value);
+
+        $styles = Collection::make([
+            'type' => HeadingStyleType::tryFrom($rawStyleType),
+        ]);
 
         $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
@@ -62,7 +64,6 @@ readonly class HeadingPresenter implements Arrayable, PresenterContract
         return new static(
             type: $type,
             key: $key,
-            tag: HeadingTag::from($data['tag']),
             content: AllowedTags::sanitize($data['content'] ?? ''),
             styles: $styles,
         );

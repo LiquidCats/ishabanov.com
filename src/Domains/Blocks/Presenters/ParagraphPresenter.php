@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Domains\Blocks\Presenters;
 
 use App\Domains\Blocks\Contracts\PresenterContract;
-use App\Domains\Blocks\Contracts\StyleValueContainer;
 use App\Domains\Blocks\Enums\BlockType;
-use App\Domains\Blocks\Styles\BlockStyleEnum;
+use App\Domains\Blocks\Styles\ParagraphStyleType;
 use App\Foundation\Enums\AllowedTags;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\Uid\AbstractUid;
@@ -31,9 +31,7 @@ readonly class ParagraphPresenter implements Arrayable, PresenterContract
             'type' => $this->type->value,
             'key' => $this->key->toRfc4122(),
             'content' => $this->content,
-            'styles' => $this->styles
-                ->map(fn (StyleValueContainer $e) => $e->value)
-                ->toArray(),
+            'styles' => $this->styles->toArray(),
         ];
     }
 
@@ -42,14 +40,17 @@ readonly class ParagraphPresenter implements Arrayable, PresenterContract
         #[ArrayShape([
             'key' => 'string',
             'content' => 'string',
-            'styles' => ['string'],
+            'styles' => [
+                'type' => 'string',
+            ],
         ])] array $data,
     ): self {
         Assert::false(empty($data), 'cant parse incoming data');
 
-        $styles = Collection::make($data['styles'] ?? [])
-            ->map(BlockStyleEnum::tryFrom(...))
-            ->filter();
+        $rawStyleType = Arr::get($data, 'styles.type', ParagraphStyleType::UNSTYLED->value);
+        $styles = Collection::make([
+            'type' => ParagraphStyleType::tryFrom($rawStyleType),
+        ]);
 
         $key = Uuid::isValid($data['key'] ?? '')
            ? Uuid::fromString($data['key'])
