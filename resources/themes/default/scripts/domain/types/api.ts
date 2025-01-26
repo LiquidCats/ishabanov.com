@@ -47,6 +47,12 @@ export interface PostResource {
     readonly previewImage: FileResource
 }
 
+export interface PostMeta {
+    readonly similar: Array<PostResource>
+    readonly previous: PostResource
+    readonly next: PostResource
+}
+
 export interface PostBlockResource<C extends any, T = undefined> {
     readonly key: string,
     readonly tag?: T,
@@ -74,10 +80,10 @@ export type ValidationErrors = {
     readonly [key: string]: string[]
 }
 
-export interface APIResponse<T extends any> {
+export interface APIResponse<T extends any, M = ResponsePaginationMeta> {
     readonly data: T
     readonly links: ResponseLinks
-    readonly meta: ResponsePaginationMeta
+    readonly meta: M
 }
 
 export interface ResponseLinks {

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-
 import Background from "../../../atoms/illustration/Background.vue";
 import AppLink from "../../../atoms/AppLink.vue";
 import {RouteNames} from "../../../../domain/enums/routes";

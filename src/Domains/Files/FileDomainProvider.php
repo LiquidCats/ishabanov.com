@@ -37,7 +37,6 @@ class FileDomainProvider extends ServiceProvider
             $disk = $config->get('filesystems.default');
 
             $options = new Options(
-                prepend: (string) $config->get('filesystems.prepend_path'),
                 path: (string) $config->get('filesystems.upload_path'),
             );
 

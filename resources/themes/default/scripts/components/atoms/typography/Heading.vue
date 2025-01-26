@@ -17,7 +17,7 @@ const classes = computed(() => [props.family, props.size, props.weight].filter(B
 </script>
 
 <template>
-    <component :is="`h${level}`" :class="classes">
+    <component :is="`h${level}`" :class="classes" class="mb-1.5 mt-1">
         <slot/>
     </component>
 </template>

@@ -42,6 +42,10 @@ const useArticleState = defineStore<'app.article', State, any, Actions>('app.art
                 const response = await PostApi.getById(id)
 
                 this.item = response.data
+                this.meta.similar = response.meta?.similar
+                this.meta.prev = response.meta?.previous
+                this.meta.next = response.meta?.next
+
                 this.status.loaded = true;
             } catch (e) {
                 console.error(e)

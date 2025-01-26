@@ -15,7 +15,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-
+use function dump;
 use function now;
 
 readonly class PostService implements PostServiceContract
@@ -128,7 +128,7 @@ readonly class PostService implements PostServiceContract
             ->findOrFail($postId);
 
         return [
-            'post' => $post,
+            'model' => $post,
             'previous' => $this->getPrevious($postId),
             'next' => $this->getNext($postId),
             'similar' => $this->getSimilarByTag($postId, $post->tags),
