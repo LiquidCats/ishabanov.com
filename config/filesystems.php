@@ -56,7 +56,7 @@ return [
             'secret' => DockerSecret::fromEnv('AWS_SECRET_ACCESS_KEY')->getValue(),
             'region' => DockerSecret::fromEnv('AWS_DEFAULT_REGION')->getValue(),
             'bucket' => DockerSecret::fromEnv('AWS_BUCKET')->getValue(),
-            // 'url' => DockerSecret::fromEnv('AWS_URL')->getValue(),
+            'url' => DockerSecret::fromEnv('AWS_URL')->getValue(),
             'endpoint' => DockerSecret::fromEnv('AWS_ENDPOINT')->getValue(),
             'use_path_style_endpoint' => DockerSecret::fromEnv('AWS_USE_PATH_STYLE_ENDPOINT', true)->getValue(),
             'throw' => true,
