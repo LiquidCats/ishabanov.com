@@ -1,4 +1,3 @@
-import {BlockStyle} from "./style";
 import {FunctionalComponent, HTMLAttributes, VNodeProps} from "vue";
 
 export enum BlockType {
@@ -12,12 +11,13 @@ export enum BlockType {
     RAW = 'raw',
 }
 
-export interface Block<C = string, T = undefined> {
+export interface Block<C = string, ST = undefined> {
     type: BlockType
     key: string
     content: C
-    tag: T
-    styles: Array<keyof typeof BlockStyle>
+    styles: {
+        type?: ST
+    }
 }
 
 export interface BlockPreview {

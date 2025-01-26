@@ -9,10 +9,7 @@ import Btn from "../../../atoms/Btn.vue";
 
 import {File} from "../../../../types/data";
 import {Block, BlockType, ImageContent} from "../../../../types/blocks";
-import FormField from "../../../atoms/Form/FormField.vue";
-import FontFamilySelector from "../FontFamilySelector.vue";
-import FontSizeSelector from "../FontSizeSelector.vue";
-import FontWeightSelector from "../FontWeightSelector.vue";
+import FormField from "@admin/components/atoms/Form/FormField.vue";
 
 interface Props {
     block: Block<ImageContent>
@@ -49,9 +46,6 @@ const caption = computed({
                 <PhotoIcon class="size-6"/>
                 <span class="hidden md:inline">Select Image</span>
             </Btn>
-            <FontFamilySelector v-model="block.styles"/>
-            <FontWeightSelector v-model="block.styles"/>
-            <FontSizeSelector v-model="block.styles"/>
         </template>
         <div class="grid md:grid-cols-3 grid-cols-1 gap-1">
             <div>

@@ -1,17 +1,21 @@
 <script setup lang="ts">
 
-import {Block, BlockType} from "../../../../types/blocks";
-import {ListTag, listTags} from "../../../../types/tags";
-import EditorBlock from "../EditorBlock.vue";
-import TagSelector from "../TagSelector.vue";
-import ListItem from "./ListItem.vue";
+import {ListStyleType} from "@admin/types/blockTypes";
+
 import {PlusIcon} from "@heroicons/vue/24/outline";
-import Btn from "../../../atoms/Btn.vue";
-import {idMapper} from "../../../../utils/idMapper";
-import {emptyBlocks} from "../../../../utils/blocks/getters";
+//
+import EditorBlock from "@admin/components/molecules/Editor/EditorBlock.vue";
+import ListStyleSelector from "@admin/components/molecules/Editor/Selectors/ListStyleSelector.vue";
+import ListItem from "@admin/components/molecules/Editor/Blocks/ListItem.vue";
+import Btn from "@admin/components/atoms/Btn.vue";
+//
+import {Block, BlockType} from "@admin/types/blocks";
+//
+import {idMapper} from "@admin/utils/idMapper";
+import {emptyBlocks} from "@admin/utils/blocks/getters";
 
 interface Props {
-    block: Block<Array<Block>, ListTag>
+    block: Block<string, ListStyleType>
 }
 
 const props = defineProps<Props>()
@@ -32,7 +36,7 @@ function addBlock() {
                  @remove:block="$emit('remove:block', block)">
         <template #title>List</template>
         <template #header>
-            <TagSelector v-model="block.tag" :values="listTags"/>
+            <ListStyleSelector v-model="block.styles.type" />
         </template>
         <ul class="grid grid-cols-1 gap-1 mb-1.5 border border-stone-500 rounded-md p-1">
             <li class="text-center" v-if="block.content.length === 0">no items</li>

@@ -2,7 +2,6 @@
 import useUsersState from "../../../states/users";
 import Btn from "../../atoms/Btn.vue";
 import Tag from "../../atoms/Tag.vue";
-import RouteNames from "../../../enums/RouteNames";
 import {RouterLink} from "vue-router";
 import Paper from "../../atoms/Paper.vue";
 import {Icons} from "../../../utils/icons";

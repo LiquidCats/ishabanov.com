@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {computed} from "vue";
 import Draggable from "vuedraggable";
 //
 import usePostState from "../../../states/post";
@@ -9,12 +8,12 @@ import {blockRenderers} from "../../../utils/blocks/getters";
 
 const postState = usePostState()
 
-const dragOptions = computed(() => ({
+const dragOptions = {
     animation: 200,
     group: "content",
     disabled: false,
     ghostClass: "ghost"
-}))
+}
 
 </script>
 

@@ -11,7 +11,8 @@
       "sourceMap": true,
       "baseUrl": ".",
       "paths": {
-          "@/admin/": ["resources/js/admin/*"]
+          "@admin/*": ["resources/admin/scripts/*"],
+          "@theme/*": ["resources/theme/default/scripts/*"],
       },
       "types": [
           "vue/types/vue",
@@ -19,7 +20,7 @@
           "@nuxt/types",
           "mande/nuxt"
       ],
-      "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+      "lib": ["esnext", "dom", "dom.iterable", "scripthost", "es2017"]
   },
   "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx", "resources/js/**/*.vue"],
   "exclude": ["node_modules"]

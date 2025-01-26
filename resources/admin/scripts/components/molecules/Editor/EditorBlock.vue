@@ -25,7 +25,7 @@ defineEmits(['remove:block', "clone:block"])
     <component :is="tag">
         <div class="flex flex-row mb-3 gap-3" v-if="$slots?.title">
             <div>
-                <Btn type="light" class="!p-1 inline-flex gap-1 cursor-move block-editor-handle">
+                <Btn type="light" size="small" class="inline-flex gap-1 cursor-move block-editor-handle">
                     <Bars4Icon class="size-4"/>
                     <slot name="title"></slot>
                 </Btn>

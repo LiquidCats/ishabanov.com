@@ -20,62 +20,70 @@ export const emptyBlocks: {[k in BlockType]: Block<any, any>} = {
     [BlockType.HEADING]: {
         type: BlockType.HEADING,
         key: '',
-        tag: 'h1',
         content: '',
-        styles: [],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.PARAGRAPH]: {
         type: BlockType.PARAGRAPH,
         key: '',
-        tag: undefined,
         content: '',
-        styles: [] as any[],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.LIST]: {
         type: BlockType.LIST,
         key: '',
-        tag: 'ul',
         content: [],
-        styles: [],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.LIST_ITEM]: {
         type: BlockType.LIST_ITEM,
         key: '',
-        tag: undefined,
         content: '',
-        styles: [],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.IMAGE]: {
         type: BlockType.IMAGE,
         key: '',
-        tag: undefined,
         content: {
             alt: '',
             src: '',
             caption: '',
         },
-        styles: [],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.RAW]: {
         type: BlockType.RAW,
         key: '',
-        tag: undefined,
         content: '',
-        styles: undefined
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.CODE]: {
         type: BlockType.CODE,
         key: '',
-        tag: undefined,
         content: '',
-        styles: [],
+        styles: {
+            type: undefined,
+        },
     },
     [BlockType.REMARK]: {
         type: BlockType.REMARK,
         key: '',
-        tag: undefined,
         content: [],
-        styles: undefined
+        styles: {
+            type: undefined,
+        },
     },
 }
 
