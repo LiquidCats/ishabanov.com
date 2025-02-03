@@ -2,7 +2,6 @@
 
 use App\Domains\Blog\ValueObjects\PostId;
 use App\Front\Presentation\Http\Controllers\ArticleController;
-use App\Front\Presentation\Http\Controllers\HomepageController;
 use App\Front\Presentation\Http\Controllers\PostListController;
 use Illuminate\Support\Facades\Route;
 
