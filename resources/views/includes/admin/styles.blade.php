@@ -1,1 +1,1 @@
-@vite('resources/admin/styles/styles.scss')
+@vite('resources/styles/admin/styles.scss')

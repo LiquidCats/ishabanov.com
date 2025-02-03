@@ -9,19 +9,20 @@ export default defineConfig(({mode}) => {
     return {
         resolve: {
             alias: {
-                "@admin": path.resolve(process.cwd(), 'resources/admin/scripts'),
-                "@theme": path.resolve(process.cwd(), 'resources/theme/default/scripts'),
+                "@admin": path.resolve(__dirname, './resources/scripts/admin'),
+                "@theme": path.resolve(__dirname, './resources/scripts/theme/default'),
+                "@kernel": path.resolve(__dirname, './resources/scripts/kernel'),
             }
         },
         plugins: [
             laravel({
                 buildDirectory: "static",
                 input: [
-                    `resources/themes/${theme}/styles/styles.scss`,
-                    `resources/themes/${theme}/scripts/index.ts`,
+                    `resources/styles/themes/${theme}/styles.scss`,
+                    'resources/styles/admin/styles.scss',
                     //
-                    'resources/admin/styles/styles.scss',
-                    'resources/admin/scripts/index.ts',
+                    `resources/scripts/themes/${theme}/index.ts`,
+                    'resources/scripts/admin/index.ts',
                 ],
                 refresh: [
                     'lang/**',
