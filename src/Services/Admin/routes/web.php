@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{frontend?}', static fn () => view('views.layouts.default'))
+Route::get('/{frontend?}', static fn () => view('layouts.admin'))
     ->where('frontend', '.*')
     ->name('admin.dashboard');

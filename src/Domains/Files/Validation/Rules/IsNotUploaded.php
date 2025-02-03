@@ -2,16 +2,14 @@
 
 namespace App\Domains\Files\Validation\Rules;
 
-use App\Domains\Files\Contracts\Repositories\FileRepositoryContract;
+use App\Domains\Files\Contracts\Services\FileServiceContract;
 use Closure;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 readonly class IsNotUploaded implements ValidationRule
 {
-    public function __construct(private FileRepositoryContract $fileRepository)
-    {
-    }
+    public function __construct(private FileServiceContract $fileRepository) {}
 
     /**
      * @param  UploadedFile  $value

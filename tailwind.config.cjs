@@ -2,17 +2,15 @@
 module.exports = {
     // purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     content: [
-        "./src/**/*Style.php",
-        "./resources/**/*.blade.php",
-        "./database/**/*.php",
         "./resources/**/*.scss",
         "./resources/**/*.js",
+        "./resources/**/*.ts",
         "./resources/**/*.vue",
-        "./resources/themes/default/views/vendor/cookie-consent/dialogContents.blade.php",
+        "./resources/**/*.blade.php",
     ],
     theme: {
         fontFamily: {
-            sans: ['"Montserrat"', 'sans-serif'],
+            sans: ['"Montserrat"', "'Pixelify Sans'", 'sans-serif'],
             serif: ['"Lora"', 'serif', 'ui-serif'],
             mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
         },

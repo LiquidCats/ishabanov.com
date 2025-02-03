@@ -12,9 +12,7 @@ use Illuminate\Routing\Controller;
 
 class FilesStoreController extends Controller
 {
-    public function __construct(readonly FileServiceContract $fileService)
-    {
-    }
+    public function __construct(readonly FileServiceContract $fileService) {}
 
     public function __invoke(FileStoreRequest $request): AnonymousResourceCollection
     {

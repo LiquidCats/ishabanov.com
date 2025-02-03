@@ -14,9 +14,7 @@ use Illuminate\Support\Str;
 
 readonly class UploadedFilesStorage implements UploadedFilesStorageContract
 {
-    public function __construct(private Filesystem $filesystem, private Options $options)
-    {
-    }
+    public function __construct(private Filesystem $filesystem, private Options $options) {}
 
     public function url(string $file): string
     {
@@ -32,7 +30,8 @@ readonly class UploadedFilesStorage implements UploadedFilesStorageContract
      */
     public function upload(UploadedFile $file): bool
     {
-        return (bool) $this->filesystem->put($this->options->prepend.DIRECTORY_SEPARATOR.$this->options->path, $file);
+        return (bool) $this->filesystem
+            ->put($this->options->path, $file);
     }
 
     public function drop(string $file): bool
@@ -44,7 +43,7 @@ readonly class UploadedFilesStorage implements UploadedFilesStorageContract
     private function fixLegacyPath(string $path): string
     {
         return Str::startsWith($path, $this->options->path.DIRECTORY_SEPARATOR)
-            ? $this->options->prepend.DIRECTORY_SEPARATOR.$path
-            : $this->options->prepend.DIRECTORY_SEPARATOR.$this->options->path.DIRECTORY_SEPARATOR.$path;
+            ? $path
+            : $this->options->path.DIRECTORY_SEPARATOR.$path;
     }
 }

@@ -31,12 +31,13 @@ services:
             MINIO_ROOT_USER: 'ishabanov'
             MINIO_ROOT_PASSWORD: 'Vsz7kVb9HeoTH27s'
         volumes:
-            - storage:/data/minio:rw
-        command: minio server /data/minio --console-address ":8900"
+            - storage:/data:rw
+        command: server /data --console-address ":8900"
         healthcheck:
-            test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
-            retries: 3
+            test: [ "CMD", "mc", "ready", "local" ]
+            interval: 5s
             timeout: 5s
+            retries: 5
 
     database:
         image: postgres:alpine

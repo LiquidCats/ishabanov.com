@@ -12,9 +12,7 @@ use Illuminate\Routing\Controller;
 
 class PostStoreController extends Controller
 {
-    public function __construct(private readonly PostServiceContract $service)
-    {
-    }
+    public function __construct(private readonly PostServiceContract $service) {}
 
     public function __invoke(PostStoreRequest $request): PostResource
     {

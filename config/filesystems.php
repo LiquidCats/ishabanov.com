@@ -19,7 +19,6 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
     'upload_path' => env('FILESYSTEM_UPLOAD_PATH', 'media'),
-    'prepend_path' => env('FILESYSTEM_PREPEND_PATH', 'ishabanov'.DIRECTORY_SEPARATOR.env('APP_ENV')),
 
     /*
     |--------------------------------------------------------------------------

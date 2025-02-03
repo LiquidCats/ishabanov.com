@@ -14,7 +14,7 @@ class AuthzServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
         $this->app->singleton(TOTP::class, fn () => new TOTP(
-            algorithm: Algorithm::SHA1,
+            algorithm: Algorithm::SHA1, // @TODO: must be updated to sha512
             length: 6,
             epoch: 1,
             period: 30,

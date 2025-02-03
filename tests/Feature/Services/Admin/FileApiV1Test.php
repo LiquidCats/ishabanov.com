@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-
+use function dump;
 use function fake;
 use function route;
 
@@ -88,14 +88,14 @@ class FileApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseHas((new FileModel)->getTable(), [
             'hash' => $response->json('data.0.hash'),
         ]);
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseHas((new FileModel)->getTable(), [
             'hash' => $response->json('data.1.hash'),
         ]);
 
-        $this->assertCount(2, $disk->files('ishabanov/testing/media'));
+        $this->assertCount(2, $disk->files('media'));
     }
 
     public function test_should_delete_file(): void
@@ -104,12 +104,12 @@ class FileApiV1Test extends TestCase
         $file = $this->files->random();
 
         $response = $this->deleteJson(route('admin.api.files.delete', [
-            FileId::AS_KEY => $file->getKey(),
+            FileId::asKey() => $file->getKey(),
         ]));
 
         $response->assertSuccessful();
 
-        $this->assertDatabaseMissing((new FileModel())->getTable(), [
+        $this->assertDatabaseMissing((new FileModel)->getTable(), [
             'hash' => $file->getKey(),
         ]);
     }

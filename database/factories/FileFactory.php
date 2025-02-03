@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Enums\AllowedTypes;
+use App\Domains\Files\ValueObjects\FileId;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,7 +23,7 @@ class FileFactory extends Factory
     public function definition(): array
     {
         return [
-            'hash' => sha1(Str::random()),
+            'hash' => new FileId(sha1(Str::random())),
             'type' => AllowedTypes::IMAGE_JPG,
             'path' => fake()->filePath(),
             'extension' => 'jpg',

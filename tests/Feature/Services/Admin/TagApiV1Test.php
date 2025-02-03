@@ -50,9 +50,14 @@ class TagApiV1Test extends TestCase
 
     public function test_should_store_tag(): void
     {
-        $data = TagModel::factory()->make()->toArray();
+        /** @var TagModel $data */
+        $data = TagModel::factory()->make();
 
-        $response = $this->postJson(route('admin.api.tags.store'), $data);
+
+        $response = $this->postJson(route('admin.api.tags.store'), [
+            'name' => $data->name,
+            'slug' => $data->slug->value,
+        ]);
 
         $response->assertSuccessful();
         $response->assertJsonStructure([
@@ -65,7 +70,7 @@ class TagApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new TagModel())->getTable(), [
+        $this->assertDatabaseHas((new TagModel)->getTable(), [
             'id' => $id,
             'name' => $data['name'],
             'slug' => $data['slug'],
@@ -77,17 +82,20 @@ class TagApiV1Test extends TestCase
         /** @var TagModel $tag */
         $tag = $this->tags->random();
 
-        $data = TagModel::factory()->make()->toArray();
+        $data = TagModel::factory()->make();
 
         $response = $this->putJson(route('admin.api.tags.update', [
-            TagId::AS_KEY => $tag->getKey(),
-        ]), $data);
+            TagId::asKey() => $tag->getKey()->value,
+        ]), [
+            'name' => $data->name,
+            'slug' => $data->slug->value,
+        ]);
 
         $response->assertSuccessful();
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new TagModel())->getTable(), [
+        $this->assertDatabaseHas((new TagModel)->getTable(), [
             'id' => $id,
             'name' => $data['name'],
             'slug' => $data['slug'],
@@ -99,14 +107,14 @@ class TagApiV1Test extends TestCase
         $tag = $this->tags->random();
 
         $response = $this->deleteJson(route('admin.api.tags.delete', [
-            TagId::AS_KEY => $tag->getKey(),
+            TagId::asKey() => $tag->getKey(),
         ]));
 
         $response->assertSuccessful();
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseMissing((new TagModel())->getTable(), [
+        $this->assertDatabaseMissing((new TagModel)->getTable(), [
             'id' => $id,
         ]);
     }

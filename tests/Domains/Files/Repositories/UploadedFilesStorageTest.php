@@ -23,7 +23,7 @@ class UploadedFilesStorageTest extends TestCase
 
         $result = $repo->upload($file);
 
-        $files = $storage->files('ishabanov/testing/media');
+        $files = $storage->files('media');
 
         $this->assertTrue($result);
         $this->assertNotEmpty($files);
@@ -40,7 +40,7 @@ class UploadedFilesStorageTest extends TestCase
         $file = UploadedFile::fake()->image('test.jpg');
         $storage->put('media', $file);
 
-        $dto = new FileModel();
+        $dto = new FileModel;
         $dto->path = $file->hashName();
         $result = $repo->drop($dto->path);
 

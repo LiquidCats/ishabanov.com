@@ -55,7 +55,7 @@ class ToolSeeder extends Seeder
 
     protected function createModel(string $name, ?ToolType $type, ?ExperienceLevel $level = null): void
     {
-        $model = new ToolModel();
+        $model = new ToolModel;
 
         $model->id = Str::of($name)
             ->lower()

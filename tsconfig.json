@@ -11,7 +11,9 @@
       "sourceMap": true,
       "baseUrl": ".",
       "paths": {
-          "@/admin/": ["resources/js/admin/*"]
+          "@admin/*": ["resources/scripts/admin/*"],
+          "@theme/*": ["resources/scripts/theme/default/*"],
+          "@kernel/*": ["resources/scripts/kernel/*"],
       },
       "types": [
           "vue/types/vue",

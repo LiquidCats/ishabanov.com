@@ -12,7 +12,7 @@ use App\Domains\Blog\Enums\PostPreviewType;
 use App\Domains\Blog\ValueObjects\PostId;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
-
+use function dump;
 use function route;
 
 class PostsApiV1Test extends TestCase
@@ -38,7 +38,7 @@ class PostsApiV1Test extends TestCase
         $this->preview = FileModel::query()->first();
 
         $this->posts->each(function (PostModel $p) {
-            $p->tags()->sync($this->tags->random(3)->pluck('id'));
+            $p->tags()->sync($this->tags->random(3)->pluck('id')->map->value);
         });
 
         $this->actingAs($this->user);
@@ -74,8 +74,8 @@ class PostsApiV1Test extends TestCase
         ]);
         $data = $response->json('data', []);
         $this->assertNotEmpty($data);
-        $this->assertCount(5, $data);
-        $this->assertEquals(10, $response->json('meta.last_page'));
+        $this->assertCount(10, $data);
+        $this->assertEquals(5, $response->json('meta.last_page'));
     }
 
     public function test_should_get_single_post(): void
@@ -84,7 +84,7 @@ class PostsApiV1Test extends TestCase
         $post = $this->posts->random(1)->first();
 
         $response = $this->getJson(route('admin.api.posts.show', [
-            PostId::AS_KEY => $post->getKey(),
+            PostId::asKey() => $post->getKey(),
         ]));
 
         $response->assertSuccessful();
@@ -111,7 +111,7 @@ class PostsApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertEquals($post->getKey(), $response->json('data.id'));
+        $this->assertEquals($post->getKey()->value, $response->json('data.id'));
     }
 
     public function test_should_store_post(): void
@@ -119,9 +119,9 @@ class PostsApiV1Test extends TestCase
         $tags = $this->tags->random(3);
         $data = [
             ...PostModel::factory()->make()->toArray(),
-            'tags' => $tags->toArray(),
-            'preview_image_type' => PostPreviewType::FILL,
-            'preview_image_id' => $this->preview->hash,
+            'tags' => $tags->map(fn (TagModel $m) => ['id' => $m->getKey()->value])->toArray(),
+            'preview_image_type' => PostPreviewType::FILL->value,
+            'preview_image_id' => $this->preview->hash->value,
         ];
 
         $response = $this->postJson(route('admin.api.posts.store'), $data);
@@ -157,11 +157,11 @@ class PostsApiV1Test extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseCount((new PostModel())->getTable(), 51);
+        $this->assertDatabaseCount((new PostModel)->getTable(), 51);
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $id,
             'title' => $data['title'],
             'preview' => $data['preview'],
@@ -186,13 +186,13 @@ class PostsApiV1Test extends TestCase
 
         $data = [
             ...PostModel::factory()->make()->toArray(),
-            'tags' => $tags,
+            'tags' => $tags->map(fn (TagModel $m) => ['id' => $m->getKey()->value])->toArray(),
             'preview_image_type' => PostPreviewType::FILL->value,
-            'preview_image_id' => $this->preview->hash,
+            'preview_image_id' => $this->preview->hash->value,
         ];
 
         $response = $this->putJson(route('admin.api.posts.update', [
-            PostId::AS_KEY => $post->getKey(),
+            PostId::asKey() => $post->getKey(),
         ]), $data);
 
         $response->assertSuccessful();
@@ -228,7 +228,7 @@ class PostsApiV1Test extends TestCase
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseHas((new PostModel())->getTable(), [
+        $this->assertDatabaseHas((new PostModel)->getTable(), [
             'id' => $id,
             'title' => $data['title'],
             'preview' => $data['preview'],
@@ -250,14 +250,14 @@ class PostsApiV1Test extends TestCase
         $post = $this->posts->random();
 
         $response = $this->deleteJson(route('admin.api.posts.delete', [
-            PostId::AS_KEY => $post->getKey(),
+            PostId::asKey() => $post->getKey(),
         ]));
 
         $response->assertSuccessful();
 
         $id = $response->json('data.id');
 
-        $this->assertDatabaseMissing((new PostModel())->getTable(), [
+        $this->assertDatabaseMissing((new PostModel)->getTable(), [
             'id' => $id,
         ]);
     }
@@ -267,7 +267,7 @@ class PostsApiV1Test extends TestCase
         $post = $this->posts->random();
 
         $response = $this->patchJson(route('admin.api.posts.state', [
-            PostId::AS_KEY => $post->getKey(),
+            PostId::asKey() => $post->getKey(),
         ]));
 
         $response->assertSuccessful();

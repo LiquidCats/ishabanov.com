@@ -7,23 +7,27 @@ namespace Database\Seeders;
 use App\Data\Database\Eloquent\Models\PostModel;
 use App\Data\Database\Eloquent\Models\TagModel;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PostSeeder extends Seeder
 {
     public function run(): void
     {
-        $posts = PostModel::factory(16)->create();
-        $tags = TagModel::query()->get();
-        if ($tags->count() === 0) {
-            $tags = TagModel::factory(6)->create();
-        }
-        $tags = $tags->pluck('id');
+        DB::transaction(function () {
+            $posts = PostModel::factory(16)->create();
+            $tags = TagModel::query()->get();
+            if ($tags->count() === 0) {
+                $tags = TagModel::factory(6)->create();
+            }
 
-        /** @var PostModel $post */
-        foreach ($posts as $post) {
-            $tagIds = $tags->random(3);
+            $tags = $tags->pluck('id');
 
-            $post->tags()->sync($tagIds);
-        }
+            /** @var PostModel $post */
+            foreach ($posts as $post) {
+                $tagIds = $tags->random(3);
+
+                $post->tags()->sync($tagIds->map->value);
+            }
+        });
     }
 }

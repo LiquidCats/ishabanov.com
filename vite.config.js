@@ -1,24 +1,31 @@
 import {defineConfig, loadEnv} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import path from 'path'
 
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd(), '')
+    const theme = env.VITE_APPEARANCE_SITE_THEME ?? 'default'
     return {
+        resolve: {
+            alias: {
+                "@admin": path.resolve(__dirname, './resources/scripts/admin'),
+                "@theme": path.resolve(__dirname, './resources/scripts/theme/default'),
+                "@kernel": path.resolve(__dirname, './resources/scripts/kernel'),
+            }
+        },
         plugins: [
             laravel({
                 buildDirectory: "static",
                 input: [
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/styles/styles.scss`,
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/scripts/index.js`,
+                    `resources/styles/themes/${theme}/styles.scss`,
+                    'resources/styles/admin/styles.scss',
                     //
-                    'resources/admin/styles/styles.scss',
-                    'resources/admin/scripts/index.ts',
+                    `resources/scripts/themes/${theme}/index.ts`,
+                    'resources/scripts/admin/index.ts',
                 ],
                 refresh: [
                     'lang/**',
-                    `resources/themes/${env.APPEARANCE_SITE_THEME ?? 'default'}/views/**`,
-                    `resources/admin/views/**`,
                 ],
             }),
             vue({

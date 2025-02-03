@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
+use function app;
 use function redirect;
 use function route;
 use function view;
@@ -17,10 +18,14 @@ class LoginController extends Controller
 {
     public function __invoke(): View|RedirectResponse
     {
+        if (app()->environment('local')) {
+            Auth::loginUsingId(1);
+        }
+
         if (Auth::check()) {
             return redirect(route('admin.dashboard'));
         }
 
-        return view('pages.login.index');
+        return view('layouts.admin');
     }
 }

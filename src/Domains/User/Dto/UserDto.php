@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace App\Domains\User\Dto;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Fluent;
 
-/**
- * @property-read string|null $name
- * @property-read string|null $email
- * @property-read string|null $password
- */
-class UserDto extends Fluent
+readonly class UserDto
 {
-    public static function fromRequest(Request $request)
+    public function __construct(
+        public string $name,
+        public string $email,
+        public string $password,
+        public ?string $otpCode = null,
+        public ?string $currentPassword = null,
+    ) {}
+
+    public static function fromRequest(Request $request): static
     {
-        return new static([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => $request->get('password'),
-        ]);
+        return new static(
+            $request->get('name'),
+            $request->get('email'),
+            $request->get('password'),
+            $request->get('2fa_otp'),
+            $request->get('currentPassword'),
+        );
     }
 }

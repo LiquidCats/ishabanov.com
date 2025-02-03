@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Domains\Blocks\Enums;
 
-use App\Domains\Blocks\Renderers\CodeRenderer;
-use App\Domains\Blocks\Renderers\HeadingRenderer;
-use App\Domains\Blocks\Renderers\ImageRenderer;
-use App\Domains\Blocks\Renderers\ListItemRenderer;
-use App\Domains\Blocks\Renderers\ListRenderer;
-use App\Domains\Blocks\Renderers\ParagraphRenderer;
-use App\Domains\Blocks\Renderers\RawRenderer;
-use App\Domains\Blocks\Renderers\RemarkRenderer;
+use App\Domains\Blocks\Contracts\PresenterContract;
+use App\Domains\Blocks\Presenters\CodePresenter;
+use App\Domains\Blocks\Presenters\HeadingPresenter;
+use App\Domains\Blocks\Presenters\ImagePresenter;
+use App\Domains\Blocks\Presenters\ListItemPresenter;
+use App\Domains\Blocks\Presenters\ListPresenter;
+use App\Domains\Blocks\Presenters\ParagraphPresenter;
+use App\Domains\Blocks\Presenters\RawPresenter;
+use App\Domains\Blocks\Presenters\RemarkPresenter;
+use Illuminate\Contracts\Support\Arrayable;
 
 enum BlockType: string
 {
@@ -24,34 +26,17 @@ enum BlockType: string
     case REMARK = 'remark';
     case RAW = 'raw';
 
-    public function getView(): string
+    public function toPresenter(array $data): PresenterContract&Arrayable
     {
         return match ($this) {
-            self::HEADING => 'includes.blocks.heading',
-            self::IMAGE => 'includes.blocks.image',
-            self::LIST => 'includes.blocks.list',
-            self::LIST_ITEM => 'includes.blocks.list-item',
-            self::PARAGRAPH => 'includes.blocks.paragraph',
-            self::CODE => 'includes.blocks.code',
-            self::REMARK => 'includes.blocks.remark',
-            self::RAW => 'includes.blocks.raw',
-        };
-    }
-
-    /**
-     * @return class-string
-     */
-    public function getRenderer(): string
-    {
-        return match ($this) {
-            self::HEADING => HeadingRenderer::class,
-            self::IMAGE => ImageRenderer::class,
-            self::LIST => ListRenderer::class,
-            self::LIST_ITEM => ListItemRenderer::class,
-            self::PARAGRAPH => ParagraphRenderer::class,
-            self::CODE => CodeRenderer::class,
-            self::REMARK => RemarkRenderer::class,
-            self::RAW => RawRenderer::class,
+            self::HEADING => HeadingPresenter::createAs($this, $data),
+            self::IMAGE => ImagePresenter::createAs($this, $data),
+            self::LIST => ListPresenter::createAs($this, $data),
+            self::LIST_ITEM => ListItemPresenter::createAs($this, $data),
+            self::PARAGRAPH => ParagraphPresenter::createAs($this, $data),
+            self::CODE => CodePresenter::createAs($this, $data),
+            self::REMARK => RemarkPresenter::createAs($this, $data),
+            self::RAW => RawPresenter::createAs($this, $data),
         };
     }
 }

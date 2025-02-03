@@ -1,5 +1,6 @@
 <?php
 
+use App\Data\Database\Eloquent\Models\PostModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,9 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', static function (Blueprint $table) {
+        Schema::table((new PostModel)->getTable(), static function (Blueprint $table) {
             $table->jsonb('blocks')
-                ->after('content')
                 ->default('[]');
         });
     }
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', static function (Blueprint $table) {
-            $table->dropColumn('blocks');
-        });
+        // Schema::table((new PostModel)->getTable(), static function (Blueprint $table) {
+        //     $table->dropColumn('blocks');
+        // });
     }
 };

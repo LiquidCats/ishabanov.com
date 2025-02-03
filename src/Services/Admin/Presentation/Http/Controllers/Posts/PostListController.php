@@ -11,9 +11,7 @@ use Illuminate\Routing\Controller;
 
 class PostListController extends Controller
 {
-    public function __construct(private readonly PostServiceContract $service)
-    {
-    }
+    public function __construct(private readonly PostServiceContract $service) {}
 
     public function __invoke(): AnonymousResourceCollection
     {

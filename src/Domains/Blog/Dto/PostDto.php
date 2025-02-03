@@ -22,8 +22,7 @@ readonly class PostDto
         public ?string $previewImageId,
         public ?PostPreviewType $previewImageType,
         public Collection $tags,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(#[ArrayShape([
         'title' => 'string',
