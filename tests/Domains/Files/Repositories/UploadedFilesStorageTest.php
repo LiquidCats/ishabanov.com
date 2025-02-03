@@ -23,7 +23,7 @@ class UploadedFilesStorageTest extends TestCase
 
         $result = $repo->upload($file);
 
-        $files = $storage->files('ishabanov/testing/media');
+        $files = $storage->files('media');
 
         $this->assertTrue($result);
         $this->assertNotEmpty($files);

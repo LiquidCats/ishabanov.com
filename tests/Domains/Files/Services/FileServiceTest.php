@@ -8,10 +8,12 @@ use App\Data\Database\Eloquent\Models\FileModel;
 use App\Domains\Files\Enums\FilterTypes;
 use App\Domains\Files\Services\FileService;
 use App\Domains\Files\ValueObjects\FileId;
+use App\Domains\User\ValueObjets\UserId;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Testing\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use Tests\TestCase;
@@ -40,7 +42,7 @@ class FileServiceTest extends TestCase
 
         $service->storeMany($data);
 
-        $this->assertCount(count($data), $disk->files('ishabanov/testing/media'));
+        $this->assertCount(count($data), $disk->files('media'));
 
         $this->assertDatabaseCount('files', count($data));
         foreach ($data as $item) {
@@ -84,12 +86,22 @@ class FileServiceTest extends TestCase
 
         $fileId = new FileId(sha1_file($image['file']->getRealPath()));
 
-        (new FileModel)->create($image['name'], $image['file']);
+        $model = new FileModel;
+
+        $model->hash = new FileId(sha1_file($image['file']->path()));
+        $model->type = $image['file']->getMimeType();
+        $model->path = $image['file']->hashName();
+        $model->file_size = $image['file']->getSize();
+        $model->extension = $image['file']->getClientOriginalExtension();
+        $model->name = $image['name'];
+        $model->created_by = new UserId(Auth::id());
+
+        $model->save();
 
         $service->drop($fileId);
 
         $this->assertDatabaseCount('files', 0);
-        $this->assertCount(0, $disk->files('ishabanov/testing/media'));
+        $this->assertCount(0, $disk->files('media'));
     }
 
     /**
@@ -106,7 +118,18 @@ class FileServiceTest extends TestCase
 
         foreach ($data as $item) {
             $disk->put('media', $item['file']);
-            (new FileModel)->create($item['name'], $item['file']);
+
+            $model = new FileModel;
+
+            $model->hash = new FileId(sha1_file($item['file']->path()));
+            $model->type = $item['file']->getMimeType();
+            $model->path = $item['file']->hashName();
+            $model->file_size = $item['file']->getSize();
+            $model->extension = $item['file']->getClientOriginalExtension();
+            $model->name = $item['name'];
+            $model->created_by = new UserId(Auth::id());
+
+            $model->save();
         }
 
         $list = $service->list();

@@ -7,7 +7,7 @@ namespace Database\Factories;
 use App\Data\Database\Eloquent\Models\UserModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use SensitiveParameterValue;
+use LiquidCats\G2FA\ValueObjects\SecretKey;
 
 use function bcrypt;
 
@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
             'remember_token' => Str::random(10),
-            'g2fa_secret' => new SensitiveParameterValue('COPFCZVACQRRI763'),
+            'g2fa_secret' => new SecretKey('COPFCZVACQRRI763'),
         ];
     }
 

@@ -95,7 +95,7 @@ class FileApiV1Test extends TestCase
             'hash' => $response->json('data.1.hash'),
         ]);
 
-        $this->assertCount(2, $disk->files('ishabanov/testing/media'));
+        $this->assertCount(2, $disk->files('media'));
     }
 
     public function test_should_delete_file(): void
