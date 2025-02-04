@@ -39,8 +39,7 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                    type="text"
                    name="title"
                    :failed="postState.errors.hasOwnProperty('title')"
-                   :value="postState.item.title"
-                   @input="postState.item.title = $event?.target?.value"/>
+                   v-model="postState.item.title"/>
         <Error name="title" :errors="postState.errors"/>
     </div>
 
@@ -74,9 +73,7 @@ const debouncedHandleTagSearch = debounce(handleTagSearch, 300)
                        :failed="postState.errors.hasOwnProperty('published_at')"
                        type="text"
                        name="published_at"
-                       :value="postState.item?.published_at || dayjs().format('YYYY-MM-DD HH:mm')"
-                       @input="postState.item.published_at = $event?.target?.value"/>
-
+                       v-model="postState.item.published_at"/>
         </div>
 
 

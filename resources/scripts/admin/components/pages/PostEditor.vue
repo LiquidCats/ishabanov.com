@@ -41,6 +41,10 @@ onMounted(async () => {
     }
 })
 
+onBeforeUnmount(() => {
+    postState.$reset()
+})
+
 const selectedTab = ref<string>('main')
 
 </script>
