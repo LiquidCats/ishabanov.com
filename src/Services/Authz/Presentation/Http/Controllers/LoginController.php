@@ -18,9 +18,9 @@ class LoginController extends Controller
 {
     public function __invoke(): View|RedirectResponse
     {
-        // if (app()->environment('local')) {
-        //     Auth::loginUsingId(1);
-        // }
+        if (app()->environment('local')) {
+            Auth::loginUsingId(1);
+        }
 
         if (Auth::check()) {
             return redirect(route('admin.dashboard'));

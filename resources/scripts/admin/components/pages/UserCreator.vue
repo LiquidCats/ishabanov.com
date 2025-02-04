@@ -30,7 +30,7 @@ function onPasswordGeneration(password: string) {
     })
 }
 // hooks
-onMounted(async () => {
+onMounted(() => {
     userState.$reset()
 })
 
