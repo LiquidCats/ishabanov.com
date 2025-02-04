@@ -52,7 +52,9 @@ const shouldDisable = computed(() =>
     <FloatingPanel class="my-3">
         <div><BackButton /></div>
 
-        <slot :disabled="shouldDisable"></slot>
+        <div class="mr-auto">
+            <slot :disabled="shouldDisable"></slot>
+        </div>
 
         <Btn :icon="postState.item.is_draft ? 'EyeIcon' : 'EyeSlashIcon'"
              :type="postState.item.is_draft?'success':'warning'"
