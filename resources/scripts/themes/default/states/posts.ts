@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
-import {PostResource, ResponsePaginationMeta} from "../../../kernel/types/api";
-import PostApi from "../../../kernel/api/posts";
+import {PostResource, ResponsePaginationMeta} from "@kernel/types/api";
+import ArticlesApi from "@kernel/api/articles";
 
 interface State {
     items: Array<PostResource>,
@@ -33,7 +33,7 @@ const usePostsState = defineStore<'app.posts', State, any, Actions>('app.posts',
 
             try {
 
-                const response = await PostApi.paginate( page)
+                const response = await ArticlesApi.paginate( page)
 
                 this.items = response.data
                 this.pagination = response.meta
