@@ -1,3 +1,9 @@
+x-backend-env: &backend-env
+  ISHABANOV_POSTGRES_USER: PxZ2
+  ISHABANOV_POSTGRES_PASSWORD: Htmp2X
+  ISHABANOV_POSTGRES_DB: ishabanov
+
+
 services:
     backend:
         build:
