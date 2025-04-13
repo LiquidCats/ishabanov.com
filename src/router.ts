@@ -1,10 +1,12 @@
 import {nextTick} from "vue";
 import {createRouter, createWebHistory} from "vue-router";
-import {AppRoutes} from "@/enums/routes.ts";
-import Home from "@/pages/public/pages/Home.vue";
-import Posts from "@/pages/public/pages/Posts.vue";
-import Article from "@/pages/public/pages/Article.vue";
-import Layout from "@/pages/public/Layout.vue";
+//
+import {AppRoutes} from "@/enums/routes";
+//
+import Home from "@/components/pages/Home.vue";
+import Posts from "@/components/pages/Posts.vue";
+import Article from "@/components/pages/Article.vue";
+import Layout from "@/components/Layout.vue";
 
 const router =  createRouter({
     history: createWebHistory(),

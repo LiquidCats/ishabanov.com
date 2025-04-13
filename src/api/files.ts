@@ -1,15 +1,13 @@
 import {mande, defaults} from "mande";
-import {baseUrl} from "@kernel/utils/url";
-import {jsonOptions} from "@kernel/api/api";
-import {APIResponse, FileResource, FileToUpload} from "@kernel/types/api";
-import {setCsrf} from "@kernel/api/csrf";
+import {baseUrl} from "@/lib/url";
+import {jsonOptions} from "@/api/api";
+import type {APIResponse, FileResource, FileToUpload} from "@/types/api";
 
 type FileResponse = APIResponse<FileResource[]>
 
 const files = mande(baseUrl('admin', 'api', 'v1', 'files'), jsonOptions)
 
 const getFilesList = async (page: number = 1, type?: string) => {
-    setCsrf(files)
 
     return files.get<FileResponse>({
         ...jsonOptions,
@@ -18,14 +16,10 @@ const getFilesList = async (page: number = 1, type?: string) => {
 }
 
 const getImages = async () => {
-    setCsrf(files)
-
     return getFilesList(1, 'images')
 }
 
 const upload = async (filesToUpload: FileToUpload[]) => {
-    setCsrf(files)
-
     const formData = new FormData();
 
     for (const fileToUpload of filesToUpload) {
@@ -40,8 +34,6 @@ const upload = async (filesToUpload: FileToUpload[]) => {
 }
 
 const remove = async (hash: string) =>  {
-    setCsrf(files)
-
     return files.delete<FileResponse>(hash, jsonOptions as any)
 }
 
