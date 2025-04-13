@@ -1,6 +1,0 @@
-### GET request to example server
-GET /app/api/v1/homepage
-Host: 127.0.0.1:8000
-Content-Type: application/json
-Accept: application/json
-###
