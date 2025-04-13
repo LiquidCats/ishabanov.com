@@ -59,6 +59,7 @@ function setItems(id: string) {
             </main>
             <ArticleFooter v-if="meta.similar.length">
                 <SimilarArticle v-for="post in meta.similar"
+                                @click:post-nav="setPostId($event)"
                                 :published-at="post.published_at as string"
                                 :post-id="post.id as number"
                                 :title="post.title as string"

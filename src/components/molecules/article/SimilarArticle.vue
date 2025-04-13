@@ -17,6 +17,7 @@ interface Props {
 
 // define
 const props = defineProps<Props>()
+defineEmits(['click:post-nav'])
 
 // compute
 const humanDate = computed(() => dayjs(props.publishedAt).fromNow())
@@ -24,7 +25,7 @@ const humanDate = computed(() => dayjs(props.publishedAt).fromNow())
 
 <template>
     <article class="bg-night rounded-xl p-3 relative">
-        <AppLink :to="{name: AppRoutes.POST_ARTICLE, params: {postId}}" class="absolute -inset-1"></AppLink>
+        <AppLink :to="{name: AppRoutes.POST_ARTICLE, params: {postId}}" @click="$emit('click:post-nav', postId)" class="absolute -inset-1"></AppLink>
         <Heading :level="3" :size="TextSize.xl" class="mb-0 line-clamp-1">
             {{ title }}
         </Heading>
