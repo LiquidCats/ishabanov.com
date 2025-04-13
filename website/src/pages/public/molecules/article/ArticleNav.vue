@@ -12,22 +12,23 @@ interface Props {
 }
 
 // define
+defineEmits(['click:post-nav'])
 const props = defineProps<Props>()
 const classes = computed(() => ({
     'text-start': props.type === 'prev',
-    'text-end': props.type === 'next',
+    'text-right': props.type === 'next',
 }))
 
 </script>
 
 <template>
-    <div class="flex group flex-row gap-6 bg-night duration-300 hover:bg-stone-800 rounded-xl text-gray-400 hover:text-gray-200 items-center relative p-3">
-        <AppLink :to="{name: AppRoutes.POST_ARTICLE, params: {postId}}" class="absolute -inset-1 z-10"/>
+    <div class="flex group flex-row gap-6 bg-night duration-300 hover:bg-stone-800 rounded-xl text-gray-400 hover:text-gray-200 items-center relative p-3 cursor-pointer">
+        <AppLink :to="{name: AppRoutes.POST_ARTICLE, params: {postId}}" @click="$emit('click:post-nav', postId)" class="absolute -inset-1 z-10"/>
         <div v-if="type === 'next'"><ArrowLeftIcon class="size-8" /></div>
 
         <div class="overflow-hidden truncate grow">
-            <div class="text-sm text-gray-500 text-start" :class="classes" v-text="type === 'prev' ? 'previous' : 'next' "/>
-            <Heading :level="5" :class="classes" class="m-0 line-clamp-1">{{ title }}</Heading>
+            <div class="text-sm text-gray-500" :class="classes" v-text="type === 'prev' ? 'previous' : 'next' "/>
+            <Heading :level="5" :class="classes" class="m-0 line-clamp-1 truncate overflow-clip">{{ title }}</Heading>
         </div>
 
         <div v-if="type === 'prev'"><ArrowRightIcon class="size-8" /></div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {RouterLinkProps} from "vue-router";
+import type {RouterLinkProps} from "vue-router";
 import {computed} from "vue";
 // define
 defineOptions({
@@ -27,8 +27,9 @@ const isExternalLink = computed(() =>
        :class="classes"><slot/></a>
     <RouterLink v-else
                 v-bind="{...$attrs, ...$props}"
+
                 active-class="cursor-default hover:no-underline !text-gray-400"
-                exact-active-class=""
+                exact-active-class="cursor-default hover:no-underline !text-gray-400"
                 :class="classes">
         <slot></slot>
     </RouterLink>

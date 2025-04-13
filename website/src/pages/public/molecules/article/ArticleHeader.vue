@@ -21,12 +21,12 @@ const humanDate = computed(() => dayjs(props.publishedAt).fromNow())
 </script>
 
 <template>
-    <header class="rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center"
+    <header class="rounded-xl mb-3 overflow-hidden bg-cover bg-no-repeat bg-center flex flex-row "
             :class="{
-                'h-96': !!imageUrl
+                'min-h-96': !!imageUrl
             }"
             :style="`background-image: url('${imageUrl}')`">
-        <div class="h-full flex flex-col justify-end p-6 bg-gradient-to-t from-night from-20% to-transparent">
+        <div class="flex flex-col grow justify-end p-6 bg-gradient-to-t from-night from-20% to-transparent">
             <Heading :level="1"
                      :size="TextSize.xl6"
                      :family="TextFamily.serif"

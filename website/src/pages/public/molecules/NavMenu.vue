@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import LogoLink from "../organisms/LogoLink.vue";
-import AppLink from "../atoms/AppLink.vue";
-import type {Link} from "../../../../kernel/types/link";
+import LogoLink from "@/pages/public/organisms/LogoLink.vue";
+import AppLink from "@/pages/public/atoms/AppLink.vue";
+import type {Link} from "@/types/link";
 
 interface Props {
     links: Array<Link>

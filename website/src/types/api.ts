@@ -2,6 +2,10 @@ import {PreviewTypes} from "@/enums/preview";
 import {ToolLevel, ToolType} from "@/enums/tool";
 import {BlockTypes} from "@/enums/blocks";
 
+export type NonStrict<T> = {
+    [P in keyof T]?: T[P]|null;
+}
+
 export interface ExperienceResource {
     id: number,
     company_url: string,
@@ -47,9 +51,9 @@ export interface PostResource {
 }
 
 export interface PostMeta {
-    similar: Array<PostResource>
-    previous: PostResource
-    next: PostResource
+    similar: Array<NonStrict<PostResource>>
+    previous: NonStrict<PostResource>
+    next: NonStrict<PostResource>
 }
 
 export interface PostBlockResource<C extends any, ST = undefined> {

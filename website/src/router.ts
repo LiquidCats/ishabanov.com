@@ -12,12 +12,12 @@ const router =  createRouter({
         {
             path: '/',
             component: Layout,
-            name: AppRoutes.HOMEPAGE,
             children: [
                 {
-                    path: "/",
+                    path: "",
                     alias: "/homepage",
                     component: Home,
+                    name: AppRoutes.HOMEPAGE,
                     meta: {
                         title: 'Home',
                     }
