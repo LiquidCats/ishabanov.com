@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import Text from "../atoms/typography/Text.vue";
-import AppLink from "../atoms/AppLink.vue";
+import Text from "@/components/atoms/typography/Text.vue";
+import AppLink from "@/components/atoms/AppLink.vue";
 import type {Link as LinkType} from "@/types/link";
 import {AppRoutes} from "@/enums/routes";
 import {computed} from "vue";

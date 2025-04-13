@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Image from "../illustration/Image.vue";
+import Image from "@/components/atoms/illustration/Image.vue";
 
 interface Props {
     blockContent: {

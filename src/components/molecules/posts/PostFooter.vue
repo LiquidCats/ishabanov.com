@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import More from "../../atoms/More.vue";
+import More from "@/components/atoms/More.vue";
 </script>
 
 <template>

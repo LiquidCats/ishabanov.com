@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Btn from "../atoms/form/Btn.vue";
+import Btn from "@/components/atoms/form/Btn.vue";
 import {ChevronRightIcon, ChevronLeftIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from "@heroicons/vue/24/outline";
 //
 import type {ResponsePaginationMeta} from "@/types/api";

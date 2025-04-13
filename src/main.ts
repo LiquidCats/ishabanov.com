@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import App from './App.vue'
+import App from '@/App.vue'
 //
 import router from "@/router.ts";
 

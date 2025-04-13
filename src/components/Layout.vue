@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppFooter from "./organisms/AppFooter.vue";
-import AppHeader from "./organisms/AppHeader.vue";
+import AppFooter from "@/components/organisms/AppFooter.vue";
+import AppHeader from "@/components/organisms/AppHeader.vue";
 
 </script>
 
