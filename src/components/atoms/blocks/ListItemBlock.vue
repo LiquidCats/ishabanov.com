@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ListItem from "../lists/ListItem.vue";
+import ListItem from "@/components/atoms/lists/ListItem.vue";
 
 interface Props {
     blockContent: string

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Text from "../atoms/typography/Text.vue";
-import LogoLink from "./LogoLink.vue";
-import FooterMenu from "../molecules/FooterMenu.vue";
+import Text from "@/components/atoms/typography/Text.vue";
+import LogoLink from "@/components/organisms/LogoLink.vue";
+import FooterMenu from "@/components/molecules/FooterMenu.vue";
 import { settings } from "@/states/static";
 
 </script>

@@ -2,7 +2,7 @@
 import {computed} from "vue";
 
 import {HeadingStyleType} from "@/enums/blocks";
-import Heading from "../typography/Heading.vue";
+import Heading from "@/components/atoms/typography/Heading.vue";
 
 interface Props {
     blockStyles: HeadingBlockStyles

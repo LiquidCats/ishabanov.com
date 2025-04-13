@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {ParagraphStyleType} from "@/enums/blocks";
-import Text from "../typography/Text.vue";
+import Text from "@/components/atoms/typography/Text.vue";
 
 interface Props {
     blockContent: string
