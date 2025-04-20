@@ -8,4 +8,17 @@
     .bg-night {
         background-color: var(--color-night);
     }
+    h1 {
+        @apply text-xl lg:text-6xl font-bold mb-3 mt-0
+    }
+    h2 {
+        @apply text-xl lg:text-4xl font-bold mb-3 mt-0
+    }
+    h3 {
+        @apply text-xl lg:text-2xl font-bold mb-3 mt-0
+    }
+    h4 {
+        @apply text-xl lg:text-xl font-bold mb-3 mt-0
+    }
+
 }

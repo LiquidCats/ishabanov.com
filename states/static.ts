@@ -1,34 +1,34 @@
-import {CodeBracketIcon, EnvelopeIcon, HomeIcon, PencilSquareIcon, SparklesIcon} from "@heroicons/vue/24/outline";
 import dayjs from "dayjs";
+import {Linkedin, Github, AtSign, Home, Rss} from "lucide-vue-next"
 import type {ExperienceResource, NonStrict, PostMeta, PostResource} from "~/types/api.ts";
 import {PreviewTypes} from "~/enums/preview";
 
 export const settings = {
     socials: [
         {
-            icon: SparklesIcon,
+            icon: Linkedin,
             link: 'https://www.linkedin.com/in/ilia-shabanov',
             text: 'LinkedIn',
         },
         {
-            icon: CodeBracketIcon,
+            icon: Github,
             link: 'https://github.com/LiquidCats',
             text: 'GitHub',
         },
         {
-            icon: EnvelopeIcon,
+            icon: AtSign,
             link: 'mailto:ishabanov@liquid-cat.com',
             text: 'Mail',
         },
     ],
     menu: [
         {
-            icon: HomeIcon,
+            icon: Home,
             link: "/",
             text: 'Home',
         },
         {
-            icon: PencilSquareIcon,
+            icon: Rss,
             link: "/posts",
             text: 'Posts',
         },

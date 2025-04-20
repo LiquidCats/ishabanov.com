@@ -2,7 +2,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-04-20',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   vite: {
@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Liquid Cats',
+      title: 'Ilya Shabanov - Back-End Engineer',
       bodyAttrs: {
         class: 'z-0 relative bg-zinc-900',
       }
