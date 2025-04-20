@@ -3,6 +3,10 @@
 import Experience from "~/components/organisms/Experience.vue";
 import Hero from "~/components/organisms/Hero.vue";
 
+useHead({
+  titleTemplate: (titleChunk) => `${titleChunk} - Home`,
+})
+
 </script>
 
 <template>

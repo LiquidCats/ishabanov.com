@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {ArrowRightIcon, ArrowLeftIcon} from "@heroicons/vue/24/outline"
+import {ArrowRightIcon, ArrowLeftIcon} from "lucide-vue-next"
 import AppLink from "~/components/atoms/AppLink.vue";
-import {AppRoutes} from "~/enums/routes";
 import Heading from "~/components/atoms/typography/Heading.vue";
 import {computed} from "vue";
 

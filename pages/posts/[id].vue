@@ -27,6 +27,25 @@ onMounted(() => {
   setItems(route?.params?.id as string)
 })
 
+useSeoMeta({
+  titleTemplate: (titleChunk) => `${titleChunk} - Posts - ${item?.value.title}`,
+  description: item?.value.preview,
+  //
+  ogTitle: item?.value.title,
+  ogUrl: route.path,
+  ogDescription: item?.value.preview,
+  ogImage: item?.value?.previewImage?.path,
+  //
+  twitterCard: "summary_large_image",
+  twitterTitle: item?.value.title,
+  twitterDescription: item?.value.preview,
+  twitterImage: item?.value?.previewImage?.path,
+})
+
+useHead({
+  titleTemplate: (titleChunk) => `${titleChunk} - Posts - ${item?.value.title}`,
+})
+
 function setPostId(id: string) {
   postId.value = id
 }

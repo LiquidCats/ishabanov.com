@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
 import {computed} from "vue";
-import {ArrowUpRightIcon} from "@heroicons/vue/24/outline"
+import {ArrowUpRightIcon} from "lucide-vue-next"
 //
 import {TextSize, TextWeight} from "~/enums/text";
 import type {ExperienceResource} from "~/types/api";
@@ -34,6 +34,7 @@ const endedYear = computed(() => props.experience?.ended_at ? dayjs(props.experi
                          :weight="TextWeight.bold"
                          class="leading-snug">
                     <AppLink :to="experience.company_url"
+                             target="_blank"
                           class="inline-flex gap-1 items-baseline leading-tight hover:!text-blue-500 focus-visible:!text-blue-500 group/link">
                         <div class="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" />
                         <Text as="span">

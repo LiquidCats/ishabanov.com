@@ -11,6 +11,10 @@ import {PreviewTypes} from "~/enums/preview";
 import type {PostResource} from "~/types/api";
 import {posts} from "~/states/static";
 
+useHead({
+  titleTemplate: (titleChunk) => `${titleChunk} - Posts`,
+})
+
 const postPreviewMap = {
   [PreviewTypes.fill]: BackgroundPreviewPostItem,
   [PreviewTypes.left_side]: LeftSidePreviewPostItem,
@@ -42,7 +46,3 @@ const items: PostResource[] = Object.keys(posts)
   <!--                    @click:prev="prevPage"/>-->
   <!--    </section>-->
 </template>
-
-<style scoped lang="scss">
-
-</style>

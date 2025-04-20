@@ -2,9 +2,8 @@
 
 import {TextSize} from "~/enums/text";
 import AppLink from "~/components/atoms/AppLink.vue";
-import {ArrowUpRightIcon} from "@heroicons/vue/24/outline";
+import {ArrowUpRightIcon} from "lucide-vue-next";
 import Text from "~/components/atoms/typography/Text.vue";
-import {AppRoutes} from "~/enums/routes";
 </script>
 
 <template>
