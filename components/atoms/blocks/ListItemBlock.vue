@@ -12,8 +12,6 @@ defineProps<Props>()
 <template>
   <client-only>
     <ListItem v-html="blockContent"
-              :key="$props?.blockContent"
-              v-if="blockContent"
               v-memo="[blockContent]"/>
   </client-only>
 </template>
