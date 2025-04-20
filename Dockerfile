@@ -1,27 +1,26 @@
-# Use a lightweight base image
-FROM node:latest AS builder
+ARG NODE_VERSION=lts
 
-# Set the working directory
+FROM node:${NODE_VERSION}-alpine AS builder
+
 WORKDIR /app
 
-# Copy your package files
-COPY package.json vite.config.* tsconfig.* ./
-COPY . .
+COPY package.json package-lock.json* ./
+RUN npm install
 
-RUN npm install --frozen-lockfile
+COPY . .
 RUN npm run build
 
-# Serve using a minimal image (optional: use nginx or caddy, or keep in Bun)
-# Here's an example using a static file server
-FROM nginx:alpine AS final
+FROM node:${NODE_VERSION}-alpine AS runner
 
-# Copy build output to nginx web root
-COPY --from=builder /app/dist /usr/share/nginx/html
+ENV NODE_ENV=production
 
-# Copy custom nginx config
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-# Expose port
-EXPOSE 80
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/.output ./.output
+
+EXPOSE 3000
+
+CMD [ "node", ".output/server/index.mjs" ]

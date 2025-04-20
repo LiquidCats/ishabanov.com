@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+    --color-night: oklch(0.25 0.0169 290.23);
+}
+
+@layer base {
+    .bg-night {
+        background-color: var(--color-night);
+    }
+}
