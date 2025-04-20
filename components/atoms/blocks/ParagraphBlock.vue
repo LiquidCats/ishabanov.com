@@ -18,5 +18,7 @@ defineProps<Props>()
 </script>
 
 <template>
+  <client-only>
     <Text size="text-lg" class="mb-2" v-html="blockContent" />
+  </client-only>
 </template>

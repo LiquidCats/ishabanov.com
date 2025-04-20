@@ -18,7 +18,7 @@ defineProps<Props>()
               target="_blank"
               class="py-3 duration-300 flex flex-col items-center justify-center text-sm group/contact hover:!text-gray-50">
             <div class="absolute -inset-1" />
-            <component :is="item.icon" class="size-10 md:duration-300 md:translate-y-1 md:group-hover/contact:-translate-y-1"/>
+            <component :is="item.icon" class="size-8 md:duration-300 md:translate-y-1 md:group-hover/contact:-translate-y-1"/>
             <span class="md:duration-300 md:opacity-75 md:translate-y-1 md:group-hover/contact:translate-y-0 md:group-hover/contact:opacity-100 motion-reduce:transition-none">{{ item.text }}</span>
         </AppLink>
     </div>

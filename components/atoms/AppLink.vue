@@ -3,7 +3,6 @@
 import type {NuxtLinkProps} from "#app";
 import {NuxtLink} from "#components";
 
-
 // define
 defineOptions({
   inheritAttrs: false,
@@ -17,10 +16,10 @@ const classes = ['text-gray-50', 'no-underline', 'hover:text-gray-400', 'duratio
 </script>
 
 <template>
-  <NuxtLink v-bind="{...$attrs, ...$props}"
-             active-class="cursor-default hover:no-underline !text-gray-400"
-             exact-active-class="cursor-default hover:no-underline !text-gray-400"
-             :class="classes">
+  <NuxtLink v-bind="{...$attrs, to: $props.to}"
+            active-class="cursor-default hover:no-underline !text-gray-400"
+            exact-active-class="cursor-default hover:no-underline !text-gray-400"
+            :class="classes">
     <slot></slot>
   </NuxtLink>
 </template>

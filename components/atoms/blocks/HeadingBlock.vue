@@ -27,8 +27,10 @@ const level = computed(() => {
 </script>
 
 <template>
+  <client-only>
     <Heading :level="level"
              class="mb-4"
              v-memo="[blockContent, level]"
              v-html="blockContent" />
+  </client-only>
 </template>

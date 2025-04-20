@@ -11,7 +11,6 @@ interface Props {
 }
 
 // define
-defineEmits(['click:post-nav'])
 const props = defineProps<Props>()
 const classes = computed(() => ({
     'text-start': props.type === 'prev',
@@ -22,7 +21,7 @@ const classes = computed(() => ({
 
 <template>
     <div class="flex group flex-row gap-6 bg-night duration-300 hover:bg-stone-800 rounded-xl text-gray-400 hover:text-gray-200 items-center relative p-3 cursor-pointer">
-        <AppLink :to="`/posts/${postId}`" @click="$emit('click:post-nav', postId)" class="absolute -inset-1 z-10"/>
+        <AppLink :to="`/posts/${postId}`" class="absolute -inset-1 z-10"/>
         <div v-if="type === 'next'"><ArrowLeftIcon class="size-8" /></div>
 
         <div class="overflow-hidden truncate grow">

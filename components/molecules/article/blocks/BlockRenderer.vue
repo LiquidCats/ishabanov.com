@@ -33,9 +33,8 @@ const renderers = {
 <template>
     <component :is="renderers[block.type]"
                :key="block.key"
-               as-child
                v-bind="{
                    blockContent: block.content,
-                   blockStyles: block.styles,
+                   blockStyles: block.styles
                }"/>
 </template>
