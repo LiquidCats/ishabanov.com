@@ -23,7 +23,7 @@ watch(postId, (newPostId, oldPostId) => {
   }
 })
 
-onMounted(() => {
+onBeforeMount(() => {
   setItems(route?.params?.id as string)
 })
 
