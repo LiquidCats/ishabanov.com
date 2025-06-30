@@ -1,19 +1,17 @@
 <script setup lang="ts">
-
-import Experience from "~/components/organisms/Experience.vue";
-import Hero from "~/components/organisms/Hero.vue";
+import Hero from "@/components/organisms/Hero.vue";
+import About from "@/components/organisms/About.vue";
+import Services from "@/components/organisms/Services.vue";
+import Experience from "@/components/organisms/Experience.vue";
 
 useHead({
   titleTemplate: (titleChunk) => `${titleChunk} - Home`,
-})
-
+});
 </script>
 
 <template>
-  <Hero class="mb-3" />
+  <Hero />
+  <About />
+  <Services />
   <Experience />
 </template>
-
-<style scoped lang="scss">
-
-</style>

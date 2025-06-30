@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import AppFooter from "~/components/organisms/AppFooter.vue";
-import AppHeader from "~/components/organisms/AppHeader.vue";
+import AppHeader from "@/components/organisms/AppHeader.vue";
+import AppFooter from "@/components/organisms/AppFooter.vue";
+
+
 
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl px-3">
-    <AppHeader id="header"/>
-    <main class="relative">
-      <slot></slot>
-    </main>
+  <AppHeader id="header"/>
 
-    <AppFooter id="footer"/>
-  </div>
+  <main class="px-3 space-y-3">
+    <slot></slot>
+  </main>
+
+  <AppFooter id="footer"/>
 </template>
