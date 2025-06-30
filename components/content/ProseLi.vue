@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <li v-bind="$attrs"><slot></slot></li>
+  <li v-bind="$attrs" class="text-zinc-900"><slot /></li>
 </template>
