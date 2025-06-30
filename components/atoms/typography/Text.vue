@@ -1,24 +1,31 @@
 <script setup lang="ts">
-import {TextFamily, TextSize, TextWeight} from "~/enums/text";
-import {computed} from "vue";
+import {cn} from "@/lib/utils";
+import type {HTMLAttributes} from "vue";
 
 interface Props {
-    size?: TextSize[keyof TextSize]
-    weight?: TextWeight
-    family?: TextFamily
-    as?: 'p' | 'div' | 'span' | 'small'
+  as?: 'p' | 'div' | 'span' | 'small'
+  inverted?: boolean
+  class?: HTMLAttributes['class']
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    as: "p",
+  as: "p",
+  inverted: false,
 })
 
-const classes = computed(() => [props.family, props.size, props.weight].filter(Boolean))
+
+const classes = [
+  !props.inverted && 'text-zinc-800',
+  !props.inverted && 'dark:text-zinc-50',
+  //
+  props.inverted && 'text-zinc-50',
+  props.inverted && 'dark:text-zinc-800',
+]
 
 </script>
 
 <template>
-    <component :is="as" :class="classes">
+    <component :is="as" :class="cn(classes, props.class)">
         <slot></slot>
     </component>
 </template>
