@@ -8,13 +8,13 @@ const services = [
     classes: ["bg-gradient-to-r", "from-cyan-500", "to-blue-500"],
     header: "System Design",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid aspernatur dolor ipsum maiores molestias nam nihil officia sit tenetur.",
+      "Get expert system design: scalable architecture, microservices, databases, APIs, high availability, fault tolerance, and cost-efficient solutions.",
   },
   {
     classes: ["bg-gradient-to-r", "from-violet-600", "to-indigo-600"],
     header: "Backend Architecture",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid aspernatur dolor ipsum maiores molestias nam nihil officia sit tenetur.",
+      "Expert in backend architecture: microservices, REST/gRPC APIs, Go/Node.js, Redis, PostgreSQL, scaling, security, and CI/CD best practices.",
   },
   {
     classes: [
@@ -26,12 +26,12 @@ const services = [
     ],
     header: "Consulting",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid aspernatur dolor ipsum maiores molestias nam nihil officia sit tenetur.",
+      "Expert help with Vue, Nuxt, Go, APIs, frontend/backend architecture, animations, performance, code reviews, testing & profitable pet projects.",
   },
 ];
 
 const cardsContainerRef = useTemplateRef("cards-container");
-const isInView = useInView(cardsContainerRef, { amount: 0.9 });
+const isInView = useInView(cardsContainerRef, { amount: 0.1 });
 const appearOptions = {
   opacity: [0, 1],
   y: [50, 0],
