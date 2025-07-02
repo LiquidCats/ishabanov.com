@@ -30,7 +30,7 @@ function splitIntoChuncks(chunkSize = 4): BlogCollectionItem[][] {
 </script>
 
 <template>
-  <div class="lg:max-w-2/3 mx-auto space-y-3 mt-6">
+  <div class="lg:max-w-3/4 xl:max-w-2/3 mx-auto space-y-3 mt-6">
     <div>
       <Button as-child>
         <NuxtLink href="/"><ChevronLeft class="size-5" />Back</NuxtLink>
@@ -43,10 +43,10 @@ function splitIntoChuncks(chunkSize = 4): BlogCollectionItem[][] {
         v-for="(chunk, index) in splitIntoChuncks()"
         :key="index"
         :class="{
-          'grid-rows-1 grid-cols-1': chunk.length === 1,
-          'grid-rows-1 grid-cols-2': chunk.length === 2,
-          'grid-rows-2 grid-cols-2': chunk.length === 3,
-          'grid-rows-2 grid-cols-5': chunk.length === 4,
+          'grod-cols-1 lg:grid-rows-1 lg:grid-cols-1': chunk.length === 1,
+          'grod-cols-1 lg:grid-rows-1 lg:grid-cols-2': chunk.length === 2,
+          'grod-cols-1 lg:grid-rows-2 lg:grid-cols-2': chunk.length === 3,
+          'grod-cols-1 lg:grid-rows-2 lg:grid-cols-5': chunk.length === 4,
         }"
         class="grid gap-3"
       >
