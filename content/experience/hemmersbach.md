@@ -2,7 +2,7 @@
 date: 2017-11
 title: Hemmersbach
 site: https://hemmersbach.com
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/experience/hemmersbach
+image: /images/experience/hemmersbach.jpg
 ---
 
 - Contributed to pioneering DDD implementation in PHP within the company.

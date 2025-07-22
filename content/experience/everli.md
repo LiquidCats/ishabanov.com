@@ -2,7 +2,7 @@
 date: 2021-11
 title: Everli
 site: https://everli.com
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/experience/everli
+image: /images/experience/everli.jpg
 ---
 
 - Reduced CI/CD pipeline execution time by 35% through pipeline optimization and caching strategies, accelerating feature delivery.

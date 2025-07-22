@@ -41,6 +41,7 @@ useSeoMeta({
           v-if="post.meta?.image"
           :src="post.meta?.image as string"
           :alt="post.title"
+          :url="post.meta?.image as string"
         />
       </CardHeader>
       <CardContent>

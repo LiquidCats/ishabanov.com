@@ -8,7 +8,7 @@ tags:
 date: 2024-01-21
 title: "Entering IT (Part 2): Best Learning Resources"
 description: Hey there! Are you ready to continue diving into the world of IT? Whether you’re just starting out or looking to polish your skills, I’ve got some resources lined up for you.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/j0YQaFf7wCdEimbaV7sDq351Pxdir2GJjPxlbUy2.jpg
+image: /images/media/j0YQaFf7wCdEimbaV7sDq351Pxdir2GJjPxlbUy2.jpg
 ---
 
 Hey there! Are you ready to continue diving into the world of IT? Whether you’re just starting out or looking to polish your skills, I’ve got some resources lined up for you.

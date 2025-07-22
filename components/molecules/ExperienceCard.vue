@@ -72,7 +72,7 @@ defineProps<Props>();
         </CardHeader>
         <CardContent class="flex flex-col gap-3">
           <NuxtImg
-            :src="item.meta.image + '.jpg'"
+            :src="item.meta.image as string"
             :alt="item.title + ' screenshot'"
             class="rounded-lg object-cover w-full h-48 shadow-md"
           />

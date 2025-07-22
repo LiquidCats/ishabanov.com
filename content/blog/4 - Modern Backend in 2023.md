@@ -9,7 +9,7 @@ tags:
 date: 2023-11-25
 title: Modern Backend in 2023
 description: 2023 is coming to an end, and it's the perfect time to chat about what modern backend development really is. In a nutshell, it's about building the powerhouse of apps and websites with the latest tech. We're talking about cool trends like microservices – tiny, independent units making your apps super flexible. There's also serverless computing, which is like having magic at your fingertips, handling all the server stuff so you don't have to. And APIs? They’re like secret tunnels that let different apps communicate. Plus, we’ve got the latest in Docker, Kubernetes, AI, and cloud-native development. It's not just about coding in Python, JavaScript, or Go, but also about the new frameworks that are changing the game. We’ll also dive into how DevOps and CI/CD can make life as a coder way smoother, and why keeping your data safe is more important than ever. This article is a fun, friendly guide to all that and more. It's for anyone curious about backend tech in 2023, and I promise it’s as exciting as it sounds!
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/T78JR7d0MITYE2fxI7Uig1tbig8aKbwaS5vETTch.jpg
+image: /images/media/T78JR7d0MITYE2fxI7Uig1tbig8aKbwaS5vETTch.jpg
 reading_time: 7 min
 ---
 
@@ -33,7 +33,7 @@ Gone are the days of bulky, monolithic applications. Microservices are in, allow
 
 ## API-First Development
 
-![API Illustration](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/yS8qvzCnJh7do3eq5LFTeVbQ4FxRsvz0bDGhUgZr.jpg)
+![API Illustration](/images/media/yS8qvzCnJh7do3eq5LFTeVbQ4FxRsvz0bDGhUgZr.jpg)
 
 APIs are the backbone of modern web applications. An API-first approach ensures that your application is flexible and ready for integration with other services or platforms. Think of it as building a universal remote control for your app – it can interact with just about anything.
 

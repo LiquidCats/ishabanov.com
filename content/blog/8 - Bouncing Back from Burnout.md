@@ -11,7 +11,7 @@ tags:
 date: 2023-12-24
 title: Bouncing Back from Burnout
 description: Hey everyone! Remember when we talked about how tough it can be to spot a toxic company during the hiring stage? Well, navigating such an environment can amplify professional burnout. I want to share my journey through this, diving deeper into the complexities of burnout in a toxic IT company. This isn't just a story; it's a survival guide packed with insights and strategies.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/Gdk3nHhd9RYBl7X1KHhqU79ERSKEOAUB5P2RiQl1.jpg
+image: /images/media/Gdk3nHhd9RYBl7X1KHhqU79ERSKEOAUB5P2RiQl1.jpg
 reading_time: 7 min
 ---
 
@@ -25,7 +25,7 @@ So, what happens when you find yourself in a less‑than‑ideal work environmen
 
 ## What To Do With This
 
-![Burnout Illustration](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/Gdk3nHhd9RYBl7X1KHhqU79ERSKEOAUB5P2RiQl1.jpg)
+![Burnout Illustration](/images/media/Gdk3nHhd9RYBl7X1KHhqU79ERSKEOAUB5P2RiQl1.jpg)
 
 ### Unplug and Recharge
 

@@ -8,7 +8,7 @@ tags:
 date: 2024-01-09
 title: "Entering IT (Part 1): IT Trends 2024"
 description: 2024 has just begun, and it's a great time for new beginnings! I'm excited to kick off a series of articles about starting a career in Information Technology (IT). We'll begin with the basics, focusing on the latest trends in IT. In this article, I aim to simplify and explain the top IT trends of the year, making them easy to understand. Let's dive into the exciting world of IT together!
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/t3WzOP9QVP4KmMzLgRL3Z4xNNmNSAexhA9ZJ6xyF.jpg
+image: /images/media/t3WzOP9QVP4KmMzLgRL3Z4xNNmNSAexhA9ZJ6xyF.jpg
 reading_time: 6 min
 ---
 

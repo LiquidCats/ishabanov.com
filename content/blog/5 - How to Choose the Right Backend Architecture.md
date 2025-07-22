@@ -10,7 +10,7 @@ tags:
 date: 2023-12-02
 title: How to Choose the Right Backend Architecture
 description: "Hey there! Today, I want to chat about something that's been a big part of my coding life: backend architectural patterns. If you're like me, you've probably found yourself lost in this maze more than once. So, let's break it down, shall we?"
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/CyILkJWkyLLSsZEnBHMlQWsseVrb5Fc3wCOXkgN4.jpg
+image: /images/media/CyILkJWkyLLSsZEnBHMlQWsseVrb5Fc3wCOXkgN4.jpg
 reading_time: 10 min
 ---
 
@@ -18,7 +18,7 @@ Hey there! Today, I want to chat about something that's been a big part of my co
 
 ## Overview Your Variants
 
-![Backend Patterns](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/banD0S7U2bSauhXgGTpLIA9ttBKAzKGgmYiy5Ad7.jpg)
+![Backend Patterns](/images/media/banD0S7U2bSauhXgGTpLIA9ttBKAzKGgmYiy5Ad7.jpg)
 
 ### The Monolith
 
@@ -60,7 +60,7 @@ Serverless is great for scalability and cost‑efficiency, as you pay per use. H
 
 ## Choosing the Right Backend Architecture: Tips from My Playbook
 
-![Decision Crossroads](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/w3MiHHk5B2x1TNf4jYovuLbewIJBaDFUbhknQJlf.jpg)
+![Decision Crossroads](/images/media/w3MiHHk5B2x1TNf4jYovuLbewIJBaDFUbhknQJlf.jpg)
 
 After exploring various architectural patterns, you might wonder, "How do I choose the right one for my project?" Well, here's some advice from my own experiences, a sort of playbook, if you will.
 

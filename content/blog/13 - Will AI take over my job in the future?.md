@@ -7,7 +7,7 @@ tags:
 date: 2024-04-27
 title: Will AI take over my job in the future?
 description: In the dynamic landscape of technology, Artificial Intelligence (AI) is no longer just a buzzword but a pivotal force reshaping the IT industry. As IT professionals, understanding the implications of AI is crucial not only for staying relevant but also for harnessing its potential to enhance our work. This article delves into how AI is integrated into various IT domains, addresses the prevalent concerns about job security, and highlights the evolving synergy between human intellect and machine learning.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/syWfeBY087amQ8SrkLD7JYJvnABJaBsUAfMBwcOs.jpg
+image: /images/media/syWfeBY087amQ8SrkLD7JYJvnABJaBsUAfMBwcOs.jpg
 reading_time: 6 min
 ---
 
@@ -38,7 +38,7 @@ Rather than viewing AI as a competitor, it should be seen as a collaborator. AI 
 - **Automated Testing:** AI can rapidly perform and replicate detailed tests on software applications, freeing developers to focus on more complex problems.
 - **Network Management:** AI‑driven tools monitor network traffic and performance, predicting outages and bottlenecks, which helps in proactive maintenance.
 
-![A modern office environment in an anime style, featuring IT professionals interacting with futuristic AI technology.](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/wY9mYRSPiXGQmo9avYsTgm7fOdmj73G9hnOgjNKy.jpg)
+![A modern office environment in an anime style, featuring IT professionals interacting with futuristic AI technology.](/images/media/wY9mYRSPiXGQmo9avYsTgm7fOdmj73G9hnOgjNKy.jpg)
 
 ## Skills to Develop to Stay Relevant
 
