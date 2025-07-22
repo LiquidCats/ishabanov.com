@@ -9,7 +9,7 @@ tags:
 date: 2024-01-28
 title: Unusual Yet Effective Optimizations
 description: Today, let's talk about some quirky yet effective optimization strategies. A few weeks ago, I was working on improving the performance of a service. Originally, its task was to verify certain details on a cryptocurrency blockchain, then check and either insert or update data in a database (DB). It sounded like a solid plan, and our initial tests seemed promising.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/FdydtsC987o9YcapdcWRjx9htTzl8lLN9ahroDJS.jpg
+image: /images/media/FdydtsC987o9YcapdcWRjx9htTzl8lLN9ahroDJS.jpg
 reading_time: 2 min
 ---
 

@@ -6,7 +6,7 @@ tags:
 date: 2023-11-11
 title: My Journey Beyond the Hype of Microservices
 description: As a software developer in the constantly evolving tech landscape, I once viewed microservices as the ultimate solution to all architectural problems. However, my journey through various projects has taught me that this isn't always the case. I've learned the hard way that microservices aren't the one‑size‑fits‑all solution they're often touted to be.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/q3X286VnOkkaADEi6DiR1SXEjKOpWcUsObtZDlhw.jpg
+image: /images/media/q3X286VnOkkaADEi6DiR1SXEjKOpWcUsObtZDlhw.jpg
 reading_time: 5 min
 ---
 

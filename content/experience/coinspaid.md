@@ -2,7 +2,7 @@
 date: 2022-12
 title: CoinsPaid
 site: https://coinspaid.com
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/experience/coinspaid
+image: /images/experience/coinspaid.jpg
 ---
 
 - Architected and deployed a clustered derivation mechanism for secure cryptocurrency address generation.

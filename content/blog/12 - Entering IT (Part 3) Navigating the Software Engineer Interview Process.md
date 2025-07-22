@@ -11,7 +11,7 @@ tags:
 date: 2024-03-17
 title: "Entering IT (Part 3): Navigating the Software Engineer Interview Process"
 description: "The field of software engineering is as exciting as it is challenging, offering endless opportunities for creative problem‑solving and innovation. As you embark on your journey into this dynamic industry, one critical hurdle stands between you and your dream job: the interview process. This article aims to demystify the software engineer interview, offering a comprehensive guide on what to expect, from HR screening to the final offer, ensuring you walk into your interview prepared and confident."
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/IhAfcP3erhsmihp651IhsSJarYMH4iPrBeHLX6FW.jpg
+image: /images/media/IhAfcP3erhsmihp651IhsSJarYMH4iPrBeHLX6FW.jpg
 reading_time: 11 min
 ---
 

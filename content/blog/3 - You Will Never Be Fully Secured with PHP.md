@@ -9,7 +9,7 @@ tags:
 date: 2023-11-19
 title: You Will Never Be Fully Secured with PHP
 description: In the evolving world of software development, security remains a paramount concern, especially when dealing with financial data. A reflection on past experiences reveals insightful lessons, particularly regarding the use of PHP in web development. While PHP offers ease of use and quick development turnaround, it inherently possesses certain security vulnerabilities that are crucial for developers to understand. This article delves into these challenges, underscoring the importance of vigilance in the realm of web security.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/L4rtitb9GZgrjhGrthMIl1PUAxEloc1503tcVnYm.jpg
+image: /images/media/L4rtitb9GZgrjhGrthMIl1PUAxEloc1503tcVnYm.jpg
 reading_time: 5 min
 ---
 

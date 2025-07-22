@@ -9,7 +9,7 @@ tags:
 date: 2023-12-18
 title: How Not to Be Hired by a Toxic Company
 description: With eight years of experience in software engineering, I've seen how toxic work environments can impact one's career and well‑being. Here's an expanded guide to help you avoid such companies.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/dccdFMne0Svjmm3lRLPBAfedA2K6UozdtlByv39y.jpg
+image: /images/media/dccdFMne0Svjmm3lRLPBAfedA2K6UozdtlByv39y.jpg
 reading_time: 6 min
 ---
 

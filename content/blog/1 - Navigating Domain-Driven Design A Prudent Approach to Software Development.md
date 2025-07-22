@@ -6,7 +6,7 @@ tags:
 date: 2023-11-04
 title: "Navigating Domain-Driven Design: A Prudent Approach to Software Development"
 description: Not too long ago, I celebrated my 8‑year journey in the field of Information Technology, and it has spurred me to contemplate sharing my valuable experiences in this domain.As a seasoned software developer, I have traversed the intricate landscape of Domain‑Driven Design (DDD), an approach highly esteemed in the realm of software development. DDD is renowned for its ability to create robust domain models and establish a domain‑specific language, ultimately bridging the communication gap between developers and domain experts. However, my experience has revealed that while DDD offers significant advantages, it may not be the panacea for every project. Join me as we explore the potential pitfalls of DDD that I have encountered and discern when it is prudent to employ this approach.
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/Ud0PONSeR77wo8capSwVVOHF61NwBy6zMaEgOuV8.jpg
+image: /images/media/Ud0PONSeR77wo8capSwVVOHF61NwBy6zMaEgOuV8.jpg
 reading_time: 4 min
 ---
 
@@ -14,7 +14,7 @@ Not too long ago, I celebrated my 8‑year journey in the field of Information T
 
 As a seasoned software developer, I have traversed the intricate landscape of Domain‑Driven Design (DDD), an approach highly esteemed in the realm of software development. DDD is renowned for its ability to create robust domain models and establish a domain‑specific language, ultimately bridging the communication gap between developers and domain experts. However, my experience has revealed that while DDD offers significant advantages, it may not be the panacea for every project. Join me as we explore the potential pitfalls of DDD that I have encountered and discern when it is prudent to employ this approach.
 
-![Upset Developer](https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/media/Ud0PONSeR77wo8capSwVVOHF61NwBy6zMaEgOuV8.jpg)
+![Upset Developer](/images/media/Ud0PONSeR77wo8capSwVVOHF61NwBy6zMaEgOuV8.jpg)
 
 ## Overcomplicating the Simple
 

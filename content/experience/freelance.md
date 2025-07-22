@@ -2,7 +2,7 @@
 date: 2013-02 
 title: Freelance
 site: https://ishabanov.com
-image: https://storage.ishabanov.com/ishabanov-0194a1e4-d4d2-73be-a773-809a8c58a186/experience/freelance
+image: /images/experience/freelance.jpg
 ---
 
 - Developed plugins and themes for CMS platforms including MODx Evolution, Joomla, and WordPress.
