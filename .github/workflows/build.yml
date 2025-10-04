@@ -15,6 +15,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Lowercase Repository Name
         id: repository
         uses: Entepotenz/change-string-case-action-min-dependencies@v1
@@ -34,6 +40,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.ref_name }}
@@ -45,6 +52,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ghcr.io/${{ steps.repository.outputs.lowercase }}:${{ github.sha }}
