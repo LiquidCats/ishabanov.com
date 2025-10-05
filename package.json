@@ -9,6 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "optionalDependencies": {
+    "better-sqlite3": "^12.4.1"
+  },
   "dependencies": {
     "@nuxt/content": "^3.7.1",
     "@nuxt/image": "^1.10.0",
