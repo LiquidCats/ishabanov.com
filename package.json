@@ -14,7 +14,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/scripts": "^0.13.2",
     "@tailwindcss/vite": "^4.1.18",
-    "@unhead/vue": "^2.1.2",
+    "@unhead/vue": "^2.1.12",
     "@vueuse/core": "^14.1.0",
     "better-sqlite3": "^12.6.2",
     "class-variance-authority": "^0.7.1",
