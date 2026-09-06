@@ -64,12 +64,6 @@ export default defineNuxtConfig({
     componentDir: './components/ui'
   },
 
-  nitro: {
-    prerender: {
-      autoSubfolderIndex: false,
-    },
-  },
-
   modules: [
     '@nuxt/image',
     'nuxt-gtag',
