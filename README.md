@@ -1,75 +1,35 @@
-# Nuxt Minimal Starter
+# ishabanov.com
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install dependencies:
+## Development
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+Create the static production site with:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+The generated site is in `.output/public`.
 
-```bash
-# npm
-npm run preview
+## Content
 
-# pnpm
-pnpm preview
+Each blog post is a self-contained Vue page in `pages/blog`. Export its typed
+`post` metadata and write the article in the page template; the blog index
+discovers it automatically at build time. Experience entries live in
+`data/experience.ts`.
 
-# yarn
-yarn preview
+## Cloudflare Pages
 
-# bun
-bun run preview
-```
+Connect this repository with Cloudflare Pages Git integration and use:
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Production branch: `main`
+- Build command: `npm run build`
+- Build output directory: `.output/public`
+- Node version: `22`
+
+Cloudflare builds and deploys commits to `main`; pull requests receive preview
+deployments. Legacy `/posts/:id` URLs are redirected by `public/_redirects`.
