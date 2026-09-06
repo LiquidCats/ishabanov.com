@@ -13,6 +13,44 @@
     }
 }
 
+@layer components {
+    .blog-prose {
+        @apply space-y-3;
+    }
+
+    .blog-prose :is(p, li) {
+        @apply text-zinc-800 dark:text-zinc-50;
+    }
+
+    .blog-prose h2 {
+        @apply text-2xl md:text-4xl text-zinc-800 dark:text-zinc-50;
+    }
+
+    .blog-prose h3 {
+        @apply text-xl md:text-2xl text-zinc-800 dark:text-zinc-50;
+    }
+
+    .blog-prose h4 {
+        @apply text-lg md:text-xl text-zinc-800 dark:text-zinc-50;
+    }
+
+    .blog-prose ul {
+        @apply list-disc list-inside space-y-1;
+    }
+
+    .blog-prose ol {
+        @apply list-decimal list-inside space-y-1;
+    }
+
+    .blog-prose blockquote {
+        @apply border-l-4 border-zinc-300 pl-4 italic text-zinc-700 dark:border-zinc-600 dark:text-zinc-200;
+    }
+
+    .blog-prose img {
+        @apply rounded-xl mx-auto;
+    }
+}
+
 @theme inline {
     --header-height: calc(var(--spacing) * 16);
     --hero-height: calc(100vh - calc(var(--header-height) + var(--header-height)/2));

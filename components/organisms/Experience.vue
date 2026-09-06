@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { queryCollection, useAsyncData } from "#imports";
+import { experiences } from "@/data/experience";
 import ExperienceCard from "@/components/molecules/ExperienceCard.vue";
 import SectionHeading from "@/components/molecules/SectionHeading.vue";
-
-const { data: experience } = await useAsyncData("experience", () => {
-  return queryCollection("experience").order("date", "ASC").all();
-});
 </script>
 
 <template>
@@ -18,9 +14,9 @@ const { data: experience } = await useAsyncData("experience", () => {
             class="absolute md:left-1/2 md:-translate-x-1/2 left-0 translate-4.5 w-px max-w-px ring-2 bg-zinc-50 p-0.5 -top-5 -bottom-5 rounded-2xl"
           />
           <ExperienceCard
-            v-for="(item, index) in experience"
+            v-for="(item, index) in experiences"
             :item="item"
-            :key="item.id"
+            :key="item.title"
             :placement="(index + 1) % 2 === 0 ? 'even' : 'odd'"
           />
         </ol>
