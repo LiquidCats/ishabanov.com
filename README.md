@@ -7,13 +7,14 @@ npm install
 npm run dev
 ```
 
-Create the static production site with:
+Build the Worker and its static assets with:
 
 ```bash
 npm run build
 ```
 
-The generated site is in `.output/public`.
+Nuxt generates the Worker entry point in `.output/server` and its assets in
+`.output/public`.
 
 ## Content
 
@@ -22,14 +23,14 @@ Each blog post is a self-contained Vue page in `pages/blog`. Export its typed
 discovers it automatically at build time. Experience entries live in
 `data/experience.ts`.
 
-## Cloudflare Pages
+## Cloudflare Workers
 
-Connect this repository with Cloudflare Pages Git integration and use:
+Connect this repository with Cloudflare Workers Builds and use:
 
 - Production branch: `main`
 - Build command: `npm run build`
-- Build output directory: `.output/public`
-- Node version: `22`
+- Deploy command: `npx wrangler deploy`
+- Node version: `24`
 
-Cloudflare builds and deploys commits to `main`; pull requests receive preview
-deployments. Legacy `/posts/:id` URLs are redirected by `public/_redirects`.
+Nuxt generates the Wrangler deployment configuration during the build. Legacy
+`/posts/:id` URLs are redirected by `public/_redirects`.
