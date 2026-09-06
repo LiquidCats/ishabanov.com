@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BlogCollectionItem } from "@nuxt/content";
+import type { BlogPost, BlogPostMetadata } from "@/types/content";
 import { ChevronLeft } from "lucide-vue-next";
 import Heading from "@/components/atoms/typography/Heading.vue";
 import PostCard from "@/components/molecules/PostCard.vue";
@@ -11,22 +11,20 @@ useSeoMeta({
   ogDescription: "Ilya Shabanov's Blog",
 });
 
-const { data: posts } = await useAsyncData("blog", () => {
-  return queryCollection("blog").order("date", "DESC").all();
+const modules = import.meta.glob<BlogPostMetadata>(["./*.vue", "!./index.vue"], {
+  eager: true,
+  import: "post",
 });
 
-const postsLen = posts.value?.length || 0;
-function splitIntoChuncks(chunkSize = 4): BlogCollectionItem[][] {
-  const chuncks = [];
+const posts: BlogPost[] = Object.entries(modules)
+  .map(([path, post]) => ({ ...post, slug: path.slice(2, -4) }))
+  .sort((a, b) => b.date.localeCompare(a.date));
 
-  for (let i = 0; i < postsLen; i += chunkSize) {
-    if (!posts.value) continue;
-
-    chuncks.push(posts.value.slice(i, i + chunkSize));
-  }
-
-  return chuncks;
+const postChunks: BlogPost[][] = [];
+for (let i = 0; i < posts.length; i += 4) {
+  postChunks.push(posts.slice(i, i + 4));
 }
+
 </script>
 
 <template>
@@ -40,7 +38,7 @@ function splitIntoChuncks(chunkSize = 4): BlogCollectionItem[][] {
     <hr class="mb-3" />
     <div class="space-y-3">
       <div
-        v-for="(chunk, index) in splitIntoChuncks()"
+        v-for="(chunk, index) in postChunks"
         :key="index"
         :class="{
           'grod-cols-1 lg:grid-rows-1 lg:grid-cols-1': chunk.length === 1,
@@ -57,7 +55,7 @@ function splitIntoChuncks(chunkSize = 4): BlogCollectionItem[][] {
             'col-span-3': (index === 0 || index === 3) && chunk.length === 4,
             'col-span-2': (index === 1 || index === 2) && chunk.length === 4,
           }"
-          :key="post.id"
+          :key="post.slug"
         />
       </div>
     </div>
