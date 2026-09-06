@@ -36,19 +36,19 @@ export default defineNuxtConfig({
         // Web App Manifest
         { rel: 'manifest', href: '/site.webmanifest' }
       ],
+      meta: [
+        { name: 'description', content: 'Ilya Shabanov - Back-End Engineer' },
+      ],
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      htmlAttrs: {
+        lang: 'en'
+      },
     },
-    meta: [
-      { name: 'description', content: 'Ilya Shabanov - Back-End Engineer' },
-    ],
-    charset: 'utf-8',
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-    htmlAttrs: {
-      lang: 'en'
-    }
   },
 
   gtag: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: !import.meta.dev,
     id: 'G-5WBHV3DLQ3'
   },
 
@@ -64,8 +64,13 @@ export default defineNuxtConfig({
     componentDir: './components/ui'
   },
 
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
+
   modules: [
-    '@nuxt/content',
     '@nuxt/image',
     'nuxt-gtag',
     'shadcn-nuxt',

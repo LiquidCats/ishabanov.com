@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-import type { ExperienceCollectionItem } from "@nuxt/content";
+import type { Experience } from "@/types/content";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useInView, animate, stagger } from "motion-v";
 import { useTemplateRef, watch } from "vue";
 
 interface Props {
-  item: ExperienceCollectionItem;
+  item: Experience;
   placement?: "odd" | "even";
 }
 
@@ -72,11 +72,15 @@ defineProps<Props>();
         </CardHeader>
         <CardContent class="flex flex-col gap-3">
           <NuxtImg
-            :src="item.meta.image as string"
+            :src="item.image"
             :alt="item.title + ' screenshot'"
             class="rounded-lg object-cover w-full h-48 shadow-md"
           />
-          <ContentRenderer :value="item"></ContentRenderer>
+          <ul class="list-disc list-inside text-zinc-900 dark:text-zinc-50">
+            <li v-for="highlight in item.highlights" :key="highlight">
+              {{ highlight }}
+            </li>
+          </ul>
         </CardContent>
       </Card>
     </div>
